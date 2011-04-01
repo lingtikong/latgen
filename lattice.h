@@ -1,0 +1,30 @@
+#ifndef LATTICE_H
+#define LATTICE_H
+
+#include "memory.h"
+
+class lattice {
+public:
+  
+  lattice();
+  ~lattice();
+
+  Memory *memory;
+
+  char *name;          // name of the lattice
+ 
+  int initialized;     // flat to indicate if initialization successful (1) or not (0)
+
+  int nucell, ntype;   // number of atoms and atomic types in a unit cell
+  int    *attyp;       // array to store atomic types
+  double alat;         // lattice constant of lattice
+  double latvec[3][3]; // lattice vectors, in unit of alat
+  double **atpos;      // fractional coordinate for atoms in unit cell
+
+  void display();      // method to display lattice info
+
+  void OrientLattice();// to orient the lattice, following the rule of LAMMPS.
+
+  int count_words(const char *);
+};
+#endif
