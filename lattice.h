@@ -27,10 +27,12 @@ public:
   double *h;           // height above each layer; will be set automatically in setup
 
   void display();      // method to display lattice info
-  void setup();        // to setup "numlayer", "h"
 
   void OrientLattice();// to orient the lattice, following the rule of LAMMPS.
 
   int count_words(const char *);
+
+private:
+  void setup();        // to setup "numlayer", "h"
 };
 #endif
