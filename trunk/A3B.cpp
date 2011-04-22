@@ -117,45 +117,54 @@ void A3B::A3B_A15()
     latvec[1][1] = 1.;
     latvec[2][2] = 1.;
 
-    atpos = memory->create_2d_double_array(nucell, 3, "A3B_A15_001_atpos");
+    atpos = memory->create(atpos,nucell, 3, "A3B_A15_001_atpos");
     attyp = new int[nucell];
+    layer = new int[nucell];
     
     attyp[0]    = ip2;
+    layer[0]    = 0;
     atpos[0][0] = 0.00;
     atpos[0][1] = 0.00;
     atpos[0][2] = 0.00;
 
     attyp[1]    = ip1;
+    layer[1]    = 0;
     atpos[1][0] = 0.50;
     atpos[1][1] = 0.25;
     atpos[1][2] = 0.00;
 
     attyp[2]    = ip1;
+    layer[2]    = 0;
     atpos[2][0] = 0.50;
     atpos[2][1] = 0.75;
     atpos[2][2] = 0.00;
 
     attyp[3]    = ip1;
+    layer[3]    = 1;
     atpos[3][0] = 0.00;
     atpos[3][1] = 0.50;
     atpos[3][2] = 0.25;
 
     attyp[4]    = ip2;
+    layer[4]    = 2;
     atpos[4][0] = 0.50;
     atpos[4][1] = 0.50;
     atpos[4][2] = 0.50;
 
     attyp[5]    = ip1;
+    layer[5]    = 2;
     atpos[5][0] = 0.25;
     atpos[5][1] = 0.00;
     atpos[5][2] = 0.50;
 
     attyp[6]    = ip1;
+    layer[6]    = 2;
     atpos[6][0] = 0.75;
     atpos[6][1] = 0.00;
     atpos[6][2] = 0.50;
 
     attyp[7]    = ip1;
+    layer[7]    = 3;
     atpos[7][0] = 0.00;
     atpos[7][1] = 0.50;
     atpos[7][2] = 0.75;
@@ -173,85 +182,102 @@ void A3B::A3B_A15()
     latvec[1][1] = sqrt(2.);
     latvec[2][2] = sqrt(2.);
 
-    atpos = memory->create_2d_double_array(nucell, 3, "A3B_A15_110_atpos");
+    atpos = memory->create(atpos,nucell, 3, "A3B_A15_110_atpos");
     attyp = new int[nucell];
+    layer = new int[nucell];
     
     attyp[0]    = ip2;
+    layer[0]    = 0;
     atpos[0][0] = 0.;
     atpos[0][1] = 0.;
     atpos[0][2] = 0.;
 
     attyp[1]    = ip2;
+    layer[1]    = 0;
     atpos[1][0] = 0.5;
     atpos[1][1] = 0.5;
     atpos[1][2] = 0.;
     
     attyp[2]    = ip1;
+    layer[2]    = 1;
     atpos[2][0] = 0.5;
     atpos[2][1] = 0.125;
     atpos[2][2] = 0.125;
     
     attyp[3]    = ip1;
+    layer[3]    = 1;
     atpos[3][0] = 0.;
     atpos[3][1] = 0.375;
     atpos[3][2] = 0.125;
     
     attyp[4]    = ip1;
+    layer[4]    = 2;
     atpos[4][0] = 0.75;
     atpos[4][1] = 0.75;
     atpos[4][2] = 0.25;
     
     attyp[5]    = ip1;
+    layer[5]    = 2;
     atpos[5][0] = 0.25;
     atpos[5][1] = 0.75;
     atpos[5][2] = 0.25;
     
     attyp[6]    = ip1;
+    layer[6]    = 3;
     atpos[6][0] = 0.5;
     atpos[6][1] = 0.375;
     atpos[6][2] = 0.375;
     
     attyp[7]    = ip1;
+    layer[7]    = 3;
     atpos[7][0] = 0.;
     atpos[7][1] = 0.125;
     atpos[7][2] = 0.375;
     
     attyp[8]    = ip2;
+    layer[8]    = 4;
     atpos[8][0] = 0.;
     atpos[8][1] = 0.5;
     atpos[8][2] = 0.5;
     
     attyp[9]    = ip2;
+    layer[9]    = 4;
     atpos[9][0] = 0.5;
     atpos[9][1] = 0.;
     atpos[9][2] = 0.5;
 
     attyp[10]    = ip1;
+    layer[10]    = 5;
     atpos[10][0] = 0.5;
     atpos[10][1] = 0.625;
     atpos[10][2] = 0.625;
     
     attyp[11]    = ip1;
+    layer[11]    = 5;
     atpos[11][0] = 0.;
     atpos[11][1] = 0.875;
     atpos[11][2] = 0.625;
     
     attyp[12]    = ip1;
+    layer[12]    = 6;
     atpos[12][0] = 0.25;
     atpos[12][1] = 0.25;
     atpos[12][2] = 0.75;
     
     attyp[13]    = ip1;
+    layer[13]    = 6;
     atpos[13][0] = 0.75;
     atpos[13][1] = 0.25;
     atpos[13][2] = 0.75;
     
     attyp[14]    = ip1;
+    layer[14]    = 7;
     atpos[14][0] = 0.5;
     atpos[14][1] = 0.875;
     atpos[14][2] = 0.875;
     
     attyp[15]    = ip1;
+    layer[15]    = 7;
     atpos[15][0] = 0.;
     atpos[15][1] = 0.625;
     atpos[15][2] = 0.875;
@@ -269,125 +295,150 @@ void A3B::A3B_A15()
     latvec[1][1] = sqrt(2.);
     latvec[2][2] = sqrt(3.)/2.;
 
-    atpos = memory->create_2d_double_array(nucell, 3, "A3B_A15_111_atpos");
+    atpos = memory->create(atpos,nucell, 3, "A3B_A15_111_atpos");
     attyp = new int[nucell];
+    layer = new int[nucell];
     
     attyp[0]    = ip2;
+    layer[0]    = 0;
     atpos[0][0] = 0.;
     atpos[0][1] = 0.;
     atpos[0][2] = 0.;
     
     attyp[1]    = ip2;
+    layer[1]    = 0;
     atpos[1][0] = 0.5;
     atpos[1][1] = 0.5;
     atpos[1][2] = 0.;
 
     attyp[2]    = ip1;
+    layer[2]    = 1;
     atpos[2][0] = 1./24.;
     atpos[2][1] = 0.375;
     atpos[2][2] = 1./6.;
     
     attyp[3]    = ip1;
+    layer[3]    = 1;
     atpos[3][0] = 13./24.;
     atpos[3][1] = 0.875;
     atpos[3][2] = 1./6.;
     
     attyp[4]    = ip1;
+    layer[4]    = 1;
     atpos[4][0] = 7./24.;
     atpos[4][1] = 0.375;
     atpos[4][2] = 1./6.;
     
     attyp[5]    = ip1;
+    layer[5]    = 1;
     atpos[5][0] = 19./24.;
     atpos[5][1] = 0.875;
     atpos[5][2] = 1./6.;
     
     attyp[6]    = ip1;
+    layer[6]    = 1;
     atpos[6][0] = 2./3.;
     atpos[6][1] = 0.25;
     atpos[6][2] = 1./6.;
     
     attyp[7]    = ip1;
+    layer[7]    = 1;
     atpos[7][0] = 1./6.;
     atpos[7][1] = 0.75;
     atpos[7][2] = 1./6.;
     
     attyp[8]    = ip2;
+    layer[8]    = 2;
     atpos[8][0] = 1./3.;
     atpos[8][1] = 0.;
     atpos[8][2] = 1./3.;
     
     attyp[9]    = ip2;
+    layer[9]    = 2;
     atpos[9][0] = 5./6.;
     atpos[9][1] = 0.5;
     atpos[9][2] = 1./3.;
     
     attyp[10]    = ip1;
+    layer[10]    = 3;
     atpos[10][0] = 0.5;
     atpos[10][1] = 0.25;
     atpos[10][2] = 0.5;
     
     attyp[11]    = ip1;
+    layer[11]    = 3;
     atpos[11][0] = 0.;
     atpos[11][1] = 0.75;
     atpos[11][2] = 0.5;
     
     attyp[12]    = ip1;
+    layer[12]    = 3;
     atpos[12][0] = 0.125;
     atpos[12][1] = 0.125;
     atpos[12][2] = 0.5;
     
     attyp[13]    = ip1;
+    layer[13]    = 3;
     atpos[13][0] = 0.625;
     atpos[13][1] = 0.625;
     atpos[13][2] = 0.5;
     
     attyp[14]    = ip1;
+    layer[14]    = 3;
     atpos[14][0] = 0.875;
     atpos[14][1] = 0.125;
     atpos[14][2] = 0.5;
     
     attyp[15]    = ip1;
+    layer[15]    = 3;
     atpos[15][0] = 0.375;
     atpos[15][1] = 0.625;
     atpos[15][2] = 0.5;
     
     attyp[16]    = ip2;
+    layer[16]    = 4;
     atpos[16][0] = 2./3.;
     atpos[16][1] = 0.;
     atpos[16][2] = 2./3.;
     
     attyp[17]    = ip2;
+    layer[17]    = 4;
     atpos[17][0] = 1./6.;
     atpos[17][1] = 0.5;
     atpos[17][2] = 2./3.;
 
     attyp[18]    = ip1;
+    layer[18]    = 5;
     atpos[18][0] = 5./6.;
     atpos[18][1] = 0.75;
     atpos[18][2] = 5./6.;
     
     attyp[19]    = ip1;
+    layer[19]    = 5;
     atpos[19][0] = 17./24.;
     atpos[19][1] = 0.375;
     atpos[19][2] = 5./6.;
     
     attyp[20]    = ip1;
+    layer[20]    = 5;
     atpos[20][0] = 5./24.;
     atpos[20][1] = 0.875;
     atpos[20][2] = 5./6.;
     
     attyp[21]    = ip1;
+    layer[21]    = 5;
     atpos[21][0] = 23./24.;
     atpos[21][1] = 0.375;
     atpos[21][2] = 5./6.;
     
     attyp[22]    = ip1;
+    layer[22]    = 5;
     atpos[22][0] = 11./24.;
     atpos[22][1] = 0.875;
     atpos[22][2] = 5./6.;
     
     attyp[23]    = ip1;
+    layer[23]    = 5;
     atpos[23][0] = 1./3.;
     atpos[23][1] = 0.25;
     atpos[23][2] = 5./6.;
@@ -437,45 +488,54 @@ void A3B::A3B_D019()
     latvec[1][1] = sqrt(3.)*0.5;
     latvec[2][2] = ca;
 
-    atpos = memory->create_2d_double_array(nucell, 3, "A3B_D019_001_atpos");
+    atpos = memory->create(atpos,nucell, 3, "A3B_D019_001_atpos");
     attyp = new int[nucell];
+    layer = new int[nucell];
     
     attyp[0]    = ip2;
+    layer[0]    = 0;
     atpos[0][0] = 0.;
     atpos[0][1] = 0.;
     atpos[0][2] = 0.;
 
     attyp[1]    = ip1;
+    layer[1]    = 0;
     atpos[1][0] = 0.5;
     atpos[1][1] = 0.;
     atpos[1][2] = 0.;
 
     attyp[2]    = ip1;
+    layer[2]    = 0;
     atpos[2][0] = 0.5;
     atpos[2][1] = 0.5;
     atpos[2][2] = 0.;
 
     attyp[3]    = ip1;
+    layer[3]    = 0;
     atpos[3][0] = 0.;
     atpos[3][1] = 0.5;
     atpos[3][2] = 0.;
 
     attyp[4]    = ip2;
+    layer[4]    = 1;
     atpos[4][0] = 1./3.;
     atpos[4][1] = 2./3.;
     atpos[4][2] = 0.5;
 
     attyp[5]    = ip1;
+    layer[5]    = 1;
     atpos[5][0] = 1./3.;
     atpos[5][1] = 1./6.;
     atpos[5][2] = 0.5;
 
     attyp[6]    = ip1;
+    layer[6]    = 1;
     atpos[6][0] = 5./6.;
     atpos[6][1] = 1./6.;
     atpos[6][2] = 0.5;
 
     attyp[7]    = ip1;
+    layer[7]    = 1;
     atpos[7][0] = 5./6.;
     atpos[7][1] = 2./3.;
     atpos[7][2] = 0.5;
@@ -493,85 +553,102 @@ void A3B::A3B_D019()
     latvec[1][1] = sqrt(3.);
     latvec[2][2] = ca;
 
-    atpos = memory->create_2d_double_array(nucell, 3, "A3B_D019_001_atpos");
+    atpos = memory->create(atpos,nucell, 3, "A3B_D019_001_atpos");
     attyp = new int[nucell];
+    layer = new int[nucell];
     
     attyp[0]    = ip2;
+    layer[0]    = 0;
     atpos[0][0] = 0.;
     atpos[0][1] = 0.5;
     atpos[0][2] = 0.;
     
     attyp[1]    = ip2;
+    layer[1]    = 0;
     atpos[1][0] = 0.5;
     atpos[1][1] = 0.;
     atpos[1][2] = 0.;
     
     attyp[2]    = ip1;
+    layer[2]    = 0;
     atpos[2][0] = 0.25;
     atpos[2][1] = 0.25;
     atpos[2][2] = 0.;
     
     attyp[3]    = ip1;
+    layer[3]    = 0;
     atpos[3][0] = 0.75;
     atpos[3][1] = 0.75;
     atpos[3][2] = 0.;
     
     attyp[4]    = ip1;
+    layer[4]    = 0;
     atpos[4][0] = 0.25;
     atpos[4][1] = 0.75;
     atpos[4][2] = 0.;
     
     attyp[5]    = ip1;
+    layer[5]    = 0;
     atpos[5][0] = 0.75;
     atpos[5][1] = 0.25;
     atpos[5][2] = 0.;
     
     attyp[6]    = ip1;
+    layer[6]    = 0;
     atpos[6][0] = 0.;
     atpos[6][1] = 0.;
     atpos[6][2] = 0.;
     
     attyp[7]    = ip1;
+    layer[7]    = 0;
     atpos[7][0] = 0.5;
     atpos[7][1] = 0.5;
     atpos[7][2] = 0.;
     
     attyp[8]    = ip2;
+    layer[8]    = 1;
     atpos[8][0] = 0.;
     atpos[8][1] = 1./6.;
     atpos[8][2] = 0.5;
     
     attyp[9]    = ip2;
+    layer[9]    = 1;
     atpos[9][0] = 0.5;
     atpos[9][1] = 2./3.;
     atpos[9][2] = 0.5;
 
     attyp[10]    = ip1;
+    layer[10]    = 1;
     atpos[10][0] = 0.75;
     atpos[10][1] = 11./12.;
     atpos[10][2] = 0.5;
     
     attyp[11]    = ip1;
+    layer[11]    = 1;
     atpos[11][0] = 0.;
     atpos[11][1] = 2./3.;
     atpos[11][2] = 0.5;
     
     attyp[12]    = ip1;
+    layer[12]    = 1;
     atpos[12][0] = 0.5;
     atpos[12][1] = 1./6.;
     atpos[12][2] = 0.5;
     
     attyp[13]    = ip1;
+    layer[13]    = 1;
     atpos[13][0] = 0.25;
     atpos[13][1] = 11./12.;
     atpos[13][2] = 0.5;
     
     attyp[14]    = ip1;
+    layer[14]    = 1;
     atpos[14][0] = 0.75;
     atpos[14][1] = 5./12.;
     atpos[14][2] = 0.5;
     
     attyp[15]    = ip1;
+    layer[15]    = 1;
     atpos[15][0] = 0.25;
     atpos[15][1] = 5./12.;
     atpos[15][2] = 0.5;
@@ -589,85 +666,102 @@ void A3B::A3B_D019()
     latvec[1][1] = ca;
     latvec[2][2] = sqrt(3.);
 
-    atpos = memory->create_2d_double_array(nucell, 3, "A3B_D019_100_atpos");
+    atpos = memory->create(atpos,nucell, 3, "A3B_D019_100_atpos");
     attyp = new int[nucell];
+    layer = new int[nucell];
     
     attyp[0]    = ip1;
+    layer[0]    = 0;
     atpos[0][0] = 0.75;
     atpos[0][1] = 0.5;
     atpos[0][2] = 0.;
     
     attyp[1]    = ip1;
+    layer[1]    = 0;
     atpos[1][0] = 0.25;
     atpos[1][1] = 0.5;
     atpos[1][2] = 0.;
     
     attyp[2]    = ip1;
+    layer[2]    = 1;
     atpos[2][0] = 0.75;
     atpos[2][1] = 0.;
     atpos[2][2] = 1./6.;
     
     attyp[3]    = ip1;
+    layer[3]    = 1;
     atpos[3][0] = 0.25;
     atpos[3][1] = 0.;
     atpos[3][2] = 1./6.;
 
     attyp[4]    = ip2;
+    layer[4]    = 2;
     atpos[4][0] = 0.5;
     atpos[4][1] = 0.5;
     atpos[4][2] = 0.25;
     
     attyp[5]    = ip1;
+    layer[5]    = 2;
     atpos[5][0] = 0.;
     atpos[5][1] = 0.5;
     atpos[5][2] = 0.25;
     
     attyp[6]    = ip2;
+    layer[6]    = 3;
     atpos[6][0] = 0.;
     atpos[6][1] = 0.;
     atpos[6][2] = 5./12.;
     
     attyp[7]    = ip1;
+    layer[7]    = 3;
     atpos[7][0] = 0.5;
     atpos[7][1] = 0.;
     atpos[7][2] = 5./12.;
     
     attyp[8]    = ip1;
+    layer[8]    = 4;
     atpos[8][0] = 0.25;
     atpos[8][1] = 0.5;
     atpos[8][2] = 0.5;
     
     attyp[9]    = ip1;
+    layer[9]    = 4;
     atpos[9][0] = 0.75;
     atpos[9][1] = 0.5;
     atpos[9][2] = 0.5;
     
     attyp[10]    = ip1;
+    layer[10]    = 5;
     atpos[10][0] = 0.25;
     atpos[10][1] = 0.;
     atpos[10][2] = 2./3.;
     
     attyp[11]    = ip1;
+    layer[11]    = 5;
     atpos[11][0] = 0.75;
     atpos[11][1] = 0.;
     atpos[11][2] = 2./3.;
     
     attyp[12]    = ip2;
+    layer[12]    = 6;
     atpos[12][0] = 0.;
     atpos[12][1] = 0.5;
     atpos[12][2] = 0.75;
     
     attyp[13]    = ip1;
+    layer[13]    = 6;
     atpos[13][0] = 0.5;
     atpos[13][1] = 0.5;
     atpos[13][2] = 0.75;
     
     attyp[14]    = ip2;
+    layer[14]    = 7;
     atpos[14][0] = 0.5;
     atpos[14][1] = 0.;
     atpos[14][2] = 11./12.;
 
     attyp[15]    = ip1;
+    layer[15]    = 7;
     atpos[15][0] = 0.;
     atpos[15][1] = 0.;
     atpos[15][2] = 11./12.;
@@ -685,85 +779,102 @@ void A3B::A3B_D019()
     latvec[1][1] = ca;
     latvec[2][2] = sqrt(3.);
 
-    atpos = memory->create_2d_double_array(nucell, 3, "A3B_D019_110_atpos");
+    atpos = memory->create(atpos,nucell, 3, "A3B_D019_110_atpos");
     attyp = new int[nucell];
+    layer = new int[nucell];
     
     attyp[0] = ip1;
+    layer[0]    = 0;
     atpos[0][0] = 0.75;
     atpos[0][1] = 0.25;
     atpos[0][2] = 0.;
     
     attyp[1] = ip1;
+    layer[1]    = 0;
     atpos[1][0] = 0.25;
     atpos[1][1] = 0.25;
     atpos[1][2] = 0.;
     
     attyp[2] = ip1;
+    layer[2]    = 1;
     atpos[2][0] = 0.75;
     atpos[2][1] = 0.75;
     atpos[2][2] = 1./6.;
     
     attyp[3] = ip1;
+    layer[3]    = 1;
     atpos[3][0] = 0.25;
     atpos[3][1] = 0.75;
     atpos[3][2] = 1./6.;
     
     attyp[4] = ip2;
+    layer[4]    = 2;
     atpos[4][0] = 0.5;
     atpos[4][1] = 0.25;
     atpos[4][2] = 0.25;
     
     attyp[5] = ip1;
+    layer[5]    = 2;
     atpos[5][0] = 0.;
     atpos[5][1] = 0.25;
     atpos[5][2] = 0.25;
     
     attyp[6] = ip1;
+    layer[6]    = 3;
     atpos[6][0] = 0.5;
     atpos[6][1] = 0.75;
     atpos[6][2] = 5./12.;
     
     attyp[7] = ip2;
+    layer[7]    = 3;
     atpos[7][0] = 0.;
     atpos[7][1] = 0.75;
     atpos[7][2] = 5./12.;
     
     attyp[8] = ip1;
+    layer[8]    = 4;
     atpos[8][0] = 0.75;
     atpos[8][1] = 0.25;
     atpos[8][2] = 0.5;
     
     attyp[9] = ip1;
+    layer[9]    = 4;
     atpos[9][0] = 0.25;
     atpos[9][1] = 0.25;
     atpos[9][2] = 0.5;
     
     attyp[10] = ip1;
+    layer[10]    = 5;
     atpos[10][0] = 0.25;
     atpos[10][1] = 0.75;
     atpos[10][2] = 2./3.;
     
     attyp[11] = ip1;
+    layer[11]    = 5;
     atpos[11][0] = 0.75;
     atpos[11][1] = 0.75;
     atpos[11][2] = 2./3.;
     
     attyp[12] = ip2;
+    layer[12]    = 6;
     atpos[12][0] = 0.;
     atpos[12][1] = 0.25;
     atpos[12][2] = 0.75;
     
     attyp[13] = ip1;
+    layer[13]    = 6;
     atpos[13][0] = 0.5;
     atpos[13][1] = 0.25;
     atpos[13][2] = 0.75;
     
     attyp[14] = ip1;
+    layer[14]    = 7;
     atpos[14][0] = 0;
     atpos[14][1] = 0.75;
     atpos[14][2] = 11./12.;
     
     attyp[15] = ip2;
+    layer[15]    = 7;
     atpos[15][0] = 0.5;
     atpos[15][1] = 0.75;
     atpos[15][2] = 11./12.;
@@ -811,45 +922,54 @@ void A3B::A3B_D022()
     latvec[1][1] = 1.;
     latvec[2][2] = ca;
 
-    atpos = memory->create_2d_double_array(nucell, 3, "A3B_D022_001_atpos");
+    atpos = memory->create(atpos,nucell, 3, "A3B_D022_001_atpos");
     attyp = new int[nucell];
+    layer = new int[nucell];
     
     attyp[0]    = ip2;
+    layer[0]    = 0;
     atpos[0][0] = 0.;
     atpos[0][1] = 0.;
     atpos[0][2] = 0.;
     
     attyp[1]    = ip1;
+    layer[1]    = 0;
     atpos[1][0] = 0.5;
     atpos[1][1] = 0.5;
     atpos[1][2] = 0.;
     
     attyp[2]    = ip1;
+    layer[2]    = 1;
     atpos[2][0] = 0.;
     atpos[2][1] = 0.5;
     atpos[2][2] = 0.25;
     
     attyp[3]    = ip1;
+    layer[3]    = 1;
     atpos[3][0] = 0.5;
     atpos[3][1] = 0.;
     atpos[3][2] = 0.25;
     
     attyp[4]    = ip2;
+    layer[4]    = 2;
     atpos[4][0] = 0.5;
     atpos[4][1] = 0.5;
     atpos[4][2] = 0.5;
 
     attyp[5]    = ip1;
+    layer[5]    = 2;
     atpos[5][0] = 0.;
     atpos[5][1] = 0.;
     atpos[5][2] = 0.5;
     
     attyp[6]    = ip1;
+    layer[6]    = 3;
     atpos[6][0] = 0.;
     atpos[6][1] = 0.5;
     atpos[6][2] = 0.75;
     
     attyp[7]    = ip1;
+    layer[7]    = 3;
     atpos[7][0] = 0.5;
     atpos[7][1] = 0.;
     atpos[7][2] = 0.75;
@@ -867,45 +987,54 @@ void A3B::A3B_D022()
     latvec[1][1] = ca;
     latvec[2][2] = 1.;
 
-    atpos = memory->create_2d_double_array(nucell, 3, "A3B_D022_100_atpos");
+    atpos = memory->create(atpos,nucell, 3, "A3B_D022_100_atpos");
     attyp = new int[nucell];
+    layer = new int[nucell];
     
     attyp[0]    = ip2;
+    layer[0]    = 0;
     atpos[0][0] = 0.;
     atpos[0][1] = 0.;
     atpos[0][2] = 0.;
     
     attyp[1]    = ip1;
+    layer[1]    = 0;
     atpos[1][0] = 0.;
     atpos[1][1] = 0.5;
     atpos[1][2] = 0.;
     
     attyp[2]    = ip1;
+    layer[2]    = 0;
     atpos[2][0] = 0.5;
     atpos[2][1] = 0.25;
     atpos[2][2] = 0.;
     
     attyp[3]    = ip1;
+    layer[3]    = 0;
     atpos[3][0] = 0.5;
     atpos[3][1] = 0.75;
     atpos[3][2] = 0.;
     
     attyp[4]    = ip2;
+    layer[4]    = 1;
     atpos[4][0] = 0.5;
     atpos[4][1] = 0.5;
     atpos[4][2] = 0.5;
 
     attyp[5]    = ip1;
+    layer[5]    = 1;
     atpos[5][0] = 0.5;
     atpos[5][1] = 0.;
     atpos[5][2] = 0.5;
     
     attyp[6]    = ip1;
+    layer[6]    = 1;
     atpos[6][0] = 0.;
     atpos[6][1] = 0.25;
     atpos[6][2] = 0.5;
     
     attyp[7]    = ip1;
+    layer[7]    = 1;
     atpos[7][0] = 0.;
     atpos[7][1] = 0.75;
     atpos[7][2] = 0.5;
@@ -923,85 +1052,102 @@ void A3B::A3B_D022()
     latvec[1][1] = ca;
     latvec[2][2] = sqrt(2.);
 
-    atpos = memory->create_2d_double_array(nucell, 3, "A3B_110_atpos");
+    atpos = memory->create(atpos,nucell, 3, "A3B_110_atpos");
     attyp = new int[nucell];
+    layer = new int[nucell];
     
     attyp[0]    = ip2;
+    layer[0]    = 0;
     atpos[0][0] = 0.;
     atpos[0][1] = 0.;
     atpos[0][2] = 0.;
     
     attyp[1]    = ip2;
+    layer[1]    = 0;
     atpos[1][0] = 0.5;
     atpos[1][1] = 0.5;
     atpos[1][2] = 0.;
     
     attyp[2]    = ip1;
+    layer[2]    = 0;
     atpos[2][0] = 0.;
     atpos[2][1] = 0.5;
     atpos[2][2] = 0.;
     
     attyp[3]    = ip1;
+    layer[3]    = 0;
     atpos[3][0] = 0.5;
     atpos[3][1] = 0.;
     atpos[3][2] = 0.;
     
     attyp[4]    = ip1;
+    layer[4]    = 1;
     atpos[4][0] = 0.25;
     atpos[4][1] = 0.25;
     atpos[4][2] = 0.25;
     
     attyp[5]    = ip1;
+    layer[5]    = 1;
     atpos[5][0] = 0.75;
     atpos[5][1] = 0.75;
     atpos[5][2] = 0.25;
     
     attyp[6]    = ip1;
+    layer[6]    = 1;
     atpos[6][0] = 0.25;
     atpos[6][1] = 0.75;
     atpos[6][2] = 0.25;
     
     attyp[7]    = ip1;
+    layer[7]    = 1;
     atpos[7][0] = 0.75;
     atpos[7][1] = 0.25;
     atpos[7][2] = 0.25;
     
     attyp[8]    = ip2;
+    layer[8]    = 2;
     atpos[8][0] = 0.5;
     atpos[8][1] = 0.;
     atpos[8][2] = 0.5;
     
     attyp[9]    = ip2;
+    layer[9]    = 2;
     atpos[9][0] = 0.;
     atpos[9][1] = 0.5;
     atpos[9][2] = 0.5;
 
     attyp[10]    = ip1;
+    layer[10]    = 2;
     atpos[10][0] = 0.5;
     atpos[10][1] = 0.5;
     atpos[10][2] = 0.5;
     
     attyp[11]    = ip1;
+    layer[11]    = 2;
     atpos[11][0] = 0.;
     atpos[11][1] = 0.;
     atpos[11][2] = 0.5;
     
     attyp[12]    = ip1;
+    layer[12]    = 3;
     atpos[12][0] = 0.25;
     atpos[12][1] = 0.25;
     atpos[12][2] = 0.75;
     
     attyp[13]    = ip1;
+    layer[13]    = 3;
     atpos[13][0] = 0.75;
     atpos[13][1] = 0.25;
     atpos[13][2] = 0.75;
     
     attyp[14]    = ip1;
+    layer[14]    = 3;
     atpos[14][0] = 0.25;
     atpos[14][1] = 0.75;
     atpos[14][2] = 0.75;
     
     attyp[15]    = ip1;
+    layer[15]    = 3;
     atpos[15][0] = 0.75;
     atpos[15][1] = 0.75;
     atpos[15][2] = 0.75;
@@ -1025,25 +1171,30 @@ void A3B::A3B_D022()
     latvec[2][1] =  0.5;
     latvec[2][2] = -0.5;
 
-    atpos = memory->create_2d_double_array(nucell, 3, "A3B_D022_primitive_atpos");
+    atpos = memory->create(atpos,nucell, 3, "A3B_D022_primitive_atpos");
     attyp = new int[nucell];
+    layer = new int[nucell];
     
     attyp[0]    = ip2;
+    layer[0]    = 0;
     atpos[0][0] = 0.;
     atpos[0][1] = 0.;
     atpos[0][2] = 0.;
     
     attyp[1]    = ip1;
+    layer[1]    = 0;
     atpos[1][0] = 0.5;
     atpos[1][1] = 0.5;
     atpos[1][2] = 0.;
     
     attyp[2]    = ip1;
+    layer[2]    = 1;
     atpos[2][0] = 0.75;
     atpos[2][1] = 0.25;
     atpos[2][2] = 0.5;
     
     attyp[3]    = ip1;
+    layer[3]    = 1;
     atpos[3][0] = 0.25;
     atpos[3][1] = 0.75;
     atpos[3][2] = 0.5;
@@ -1092,45 +1243,54 @@ void A3B::A3B_D03()
     latvec[1][1] = 1./sqrt(2.);
     latvec[2][2] = 1.;
 
-    atpos = memory->create_2d_double_array(nucell, 3, "A3B_D03_001_atpos");
+    atpos = memory->create(atpos,nucell, 3, "A3B_D03_001_atpos");
     attyp = new int[nucell];
+    layer = new int[nucell];
 
     attyp[0] = ip1;
+    layer[0]    = 0;
     atpos[0][0] = 0.5;
     atpos[0][1] = 0.5;
     atpos[0][2] = 0.;
     
     attyp[1] = ip2;
+    layer[1]    = 0;
     atpos[1][0] = 0.;
     atpos[1][1] = 0.;
     atpos[1][2] = 0.;
     
     attyp[2] = ip1;
+    layer[2]    = 1;
     atpos[2][0] = 0.;
     atpos[2][1] = 0.5;
     atpos[2][2] = 0.25;
     
     attyp[3] = ip1;
+    layer[3]    = 1;
     atpos[3][0] = 0.5;
     atpos[3][1] = 0.;
     atpos[3][2] = 0.25;
     
     attyp[4] = ip1;
+    layer[4]    = 2;
     atpos[4][0] = 0.;
     atpos[4][1] = 0.;
     atpos[4][2] = 0.5;
     
     attyp[5] = ip2;
+    layer[5]    = 2;
     atpos[5][0] = 0.5;
     atpos[5][1] = 0.5;
     atpos[5][2] = 0.5;
     
     attyp[6] = ip1;
+    layer[6]    = 3;
     atpos[6][0] = 0.5;
     atpos[6][1] = 0.;
     atpos[6][2] = 0.75;
     
     attyp[7] = ip1;
+    layer[7]    = 3;
     atpos[7][0] = 0.;
     atpos[7][1] = 0.5;
     atpos[7][2] = 0.75;  
@@ -1148,85 +1308,102 @@ void A3B::A3B_D03()
     latvec[1][1] = 1.;
     latvec[2][2] = 1.;
 
-    atpos = memory->create_2d_double_array(nucell, 3, "A3B_D03_100_atpos");
+    atpos = memory->create(atpos,nucell, 3, "A3B_D03_100_atpos");
     attyp = new int[nucell];
+    layer = new int[nucell];
     
     attyp[0] = ip1;
+    layer[0]    = 0;
     atpos[0][0] = 0.5;
     atpos[0][1] = 0.;
     atpos[0][2] = 0.;
     
     attyp[1] = ip1;
+    layer[1]    = 0;
     atpos[1][0] = 0.;
     atpos[1][1] = 0.5;
     atpos[1][2] = 0.;
     
     attyp[2] = ip2;
+    layer[2]    = 0;
     atpos[2][0] = 0.;
     atpos[2][1] = 0.;
     atpos[2][2] = 0.;
     
     attyp[3] = ip2;
+    layer[3]    = 0;
     atpos[3][0] = 0.5;
     atpos[3][1] = 0.5;
     atpos[3][2] = 0.;
     
     attyp[4] = ip1;
+    layer[4]    = 1;
     atpos[4][0] = 0.75;
     atpos[4][1] = 0.25;
     atpos[4][2] = 0.25;
     
     attyp[5] = ip1;
+    layer[5]    = 1;
     atpos[5][0] = 0.25;
     atpos[5][1] = 0.75;
     atpos[5][2] = 0.25;
     
     attyp[6] = ip1;
+    layer[6]    = 1;
     atpos[6][0] = 0.25;
     atpos[6][1] = 0.25;
     atpos[6][2] = 0.25;
     
     attyp[7] = ip1;
+    layer[7]    = 1;
     atpos[7][0] = 0.75;
     atpos[7][1] = 0.75;
     atpos[7][2] = 0.25;
     
     attyp[8] = ip1;
+    layer[8]    = 2;
     atpos[8][0] = 0.5;
     atpos[8][1] = 0.5;
     atpos[8][2] = 0.5;
     
     attyp[9] = ip1;
+    layer[9]    = 2;
     atpos[9][0] = 0.;
     atpos[9][1] = 0.;
     atpos[9][2] = 0.5;
     
     attyp[10] = ip2;
+    layer[10]    = 2;
     atpos[10][0] = 0.;
     atpos[10][1] = 0.5;
     atpos[10][2] = 0.5;
     
     attyp[11] = ip2;
+    layer[11]    = 2;
     atpos[11][0] = 0.5;
     atpos[11][1] = 0.;
     atpos[11][2] = 0.5;
     
     attyp[12] = ip1;
+    layer[12]    = 3;
     atpos[12][0] = 0.75;
     atpos[12][1] = 0.75;
     atpos[12][2] = 0.75;
     
     attyp[13] = ip1;
+    layer[13]    = 3;
     atpos[13][0] = 0.75;
     atpos[13][1] = 0.25;
     atpos[13][2] = 0.75;
     
     attyp[14] = ip1;
+    layer[14]    = 3;
     atpos[14][0] = 0.25;
     atpos[14][1] = 0.75;
     atpos[14][2] = 0.75;
     
     attyp[15] = ip1;
+    layer[15]    = 3;
     atpos[15][0] = 0.25;
     atpos[15][1] = 0.25;
     atpos[15][2] = 0.75;
@@ -1244,45 +1421,54 @@ void A3B::A3B_D03()
     latvec[1][1] = sqrt(2.);
     latvec[2][2] = sqrt(2.);
 
-    atpos = memory->create_2d_double_array(nucell, 3, "A3B_D03_110_atpos");
+    atpos = memory->create(atpos,nucell, 3, "A3B_D03_110_atpos");
     attyp = new int[nucell];
+    layer = new int[nucell];
     
     attyp[0] = ip1;
+    layer[0]    = 0;
     atpos[0][0] = 0.5;
     atpos[0][1] = 0.;
     atpos[0][2] = 0.;
     
     attyp[1] = ip1;
+    layer[1]    = 0;
     atpos[1][0] = 0.75;
     atpos[1][1] = 0.5;
     atpos[1][2] = 0.;
     
     attyp[2] = ip1;
+    layer[2]    = 0;
     atpos[2][0] = 0.25;
     atpos[2][1] = 0.5;
     atpos[2][2] = 0.;
     
     attyp[3] = ip2;
+    layer[3]    = 0;
     atpos[3][0] = 0.;
     atpos[3][1] = 0.;
     atpos[3][2] = 0.;
     
     attyp[4] = ip1;
+    layer[4]    = 1;
     atpos[4][0] = 0.;
     atpos[4][1] = 0.5;
     atpos[4][2] = 0.5;
     
     attyp[5] = ip1;
+    layer[5]    = 1;
     atpos[5][0] = 0.25;
     atpos[5][1] = 0.;
     atpos[5][2] = 0.5;
     
     attyp[6] = ip1;
+    layer[6]    = 1;
     atpos[6][0] = 0.75;
     atpos[6][1] = 0.;
     atpos[6][2] = 0.5;
     
     attyp[7] = ip2;
+    layer[7]    = 1;
     atpos[7][0] = 0.5;
     atpos[7][1] = 0.5;
     atpos[7][2] = 0.5;
@@ -1300,125 +1486,150 @@ void A3B::A3B_D03()
     latvec[1][1] = sqrt(6.)/2.;
     latvec[2][2] = sqrt(3.);
 
-    atpos = memory->create_2d_double_array(nucell, 3, "A3B_D03_111_atpos");
+    atpos = memory->create(atpos,nucell, 3, "A3B_D03_111_atpos");
     attyp = new int[nucell];
+    layer = new int[nucell];
     
     attyp[0] = ip2;
+    layer[0]    = 0;
     atpos[0][0] = 0.;
     atpos[0][1] = 0.;
     atpos[0][2] = 0.;
     
     attyp[1] = ip2;
+    layer[1]    = 0;
     atpos[1][0] = 0.5;
     atpos[1][1] = 0.5;
     atpos[1][2] = 0.;
     
     attyp[2] = ip1;
+    layer[2]    = 1;
     atpos[2][0] = 0.5;
     atpos[2][1] = 1./6.;
     atpos[2][2] = 1./12.;
     
     attyp[3] = ip1;
+    layer[3]    = 1;
     atpos[3][0] = 0.;
     atpos[3][1] = 2./3.;
     atpos[3][2] = 1./12.;
     
     attyp[4] = ip1;
+    layer[4]    = 2;
     atpos[4][0] = 0.5;
     atpos[4][1] = 5./6.;
     atpos[4][2] = 1./6.;
     
     attyp[5] = ip1;
+    layer[5]    = 2;
     atpos[5][0] = 0.;
     atpos[5][1] = 1./3.;
     atpos[5][2] = 1./6.;
     
     attyp[6] = ip1;
+    layer[6]    = 3;
     atpos[6][0] = 0.5;
     atpos[6][1] = 0.5;
     atpos[6][2] = 0.25;
     
     attyp[7] = ip1;
+    layer[7]    = 3;
     atpos[7][0] = 0.;
     atpos[7][1] = 0.;
     atpos[7][2] = 0.25;
     
     attyp[8] = ip2;
+    layer[8]    = 4;
     atpos[8][0] = 0.;
     atpos[8][1] = 2./3.;
     atpos[8][2] = 1./3.;
     
     attyp[9] = ip2;
+    layer[9]    = 4;
     atpos[9][0] = 0.5;
     atpos[9][1] = 1./6.;
     atpos[9][2] = 1./3.;
     
     attyp[10] = ip1;
+    layer[10]    = 5;
     atpos[10][0] = 0.5;
     atpos[10][1] = 5./6.;
     atpos[10][2] = 5./12.;
     
     attyp[11] = ip1;
+    layer[11]    = 5;
     atpos[11][0] = 0.;
     atpos[11][1] = 1./3.;
     atpos[11][2] = 5./12.;
     
     attyp[12] = ip1;
+    layer[12]    = 6;
     atpos[12][0] = 0.5;
     atpos[12][1] = 0.5;
     atpos[12][2] = 0.5;
     
     attyp[13] = ip1;
+    layer[13]    = 6;
     atpos[13][0] = 0.;
     atpos[13][1] = 0.;
     atpos[13][2] = 0.5;
     
     attyp[14] = ip1;
+    layer[14]    = 7;
     atpos[14][0] = 0.;
     atpos[14][1] = 2./3.;
     atpos[14][2] = 7./12.;
     
     attyp[15] = ip1;
+    layer[15]    = 7;
     atpos[15][0] = 0.5;
     atpos[15][1] = 1./6.;
-    atpos[15][2] = 5./12.;
+    atpos[15][2] = 7./12.;
     
     attyp[16] = ip2;
+    layer[16]    = 8;
     atpos[16][0] = 0.;
     atpos[16][1] = 1./3.;
     atpos[16][2] = 2./3.;
     
     attyp[17] = ip2;
+    layer[17]    = 8;
     atpos[17][0] = 0.5;
     atpos[17][1] = 5./6.;
     atpos[17][2] = 2./3.;
     
     attyp[18] = ip1;
+    layer[18]    = 9;
     atpos[18][0] = 0.;
     atpos[18][1] = 0.;
     atpos[18][2] = 0.75;
     
     attyp[19] = ip1;
+    layer[19]    = 9;
     atpos[19][0] = 0.5;
     atpos[19][1] = 0.5;
     atpos[19][2] = 0.75;
     
     attyp[20] = ip1;
+    layer[20]    = 10;
     atpos[20][0] = 0.;
     atpos[20][1] = 2./3.;
     atpos[20][2] = 5./6.;
     
     attyp[21] = ip1;
+    layer[21]    = 10;
     atpos[21][0] = 0.5;
     atpos[21][1] = 1./6.;
     atpos[21][2] = 5./6.;
     
     attyp[22] = ip1;
+    layer[22]    = 11;
     atpos[22][0] = 0.5;
     atpos[22][1] = 5./6.;
     atpos[22][2] = 11./12.;
     
     attyp[23] = ip1;
+    layer[23]    = 11;
     atpos[23][0] = 0.;
     atpos[23][1] = 1./3.;
     atpos[23][2] = 11./12.;
@@ -1439,25 +1650,30 @@ void A3B::A3B_D03()
     latvec[2][0] = 0.5;
     latvec[2][1] = 0.5;
 
-    atpos = memory->create_2d_double_array(nucell, 3, "A3B_D03_primitive_atpos");
+    atpos = memory->create(atpos,nucell, 3, "A3B_D03_primitive_atpos");
     attyp = new int[nucell];
+    layer = new int[nucell];
     
     attyp[0] = ip2;
+    layer[0]    = 0;
     atpos[0][0] = 0.;
     atpos[0][1] = 0.;
     atpos[0][2] = 0.;
     
     attyp[1] = ip1;
+    layer[1]    = 1;
     atpos[1][0] = 0.25;
     atpos[1][1] = 0.25;
     atpos[1][2] = 0.25;
     
     attyp[2] = ip1;
+    layer[2]    = 2;
     atpos[2][0] = 0.5;
     atpos[2][1] = 0.5;
     atpos[2][2] = 0.5;
     
     attyp[3] = ip1;
+    layer[3]    = 3;
     atpos[3][0] = 0.75;
     atpos[3][1] = 0.75;
     atpos[3][2] = 0.75;
@@ -1504,25 +1720,30 @@ void A3B::A3B_D09()
     latvec[1][1] = 1.;
     latvec[2][2] = 1.;
 
-    atpos = memory->create_2d_double_array(nucell, 3, "A3B_D09_001_atpos");
+    atpos = memory->create(atpos,nucell, 3, "A3B_D09_001_atpos");
     attyp = new int[nucell];
+    layer = new int[nucell];
 
     attyp[0] = ip1;
+    layer[0]    = 0;
     atpos[0][0] = 0.5;
     atpos[0][1] = 0.;
     atpos[0][2] = 0.;
     
     attyp[1] = ip1;
+    layer[1]    = 0;
     atpos[1][0] = 0.;
     atpos[1][1] = 0.5;
     atpos[1][2] = 0.;
     
     attyp[2] = ip2;
+    layer[2]    = 0;
     atpos[2][0] = 0.;
     atpos[2][1] = 0.;
     atpos[2][2] = 0.;
     
     attyp[3] = ip1;
+    layer[3]    = 1;
     atpos[3][0] = 0.;
     atpos[3][1] = 0.;
     atpos[3][2] = 0.5;
@@ -1540,45 +1761,54 @@ void A3B::A3B_D09()
     latvec[1][1] = sqrt(2.);
     latvec[2][2] = sqrt(2.);
 
-    atpos = memory->create_2d_double_array(nucell, 3, "A3B_D09_110_atpos");
+    atpos = memory->create(atpos,nucell, 3, "A3B_D09_110_atpos");
     attyp = new int[nucell];
+    layer = new int[nucell];
     
     attyp[0] = ip1;
+    layer[0]    = 0;
     atpos[0][0] = 0.5;
     atpos[0][1] = 0.;
     atpos[0][2] = 0.;
     
     attyp[1] = ip2;
+    layer[1]    = 0;
     atpos[1][0] = 0.;
     atpos[1][1] = 0.;
     atpos[1][2] = 0.;
     
     attyp[2] = ip1;
+    layer[2]    = 1;
     atpos[2][0] = 0.;
     atpos[2][1] = 0.25;
     atpos[2][2] = 0.25;
     
     attyp[3] = ip1;
+    layer[3]    = 1;
     atpos[3][0] = 0.;
     atpos[3][1] = 0.75;
     atpos[3][2] = 0.25;
     
     attyp[4] = ip1;
+    layer[4]    = 2;
     atpos[4][0] = 0.5;
     atpos[4][1] = 0.50;
     atpos[4][2] = 0.50;
     
     attyp[5] = ip2;
+    layer[5]    = 2;
     atpos[5][0] = 0.;
     atpos[5][1] = 0.50;
     atpos[5][2] = 0.50;
     
     attyp[6] = ip1;
+    layer[6]    = 3;
     atpos[6][0] = 0.;
     atpos[6][1] = 0.75;
     atpos[6][2] = 0.75;
     
     attyp[7] = ip1;
+    layer[7]    = 3;
     atpos[7][0] = 0.;
     atpos[7][1] = 0.25;
     atpos[7][2] = 0.75;
@@ -1596,125 +1826,150 @@ void A3B::A3B_D09()
     latvec[1][1] = sqrt(6.);
     latvec[2][2] = sqrt(3.);
 
-    atpos = memory->create_2d_double_array(nucell, 3, "A3B_D09_111_atpos");
+    atpos = memory->create(atpos,nucell, 3, "A3B_D09_111_atpos");
     attyp = new int[nucell];
+    layer = new int[nucell];
 
     attyp[0] = ip2;
+    layer[0]    = 0;
     atpos[0][0] = 0.;
     atpos[0][1] = 0.;
     atpos[0][2] = 0.;
     
     attyp[1] = ip2;
+    layer[1]    = 0;
     atpos[1][0] = 0.50;
     atpos[1][1] = 0.5;
     atpos[1][2] = 0.;
     
     attyp[2] = ip1;
+    layer[2]    = 1;
     atpos[2][0] = 0.25;
     atpos[2][1] = 5./12.;
     atpos[2][2] = 1./6.;
     
     attyp[3] = ip1;
+    layer[3]    = 1;
     atpos[3][0] = 0.25;
     atpos[3][1] = 11./12.;
     atpos[3][2] = 1./6.;
     
     attyp[4] = ip1;
+    layer[4]    = 1;
     atpos[4][0] = 0.75;
     atpos[4][1] = 11./12.;
     atpos[4][2] = 1./6.;
     
     attyp[5] = ip1;
+    layer[5]    = 1;
     atpos[5][0] = 0.75;
     atpos[5][1] = 5./12.;
     atpos[5][2] = 1./6.;
     
     attyp[6] = ip1;
+    layer[6]    = 1;
     atpos[6][0] = 0.;
     atpos[6][1] = 1./6.;
     atpos[6][2] = 1./6.;
     
     attyp[7] = ip1;
+    layer[7]    = 1;
     atpos[7][0] = 0.50;
     atpos[7][1] = 2./3.;
     atpos[7][2] = 1./6.;
     
     attyp[8] = ip2;
+    layer[8]    = 2;
     atpos[8][0] = 0.;
     atpos[8][1] = 1./3.;
     atpos[8][2] = 1./3.;
     
     attyp[9] = ip2;
+    layer[9]    = 2;
     atpos[9][0] = 0.50;
     atpos[9][1] = 5./6.;
     atpos[9][2] = 1./3.;
     
     attyp[10] = ip1;
+    layer[10]    = 3;
     atpos[10][0] = 0.50;
     atpos[10][1] = 0.;
     atpos[10][2] = 0.5;
     
     attyp[11] = ip1;
+    layer[11]    = 3;
     atpos[11][0] = 0.25;
     atpos[11][1] = 0.75;
     atpos[11][2] = 0.5;
     
     attyp[12] = ip1;
+    layer[12]    = 3;
     atpos[12][0] = 0.75;
     atpos[12][1] = 0.25;
     atpos[12][2] = 0.5;
     
     attyp[13] = ip1;
+    layer[13]    = 3;
     atpos[13][0] = 0.25;
     atpos[13][1] = 0.25;
     atpos[13][2] = 0.5;
     
     attyp[14] = ip1;
+    layer[14]    = 3;
     atpos[14][0] = 0.75;
     atpos[14][1] = 0.75;
     atpos[14][2] = 0.5;
     
     attyp[15] = ip1;
+    layer[15]    = 3;
     atpos[15][0] = 0.;
     atpos[15][1] = 0.5;
     atpos[15][2] = 0.5;
     
     attyp[16] = ip2;
+    layer[16]    = 4;
     atpos[16][0] = 0.;
     atpos[16][1] = 2./3.;
     atpos[16][2] = 2./3.;
     
     attyp[17] = ip2;
+    layer[17]    = 4;
     atpos[17][0] = 0.50;
     atpos[17][1] = 1./6.;
     atpos[17][2] = 2./3.;
     
     attyp[18] = ip1;
+    layer[18]    = 5;
     atpos[18][0] = 0.;
     atpos[18][1] = 5./6.;
     atpos[18][2] = 5./6.;
     
     attyp[19] = ip1;
+    layer[19]    = 5;
     atpos[19][0] = 0.50;
     atpos[19][1] = 1./3.;
     atpos[19][2] = 5./6.;
     
     attyp[20] = ip1;
+    layer[20]    = 5;
     atpos[20][0] = 0.25;
     atpos[20][1] = 1./12.;
     atpos[20][2] = 5./6.;
     
     attyp[21] = ip1;
+    layer[21]    = 5;
     atpos[21][0] = 0.75;
     atpos[21][1] = 7./12.;
     atpos[21][2] = 5./6.;
     
     attyp[22] = ip1;
+    layer[22]    = 5;
     atpos[22][0] = 0.25;
     atpos[22][1] = 7./12.;
     atpos[22][2] = 5./6.;
     
     attyp[23] = ip1;
+    layer[23]    = 5;
     atpos[23][0] = 0.75;
     atpos[23][1] = 1./12.;
     atpos[23][2] = 5./6.;
@@ -1761,25 +2016,30 @@ void A3B::A3B_L12()
     latvec[1][1] = 1.;
     latvec[2][2] = 1.;
 
-    atpos = memory->create_2d_double_array(nucell, 3, "A3B_L12_001_atpos");
+    atpos = memory->create(atpos,nucell, 3, "A3B_L12_001_atpos");
     attyp = new int[nucell];
+    layer = new int[nucell];
 
     attyp[0] = ip2;
+    layer[0]    = 0;
     atpos[0][0] = 0.;
     atpos[0][1] = 0.;
     atpos[0][2] = 0.;
     
     attyp[1] = ip1;
+    layer[1]    = 0;
     atpos[1][0] = 0.5;
     atpos[1][1] = 0.5;
     atpos[1][2] = 0.;
     
     attyp[2] = ip1;
+    layer[2]    = 1;
     atpos[2][0] = 0.;
     atpos[2][1] = 0.5;
     atpos[2][2] = 0.5;
     
     attyp[3] = ip1;
+    layer[3]    = 1;
     atpos[3][0] = 0.5;
     atpos[3][1] = 0.;
     atpos[3][2] = 0.5;
@@ -1797,45 +2057,54 @@ void A3B::A3B_L12()
     latvec[1][1] = sqrt(2.);
     latvec[2][2] = sqrt(2.);
 
-    atpos = memory->create_2d_double_array(nucell, 3, "A3B_L12_110_atpos");
+    atpos = memory->create(atpos,nucell, 3, "A3B_L12_110_atpos");
     attyp = new int[nucell];
+    layer = new int[nucell];
     
     attyp[0] = ip1;
+    layer[0]    = 0;
     atpos[0][0] = 0.;
     atpos[0][1] = 0.50;
     atpos[0][2] = 0.;
     
     attyp[1] = ip2;
+    layer[1]    = 0;
     atpos[1][0] = 0.;
     atpos[1][1] = 0.;
     atpos[1][2] = 0.;
     
     attyp[2] = ip1;
+    layer[2]    = 1;
     atpos[2][0] = 0.5;
     atpos[2][1] = 0.25;
     atpos[2][2] = 0.25;
     
     attyp[3] = ip1;
+    layer[3]    = 1;
     atpos[3][0] = 0.5;
     atpos[3][1] = 0.75;
     atpos[3][2] = 0.25;
     
     attyp[4] = ip1;
+    layer[4]    = 2;
     atpos[4][0] = 0.;
     atpos[4][1] = 0.;
     atpos[4][2] = 0.50;
     
     attyp[5] = ip2;
+    layer[5]    = 2;
     atpos[5][0] = 0.;
     atpos[5][1] = 0.50;
     atpos[5][2] = 0.50;
     
     attyp[6] = ip1;
+    layer[6]    = 3;
     atpos[6][0] = 0.5;
     atpos[6][1] = 0.75;
     atpos[6][2] = 0.75;
     
     attyp[7] = ip1;
+    layer[7]    = 3;
     atpos[7][0] = 0.5;
     atpos[7][1] = 0.25;
     atpos[7][2] = 0.75;
@@ -1853,125 +2122,150 @@ void A3B::A3B_L12()
     latvec[1][1] = sqrt(6.);
     latvec[2][2] = sqrt(3.);
 
-    atpos = memory->create_2d_double_array(nucell, 3, "A3B_L12_111_atpos");
+    atpos = memory->create(atpos,nucell, 3, "A3B_L12_111_atpos");
     attyp = new int[nucell];
+    layer = new int[nucell];
 
     attyp[0] = ip1;
+    layer[0]    = 0;
     atpos[0][0] = 0.;
     atpos[0][1] = 0.5;
     atpos[0][2] = 0.;
     
     attyp[1] = ip1;
+    layer[1]    = 0;
     atpos[1][0] = 0.25;
     atpos[1][1] = 0.75;
     atpos[1][2] = 0.;
     
     attyp[2] = ip1;
+    layer[2]    = 0;
     atpos[2][0] = 0.75;
     atpos[2][1] = 0.25;
     atpos[2][2] = 0.;
     
     attyp[3] = ip1;
+    layer[3]    = 0;
     atpos[3][0] = 0.50;
     atpos[3][1] = 0.;
     atpos[3][2] = 0.;
     
     attyp[4] = ip1;
+    layer[4]    = 0;
     atpos[4][0] = 0.25;
     atpos[4][1] = 0.25;
     atpos[4][2] = 0.;
     
     attyp[5] = ip1;
+    layer[5]    = 0;
     atpos[5][0] = 0.75;
     atpos[5][1] = 0.75;
     atpos[5][2] = 0.;
     
     attyp[6] = ip2;
+    layer[6]    = 0;
     atpos[6][0] = 0.;
     atpos[6][1] = 0.;
     atpos[6][2] = 0.;
     
     attyp[7] = ip2;
+    layer[7]    = 0;
     atpos[7][0] = 0.50;
     atpos[7][1] = 0.5;
     atpos[7][2] = 0.;
     
     attyp[8] = ip1;
+    layer[8]    = 1;
     atpos[8][0] = 0.75;
     atpos[8][1] = 1./12.;
     atpos[8][2] = 1./3.;
     
     attyp[9] = ip1;
+    layer[9]    = 1;
     atpos[9][0] = 0.25;
     atpos[9][1] = 1./12.;
     atpos[9][2] = 1./3.;
     
     attyp[10] = ip1;
+    layer[10]    = 1;
     atpos[10][0] = 0.75;
     atpos[10][1] = 7./12.;
     atpos[10][2] = 1./3.;
     
     attyp[11] = ip1;
+    layer[11]    = 1;
     atpos[11][0] = 0.;
     atpos[11][1] = 5./6.;
     atpos[11][2] = 1./3.;
     
     attyp[12] = ip1;
+    layer[12]    = 1;
     atpos[12][0] = 0.50;
     atpos[12][1] = 1./3.;
     atpos[12][2] = 1./3.;
     
     attyp[13] = ip1;
+    layer[13]    = 1;
     atpos[13][0] = 0.25;
     atpos[13][1] = 7./12.;
     atpos[13][2] = 1./3.;
     
     attyp[14] = ip2;
+    layer[14]    = 1;
     atpos[14][0] = 0.;
     atpos[14][1] = 1./3.;
     atpos[14][2] = 1./3.;
     
     attyp[15] = ip2;
+    layer[15]    = 1;
     atpos[15][0] = 0.50;
     atpos[15][1] = 5./6.;
     atpos[15][2] = 1./3.;
     
     attyp[16] = ip1;
+    layer[16]    = 2;
     atpos[16][0] = 0.25;
     atpos[16][1] = 11./12.;
     atpos[16][2] = 2./3.;
     
     attyp[17] = ip1;
+    layer[17]    = 2;
     atpos[17][0] = 0.75;
     atpos[17][1] = 5./12.;
     atpos[17][2] = 2./3.;
     
     attyp[18] = ip1;
+    layer[18]    = 2;
     atpos[18][0] = 0.25;
     atpos[18][1] = 5./12.;
     atpos[18][2] = 2./3.;
     
     attyp[19] = ip1;
+    layer[19]    = 2;
     atpos[19][0] = 0.75;
     atpos[19][1] = 11./12.;
     atpos[19][2] = 2./3.;
     
     attyp[20] = ip1;
+    layer[20]    = 2;
     atpos[20][0] = 0.;
     atpos[20][1] = 1./6.;
     atpos[20][2] = 2./3.;
     
     attyp[21] = ip1;
+    layer[21]    = 2;
     atpos[21][0] = 0.50;
     atpos[21][1] = 2./3.;
     atpos[21][2] = 2./3.;
     
     attyp[22] = ip2;
+    layer[22]    = 2;
     atpos[22][0] = 0.;
     atpos[22][1] = 2./3.;
     atpos[22][2] = 2./3.;
     
     attyp[23] = ip2;
+    layer[23]    = 2;
     atpos[23][0] = 0.50;
     atpos[23][1] = 1./6.;
     atpos[23][2] = 2./3.;
@@ -2018,25 +2312,30 @@ void A3B::A3B_L60()
     latvec[1][1] = 1.;
     latvec[2][2] = ca;
 
-    atpos = memory->create_2d_double_array(nucell, 3, "A3B_L60_001_atpos");
+    atpos = memory->create(atpos,nucell, 3, "A3B_L60_001_atpos");
     attyp = new int[nucell];
+    layer = new int[nucell];
 
     attyp[0] = ip1;
+    layer[0]    = 0;
     atpos[0][0] = 0.5;
     atpos[0][1] = 0.5;
     atpos[0][2] = 0.;
     
     attyp[1] = ip2;
+    layer[1]    = 0;
     atpos[1][0] = 0.;
     atpos[1][1] = 0.;
     atpos[1][2] = 0.;
     
     attyp[2] = ip1;
+    layer[2]    = 1;
     atpos[2][0] = 0.5;
     atpos[2][1] = 0.;
     atpos[2][2] = 0.5;
     
     attyp[3] = ip1;
+    layer[3]    = 1;
     atpos[3][0] = 0.;
     atpos[3][1] = 0.5;
     atpos[3][2] = 0.5;
@@ -2054,25 +2353,30 @@ void A3B::A3B_L60()
     latvec[1][1] = ca;
     latvec[2][2] = 1.;
 
-    atpos = memory->create_2d_double_array(nucell, 3, "A3B_L60_100_atpos");
+    atpos = memory->create(atpos,nucell, 3, "A3B_L60_100_atpos");
     attyp = new int[nucell];
+    layer = new int[nucell];
     
     attyp[0] = ip1;
+    layer[0]    = 0;
     atpos[0][0] = 0.5;
     atpos[0][1] = 0.5;
     atpos[0][2] = 0.;
     
     attyp[1] = ip2;
+    layer[1]    = 0;
     atpos[1][0] = 0.;
     atpos[1][1] = 0.;
     atpos[1][2] = 0.;
     
     attyp[2] = ip1;
+    layer[2]    = 1;
     atpos[2][0] = 0.5;
     atpos[2][1] = 0.;
     atpos[2][2] = 0.5;
     
     attyp[3] = ip1;
+    layer[3]    = 1;
     atpos[3][0] = 0.;
     atpos[3][1] = 0.5;
     atpos[3][2] = 0.5;
@@ -2090,45 +2394,54 @@ void A3B::A3B_L60()
     latvec[1][1] = sqrt(2.);
     latvec[2][2] = sqrt(2.);
 
-    atpos = memory->create_2d_double_array(nucell, 3, "A3B_L60_110_atpos");
+    atpos = memory->create(atpos,nucell, 3, "A3B_L60_110_atpos");
     attyp = new int[nucell];
+    layer = new int[nucell];
 
     attyp[0] = ip1;
+    layer[0]    = 0;
     atpos[0][0] = 0.;
     atpos[0][1] = 0.50;
     atpos[0][2] = 0.;
     
     attyp[1] = ip2;
+    layer[1]    = 0;
     atpos[1][0] = 0.;
     atpos[1][1] = 0.;
     atpos[1][2] = 0.;
 
     attyp[2] = ip1;
+    layer[2]    = 1;
     atpos[2][0] = 0.5;
     atpos[2][1] = 0.25;
     atpos[2][2] = 0.25;
     
     attyp[3] = ip1;
+    layer[3]    = 1;
     atpos[3][0] = 0.5;
     atpos[3][1] = 0.75;
     atpos[3][2] = 0.25;
     
     attyp[4] = ip1;
+    layer[4]    = 2;
     atpos[4][0] = 0.;
     atpos[4][1] = 0.;
     atpos[4][2] = 0.50;
     
     attyp[5] = ip2;
+    layer[5]    = 2;
     atpos[5][0] = 0.;
     atpos[5][1] = 0.50;
     atpos[5][2] = 0.50;
     
     attyp[6] = ip1;
+    layer[6]    = 3;
     atpos[6][0] = 0.5;
     atpos[6][1] = 0.75;
     atpos[6][2] = 0.75;
     
     attyp[7] = ip1;
+    layer[7]    = 3;
     atpos[7][0] = 0.5;
     atpos[7][1] = 0.25;
     atpos[7][2] = 0.75;

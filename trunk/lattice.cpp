@@ -4,11 +4,25 @@
 #include "string.h"
 #include "math.h"
 
+#define MAX(a,b) ((a) > (b) ? (a) : (b))
+#define MIN(a,b) ((a) < (b) ? (a) : (b))
+
 /* ----------------------------------------------------------------------
    constructor does nothing
 ------------------------------------------------------------------------- */
 lattice::lattice()
 {
+  initialized = 0;
+  nlayer = nucell = ntype = 0;
+
+  name = NULL;
+  attyp = NULL;
+  atpos = NULL;
+
+  layer = NULL;
+  numlayer = NULL;
+  h        = NULL;
+
   memory = new Memory;
 }
 
@@ -17,9 +31,13 @@ lattice::lattice()
 ------------------------------------------------------------------------- */
 lattice::~lattice()
 {
-  if (atpos != NULL) memory->destroy_2d_double_array(atpos);
-  if (attyp != NULL) delete []attyp;
-  if (name  != NULL) delete []name;
+  if (atpos) memory->destroy(atpos);
+  if (attyp) delete []attyp;
+  if (name ) delete []name;
+  if (layer) delete []layer;
+  if (numlayer) delete []numlayer;
+  if (h       ) delete []h;
+  
   delete memory;
 }
 
@@ -102,3 +120,41 @@ int lattice::count_words(const char *line)
   memory->sfree(copy);
   return n;
 }
+
+/*------------------------------------------------------------------------------
+ * Method to setup the dependent parameters
+ *----------------------------------------------------------------------------*/
+void lattice::setup()
+{
+  if (initialized == 0) return;
+  nlayer = 0;
+  for (int i=0; i<nucell; i++) nlayer = MAX(nlayer, layer[i]);
+  nlayer++;
+
+  if (h) delete []h;
+  if (numlayer) delete []numlayer;
+  h = new double[nlayer];
+  numlayer = new int[nlayer];
+
+  for (int i=0; i<nlayer; i++) numlayer[i] = 0;
+  for (int i=0; i<nucell; i++) numlayer[layer[i]]++;
+
+  h[0] = 0.;
+  int i0 = 0;
+  double pos0[3], pos1[3];
+  for (int i=0; i<nucell; i++) if (layer[i] == 0) {i0 = i; break;}
+  pos0[0] = pos0[1] = pos0[2] = 0.;
+  for (int i=0; i<3; i++)
+  for (int j=0; j<3; j++) pos0[j] += atpos[i0][i] * latvec[i][j];
+
+  for (int il=1; il<nlayer; il++){
+    int i1;
+    for (int i=0; i<nucell; i++) if (layer[i] == il) {i1 = i; break;}
+    for (int i=0; i<3; i++)
+    for (int j=0; j<3; j++) pos1[j] += atpos[i1][i] * latvec[i][j];
+    h[il] = (pos1[2] - pos0[2])*alat;
+  }
+
+return;
+}
+

@@ -49,7 +49,7 @@ Driver::Driver()
 ------------------------------------------------------------------------- */
 Driver::~Driver()
 {
-  if (atpos!= NULL) latt->memory->destroy_2d_double_array(atpos);
+  if (atpos!= NULL) latt->memory->destroy(atpos);
   if (attyp!= NULL) delete []attyp;
   if (xmap != NULL) delete []xmap;
   if (ymap != NULL) delete []ymap;
@@ -83,7 +83,7 @@ void Driver::generate()
   if (latt->count_words(gets(str)) > 0) sscanf(str,"%d", &leading_dir);
   printf("===========================================================\n");
 
-  atpos = latt->memory->create_2d_double_array(natom, 3, "driver->generate:atpos");
+  atpos = latt->memory->create(atpos, natom, 3, "driver->generate:atpos");
   xmap = new int[natom];
   ymap = new int[natom];
   zmap = new int[natom];

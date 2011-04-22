@@ -105,14 +105,18 @@ void FCC::FCC001()
     latvec[1][1] = 1./sqrt(2.);
     latvec[2][2] = 1.;
 
-    atpos = memory->create_2d_double_array(nucell, 3, "FCC001_atpos");
+    atpos = memory->create(atpos,nucell, 3, "FCC001_atpos");
     attyp = new int[nucell];
+    layer = new int[nucell];
+  
     
     for (int i=0; i<nucell; i++) attyp[i] = 1;
+    layer[0]    = 0;
     atpos[0][0] = 0.;
     atpos[0][1] = 0.;
     atpos[0][2] = 0.;
 
+    layer[1]    = 1;
     atpos[1][0] = 0.5;
     atpos[1][1] = 0.5;
     atpos[1][2] = 0.5;
@@ -127,22 +131,27 @@ void FCC::FCC001()
     latvec[1][1] = 1.;
     latvec[2][2] = 1.;
 
-    atpos = memory->create_2d_double_array(nucell, 3, "FCC001_atpos");
+    atpos = memory->create(atpos,nucell, 3, "FCC001_atpos");
     attyp = new int[nucell];
+    layer = new int[nucell];
     
     for (int i=0; i<nucell; i++) attyp[i] = 1;
+    layer[0]    = 0;
     atpos[0][0] = 0.;
     atpos[0][1] = 0.;
     atpos[0][2] = 0.;
 
+    layer[1]    = 0;
     atpos[1][0] = 0.5;
     atpos[1][1] = 0.5;
     atpos[1][2] = 0.;
 
+    layer[2]    = 1;
     atpos[2][0] = 0.;
     atpos[2][1] = 0.5;
     atpos[2][2] = 0.5;
 
+    layer[3]    = 1;
     atpos[3][0] = 0.5;
     atpos[3][1] = 0.;
     atpos[3][2] = 0.5;
@@ -188,22 +197,27 @@ void FCC::FCC110()
     latvec[1][1] = 1.;
     latvec[2][2] = sqrt(2.);
 
-    atpos = memory->create_2d_double_array(nucell, 3, "FCC110_atpos");
+    atpos = memory->create(atpos,nucell, 3, "FCC110_atpos");
     attyp = new int[nucell];
+    layer = new int[nucell];
     
     for (int i=0; i<nucell; i++) attyp[i] = 1;
+    layer[0]    = 0;
     atpos[0][0] = 0.;
     atpos[0][1] = 0.;
     atpos[0][2] = 0.;
 
+    layer[1]    = 0;
     atpos[1][0] = 0.5;
     atpos[1][1] = 0.;
     atpos[1][2] = 0.;
 
+    layer[2]    = 1;
     atpos[2][0] = 0.25;
     atpos[2][1] = 0.5;
     atpos[2][2] = 0.5;
 
+    layer[3]    = 1;
     atpos[3][0] = 0.75;
     atpos[3][1] = 0.5;
     atpos[3][2] = 0.5;
@@ -218,23 +232,28 @@ void FCC::FCC110()
     latvec[1][1] = sqrt(2.);
     latvec[2][2] = sqrt(2.);
 
-    atpos = memory->create_2d_double_array(nucell, 3, "FCC110_atpos");
+    atpos = memory->create(atpos,nucell, 3, "FCC110_atpos");
     attyp = new int[nucell];
+    layer = new int[nucell];
     
     for (int i=0; i<nucell; i++) attyp[i] = 1;
 
+    layer[0]    = 0;
     atpos[0][0] = 0.;
     atpos[0][1] = 0.;
     atpos[0][2] = 0.;
 
+    layer[1]    = 0;
     atpos[1][0] = 0.;
     atpos[1][1] = 0.5;
     atpos[1][2] = 0.;
 
+    layer[2]    = 1;
     atpos[2][0] = 0.5;
     atpos[2][1] = 0.25;
     atpos[2][2] = 0.5;
 
+    layer[3]    = 1;
     atpos[3][0] = 0.5;
     atpos[3][1] = 0.75;
     atpos[3][2] = 0.5;
@@ -285,19 +304,23 @@ void FCC::FCC111()
     latvec[1][1] = sqrt(0.375);
     latvec[2][2] = sqrt(3.);
 
-    atpos = memory->create_2d_double_array(nucell, 3, "FCC111_atpos");
+    atpos = memory->create(atpos,nucell, 3, "FCC111_atpos");
     attyp = new int[nucell];
+    layer = new int[nucell];
     
     for (int i=0; i<nucell; i++) attyp[i] = 1;
 
+    layer[0]    = 0;
     atpos[0][0] = 0.;
     atpos[0][1] = 0.;
     atpos[0][2] = 0.;
 
+    layer[1]    = 1;
     atpos[1][0] = 1./3.;
     atpos[1][1] = 1./3.;
     atpos[1][2] = 1./3.;
 
+    layer[2]    = 2;
     atpos[2][0] = 2./3.;
     atpos[2][1] = 2./3.;
     atpos[2][2] = 2./3.;
@@ -313,19 +336,23 @@ void FCC::FCC111()
     latvec[1][1] = sqrt(0.5);
     latvec[2][2] = sqrt(3.);
 
-    atpos = memory->create_2d_double_array(nucell, 3, "FCC111_atpos");
+    atpos = memory->create(atpos,nucell, 3, "FCC111_atpos");
     attyp = new int[nucell];
+    layer = new int[nucell];
 
     for (int i=0; i<nucell; i++) attyp[i] = 1;
 
+    layer[0]    = 0;
     atpos[0][0] = 0.;
     atpos[0][1] = 0.;
     atpos[0][2] = 0.;
 
+    layer[1]    = 1;
     atpos[1][0] = 1./3.;
     atpos[1][1] = 1./3.;
     atpos[1][2] = 1./3.;
 
+    layer[2]    = 2;
     atpos[2][0] = 2./3.;
     atpos[2][1] = 2./3.;
     atpos[2][2] = 2./3.;
@@ -341,19 +368,23 @@ void FCC::FCC111()
     latvec[1][1] =  sqrt(0.375);
     latvec[2][2] =  sqrt(3.);
 
-    atpos = memory->create_2d_double_array(nucell, 3, "FCC111_atpos");
+    atpos = memory->create(atpos,nucell, 3, "FCC111_atpos");
     attyp = new int[nucell];
+    layer = new int[nucell];
 
     for (int i=0; i<nucell; i++) attyp[i] = 1;
 
+    layer[0]    = 0;
     atpos[0][0] = 0.;
     atpos[0][1] = 0.;
     atpos[0][2] = 0.;
 
+    layer[1]    = 1;
     atpos[1][0] = 2./3.;
     atpos[1][1] = 1./3.;
     atpos[1][2] = 1./3.;
 
+    layer[2]    = 2;
     atpos[2][0] = 1./3.;
     atpos[2][1] = 2./3.;
     atpos[2][2] = 2./3.;
@@ -369,19 +400,23 @@ void FCC::FCC111()
     latvec[1][1] =  sqrt(0.5);
     latvec[2][2] =  sqrt(3.);
 
-    atpos = memory->create_2d_double_array(nucell, 3, "FCC111_atpos");
+    atpos = memory->create(atpos,nucell, 3, "FCC111_atpos");
     attyp = new int[nucell];
+    layer = new int[nucell];
 
     for (int i=0; i<nucell; i++) attyp[i] = 1;
 
+    layer[0]    = 0;
     atpos[0][0] = 0.;
     atpos[0][1] = 0.;
     atpos[0][2] = 0.;
 
+    layer[1]    = 1;
     atpos[1][0] = 1./3.;
     atpos[1][1] = 2./3.;
     atpos[1][2] = 1./3.;
 
+    layer[2]    = 2;
     atpos[2][0] = 2./3.;
     atpos[2][1] = 1./3.;
     atpos[2][2] = 2./3.;
@@ -396,31 +431,38 @@ void FCC::FCC111()
     latvec[1][1] =  sqrt(0.5);
     latvec[2][2] =  sqrt(3.);
 
-    atpos = memory->create_2d_double_array(nucell, 3, "FCC111_atpos");
+    atpos = memory->create(atpos,nucell, 3, "FCC111_atpos");
     attyp = new int[nucell];
+    layer = new int[nucell];
 
     for (int i=0; i<nucell; i++) attyp[i] = 1;
 
+    layer[0]    = 0;
     atpos[0][0] = 0.;
     atpos[0][1] = 0.;
     atpos[0][2] = 0.;
 
+    layer[1]    = 0;
     atpos[1][0] = 0.5;
     atpos[1][1] = 0.5;
     atpos[1][2] = 0.;
 
+    layer[2]    = 1;
     atpos[2][0] = 1./6.;
     atpos[2][1] = 0.5;
     atpos[2][2] = 1./3.;
 
+    layer[3]    = 1;
     atpos[3][0] = 2./3.;
     atpos[3][1] = 1.;
     atpos[3][2] = 1./3.;
 
+    layer[4]    = 2;
     atpos[4][0] = 1./3.;
     atpos[4][1] = 0.;
     atpos[4][2] = 2./3.;
 
+    layer[5]    = 2;
     atpos[5][0] = 5./6.;
     atpos[5][1] = 0.5;
     atpos[5][2] = 2./3.;
@@ -435,31 +477,38 @@ void FCC::FCC111()
     latvec[1][1] = sqrt(1.5);
     latvec[2][2] = sqrt(3.);
 
-    atpos = memory->create_2d_double_array(nucell, 3, "FCC111_atpos");
+    atpos = memory->create(atpos,nucell, 3, "FCC111_atpos");
     attyp = new int[nucell];
+    layer = new int[nucell];
 
     for (int i=0; i<nucell; i++) attyp[i] = 1;
 
+    layer[0]    = 0;
     atpos[0][0] = 0.;
     atpos[0][1] = 0.;
     atpos[0][2] = 0.;
 
+    layer[1]    = 0;
     atpos[1][0] = 0.5;
     atpos[1][1] = 0.5;
     atpos[1][2] = 0.;
 
+    layer[2]    = 1;
     atpos[2][0] = 0.5;
     atpos[2][1] = 1./6.;
     atpos[2][2] = 1./3.;
 
+    layer[3]    = 1;
     atpos[3][0] = 1.;
     atpos[3][1] = 2./3.;
     atpos[3][2] = 1./3.;
 
+    layer[4]    = 2;
     atpos[4][0] = 0.;
     atpos[4][1] = 1./3.;
     atpos[4][2] = 2./3.;
 
+    layer[5]    = 2;
     atpos[5][0] = 0.5;
     atpos[5][1] = 5./6.;
     atpos[5][2] = 2./3.;
@@ -493,10 +542,11 @@ void FCC::Primitive()
   latvec[2][0] =  0.5;
   latvec[2][1] =  0.5;
 
-  atpos = memory->create_2d_double_array(nucell, 3, "Primitive_atpos");
-  attyp = new int[nucell];
+  atpos = memory->create(atpos,nucell, 3, "Primitive_atpos");
+  attyp = new int[nucell]; layer = new int[nucell];
   
   for (int i=0; i<nucell; i++) attyp[i] = 1;
+  layer[0]    = 0;
   atpos[0][0] = 0.;
   atpos[0][1] = 0.;
   atpos[0][2] = 0.;
@@ -526,14 +576,16 @@ void FCC::DiamondPrim()
   latvec[2][0] =  0.5;
   latvec[2][1] =  0.5;
 
-  atpos = memory->create_2d_double_array(nucell, 3, "Primitive_atpos");
-  attyp = new int[nucell];
+  atpos = memory->create(atpos,nucell, 3, "Primitive_atpos");
+  attyp = new int[nucell]; layer = new int[nucell];
   
   for (int i=0; i<nucell; i++) attyp[i] = 1;
+  layer[0]    = 0;
   atpos[0][0] = 0.;
   atpos[0][1] = 0.;
   atpos[0][2] = 0.;
 
+  layer[1]    = 1;
   atpos[1][0] = 0.25;
   atpos[1][1] = 0.25;
   atpos[1][2] = 0.25;
@@ -560,38 +612,46 @@ void FCC::DiamondConv()
   latvec[1][1] = 1.;
   latvec[2][2] = 1.;
 
-  atpos = memory->create_2d_double_array(nucell, 3, "Primitive_atpos");
-  attyp = new int[nucell];
+  atpos = memory->create(atpos,nucell, 3, "Primitive_atpos");
+  attyp = new int[nucell]; layer = new int[nucell];
   
   for (int i=0; i<nucell; i++) attyp[i] = 1;
+  layer[0]    = 0;
   atpos[0][0] = 0.;
   atpos[0][1] = 0.;
   atpos[0][2] = 0.;
 
+  layer[1]    = 0;
   atpos[1][0] = 0.5;
   atpos[1][1] = 0.5;
   atpos[1][2] = 0.;
 
+  layer[2]    = 1;
   atpos[2][0] = 0.25;
   atpos[2][1] = 0.25;
   atpos[2][2] = 0.25;
 
+  layer[3]    = 1;
   atpos[3][0] = 0.75;
   atpos[3][1] = 0.75;
   atpos[3][2] = 0.25;
 
+  layer[4]    = 2;
   atpos[4][0] = 0.5;
   atpos[4][1] = 0.0;
   atpos[4][2] = 0.5;
 
+  layer[5]    = 2;
   atpos[5][0] = 0.0;
   atpos[5][1] = 0.5;
   atpos[5][2] = 0.5;
 
+  layer[6]    = 3;
   atpos[6][0] = 0.75;
   atpos[6][1] = 0.25;
   atpos[6][2] = 0.75;
 
+  layer[7]    = 3;
   atpos[7][0] = 0.25;
   atpos[7][1] = 0.75;
   atpos[7][2] = 0.75;
@@ -621,16 +681,18 @@ void FCC::NaClPrim()
   latvec[2][0] =  0.5;
   latvec[2][1] =  0.5;
 
-  atpos = memory->create_2d_double_array(nucell, 3, "NaCl_prim_atpos");
-  attyp = new int[nucell];
+  atpos = memory->create(atpos,nucell, 3, "NaCl_prim_atpos");
+  attyp = new int[nucell]; layer = new int[nucell];
   
   attyp[0] = 1;
   attyp[1] = 2;
 
+  layer[0]    = 0;
   atpos[0][0] = 0.;
   atpos[0][1] = 0.;
   atpos[0][2] = 0.;
 
+  layer[1]    = 1;
   atpos[1][0] = 0.5;
   atpos[1][1] = 0.5;
   atpos[1][2] = 0.5;
@@ -657,40 +719,48 @@ void FCC::NaClConv()
   latvec[1][1] = 1.;
   latvec[2][2] = 1.;
 
-  atpos = memory->create_2d_double_array(nucell, 3, "NaCl_conv_atpos");
-  attyp = new int[nucell];
+  atpos = memory->create(atpos,nucell, 3, "NaCl_conv_atpos");
+  attyp = new int[nucell]; layer = new int[nucell];
   
   for (int i=0; i<nucell; i+=2) attyp[i] = 1;
   for (int i=1; i<nucell; i+=2) attyp[i] = 2;
 
+  layer[0]    = 0;
   atpos[0][0] = 0.;
   atpos[0][1] = 0.;
   atpos[0][2] = 0.;
 
+  layer[1]    = 0;
   atpos[1][0] = 0.5;
   atpos[1][1] = 0.;
   atpos[1][2] = 0.;
 
+  layer[2]    = 0;
   atpos[2][0] = 0.5;
   atpos[2][1] = 0.5;
   atpos[2][2] = 0.;
 
+  layer[3]    = 0;
   atpos[3][0] = 0.;
   atpos[3][1] = 0.5;
   atpos[3][2] = 0.;
 
+  layer[4]    = 1;
   atpos[4][0] = 0.5;
   atpos[4][1] = 0.0;
   atpos[4][2] = 0.5;
 
+  layer[5]    = 1;
   atpos[5][0] = 0.0;
   atpos[5][1] = 0.0;
   atpos[5][2] = 0.5;
 
+  layer[6]    = 1;
   atpos[6][0] = 0.0;
   atpos[6][1] = 0.5;
   atpos[6][2] = 0.5;
 
+  layer[7]    = 1;
   atpos[7][0] = 0.5;
   atpos[7][1] = 0.5;
   atpos[7][2] = 0.5;

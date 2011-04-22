@@ -101,14 +101,16 @@ void HCP::HCP001()
     latvec[1][1] = sqrt(0.75);
     latvec[2][2] = ca;
 
-    atpos = memory->create_2d_double_array(nucell, 3, "HCP001_atpos");
-    attyp = new int[nucell];
+    atpos = memory->create(atpos,nucell, 3, "HCP001_atpos");
+    attyp = new int[nucell]; layer = new int[nucell];
     
     for (int i=0; i<nucell; i++) attyp[i] = 1;
+    layer[0]    = 0;
     atpos[0][0] = 0.;
     atpos[0][1] = 0.;
     atpos[0][2] = 0.;
 
+    layer[1]    = 1;
     atpos[1][0] = 1./3.;
     atpos[1][1] = 1./3.;
     atpos[1][2] = 0.5;
@@ -124,14 +126,16 @@ void HCP::HCP001()
     latvec[1][1] = 1.;
     latvec[2][2] = ca;
 
-    atpos = memory->create_2d_double_array(nucell, 3, "HCP001_atpos");
-    attyp = new int[nucell];
+    atpos = memory->create(atpos,nucell, 3, "HCP001_atpos");
+    attyp = new int[nucell]; layer = new int[nucell];
     
     for (int i=0; i<nucell; i++) attyp[i] = 1;
+    layer[0]    = 0;
     atpos[0][0] = 0.;
     atpos[0][1] = 0.;
     atpos[0][2] = 0.;
 
+    layer[1]    = 1;
     atpos[1][0] = 1./3.;
     atpos[1][1] = 1./3.;
     atpos[1][2] = 0.5;
@@ -147,14 +151,16 @@ void HCP::HCP001()
     latvec[1][1] =  sqrt(0.75);
     latvec[2][2] = ca;
 
-    atpos = memory->create_2d_double_array(nucell, 3, "HCP001_atpos");
-    attyp = new int[nucell];
+    atpos = memory->create(atpos,nucell, 3, "HCP001_atpos");
+    attyp = new int[nucell]; layer = new int[nucell];
     
     for (int i=0; i<nucell; i++) attyp[i] = 1;
+    layer[0]    = 0;
     atpos[0][0] = 0.;
     atpos[0][1] = 0.;
     atpos[0][2] = 0.;
 
+    layer[1]    = 1;
     atpos[1][0] = 2./3.;
     atpos[1][1] = 1./3.;
     atpos[1][2] = 0.5;
@@ -170,14 +176,16 @@ void HCP::HCP001()
     latvec[1][1] = 1.;
     latvec[2][2] = ca;
 
-    atpos = memory->create_2d_double_array(nucell, 3, "HCP001_atpos");
-    attyp = new int[nucell];
+    atpos = memory->create(atpos,nucell, 3, "HCP001_atpos");
+    attyp = new int[nucell]; layer = new int[nucell];
     
     for (int i=0; i<nucell; i++) attyp[i] = 1;
+    layer[0]    = 0;
     atpos[0][0] = 0.;
     atpos[0][1] = 0.;
     atpos[0][2] = 0.;
 
+    layer[1]    = 1;
     atpos[1][0] = 2./3.;
     atpos[1][1] = 1./3.;
     atpos[1][2] = 0.5;
@@ -192,20 +200,26 @@ void HCP::HCP001()
     latvec[1][1] = 1.;
     latvec[2][2] = ca;
 
-    atpos = memory->create_2d_double_array(nucell, 3, "HCP001_atpos");
-    attyp = new int[nucell];
+    atpos = memory->create(atpos,nucell, 3, "HCP001_atpos");
+    attyp = new int[nucell]; layer = new int[nucell];
 
     for (int i=0; i<nucell; i++) attyp[i] = 1;
+    layer[0]    = 0;
     atpos[0][0] = 0.;
     atpos[0][1] = 0.;
     atpos[0][2] = 0.;
+
+    layer[1]    = 0;
     atpos[1][0] = 0.5;
     atpos[1][1] = 0.5;
     atpos[1][2] = 0.;
 
+    layer[2]    = 1;
     atpos[2][0] = 1./6.;
     atpos[2][1] = 0.5;
     atpos[2][2] = 0.5;
+
+    layer[3]    = 1;
     atpos[3][0] = 2./3.;
     atpos[3][1] = 0.0;
     atpos[3][2] = 0.5;
@@ -220,20 +234,26 @@ void HCP::HCP001()
     latvec[1][1] = sqrt(3.0);
     latvec[2][2] = ca;
 
-    atpos = memory->create_2d_double_array(nucell, 3, "HCP001_atpos");
-    attyp = new int[nucell];
+    atpos = memory->create(atpos,nucell, 3, "HCP001_atpos");
+    attyp = new int[nucell]; layer = new int[nucell];
 
     for (int i=0; i<nucell; i++) attyp[i] = 1;
+    layer[0]    = 0;
     atpos[0][0] = 0.;
     atpos[0][1] = 0.;
     atpos[0][2] = 0.;
+
+    layer[1]    = 0;
     atpos[1][0] = 0.5;
     atpos[1][1] = 0.5;
     atpos[1][2] = 0.;
 
+    layer[2]    = 1;
     atpos[2][0] = 0.5;
     atpos[2][1] = 1./6.;
     atpos[2][2] = 0.5;
+
+    layer[3]    = 1;
     atpos[3][0] = 0.0;
     atpos[3][1] = 2./3.;
     atpos[3][2] = 0.5;
@@ -265,22 +285,26 @@ void HCP::HCP100()
   latvec[1][1] = ca;
   latvec[2][2] = sqrt(3.);
 
-  atpos = memory->create_2d_double_array(nucell, 3, "HCP100_atpos");
-  attyp = new int[nucell];
+  atpos = memory->create(atpos,nucell, 3, "HCP100_atpos");
+  attyp = new int[nucell]; layer = new int[nucell];
     
   for (int i=0; i<nucell; i++) attyp[i] = 1;
+  layer[0]    = 0;
   atpos[0][0] = 0.50;
   atpos[0][1] = 0.75;
   atpos[0][2] = 0.00;
 
+  layer[1]    = 1;
   atpos[1][0] = 0.50;
   atpos[1][1] = 0.25;
   atpos[1][2] = 1./3.;
 
+  layer[2]    = 2;
   atpos[2][0] = 0.00;
   atpos[2][1] = 0.75;
   atpos[2][2] = 0.50;
 
+  layer[3]    = 3;
   atpos[3][0] = 0.00;
   atpos[3][1] = 0.25;
   atpos[3][2] = 5./6.;
@@ -309,22 +333,26 @@ void HCP::HCP110()
   latvec[1][1] = sqrt(3.);
   latvec[2][2] = 1.;
 
-  atpos = memory->create_2d_double_array(nucell, 3, "HCP110_atpos");
-  attyp = new int[nucell];
+  atpos = memory->create(atpos,nucell, 3, "HCP110_atpos");
+  attyp = new int[nucell]; layer = new int[nucell];
     
   for (int i=0; i<nucell; i++) attyp[i] = 1;
+  layer[0]    = 0;
   atpos[0][0] = 0.25;
   atpos[0][1] = 1./3.;
   atpos[0][2] = 0.00;
 
+  layer[1]    = 0;
   atpos[1][0] = 0.75;
   atpos[1][1] = 2./3.;
   atpos[1][2] = 0.;
 
+  layer[2]    = 1;
   atpos[2][0] = 0.75;
   atpos[2][1] = 1./6.;
   atpos[2][2] = 0.50;
 
+  layer[3]    = 1;
   atpos[3][0] = 0.25;
   atpos[3][1] = 5./6.;
   atpos[3][2] = 0.50;
@@ -353,25 +381,29 @@ void HCP::HCPm10()
   latvec[1][1] = ca;
   latvec[2][2] = sqrt(3.);
 
-  atpos = memory->create_2d_double_array(nucell, 3, "HCPm10_atpos");
-  attyp = new int[nucell];
+  atpos = memory->create(atpos,nucell, 3, "HCPm10_atpos");
+  attyp = new int[nucell]; layer = new int[nucell];
     
   for (int i=0; i<nucell; i++) attyp[i] = 1;
+  layer[0]    = 0;
   atpos[0][0] = 0.50;
   atpos[0][1] = 0.25;
   atpos[0][2] = 0.00;
 
-  atpos[1][0] = 0.50;
+  layer[1]    = 1;
+  atpos[1][0] = 0.00;
   atpos[1][1] = 0.75;
-  atpos[1][2] = 1./3.;
+  atpos[1][2] = 1./6.;
 
+  layer[2]    = 2;
   atpos[2][0] = 0.00;
   atpos[2][1] = 0.25;
   atpos[2][2] = 0.50;
 
-  atpos[3][0] = 0.00;
+  layer[3]    = 3;
+  atpos[3][0] = 0.50;
   atpos[3][1] = 0.75;
-  atpos[3][2] = 0.50;
+  atpos[3][2] = 2./3.;
 
   initialized = 1;
 
