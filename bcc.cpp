@@ -92,14 +92,17 @@ void BCC::BCC001()
     latvec[1][1] = 1.;
     latvec[2][2] = 1.;
 
-    atpos = memory->create_2d_double_array(nucell, 3, "BCC001_atpos");
+    atpos = memory->create(atpos,nucell, 3, "BCC001_atpos");
     attyp = new int[nucell];
+    layer = new int[nucell];
     
     for (int i=0; i<nucell; i++) attyp[i] = 1;
+    layer[0]    = 0;
     atpos[0][0] = 0.;
     atpos[0][1] = 0.;
     atpos[0][2] = 0.;
 
+    layer[1]    = 1;
     atpos[1][0] = 0.5;
     atpos[1][1] = 0.5;
     atpos[1][2] = 0.5;
@@ -114,16 +117,19 @@ void BCC::BCC001()
     latvec[1][1] = 1.;
     latvec[2][2] = 1.;
 
-    atpos = memory->create_2d_double_array(nucell, 3, "BCC001_atpos");
+    atpos = memory->create(atpos,nucell, 3, "BCC001_atpos");
     attyp = new int[nucell];
+    layer = new int[nucell];
     
     attyp[0] = 1;
     attyp[1] = 2;
 
+    layer[0]    = 0;
     atpos[0][0] = 0.;
     atpos[0][1] = 0.;
     atpos[0][2] = 0.;
 
+    layer[1]    = 1;
     atpos[1][0] = 0.5;
     atpos[1][1] = 0.5;
     atpos[1][2] = 0.5;
@@ -169,22 +175,28 @@ void BCC::BCC110()
     latvec[1][1] = 1.;
     latvec[2][2] = sqrt(2.);
 
-    atpos = memory->create_2d_double_array(nucell, 3, "BCC110_atpos");
+    atpos = memory->create(atpos,nucell, 3, "BCC110_atpos");
     attyp = new int[nucell];
+    layer = new int[nucell];
     
     for (int i=0; i<nucell; i++) attyp[i] = 1;
+
+    layer[0]    = 0;
     atpos[0][0] = 0.;
     atpos[0][1] = 0.;
     atpos[0][2] = 0.;
 
+    layer[1]    = 0;
     atpos[1][0] = 0.5;
     atpos[1][1] = 0.5;
     atpos[1][2] = 0.;
 
+    layer[2]    = 1;
     atpos[2][0] = 0.5;
     atpos[2][1] = 0.0;
     atpos[2][2] = 0.5;
 
+    layer[3]    = 1;
     atpos[3][0] = 0.0;
     atpos[3][1] = 0.5;
     atpos[3][2] = 0.5;
@@ -199,23 +211,28 @@ void BCC::BCC110()
     latvec[1][1] = sqrt(2.);
     latvec[2][2] = sqrt(2.);
 
-    atpos = memory->create_2d_double_array(nucell, 3, "BCC110_atpos");
+    atpos = memory->create(atpos,nucell, 3, "BCC110_atpos");
     attyp = new int[nucell];
+    layer = new int[nucell];
     
     for (int i=0; i<nucell; i++) attyp[i] = 1;
 
+    layer[0]    = 0;
     atpos[0][0] = 0.;
     atpos[0][1] = 0.;
     atpos[0][2] = 0.;
 
+    layer[1]    = 0;
     atpos[1][0] = 0.5;
     atpos[1][1] = 0.5;
     atpos[1][2] = 0.;
 
+    layer[2]    = 1;
     atpos[2][0] = 0.;
     atpos[2][1] = 0.5;
     atpos[2][2] = 0.5;
 
+    layer[3]    = 1;
     atpos[3][0] = 0.5;
     atpos[3][1] = 0.0;
     atpos[3][2] = 0.5;
@@ -261,22 +278,27 @@ void BCC::BCC111()
     latvec[1][1] = 1.;
     latvec[2][2] = sqrt(2.);
 
-    atpos = memory->create_2d_double_array(nucell, 3, "BCC111_atpos");
+    atpos = memory->create(atpos,nucell, 3, "BCC111_atpos");
     attyp = new int[nucell];
+    layer = new int[nucell];
     
     for (int i=0; i<nucell; i++) attyp[i] = 1;
+    layer[0]    = 0;
     atpos[0][0] = 0.;
     atpos[0][1] = 0.;
     atpos[0][2] = 0.;
 
+    layer[1]    = 0;
     atpos[1][0] = 0.5;
     atpos[1][1] = 0.5;
     atpos[1][2] = 0.;
 
+    layer[2]    = 1;
     atpos[2][0] = 0.5;
     atpos[2][1] = 0.0;
     atpos[2][2] = 0.5;
 
+    layer[3]    = 1;
     atpos[3][0] = 0.0;
     atpos[3][1] = 0.5;
     atpos[3][2] = 0.5;
@@ -291,23 +313,28 @@ void BCC::BCC111()
     latvec[1][1] = sqrt(2.);
     latvec[2][2] = sqrt(2.);
 
-    atpos = memory->create_2d_double_array(nucell, 3, "BCC111_atpos");
+    atpos = memory->create(atpos,nucell, 3, "BCC111_atpos");
     attyp = new int[nucell];
+    layer = new int[nucell];
     
     for (int i=0; i<nucell; i++) attyp[i] = 1;
 
+    layer[0]    = 0;
     atpos[0][0] = 0.;
     atpos[0][1] = 0.;
     atpos[0][2] = 0.;
 
+    layer[1]    = 0;
     atpos[1][0] = 0.5;
     atpos[1][1] = 0.5;
     atpos[1][2] = 0.;
 
+    layer[2]    = 1;
     atpos[2][0] = 0.;
     atpos[2][1] = 0.5;
     atpos[2][2] = 0.5;
 
+    layer[3]    = 1;
     atpos[3][0] = 0.5;
     atpos[3][1] = 0.0;
     atpos[3][2] = 0.5;
@@ -341,10 +368,12 @@ void BCC::Primitive()
   latvec[2][1] =  0.5;
   latvec[2][2] = -0.5;
 
-  atpos = memory->create_2d_double_array(nucell, 3, "BCC001_atpos");
+  atpos = memory->create(atpos,nucell, 3, "BCC001_atpos");
   attyp = new int[nucell];
+  layer = new int[nucell];
   
   for (int i=0; i<nucell; i++) attyp[i] = 1;
+  layer[0]    = 0;
   atpos[0][0] = 0.;
   atpos[0][1] = 0.;
   atpos[0][2] = 0.;

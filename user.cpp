@@ -35,7 +35,7 @@ USER::USER() : lattice()
     //  yx yy yz
     //  zx zy zz
     //  ntype1 ntype2 ntype3 ...
-    //  sx1 sy1 sz1
+    //  sx1 sy1 sz1 layer-ID
     //  ...
     fgets(str,MAX_LINE_LENGTH,fp); if (feof(fp)){fclose(fp); return;}
     sscanf(str,"%lg",&alat);
@@ -56,14 +56,15 @@ USER::USER() : lattice()
       nucell += ntm[i];
     }
 
-    atpos = memory->create_2d_double_array(nucell, 3, "USER_atpos");
+    atpos = memory->create(atpos,nucell, 3, "USER_atpos");
     attyp = new int[nucell];
+    layer = new int[nucell];
 
     int iatom =0;
     for (int ip=0; ip<ntype; ip++){
       for (int i=0; i<ntm[ip]; i++){
         fgets(str,MAX_LINE_LENGTH,fp); if (feof(fp)){fclose(fp); return;}
-        sscanf(str,"%lg %lg %lg", &atpos[iatom][0],&atpos[iatom][1],&atpos[iatom][2]);
+        sscanf(str,"%lg %lg %lg", &atpos[iatom][0],&atpos[iatom][1],&atpos[iatom][2], &layer[iatom]);
         attyp[iatom++] = ip+1;
       }
     }
@@ -97,15 +98,16 @@ USER::USER() : lattice()
       if (ntype > nucell) ntype = nucell;
     }
       
-    atpos = memory->create_2d_double_array(nucell, 3, "USER_atpos");
+    atpos = memory->create(atpos,nucell, 3, "USER_atpos");
     attyp = new int[nucell];
+    layer = new int[nucell];
     // ask for atom coordinates and types
     for (int i=0; i<nucell; i++){
       int nr;
       while (1){
-        printf("Please input [xs ys zs type] for atom %d: ", i+1);
+        printf("Please input [type xs ys zs layerID] for atom %d: ", i+1);
         if (count_words(gets(str)) < 4) continue;
-        nr = sscanf(str,"%lg %lg %lg %d", &atpos[i][0], &atpos[i][1], &atpos[i][2], &attyp[i]);
+        nr = sscanf(str,"%d %lg %lg %lg %d", &attyp[i],&atpos[i][0], &atpos[i][1], &atpos[i][2], &layer[i]);
         if (nr == 4) break;
       }
     }

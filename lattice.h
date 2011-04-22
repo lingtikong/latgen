@@ -21,7 +21,13 @@ public:
   double latvec[3][3]; // lattice vectors, in unit of alat
   double **atpos;      // fractional coordinate for atoms in unit cell
 
+  int nlayer;          // # of layers per unit cell; will count automatically in setup
+  int *layer;          // layer ID for each atom
+  int *numlayer;       // # of atoms per layer; will count automatically in setup
+  double *h;           // height above each layer; will be set automatically in setup
+
   void display();      // method to display lattice info
+  void setup();        // to setup "numlayer", "h"
 
   void OrientLattice();// to orient the lattice, following the rule of LAMMPS.
 
