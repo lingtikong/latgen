@@ -3,45 +3,92 @@
 #include "stdlib.h"
 #include "string.h"
 #include <time.h>
+#include <math.h>
 
-#define MAX_LINE_LENGTH 256
+#define MAXLINE 512
 /* ----------------------------------------------------------------------
    constructor to initialize
 ------------------------------------------------------------------------- */
 Driver::Driver()
 {
-  char str[MAX_LINE_LENGTH];
-  int lattyp = 1;
+  nx = ny = nz = natom = ntype = 0;
+
+  alat = 0.;
+  latt = NULL;
+  atpos = NULL;
+  attyp = NULL;
+  random = NULL;
+  typeID = numtype = NULL;
+  xmap = ymap = zmap = umap = NULL;
+
+  memory = new Memory();
+
+  MainMenu();
+
+return;
+}
+
+int Driver::ShowMenu(const int flag)
+{
+  int ltype = 1;
+  char str[MAXLINE];
+
   // print out the menu
   printf("\n===========================================================\n");
-  printf("Please select the lattice type of your system:\n");
+  if (flag) printf("Please select the lattice type for lattice: %c\n", flag+'A'-1);
+  else printf("Please select the lattice type of your system:\n");
   printf(" 1. FCC/NaCl/Diamond;      |  4. A3B;\n");
   printf(" 2. BCC;                   |  5. A2B;\n");
   printf(" 3. HCP;                   |  6. AB;\n");
   printf("---------------------------+-------------------------------\n");
-  printf(" 7. User defined;          |  0. Exit.\n");
-  printf("---------------------------+-------------------------------\n");
-  printf("Your  choice[1]: ");
-  if (strlen(gets(str)) > 0) sscanf(str,"%d", &lattyp);
-  printf("You selected: %d", lattyp);
+  if (flag){
+    printf(" 7. User defined;          |  0. Exit.\n");
+  } else {
+    printf(" 7. User defined;          |  8. Multi-layer.\n");
+    printf("-----------------------------------------------------------\n");
+    printf(" 0. Exit.\n");
+  }
+  printf("-----------------------------------------------------------\n");
+  printf("Your choice [1]: ");
+  if (strlen(gets(str)) > 0) sscanf(str,"%d", &ltype);
+  printf("You selected: %d", ltype);
   printf("\n===========================================================\n");
-  // select the job
-  switch (lattyp){
-  case 1: latt = new FCC; break;
-  case 2: latt = new BCC; break;
-  case 3: latt = new HCP; break;
-  case 4: latt = new A3B; break;
-  case 5: latt = new A2B; break;
-  case 6: latt = new AB; break;
-  case 7: latt = new USER; break;
+
+  switch (ltype){
+  case 1: latt = new FCC(); break;
+  case 2: latt = new BCC(); break;
+  case 3: latt = new HCP(); break;
+  case 4: latt = new A3B(); break;
+  case 5: latt = new A2B(); break;
+  case 6: latt = new AB(); break;
+  case 7: latt = new USER(); break;
+  case 8: if (! flag) FormLayers(); break;
   default: exit(1);}
-  // re-orient the lattice
-  printf("Would you like to re-orient the unit cell? (y/n)[n]: ");
-  if (strlen(gets(str)) > 0){
-    if (strcmp(str,"y")==0 || strcmp(str,"Y")==0) latt->OrientLattice();
+
+  int rflag = 8-ltype;
+  if ( rflag ){
+    // re-orient the lattice
+    printf("Would you like to re-orient the unit cell? (y/n)[n]: ");
+    if (strlen(gets(str)) > 0){
+      if (strcmp(str,"y")==0 || strcmp(str,"Y")==0) latt->OrientLattice();
+    }
   }
 
-  latt->display();
+return rflag;
+}
+
+void Driver::MainMenu()
+{
+  if ( ShowMenu(0) ){
+    name = new char[strlen(latt->name)+1];
+    strcpy(name, latt->name);
+    alat = latt->alat;
+   
+    latt->display();
+
+    generate();
+  }
+return;
 }
 
 /* ----------------------------------------------------------------------
@@ -49,13 +96,14 @@ Driver::Driver()
 ------------------------------------------------------------------------- */
 Driver::~Driver()
 {
-  if (atpos!= NULL) latt->memory->destroy(atpos);
-  if (attyp!= NULL) delete []attyp;
+  if (atpos!= NULL) memory->destroy(atpos);
+  if (attyp!= NULL) memory->destroy(attyp);
   if (xmap != NULL) delete []xmap;
   if (ymap != NULL) delete []ymap;
   if (zmap != NULL) delete []zmap;
   if (umap != NULL) delete []umap;
   if (latt != NULL) delete latt;
+  if (name != NULL) delete []name;
 
   if (typeID!= NULL) delete []typeID;
   if (numtype!= NULL) delete []numtype;
@@ -67,7 +115,7 @@ Driver::~Driver()
 ------------------------------------------------------------------------- */
 void Driver::generate()
 {
-  char str[MAX_LINE_LENGTH];
+  char str[MAXLINE];
   int leading_dir = 1;
   printf("\n===========================================================\n");
   while (1){
@@ -83,12 +131,12 @@ void Driver::generate()
   if (latt->count_words(gets(str)) > 0) sscanf(str,"%d", &leading_dir);
   printf("===========================================================\n");
 
-  atpos = latt->memory->create(atpos, natom, 3, "driver->generate:atpos");
+  atpos = memory->create(atpos, natom, 3, "driver->generate:atpos");
+  attyp = memory->create(attyp, natom, "driver->generate:attyp");
   xmap = new int[natom];
   ymap = new int[natom];
   zmap = new int[natom];
   umap = new int[natom];
-  attyp = new int[natom];
 
   int iatom = 0;
   if ( leading_dir == 1){
@@ -206,11 +254,12 @@ int Driver::lookup(int ip)
 ------------------------------------------------------------------------- */
 void Driver::write()
 {
+  if (natom < 1) return;
   FILE *fp;
-  char str[MAX_LINE_LENGTH], *posfile, *mapfile;
+  char str[MAXLINE], *posfile, *mapfile;
   printf("\n===========================================================\n");
   printf("Please input the filename of the output xyz file [atomcfg.xyz]: ");
-  if (latt->count_words(gets(str)) > 0){
+  if (strlen(gets(str)) > 0){
     int n = strlen(str) + 1;
     posfile = new char[n];
     strcpy(posfile, str);
@@ -219,23 +268,26 @@ void Driver::write()
     strcpy(posfile, "atomcfg.xyz");
   }
 
-  printf("Please input the filename of the output map file [map.in]: ");
-  if (latt->count_words(gets(str)) > 0){
-    int n = strlen(str) + 1;
-    mapfile = new char[n];
-    strcpy(mapfile, str);
-  } else {
-    mapfile = new char[7];
-    strcpy(mapfile, "map.in");
-  } 
+  if (xmap){
+    printf("Please input the filename of the output map file [map.in]: ");
+    if (strlen(gets(str)) > 0){
+      int n = strlen(str) + 1;
+      mapfile = new char[n];
+      strcpy(mapfile, str);
+    } else {
+      mapfile = new char[7];
+      strcpy(mapfile, "map.in");
+    } 
+  }
 
   printf("\nThe atomic configuration will be written to file: %s\n", posfile);
-  printf("The FFT map information  will be written to file: %s", mapfile);
-  printf("\n===========================================================\n");
+  if (xmap) printf("The FFT map information  will be written to file: %s\n", mapfile);
+  printf("===========================================================\n");
+
   // write the xyz position file 
   fp = fopen(posfile, "w");
   fprintf(fp, "%d\n", natom);
-  fprintf(fp, "%s cell with dimension %d x %d x %d and a = %g\n",latt->name, nx, ny, nz, latt->alat);
+  fprintf(fp, "%s cell with dimension %d x %d x %d and a = %g\n", name, nx, ny, nz, alat);
   int nr = 3;
   if (natom < nr) nr = natom;
   for (int i=0; i<nr; i++){
@@ -245,16 +297,20 @@ void Driver::write()
   for (int i=nr; i<natom; i++)
     fprintf(fp,"%d %16.16e %16.16e %16.16e\n", attyp[i], atpos[i][0], atpos[i][1], atpos[i][2]);
   fclose(fp);
-  // write the map file, useful to fix_phonon only.
-  fp = fopen(mapfile, "w");
-  fprintf(fp,"%d %d %d %d\n", nx, ny, nz, latt->nucell);
-  fprintf(fp,"Map file for %dx%dx%d %s cell.\n",nx,ny,nz,latt->name);
-  for (int i=0; i<natom; i++)
-    fprintf(fp,"%d %d %d %d %d\n", xmap[i], ymap[i], zmap[i], umap[i], i+1);
-  fclose(fp);
-
   delete []posfile;
-  delete []mapfile;
+
+  // write the map file, useful to fix_phonon only.
+  if (xmap){
+     fp = fopen(mapfile, "w");
+     fprintf(fp,"%d %d %d %d\n", nx, ny, nz, latt->nucell);
+     fprintf(fp,"Map file for %dx%dx%d %s cell.\n",nx,ny,nz, name);
+     for (int i=0; i<natom; i++)
+       fprintf(fp,"%d %d %d %d %d\n", xmap[i], ymap[i], zmap[i], umap[i], i+1);
+     fclose(fp);
+
+     delete []mapfile;
+  }
+
 return;
 }
 
@@ -263,7 +319,8 @@ return;
 ------------------------------------------------------------------------- */
 void Driver::modify()
 {
-  char str[MAX_LINE_LENGTH];
+  if (natom < 1) return;
+  char str[MAXLINE];
   int ncycle = 1;
   while (ncycle){
     int job=0;
@@ -276,7 +333,7 @@ void Driver::modify()
     else printf("  0. Done.\n");
     printf("Your choice[0]: ");
 
-    if (latt->count_words(gets(str)) >0) sscanf(str,"%d",&job);
+    if (strlen(gets(str)) >0) sscanf(str,"%d",&job);
 
     printf("You selected: %d", job);
     printf("\n===========================================================\n");
@@ -296,7 +353,7 @@ return;
 ------------------------------------------------------------------------- */
 void Driver::solidsol()
 {
-  char str[MAX_LINE_LENGTH];
+  char str[MAXLINE];
   printf("\n===========================================================\n");
   int lrange = 0, nrange;
   printf("Limit the solid solution within a region? (y/n)[n]: ");
@@ -395,5 +452,150 @@ void Driver::solidsol()
 
   // reset type info
   typescan();
+return;
+}
+
+void Driver::FormLayers()
+{
+  int nlat = 1, idum;
+  int *mynx, *myny;
+  char str[MAXLINE];
+
+  printf("\n\n>>>>>>======    To form multilayers with multiple lattices     =====<<<<<<\n");
+  printf("NOTE: The 3rd axis of these lattices must be perpendicular to the other 2!\n");
+  printf("\nPlease input the number of lattices in your multi-layer system: ");
+  if (strlen(gets(str)) > 0) sscanf(str,"%d", &nlat);
+  if (nlat < 1) return;
+
+  lattice *latts[nlat];
+  for (int i=0; i<nlat; i++){
+    if (! ShowMenu(i+1) ){nlat = i; break;}
+
+    latts[i] = latt;
+    latt = NULL;
+  }
+
+  for (int i=0; i<nlat; i++){
+    printf("\n>>>>>>   Lattice info for lattice: %c - %s    <<<<<", 'A'+i, latts[i]->name);
+    latts[i]->display();
+  }
+
+  idum = 0;
+  printf("\nYou have defined %d lattices: ", nlat);
+  for (int i=0; i<nlat; i++) printf(" %c = %s;", 'A'+i, latts[i]->name);
+  printf("\nWhich one will be used to define the lateral size of your cell? (A-%c)[A]: ", 'A'+nlat-1);
+  if (strlen(gets(str)) > 0) sscanf(str,"%d", &idum);
+  if (idum < 0) idum = 0;
+  
+  mynx = memory->create(mynx, nlat, "mynx");
+  myny = memory->create(myny, nlat, "myny");
+  double lx, ly, lx0=0., ly0=0.;
+  for (int ilat=0; ilat<nlat; ilat++){
+    printf("Please input the lateral extensions (nx & ny) for lattice %c: ", 'A'+ilat);
+    while (1){
+      scanf("%d %d", &mynx[ilat], &myny[ilat]); while (getchar() != '\n');
+      if (mynx[ilat] > 0 && myny[ilat] > 0) break;
+    }
+    if (idum == ilat){
+      nx = mynx[ilat]; ny = myny[ilat]; nz = 0;
+      for (int j=0; j<3; j++){
+        latvec[0][j] = nx*latts[ilat]->latvec[0][j]*latts[ilat]->alat;
+        latvec[1][j] = ny*latts[ilat]->latvec[1][j]*latts[ilat]->alat;
+        lx0 += latvec[0][j]*latvec[0][j];
+        ly0 += latvec[1][j]*latvec[1][j];
+      }
+    }
+  }
+  lx0 = sqrt(lx0); ly0 = sqrt(ly0);
+
+  printf("\nThe simulation cell in the lateral direction will be: [%g %g %g], [%g %g %g]\n",
+  latvec[0][0], latvec[0][1], latvec[0][2], latvec[1][0], latvec[1][1], latvec[1][2]);
+  for (int i=0; i<nlat; i++){
+    lx = ly = 0.;
+    for (int j=0; j<3; j++){
+      double xi = mynx[i]*latts[i]->latvec[0][j]*latts[i]->alat;
+      double yi = myny[i]*latts[i]->latvec[1][j]*latts[i]->alat;
+      lx += xi*xi;
+      ly += yi*yi;
+    }
+    lx = sqrt(lx); ly = sqrt(ly);
+    printf("Lateral mistfit for lattice %c is: [%lg %lg]\n", 'A'+i, (lx-lx0)/lx0, (ly-ly0)/ly0);
+  }
+
+  double H = 0.;
+  int zprev[nlat], ntprev[nlat], zflag = 0, iatom = 0;
+  for (int i=0; i<nlat; i++) zprev[i] = 0;
+
+  ntprev[0] = 0;
+  for (int i=1; i<nlat; i++) ntprev[i] = ntprev[i-1] + latts[i-1]->ntype;
+
+  char realized[MAXLINE]; strcpy(realized, "");
+  printf("\nPlease input the layer sequences, for example, if you have two lattices: A and B,\n");
+  printf("and you want to have 4 layers A, 5 layers B and then 3 layers A, input A4 B5 A3.\n");
+  printf("If you want to form the 2nd A layers from its first layer in the unit cell, use\n");
+  printf("lower case 'a' instead of 'A'. Now, input your sequences: ");
+  if (strlen(gets(str)) > 1) {
+    char *ptr = strtok(str," \n\r\t\f");
+    while (ptr != NULL){
+      zflag = 0;
+      int ilat = ptr[0] - 'A';
+      if (ilat > nlat){ ilat = ptr[0] - 'a'; zflag = 1;}
+      if (ilat >=0 && ilat < nlat){
+        latt = latts[ilat];
+
+        strcat(realized," ");strcat(realized, ptr);
+        if (zflag) zprev[ilat] = 0;
+        ptr[0] = ' ';
+        int nl_new  = atoi(ptr);
+        int ntm_new = 0;
+        for (int i=0; i<nl_new; i++) ntm_new += latt->numlayer[(i+zprev[ilat])%latt->nlayer];
+
+        ntm_new *= (mynx[ilat]*myny[ilat]);
+        natom += ntm_new;
+        atpos = memory->grow(atpos, natom, 3, "atpos");
+        attyp = memory->grow(attyp, natom, "attyp");
+
+        for (int k=0; k<nl_new; k++){
+          int il = (k+zprev[ilat])%latt->nlayer;
+          for (int ia=0; ia<latt->nucell; ia++){
+            if ( latt->layer[ia] == il ){
+              for (int i=0; i<mynx[ilat]; i++)
+              for (int j=0; j<myny[ilat]; j++){
+                atpos[iatom][0] = (double(i)+latt->atpos[ia][0])/double(mynx[ilat]);
+                atpos[iatom][1] = (double(j)+latt->atpos[ia][1])/double(myny[ilat]);
+                atpos[iatom][2] = H;
+                attyp[iatom++]  = latt->attyp[ia] + ntprev[ilat];
+              }
+            }
+          }
+          nz++;
+          H += latt->h[il];
+        }
+        zprev[ilat] += nl_new%latt->nlayer;
+      }
+
+      ptr = strtok(NULL, " \n\r\t\f");
+    }
+  }
+
+  printf("\nThe layer sequences realized is:%s\n", realized);
+  printf("In total, %d layers and %d atoms are created.\n", nz, iatom);
+
+  latt = NULL; alat = 1.;
+  latvec[2][0] = latvec[2][1] = 0.; latvec[2][2] = H;
+
+  strcpy(str,"Multilayer of:");
+  for (int i=0; i<nlat; i++){strcat(str," "); strcat(str,latts[i]->name);}
+  name = new char [strlen(str)+1]; strcpy(name, str);
+
+  double tmp[2];
+  for (int i=0; i<natom; i++){
+    for (int idim=0; idim<2; idim++) tmp[idim] = atpos[i][idim];
+    atpos[i][0] = tmp[0]*latvec[0][0] + tmp[1]*latvec[1][0];
+    atpos[i][1] = tmp[0]*latvec[0][1] + tmp[1]*latvec[1][1];
+  }
+
+  for (int i=0; i<nlat; i++) delete latts[i];
+
 return;
 }

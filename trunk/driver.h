@@ -3,6 +3,7 @@
 
 #include "lists.h"
 #include "random.h"
+#include "memory.h"
 
 class Driver{
 public:
@@ -14,8 +15,16 @@ public:
 
   void write();     // method to write the atomic configuration (xyz) and mapping info
 
+  void FormLayers();
+
 private:
+  int ShowMenu(int);
+  void MainMenu();
+
   lattice *latt;
+
+  char *name;
+  double alat;
   int nx, ny, nz, natom, ntype;   // size in three dimension and total number of atoms
   int *attyp, *numtype, *typeID;  // array to store the atomic types for all
   int *xmap, *ymap, *zmap, *umap; // arrays to store the mapping info
@@ -24,6 +33,7 @@ private:
   int lookup(int);                // to find the ID of an atomic type
 
   RanPark *random;                // class object to create random numbers
+  Memory *memory;
 
   // private modification methods
   void solidsol(void);            // method to create subsutitutional solid solution

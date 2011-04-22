@@ -47,11 +47,18 @@ lattice::~lattice()
 void lattice::display()
 {
   if (!initialized) return;
+  setup();
+
   printf("\n======================= Lattice info ======================\n");
   printf("Lattice name......................: %s\n", name);
   printf("Lattice constant of unit cell.....: %g\n", alat);
   printf("Number of atom per unit cell......: %d\n", nucell);
   printf("Number of atom types per unit cell: %d\n", ntype);
+  printf("Number of layers in each unit cell: %d\n", nlayer);
+  printf("Number of atoms  in each layer    :");
+  for (int i=0; i<nlayer; i++) printf(" %d", numlayer[i]); printf("\n");
+  printf("Expected height above each layer  :");
+  for (int i=0; i<nlayer; i++) printf(" %g", h[i]); printf("\n");
   printf("-----------------------------------------------------------\n");
   printf("Lattice vectors:\n");
   for (int i=0; i<3; i++){
@@ -139,21 +146,23 @@ void lattice::setup()
   for (int i=0; i<nlayer; i++) numlayer[i] = 0;
   for (int i=0; i<nucell; i++) numlayer[layer[i]]++;
 
-  h[0] = 0.;
-  int i0 = 0;
-  double pos0[3], pos1[3];
+  int i0 = 0, i1 =0;
+  double pos0, pos1;
   for (int i=0; i<nucell; i++) if (layer[i] == 0) {i0 = i; break;}
-  pos0[0] = pos0[1] = pos0[2] = 0.;
-  for (int i=0; i<3; i++)
-  for (int j=0; j<3; j++) pos0[j] += atpos[i0][i] * latvec[i][j];
+  pos0 = 0.;
+  for (int i=0; i<3; i++) pos0 += atpos[i0][i] * latvec[i][2];
 
   for (int il=1; il<nlayer; il++){
-    int i1;
     for (int i=0; i<nucell; i++) if (layer[i] == il) {i1 = i; break;}
-    for (int i=0; i<3; i++)
-    for (int j=0; j<3; j++) pos1[j] += atpos[i1][i] * latvec[i][j];
-    h[il] = (pos1[2] - pos0[2])*alat;
+    pos1 = 0.;
+    for (int i=0; i<3; i++) pos1 += atpos[i1][i] * latvec[i][2];
+    h[il-1] = (pos1 - pos0)*alat;
+    pos0 = pos1;
   }
+
+  pos1 = 0.;
+  for (int i=0; i<3; i++) pos1 += (atpos[i0][i]+double(i/2)) * latvec[i][2];
+  h[nlayer-1] = (pos1-pos0)*alat;
 
 return;
 }
