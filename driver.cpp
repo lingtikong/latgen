@@ -519,7 +519,7 @@ void Driver::FormLayers()
       ly += yi*yi;
     }
     lx = sqrt(lx); ly = sqrt(ly);
-    printf("Lateral mistfit for lattice %c is: [%lg %lg]\n", 'A'+i, (lx-lx0)/lx0, (ly-ly0)/ly0);
+    printf("Lateral misfit for lattice %c is: [%lg %lg]\n", 'A'+i, (lx-lx0)/lx0, (ly-ly0)/ly0);
   }
 
   double H = 0.;
