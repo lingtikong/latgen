@@ -189,7 +189,7 @@ void FCC::FCC110()
 
   // initialize according to surface type
   switch (surftype){
-  case 1:
+  case 2:
     nucell = 2;
     ntype  = 1;
     
@@ -214,7 +214,7 @@ void FCC::FCC110()
 
     initialized = 1;
     break;
-  case 2:
+  case 1:
     nucell = 2;
     ntype  = 1;
     
@@ -255,7 +255,7 @@ void FCC::FCC111()
   int surftype = 5;
   // print out the menu
   printf("\n===========================================================\n");
-  printf("Please selection the type of FCC(110) surface:\n");
+  printf("Please selection the type of FCC(111) surface:\n");
   printf("   1. hexgonal U along x, 60 deg;\n");
   printf("   2. hexgonal V along y, 60 deg;\n");
   printf("   3. hexgonal U along x, 120 deg;\n");
@@ -271,7 +271,7 @@ void FCC::FCC111()
     for (int j=0; j<3; j++) latvec[i][j] = 0.;
   }
   name = new char[9];
-  strcpy(name, "FCC(110)");
+  strcpy(name, "FCC(111)");
 
   // initialize according to surface type
   switch (surftype){
