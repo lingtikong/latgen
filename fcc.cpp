@@ -190,12 +190,12 @@ void FCC::FCC110()
   // initialize according to surface type
   switch (surftype){
   case 1:
-    nucell = 4;
+    nucell = 2;
     ntype  = 1;
     
-    latvec[0][0] = sqrt(2.);
+    latvec[0][0] = 0.5*sqrt(2.);
     latvec[1][1] = 1.;
-    latvec[2][2] = sqrt(2.);
+    latvec[2][2] = 0.5*sqrt(2.);
 
     atpos = memory->create(atpos,nucell, 3, "FCC110_atpos");
     attyp = new int[nucell];
@@ -207,30 +207,20 @@ void FCC::FCC110()
     atpos[0][1] = 0.;
     atpos[0][2] = 0.;
 
-    layer[1]    = 0;
+    layer[1]    = 1;
     atpos[1][0] = 0.5;
-    atpos[1][1] = 0.;
-    atpos[1][2] = 0.;
-
-    layer[2]    = 1;
-    atpos[2][0] = 0.25;
-    atpos[2][1] = 0.5;
-    atpos[2][2] = 0.5;
-
-    layer[3]    = 1;
-    atpos[3][0] = 0.75;
-    atpos[3][1] = 0.5;
-    atpos[3][2] = 0.5;
+    atpos[1][1] = 0.5;
+    atpos[1][2] = 0.5;
 
     initialized = 1;
     break;
   case 2:
-    nucell = 4;
+    nucell = 2;
     ntype  = 1;
     
     latvec[0][0] = 1.;
-    latvec[1][1] = sqrt(2.);
-    latvec[2][2] = sqrt(2.);
+    latvec[1][1] = sqrt(2.)*0.5;
+    latvec[2][2] = sqrt(2.)*0.5;
 
     atpos = memory->create(atpos,nucell, 3, "FCC110_atpos");
     attyp = new int[nucell];
@@ -243,20 +233,10 @@ void FCC::FCC110()
     atpos[0][1] = 0.;
     atpos[0][2] = 0.;
 
-    layer[1]    = 0;
-    atpos[1][0] = 0.;
+    layer[1]    = 1;
+    atpos[1][0] = 0.5;
     atpos[1][1] = 0.5;
-    atpos[1][2] = 0.;
-
-    layer[2]    = 1;
-    atpos[2][0] = 0.5;
-    atpos[2][1] = 0.25;
-    atpos[2][2] = 0.5;
-
-    layer[3]    = 1;
-    atpos[3][0] = 0.5;
-    atpos[3][1] = 0.75;
-    atpos[3][2] = 0.5;
+    atpos[1][2] = 0.5;
 
     initialized = 1;
     break;
