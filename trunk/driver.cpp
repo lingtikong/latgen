@@ -530,6 +530,10 @@ void Driver::FormLayers()
   for (int i=1; i<nlat; i++) ntprev[i] = ntprev[i-1] + latts[i-1]->ntype;
 
   char realized[MAXLINE]; strcpy(realized, "");
+
+  int first = 1;
+  double Hlast = 0., Hfirst = 0.;
+
   printf("\nPlease input the layer sequences, for example, if you have two lattices: A and B,\n");
   printf("and you want to have 4 layers A, 5 layers B and then 3 layers A, input A4 B5 A3.\n");
   printf("If you want to form the 2nd A layers from its first layer in the unit cell, use\n");
@@ -550,6 +554,14 @@ void Driver::FormLayers()
         int ntm_new = 0;
         for (int i=0; i<nl_new; i++) ntm_new += latt->numlayer[(i+zprev[ilat])%latt->nlayer];
 
+        double Hbelow = 0.5*latt->h[(latt->nlayer-1+zprev[ilat])%latt->nlayer];
+        if (first){
+          first = 0;
+          Hfirst = Hbelow;
+          H = -Hfirst;
+        }
+        if (nl_new > 0) H += Hbelow;
+
         ntm_new *= (mynx[ilat]*myny[ilat]);
         natom += ntm_new;
         atpos = memory->grow(atpos, natom, 3, "atpos");
@@ -569,8 +581,11 @@ void Driver::FormLayers()
             }
           }
           nz++;
-          H += latt->h[il];
+
+          Hlast = latt->h[il];
+          H += Hlast;
         }
+        if (nl_new > 0) H -= 0.5*Hlast;
         zprev[ilat] += nl_new%latt->nlayer;
       }
 
@@ -578,9 +593,10 @@ void Driver::FormLayers()
     }
   }
 
-  printf("\nThe layer sequences realized is:%s\n", realized);
+  printf("\nThe layer sequences realized is: %s\n", realized);
   printf("In total, %d layers and %d atoms are created.\n", nz, iatom);
 
+  H += Hfirst;
   latt = NULL; alat = 1.;
   latvec[2][0] = latvec[2][1] = 0.; latvec[2][2] = H;
 
