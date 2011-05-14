@@ -17,7 +17,7 @@ USER::USER() : lattice()
   name = new char[10];
   strcpy(name, "USER_LATT");
   char str[MAX_LINE_LENGTH];
-  printf("\n===========================================================\n");
+  printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
   printf("Would you like to read the lattice info from a file?(y/n)[n]: ");
   gets(str);
   if (strcmp(str,"y")==0 || strcmp(str,"Y")==0){
@@ -112,7 +112,7 @@ USER::USER() : lattice()
       }
     }
   }
-  printf("===========================================================\n");
+  printf(""); for (int i=0; i<70; i++) printf("="); printf("\n");
   initialized = 1;
 
 return;

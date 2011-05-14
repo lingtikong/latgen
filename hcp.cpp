@@ -16,7 +16,7 @@ HCP::HCP() : lattice()
   char str[MAX_LINE_LENGTH];
   alat = 1.; ca = sqrt(8./3.);
   // print out the menu
-  printf("\n===========================================================\n");
+  printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
   printf("Please input the lattice constant of the HCP lattice [1]:");
   if (count_words(gets(str)) > 0) sscanf(str,"%lg",&alat);
   printf("Please input the value of c/a ratio or c (negative) [1.633]: ");
@@ -25,15 +25,14 @@ HCP::HCP() : lattice()
   printf("The lattice constants of your HCP: a = %g, c/a = %g.\n", alat, ca);
 
   int orient = 1;
-  printf("Please selection the orientation of the HCP lattice:\n");
-  printf("   1. (001);\n");
-  printf("   2. (100);\n");
+  printf("Please select the orientation of the HCP lattice:\n");
+  printf("   1. (001);         4. (-110); \n");
+  printf("   2. (100);         5. Graphene;\n");
   printf("   3. (110);\n");
-  printf("   4. (-110);\n");
   printf("Your  choice [1]: ");
   if (count_words(gets(str)) > 0) sscanf(str,"%d",&orient);
   printf("You selected: %d", orient);
-  printf("\n===========================================================\n");
+  printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
   
   // initialize according to orientation
   initialized = 0;
@@ -50,6 +49,8 @@ HCP::HCP() : lattice()
   case 4:
     HCPm10();
     break;
+  case 5:
+    Graphene();
   default:
     break;
   }
@@ -72,8 +73,8 @@ void HCP::HCP001()
   char str[MAX_LINE_LENGTH];
   int surftype = 5;
   // print out the menu
-  printf("\n===========================================================\n");
-  printf("Please selection the type of HCP(001) surface:\n");
+  printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
+  printf("Please select the type of HCP(001) surface:\n");
   printf("   1. U along x,  60 degree;\n");
   printf("   2. V along y,  60 degree;\n");
   printf("   3. U along x, 120 degree;\n");
@@ -83,7 +84,7 @@ void HCP::HCP001()
   printf("Your  choice [5]: ");
   if (count_words(gets(str)) > 0) sscanf(str,"%d",&surftype);
   printf("You selected: %d", surftype);
-  printf("\n===========================================================\n");
+  printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
   for (int i=0; i<3; i++){
     for (int j=0; j<3; j++) latvec[i][j] = 0.;
   }
@@ -407,5 +408,207 @@ void HCP::HCPm10()
 
   initialized = 1;
 
+return;
+}
+
+/* ----------------------------------------------------------------------
+   Initialize for Graphene layers
+------------------------------------------------------------------------- */
+void HCP::Graphene()
+{
+  char str[MAX_LINE_LENGTH];
+  int surftype = 5;
+  // print out the menu
+  printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
+  printf("Please select the orientation of the graphene layers:\n");
+  printf("   1. Primitive, U along x,  60 degree;\n");
+  printf("   2. Primitive, V along y,  60 degree;\n");
+  printf("   3. Primitive, U along x, 120 degree;\n");
+  printf("   4. Primitive, V along y, 120 degree;\n");
+  printf("   5. Rectangle, long along x;\n");
+  printf("   6. Rectangle, long along y;\n");
+  printf("Your  choice [5]: ");
+  if (count_words(gets(str)) > 0) sscanf(str,"%d",&surftype);
+  printf("You selected: %d", surftype);
+  printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
+  for (int i=0; i<3; i++){
+    for (int j=0; j<3; j++) latvec[i][j] = 0.;
+  }
+  name = new char[9];
+  strcpy(name, "Graphene");
+
+  // initialize according to surface type
+  switch (surftype){
+  case 1:
+    nucell = 2;
+    ntype  = 1;
+    
+    latvec[0][0] = 1.;
+    latvec[1][0] = 0.5;
+    latvec[1][1] = sqrt(0.75);
+    latvec[2][2] = ca;
+
+    atpos = memory->create(atpos,nucell, 3, "Graphene_atpos");
+    attyp = new int[nucell]; layer = new int[nucell];
+    
+    for (int i=0; i<nucell; i++) attyp[i] = 1;
+    layer[0]    = 0;
+    atpos[0][0] = 0.;
+    atpos[0][1] = 0.;
+    atpos[0][2] = 0.;
+
+    layer[1]    = 0;
+    atpos[1][0] = 1./3.;
+    atpos[1][1] = 1./3.;
+    atpos[1][2] = 0.;
+
+    initialized = 1;
+    break;
+  case 2:
+    nucell = 2;
+    ntype  = 1;
+    
+    latvec[0][0] = sqrt(0.75);
+    latvec[0][1] = 0.5;
+    latvec[1][1] = 1.;
+    latvec[2][2] = ca;
+
+    atpos = memory->create(atpos,nucell, 3, "Graphene_atpos");
+    attyp = new int[nucell]; layer = new int[nucell];
+    
+    for (int i=0; i<nucell; i++) attyp[i] = 1;
+    layer[0]    = 0;
+    atpos[0][0] = 0.;
+    atpos[0][1] = 0.;
+    atpos[0][2] = 0.;
+
+    layer[1]    = 0;
+    atpos[1][0] = 1./3.;
+    atpos[1][1] = 1./3.;
+    atpos[1][2] = 0.;
+
+    initialized = 1;
+    break;
+  case 3:
+    nucell = 2;
+    ntype  = 1;
+    
+    latvec[0][0] =  1.;
+    latvec[1][0] = -0.5;
+    latvec[1][1] =  sqrt(0.75);
+    latvec[2][2] = ca;
+
+    atpos = memory->create(atpos,nucell, 3, "Graphene_atpos");
+    attyp = new int[nucell]; layer = new int[nucell];
+    
+    for (int i=0; i<nucell; i++) attyp[i] = 1;
+    layer[0]    = 0;
+    atpos[0][0] = 0.;
+    atpos[0][1] = 0.;
+    atpos[0][2] = 0.;
+
+    layer[1]    = 0;
+    atpos[1][0] = 1./3.;
+    atpos[1][1] = 2./3.;
+    atpos[1][2] = 0.;
+
+    initialized = 1;
+    break;
+  case 4:
+    nucell = 2;
+    ntype  = 1;
+    
+    latvec[0][0] = sqrt(0.75);
+    latvec[0][1] = -0.5;
+    latvec[1][1] = 1.;
+    latvec[2][2] = ca;
+
+    atpos = memory->create(atpos,nucell, 3, "Graphene_atpos");
+    attyp = new int[nucell]; layer = new int[nucell];
+    
+    for (int i=0; i<nucell; i++) attyp[i] = 1;
+    layer[0]    = 0;
+    atpos[0][0] = 0.;
+    atpos[0][1] = 0.;
+    atpos[0][2] = 0.;
+
+    layer[1]    = 0;
+    atpos[1][0] = 1./3.;
+    atpos[1][1] = 2./3.;
+    atpos[1][2] = 0.;
+
+    initialized = 1;
+    break;
+  case 5:
+    nucell = 4;
+    ntype  = 1;
+
+    latvec[0][0] = sqrt(3.0);
+    latvec[1][1] = 1.;
+    latvec[2][2] = ca;
+
+    atpos = memory->create(atpos,nucell, 3, "Graphene_atpos");
+    attyp = new int[nucell]; layer = new int[nucell];
+
+    for (int i=0; i<nucell; i++) attyp[i] = 1;
+    layer[0]    = 0;
+    atpos[0][0] = 0.;
+    atpos[0][1] = 0.;
+    atpos[0][2] = 0.;
+
+    layer[1]    = 0;
+    atpos[1][0] = 1./3.;
+    atpos[1][1] = 0.;
+    atpos[1][2] = 0.;
+
+    layer[2]    = 0;
+    atpos[2][0] = 0.5;
+    atpos[2][1] = 0.5;
+    atpos[2][2] = 0.;
+
+    layer[3]    = 0;
+    atpos[3][0] = 5./6.;
+    atpos[3][1] = 0.5;
+    atpos[3][2] = 0.;
+
+    initialized = 1;
+    break;
+  case 6:
+    nucell = 4;
+    ntype  = 1;
+
+    latvec[0][0] = 1.;
+    latvec[1][1] = sqrt(3.0);
+    latvec[2][2] = ca;
+
+    atpos = memory->create(atpos,nucell, 3, "Graphene_atpos");
+    attyp = new int[nucell]; layer = new int[nucell];
+
+    for (int i=0; i<nucell; i++) attyp[i] = 1;
+    layer[0]    = 0;
+    atpos[0][0] = 0.;
+    atpos[0][1] = 0.;
+    atpos[0][2] = 0.;
+
+    layer[1]    = 0;
+    atpos[1][0] = 0.;
+    atpos[1][1] = 1./3.;
+    atpos[1][2] = 0.;
+
+    layer[2]    = 0;
+    atpos[2][0] = 0.5;
+    atpos[2][1] = 0.5;
+    atpos[2][2] = 0.;
+
+    layer[3]    = 0;
+    atpos[3][0] = 0.5;
+    atpos[3][1] = 5./6.;
+    atpos[3][2] = 0.;
+
+    initialized = 1;
+    break;
+  default:
+    break;
+  }
 return;
 }

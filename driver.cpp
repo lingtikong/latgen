@@ -34,25 +34,25 @@ int Driver::ShowMenu(const int flag)
   char str[MAXLINE];
 
   // print out the menu
-  printf("\n===========================================================\n");
+  printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
   if (flag) printf("Please select the lattice type for lattice: %c\n", flag+'A'-1);
   else printf("Please select the lattice type of your system:\n");
-  printf(" 1. FCC/NaCl/Diamond;      |  4. A3B;\n");
-  printf(" 2. BCC;                   |  5. A2B;\n");
-  printf(" 3. HCP;                   |  6. AB;\n");
-  printf("---------------------------+-------------------------------\n");
+  printf(" 1. FCC/NaCl/Diamond;          |  4. A3B;\n");
+  printf(" 2. BCC;                       |  5. A2B;\n");
+  printf(" 3. HCP;                       |  6. AB;\n");
+  printf("-------------------------------+-------------------------------------\n");
   if (flag){
-    printf(" 7. User defined;          |  0. Exit.\n");
+    printf(" 7. User defined;              |  0. Exit.\n");
   } else {
-    printf(" 7. User defined;          |  8. Multi-layer.\n");
-    printf("-----------------------------------------------------------\n");
+    printf(" 7. User defined;              |  8. Multi-layer.\n");
+    printf("---------------------------------------------------------------------\n");
     printf(" 0. Exit.\n");
   }
-  printf("-----------------------------------------------------------\n");
+  printf("---------------------------------------------------------------------\n");
   printf("Your choice [1]: ");
   if (strlen(gets(str)) > 0) sscanf(str,"%d", &ltype);
   printf("You selected: %d", ltype);
-  printf("\n===========================================================\n");
+  printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
 
   switch (ltype){
   case 1: latt = new FCC(); break;
@@ -117,7 +117,7 @@ void Driver::generate()
 {
   char str[MAXLINE];
   int leading_dir = 1;
-  printf("\n===========================================================\n");
+  printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
   while (1){
     printf("Please input the dimensions in x, y, and z directions: ");
     if (latt->count_words(gets(str)) < 3) continue;
@@ -129,7 +129,7 @@ void Driver::generate()
   printf("Your system would be %d x %d x %d with %d atoms.\n",nx,ny,nz,natom);
   printf("Please indicate which direction should goes fast(1:x; other: z)[1]: ");
   if (latt->count_words(gets(str)) > 0) sscanf(str,"%d", &leading_dir);
-  printf("===========================================================\n");
+  for (int i=0; i<70; i++) printf("="); printf("\n");
 
   atpos = memory->create(atpos, natom, 3, "driver->generate:atpos");
   attyp = memory->create(attyp, natom, "driver->generate:attyp");
@@ -256,8 +256,8 @@ void Driver::write()
 {
   if (natom < 1) return;
   FILE *fp;
-  char str[MAXLINE], *posfile, *mapfile;
-  printf("\n===========================================================\n");
+  char str[MAXLINE], *posfile, *mapfile, *lmpfile;
+  printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
   printf("Please input the filename of the output xyz file [atomcfg.xyz]: ");
   if (strlen(gets(str)) > 0){
     int n = strlen(str) + 1;
@@ -266,6 +266,15 @@ void Driver::write()
   } else {
     posfile = new char[12];
     strcpy(posfile, "atomcfg.xyz");
+  }
+  printf("Please input the filename of the lammps atomic file [data.pos]: ");
+  if (strlen(gets(str)) > 0){
+    int n = strlen(str) + 1;
+    lmpfile = new char[n];
+    strcpy(lmpfile, str);
+  } else {
+    lmpfile = new char[9];
+    strcpy(lmpfile, "data.pos");
   }
 
   if (xmap){
@@ -282,7 +291,7 @@ void Driver::write()
 
   printf("\nThe atomic configuration will be written to file: %s\n", posfile);
   if (xmap) printf("The FFT map information  will be written to file: %s\n", mapfile);
-  printf("===========================================================\n");
+  for (int i=0; i<70; i++) printf("="); printf("\n");
 
   // write the xyz position file 
   fp = fopen(posfile, "w");
@@ -298,6 +307,22 @@ void Driver::write()
     fprintf(fp,"%d %16.16e %16.16e %16.16e\n", attyp[i], atpos[i][0], atpos[i][1], atpos[i][2]);
   fclose(fp);
   delete []posfile;
+
+  // write the lammps atomic style file
+  fp = fopen(lmpfile,"w");
+  fprintf(fp, "# %s cell with dimension %d x %d x %d and a = %g\n", name, nx, ny, nz, alat);
+  fprintf(fp, "%10d  atoms\n", natom);
+  fprintf(fp, "%10d  atom types\n\n", ntype);
+  fprintf(fp, " 0. %20.14f  xlo xhi\n", latvec[0][0]);
+  fprintf(fp, " 0. %20.14f  ylo yhi\n", latvec[1][1]);
+  fprintf(fp, " 0. %20.14f  zlo zhi\n", latvec[2][2]);
+  if ( latvec[1][0]*latvec[1][0] + latvec[2][0]*latvec[2][0] + latvec[2][1]*latvec[2][1] > 1.e-8 )
+    fprintf(fp, "%20.14f %20.14f %20.14f xy xz yz\n", latvec[1][0], latvec[2][0], latvec[2][1]);
+  fprintf(fp, "\nAtoms\n\n");
+
+  for (int i=0; i<natom; i++) fprintf(fp,"%d %d %20.14f %20.14f %20.14f\n", i+1, attyp[i], atpos[i][0], atpos[i][1], atpos[i][2]);
+  fclose(fp);
+  delete []lmpfile;
 
   // write the map file, useful to fix_phonon only.
   if (xmap){
@@ -325,7 +350,7 @@ void Driver::modify()
   while (ncycle){
     int job=0;
     // to display the menu for modification
-    printf("\n===========================================================\n");
+    printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
     printf("Please select the modification you want to do:\n");
     printf("  1. Create substitutional solid solution;\n");
 
@@ -336,7 +361,7 @@ void Driver::modify()
     if (strlen(gets(str)) >0) sscanf(str,"%d",&job);
 
     printf("You selected: %d", job);
-    printf("\n===========================================================\n");
+    printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
    
     switch (job){ 
     case 1: solidsol(); break;
@@ -354,7 +379,7 @@ return;
 void Driver::solidsol()
 {
   char str[MAXLINE];
-  printf("\n===========================================================\n");
+  printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
   int lrange = 0, nrange;
   printf("Limit the solid solution within a region? (y/n)[n]: ");
   if (strlen(gets(str)) > 0) if (strcmp(str,"y") == 0 || strcmp(str,"Y")== 0) lrange = 1;
@@ -461,7 +486,7 @@ void Driver::FormLayers()
   int *mynx, *myny;
   char str[MAXLINE];
 
-  printf("\n\n>>>>>>======    To form multilayers with multiple lattices     =====<<<<<<\n");
+  printf("\n\n>>>>>>======  To form multilayers with multiple lattices  ======<<<<<<\n");
   printf("NOTE: The 3rd axis of these lattices must be perpendicular to the other 2!\n");
   printf("\nPlease input the number of lattices in your multi-layer system: ");
   if (strlen(gets(str)) > 0) sscanf(str,"%d", &nlat);
