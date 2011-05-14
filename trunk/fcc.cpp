@@ -26,8 +26,8 @@ FCC::FCC() : lattice()
   printf("   2. (110);                6. Diamond conventional cell;\n");
   printf("   3. (111);                7. NaCl primitive cell;\n");
   printf("   4. Primitive cell;       8. NaCl convertion cell;\n");
-  printf("-----------------------------------------------------------\n");
-  printf("Your  choice [3]: ");
+  for (int i=0; i<70; i++) printf("-");
+  printf("\nYour  choice [3]: ");
   if (count_words(gets(str)) > 0) sscanf(str,"%d",&orient);
   printf("You selected: %d", orient);
   printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");

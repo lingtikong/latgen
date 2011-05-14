@@ -40,16 +40,16 @@ int Driver::ShowMenu(const int flag)
   printf(" 1. FCC/NaCl/Diamond;          |  4. A3B;\n");
   printf(" 2. BCC;                       |  5. A2B;\n");
   printf(" 3. HCP;                       |  6. AB;\n");
-  printf("-------------------------------+-------------------------------------\n");
+  for (int i=0; i<31; i++) printf("-"); printf("+"); for (int i=0; i<38; i++) printf("-"); printf("\n");
   if (flag){
     printf(" 7. User defined;              |  0. Exit.\n");
   } else {
     printf(" 7. User defined;              |  8. Multi-layer.\n");
-    printf("---------------------------------------------------------------------\n");
-    printf(" 0. Exit.\n");
+    for (int i=0; i<70; i++) printf("-");
+    printf("\n 0. Exit.\n");
   }
-  printf("---------------------------------------------------------------------\n");
-  printf("Your choice [1]: ");
+  for (int i=0; i<70; i++) printf("-");
+  printf("\nYour choice [1]: ");
   if (strlen(gets(str)) > 0) sscanf(str,"%d", &ltype);
   printf("You selected: %d", ltype);
   printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
@@ -289,7 +289,7 @@ void Driver::write()
     } 
   }
 
-  printf("\nThe atomic configuration will be written to file: %s\n", posfile);
+  printf("\nThe atomic configuration will be written to files %s and %s\n", posfile, lmpfile);
   if (xmap) printf("The FFT map information  will be written to file: %s\n", mapfile);
   for (int i=0; i<70; i++) printf("="); printf("\n");
 

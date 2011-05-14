@@ -49,7 +49,8 @@ void lattice::display()
   if (!initialized) return;
   setup();
 
-  printf("\n======================= Lattice info ======================\n");
+  printf("\n"); for (int i=0; i<28; i++) printf("=");
+  printf(" Lattice Info "); for (int i=0; i<28; i++) printf("="); printf("\n");
   printf("Lattice name......................: %s\n", name);
   printf("Number of atom per unit cell......: %d\n", nucell);
   printf("Number of atom types per unit cell: %d\n", ntype);
@@ -58,18 +59,18 @@ void lattice::display()
   for (int i=0; i<nlayer; i++) printf(" %d", numlayer[i]); printf("\n");
   printf("Expected height above each layer  :");
   for (int i=0; i<nlayer; i++) printf(" %g", h[i]); printf("\n");
-  printf("-----------------------------------------------------------\n");
-  printf("Lattice vectors:\n");
+  for (int i=0; i<70; i++) printf("-");
+  printf("\nLattice vectors:\n");
   for (int i=0; i<3; i++){
     for(int j=0; j<3; j++) printf("%lf ", latvec[i][j]*alat);
     printf("\n");
   }
-  printf("-----------------------------------------------------------\n");
-  printf("Basis (Fractional coordinate & type):\n");
+  for (int i=0; i<70; i++) printf("-");
+  printf("\nBasis (Fractional coordinate & type):\n");
   for (int i=0; i<nucell; i++){
     printf("%lf %lf %lf %d\n", atpos[i][0], atpos[i][1], atpos[i][2], attyp[i]);
   }
-  printf("===========================================================\n\n");
+  for (int i=0; i<70; i++) printf("="); printf("\n\n");
 }
 
 /*------------------------------------------------------------------------------
