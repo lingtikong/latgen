@@ -17,7 +17,7 @@ A3B::A3B() : lattice()
   alat = 1.; ca = 1.;
   int ctype = 1;
   // print out the menu
-  printf("\n===========================================================\n");
+  printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
   printf("Please select the composition of your lattice:\n");
   printf("   1. A3B;\n");
   printf("   2. AB3;\n");
@@ -43,7 +43,7 @@ A3B::A3B() : lattice()
     printf("Please input the c/a ratio of your lattice [1.]:");
     if (count_words(gets(str)) > 0) sscanf(str,"%lg",&ca);
   }
-  printf("\n===========================================================\n");
+  printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
   
   // initialize according to orientation
   initialized = 0;
@@ -91,7 +91,7 @@ void A3B::A3B_A15()
   char str[MAX_LINE_LENGTH];
   int surftype = 1;
   // print out the menu
-  printf("\n===========================================================\n");
+  printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
   printf("Please selection the type of A3B-A15 surface:\n");
   printf("   1. (001) conventional orientation;\n");
   printf("   2. (110), long along y;\n");
@@ -99,7 +99,7 @@ void A3B::A3B_A15()
   printf("Your  choice [1]: ");
   if (count_words(gets(str)) > 0) sscanf(str,"%d",&surftype);
   printf("You selected: %d\n", surftype);
-  printf("\n===========================================================\n");
+  printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
   for (int i=0; i<3; i++){
     for (int j=0; j<3; j++) latvec[i][j] = 0.;
   }
@@ -459,7 +459,7 @@ void A3B::A3B_D019()
   char str[MAX_LINE_LENGTH];
   int surftype = 1;
   // print out the menu
-  printf("\n===========================================================\n");
+  printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
   printf("Please selection the type of A3B-D019 surface:\n");
   printf("   1. (001), conventional;\n");
   printf("   2. (001), orthogonal, long along y;\n");
@@ -468,7 +468,7 @@ void A3B::A3B_D019()
   printf("Your  choice [1]: ");
   if (count_words(gets(str)) > 0) sscanf(str,"%d",&surftype);
   printf("You selected: %d\n", surftype);
-  printf("\n===========================================================\n");
+  printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
   
   for (int i=0; i<3; i++){
     for (int j=0; j<3; j++) latvec[i][j] = 0.;
@@ -895,7 +895,7 @@ void A3B::A3B_D022()
   char str[MAX_LINE_LENGTH];
   int surftype = 1;
   // print out the menu
-  printf("\n===========================================================\n");
+  printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
   printf("Please selection the type of A3B-D022 surface:\n");
   printf("   1. (001);\n");
   printf("   2. (100);\n");
@@ -904,7 +904,7 @@ void A3B::A3B_D022()
   printf("Your  choice [1]: ");
   if (count_words(gets(str)) > 0) sscanf(str,"%d",&surftype);
   printf("You selected: %d\n", surftype);
-  printf("\n===========================================================\n");
+  printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
   for (int i=0; i<3; i++){
     for (int j=0; j<3; j++) latvec[i][j] = 0.;
   }
@@ -1215,7 +1215,7 @@ void A3B::A3B_D03()
   char str[MAX_LINE_LENGTH];
   int surftype = 1;
   // print out the menu
-  printf("\n===========================================================\n");
+  printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
   printf("Please selection the type of A3B-D03 surface:\n");
   printf("   1. (001), small;\n");
   printf("   2. (001), conventional;\n");
@@ -1225,7 +1225,7 @@ void A3B::A3B_D03()
   printf("Your  choice [1]: ");
   if (count_words(gets(str)) > 0) sscanf(str,"%d",&surftype);
   printf("You selected: %d\n", surftype);
-  printf("\n===========================================================\n");
+  printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
   for (int i=0; i<3; i++){
     for (int j=0; j<3; j++) latvec[i][j] = 0.;
   }
@@ -1694,7 +1694,7 @@ void A3B::A3B_D09()
   char str[MAX_LINE_LENGTH];
   int surftype = 1;
   // print out the menu
-  printf("\n===========================================================\n");
+  printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
   printf("Please selection the type of A3B-D09 surface:\n");
   printf("   1. (001), conventional;\n");
   printf("   2. (110), orthogonal, long along y;\n");
@@ -1702,7 +1702,7 @@ void A3B::A3B_D09()
   printf("Your  choice [1]: ");
   if (count_words(gets(str)) > 0) sscanf(str,"%d",&surftype);
   printf("You selected: %d\n", surftype);
-  printf("\n===========================================================\n");
+  printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
   for (int i=0; i<3; i++){
     for (int j=0; j<3; j++) latvec[i][j] = 0.;
   }
@@ -1990,7 +1990,7 @@ void A3B::A3B_L12()
   char str[MAX_LINE_LENGTH];
   int surftype = 1;
   // print out the menu
-  printf("\n===========================================================\n");
+  printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
   printf("Please selection the type of A3B-L12 surface:\n");
   printf("   1. (001), conventional;\n");
   printf("   2. (110), orthogonal, long along y;\n");
@@ -1998,7 +1998,7 @@ void A3B::A3B_L12()
   printf("Your  choice [1]: ");
   if (count_words(gets(str)) > 0) sscanf(str,"%d",&surftype);
   printf("You selected: %d\n", surftype);
-  printf("\n===========================================================\n");
+  printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
   for (int i=0; i<3; i++){
     for (int j=0; j<3; j++) latvec[i][j] = 0.;
   }
@@ -2286,7 +2286,7 @@ void A3B::A3B_L60()
   char str[MAX_LINE_LENGTH];
   int surftype = 1;
   // print out the menu
-  printf("\n===========================================================\n");
+  printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
   printf("Please selection the type of A3B-L60 surface:\n");
   printf("   1. (001), conventional;\n");
   printf("   2. (100), conventional;\n");
@@ -2294,7 +2294,7 @@ void A3B::A3B_L60()
   printf("Your  choice [1]: ");
   if (count_words(gets(str)) > 0) sscanf(str,"%d",&surftype);
   printf("You selected: %d\n", surftype);
-  printf("\n===========================================================\n");
+  printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
   for (int i=0; i<3; i++){
     for (int j=0; j<3; j++) latvec[i][j] = 0.;
   }

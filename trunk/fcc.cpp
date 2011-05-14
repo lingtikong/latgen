@@ -16,7 +16,7 @@ FCC::FCC() : lattice()
   char str[MAX_LINE_LENGTH];
   alat = 1.;
   // print out the menu
-  printf("\n===========================================================\n");
+  printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
   printf("Please input the lattice constant of the FCC lattice [1.]: ");
   if (count_words(gets(str)) > 0) sscanf(str,"%lg",&alat);
 
@@ -30,7 +30,7 @@ FCC::FCC() : lattice()
   printf("Your  choice [3]: ");
   if (count_words(gets(str)) > 0) sscanf(str,"%d",&orient);
   printf("You selected: %d", orient);
-  printf("\n===========================================================\n");
+  printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
   
   // initialize according to orientation
   initialized = 0;
@@ -81,14 +81,14 @@ void FCC::FCC001()
   char str[MAX_LINE_LENGTH];
   int surftype = 2;
   // print out the menu
-  printf("\n===========================================================\n");
+  printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
   printf("Please selection the type of FCC(001) surface:\n");
   printf("   1. primitive, horizental orientation;\n");
   printf("   2. conventional orientation;\n");
   printf("Your  choice [2]: ");
   if (count_words(gets(str)) > 0) sscanf(str,"%d",&surftype);
   printf("You selected: %d", surftype);
-  printf("\n===========================================================\n");
+  printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
   for (int i=0; i<3; i++){
     for (int j=0; j<3; j++) latvec[i][j] = 0.;
   }
@@ -172,14 +172,14 @@ void FCC::FCC110()
   char str[MAX_LINE_LENGTH];
   int surftype = 1;
   // print out the menu
-  printf("\n===========================================================\n");
+  printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
   printf("Please selection the type of FCC(110) surface:\n");
   printf("   1. orthogonal, long side along x\n");
   printf("   2. orthogonal, long side along y\n");
   printf("Your  choice [1]: ");
   if (count_words(gets(str)) > 0) sscanf(str,"%d",&surftype);
   printf("You selected: %d", surftype);
-  printf("\n===========================================================\n");
+  printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
   
   for (int i=0; i<3; i++){
     for (int j=0; j<3; j++) latvec[i][j] = 0.;
@@ -254,7 +254,7 @@ void FCC::FCC111()
   char str[MAX_LINE_LENGTH];
   int surftype = 5;
   // print out the menu
-  printf("\n===========================================================\n");
+  printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
   printf("Please selection the type of FCC(111) surface:\n");
   printf("   1. hexgonal U along x, 60 deg;\n");
   printf("   2. hexgonal V along y, 60 deg;\n");
@@ -265,7 +265,7 @@ void FCC::FCC111()
   printf("Your  choice [5]: ");
   if (count_words(gets(str)) > 0) sscanf(str,"%d",&surftype);
   printf("You selected: %d", surftype);
-  printf("\n===========================================================\n");
+  printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
   
   for (int i=0; i<3; i++){
     for (int j=0; j<3; j++) latvec[i][j] = 0.;
