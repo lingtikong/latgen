@@ -13,7 +13,8 @@ public:
 
   char *name;          // name of the lattice
  
-  int initialized;     // flat to indicate if initialization successful (1) or not (0)
+  int initialized;     // flag to indicate if initialization successful (1) or not (0)
+  int flag_z_perp_xy;  // flag to indicate that z is perpendicular to xy plane
 
   int nucell, ntype;   // number of atoms and atomic types in a unit cell
   int    *attyp;       // array to store atomic types
