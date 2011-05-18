@@ -39,7 +39,7 @@ int Driver::ShowMenu(const int flag)
   else printf("Please select the lattice type of your system:\n");
   printf(" 1. FCC/NaCl/Diamond;          |  4. A3B;\n");
   printf(" 2. BCC;                       |  5. A2B;\n");
-  printf(" 3. HCP;                       |  6. AB;\n");
+  printf(" 3. HCP/Graphene;              |  6. AB;\n");
   for (int i=0; i<31; i++) printf("-"); printf("+"); for (int i=0; i<38; i++) printf("-"); printf("\n");
   if (flag){
     printf(" 7. User defined;              |  0. Exit.\n");
@@ -68,7 +68,7 @@ int Driver::ShowMenu(const int flag)
   int rflag = 8-ltype;
   if ( rflag ){
     // re-orient the lattice
-    printf("Would you like to re-orient the unit cell? (y/n)[n]: ");
+    printf("Would you like to re-orient the unit cell to comply with LAMMPS? (y/n)[n]: ");
     if (strlen(gets(str)) > 0){
       if (strcmp(str,"y")==0 || strcmp(str,"Y")==0) latt->OrientLattice();
     }
@@ -290,6 +290,7 @@ void Driver::write()
   }
 
   printf("\nThe atomic configuration will be written to files %s and %s\n", posfile, lmpfile);
+  printf("Please NOTE that if you did not re-orient your unit cell, %s might be incorrect.\n", lmpfile);
   if (xmap) printf("The FFT map information  will be written to file: %s\n", mapfile);
   for (int i=0; i<70; i++) printf("="); printf("\n");
 
@@ -495,6 +496,9 @@ void Driver::FormLayers()
   lattice *latts[nlat];
   for (int i=0; i<nlat; i++){
     if (! ShowMenu(i+1) ){nlat = i; break;}
+
+    if (latt->flag_z_perp_xy == 0)
+      printf("\nWARNING: A3 is not perpendicular to A1 and A2, this lattice cannot be used to form layers!\n");
 
     latts[i] = latt;
     latt = NULL;

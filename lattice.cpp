@@ -13,6 +13,7 @@
 lattice::lattice()
 {
   initialized = 0;
+  flag_z_perp_xy = 0;
   nlayer = nucell = ntype = 0;
 
   name = NULL;
@@ -134,10 +135,12 @@ int lattice::count_words(const char *line)
 void lattice::setup()
 {
   if (initialized == 0) return;
+  // get the # of layers in the unit cell
   nlayer = 0;
   for (int i=0; i<nucell; i++) nlayer = MAX(nlayer, layer[i]);
   nlayer++;
 
+  // get the height above each layer
   if (h) delete []h;
   if (numlayer) delete []numlayer;
   h = new double[nlayer];
@@ -163,6 +166,12 @@ void lattice::setup()
   pos1 = 0.;
   for (int i=0; i<3; i++) pos1 += (atpos[i0][i]+double(i/2)) * latvec[i][2];
   h[nlayer-1] = (pos1-pos0)*alat;
+
+  // check if A3 is perpendicular to both A1 and A2
+  double A3dA1, A3dA2;
+  A3dA1 = A3dA2 = 0.;
+  for (int i=0; i<3; i++){ A3dA1 += latvec[0][i]*latvec[2][i]; A3dA2 += latvec[1][i]*latvec[2][i];}
+  if ( (A3dA1+A3dA2) < 1.e-6 ) flag_z_perp_xy = 1;
 
 return;
 }
