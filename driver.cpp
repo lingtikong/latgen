@@ -290,7 +290,8 @@ void Driver::write()
   }
 
   printf("\nThe atomic configuration will be written to files %s and %s\n", posfile, lmpfile);
-  printf("Please NOTE that if you did not re-orient your unit cell, %s might be incorrect.\n", lmpfile);
+  if (latvec[0][1]*latvec[0][1]+latvec[0][2]*latvec[0][2]+latvec[1][2]*latvec[1][2] > 1.e-6)
+    printf("The orientation of your lattice differs from that of lammps, %s might be unriable.\n", lmpfile);
   if (xmap) printf("The FFT map information  will be written to file: %s\n", mapfile);
   for (int i=0; i<70; i++) printf("="); printf("\n");
 
