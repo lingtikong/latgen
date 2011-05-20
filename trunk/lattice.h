@@ -34,6 +34,6 @@ public:
   int count_words(const char *);
 
 private:
-  void setup();        // to setup "numlayer", "h"
+  void setup();        // to setup "numlayer", "h", "flag_z_perp_xy"
 };
 #endif
