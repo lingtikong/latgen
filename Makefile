@@ -8,21 +8,22 @@ OFLAGS = -O3 $(DEBUG)
 INC    = $(FFTINC) $(LPKINC) $(USRINC)
 LIB    = $(FFTLIB) $(LPKLIB) $(USRLIB)
 #
-# fftw 3 library
+# fftw 3 library; not needed by this code
 #FFTINC    = -I/opt/fftw/fftw3/include
 #FFTLIB    = -L/opt/fftw/fftw3/lib -lfftw3
-#
-# Lapack library
+
+# Lapack library; not needed by this code
 #LPKINC = -I/opt/clapack/3.2.1/include
 #LPKLIB = -L/opt/clapack/3.2.1/lib -lclapack -lblas -lf2c -lm
-#
+
 # Debug flags
 #DEBUG = -g
 #====================================================================
 # executable name
 BASE   = latgen
 EXE    = ${BASE}
-#====================================================================
+
+#================= Do not modify the following ======================
 # source and rules
 SRC = $(wildcard *.cpp)
 OBJ = $(SRC:.cpp=.o)
