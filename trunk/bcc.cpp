@@ -271,54 +271,18 @@ void BCC::BCC111()
   // initialize according to surface type
   switch (surftype){
   case 1:
-    nucell = 4;
+    nucell = 6;
     ntype  = 1;
     
     latvec[0][0] = sqrt(2.);
-    latvec[1][1] = 1.;
-    latvec[2][2] = sqrt(2.);
+    latvec[1][1] = sqrt(6.);
+    latvec[2][2] = sqrt(3.)*0.5;
 
     atpos = memory->create(atpos,nucell, 3, "BCC111_atpos");
     attyp = new int[nucell];
     layer = new int[nucell];
     
     for (int i=0; i<nucell; i++) attyp[i] = 1;
-    layer[0]    = 0;
-    atpos[0][0] = 0.;
-    atpos[0][1] = 0.;
-    atpos[0][2] = 0.;
-
-    layer[1]    = 0;
-    atpos[1][0] = 0.5;
-    atpos[1][1] = 0.5;
-    atpos[1][2] = 0.;
-
-    layer[2]    = 1;
-    atpos[2][0] = 0.5;
-    atpos[2][1] = 0.0;
-    atpos[2][2] = 0.5;
-
-    layer[3]    = 1;
-    atpos[3][0] = 0.0;
-    atpos[3][1] = 0.5;
-    atpos[3][2] = 0.5;
-
-    initialized = 1;
-    break;
-  case 2:
-    nucell = 4;
-    ntype  = 1;
-    
-    latvec[0][0] = 1.;
-    latvec[1][1] = sqrt(2.);
-    latvec[2][2] = sqrt(2.);
-
-    atpos = memory->create(atpos,nucell, 3, "BCC111_atpos");
-    attyp = new int[nucell];
-    layer = new int[nucell];
-    
-    for (int i=0; i<nucell; i++) attyp[i] = 1;
-
     layer[0]    = 0;
     atpos[0][0] = 0.;
     atpos[0][1] = 0.;
@@ -331,13 +295,69 @@ void BCC::BCC111()
 
     layer[2]    = 1;
     atpos[2][0] = 0.;
-    atpos[2][1] = 0.5;
-    atpos[2][2] = 0.5;
+    atpos[2][1] = 1./3.;
+    atpos[2][2] = 1./3.;
 
     layer[3]    = 1;
     atpos[3][0] = 0.5;
-    atpos[3][1] = 0.0;
-    atpos[3][2] = 0.5;
+    atpos[3][1] = 5./6.;
+    atpos[3][2] = 1./3.;
+
+    layer[4]    = 2;
+    atpos[4][0] = 0.;
+    atpos[4][1] = 2./3.;
+    atpos[4][2] = 2./3.;
+
+    layer[5]    = 2;
+    atpos[5][0] = 0.5;
+    atpos[5][1] = 1./6.;
+    atpos[5][2] = 2./3.;
+
+    initialized = 1;
+    break;
+  case 2:
+    nucell = 6;
+    ntype  = 1;
+    
+    latvec[0][0] = sqrt(6.);
+    latvec[1][1] = sqrt(2.);
+    latvec[2][2] = sqrt(3.)*0.5;
+
+    atpos = memory->create(atpos,nucell, 3, "BCC111_atpos");
+    attyp = new int[nucell];
+    layer = new int[nucell];
+    
+    for (int i=0; i<nucell; i++) attyp[i] = 1;
+
+    layer[0]    = 0;
+    atpos[0][0] = 0.;
+    atpos[0][1] = 0.;
+    atpos[0][2] = 0.;
+
+    layer[1]    = 0;
+    atpos[1][0] = 0.5;
+    atpos[1][1] = 0.5;
+    atpos[1][2] = 0.;
+
+    layer[2]    = 1;
+    atpos[2][0] = 1./3.;
+    atpos[2][1] = 0.;
+    atpos[2][2] = 1./3.;
+
+    layer[3]    = 1;
+    atpos[3][0] = 5./6.;
+    atpos[3][1] = 0.5;
+    atpos[3][2] = 1./3.;
+
+    layer[4]    = 2;
+    atpos[4][0] = 2./3.;
+    atpos[4][1] = 0.;
+    atpos[4][2] = 2./3.;
+
+    layer[5]    = 2;
+    atpos[5][0] = 1./6.;
+    atpos[5][1] = 0.5;
+    atpos[5][2] = 2./3.;
 
     initialized = 1;
     break;
