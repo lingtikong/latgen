@@ -358,7 +358,7 @@ void Driver::modify()
 
     if (ncycle == 1) printf("  0. Nothing.\n");
     else printf("  0. Done.\n");
-    printf("Your choice[0]: ");
+    printf("Your choice [0]: ");
 
     if (strlen(gets(str)) >0) sscanf(str,"%d",&job);
 
