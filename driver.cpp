@@ -440,7 +440,7 @@ void Driver::solidsol()
   do {
     printf("Please input the fraction or total # of atoms to be replaced: ");
     scanf("%lg", &frac); while (getchar() != '\n');
-  } while (frac<0. || int(frac) >= numtype[idsrc]);
+  } while (frac<0. || int(frac) > numtype[idsrc]);
   if (frac < 1.) numsub = int(frac*double(numtype[idsrc]));
   else numsub = int(frac);
   printf("There will be %d atoms with type %d to be replaced.\n", numsub, ipsrc);
