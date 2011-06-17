@@ -650,5 +650,8 @@ void Driver::FormLayers()
 
   for (int i=0; i<nlat; i++) delete latts[i];
 
+  // find the total # of types and # of atoms for each type
+  typescan();
+
 return;
 }
