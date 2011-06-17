@@ -560,8 +560,7 @@ void Driver::FormLayers()
 
   double H = 0.;
   int zprev[nlat], ntprev[nlat], zflag = 0, iatom = 0;
-  ntype = 0;
-  for (int i=0; i<nlat; i++){ zprev[i] = 0; ntype += latts[i]->ntype; }
+  for (int i=0; i<nlat; i++) zprev[i] = 0;
 
   ntprev[0] = 0;
   for (int i=1; i<nlat; i++) ntprev[i] = ntprev[i-1] + latts[i-1]->ntype;
