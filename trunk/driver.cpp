@@ -6,6 +6,8 @@
 #include <math.h>
 
 #define MAXLINE 512
+#define MAX(a,b) ((a) > (b) ? (a) : (b))
+#define MIN(a,b) ((a) < (b) ? (a) : (b))
 /* ----------------------------------------------------------------------
    constructor to initialize
 ------------------------------------------------------------------------- */
@@ -504,15 +506,15 @@ void Driver::FormLayers()
   for (int i=0; i<nlat; i++){
     if (! ShowMenu(i+1) ){nlat = i; break;}
 
-    if (latt->flag_z_perp_xy == 0)
-      printf("\nWARNING: A3 is not perpendicular to A1 and A2, this lattice cannot be used to form layers!\n");
-
     latts[i] = latt;
     latt = NULL;
   }
 
   for (int i=0; i<nlat; i++){
     printf("\n>>>>>>   Lattice info for lattice: %c - %s    <<<<<", 'A'+i, latts[i]->name);
+    if (latts[i]->flag_z_perp_xy == 0)
+      printf("\nWARNING: A3 is not perpendicular to A1 and A2, this lattice cannot be used to form layers!\n");
+
     latts[i]->display();
   }
 
@@ -520,7 +522,12 @@ void Driver::FormLayers()
   printf("\nYou have defined %d lattices: ", nlat);
   for (int i=0; i<nlat; i++) printf(" %c = %s;", 'A'+i, latts[i]->name);
   printf("\nWhich one will be used to define the lateral size of your cell? (A-%c)[A]: ", 'A'+nlat-1);
-  if (strlen(gets(str)) > 0) sscanf(str,"%d", &idum);
+  if (strlen(gets(str)) > 0){
+    char ptr;
+    sscanf(str,"%c", &ptr);
+    if (ptr > 'Z') ptr -= ('a' - 'A');
+    idum = ptr - 'A';
+  }
   if (idum < 0) idum = 0;
   
   mynx = memory->create(mynx, nlat, "mynx");
@@ -568,16 +575,18 @@ void Driver::FormLayers()
   char realized[MAXLINE]; strcpy(realized, "");
 
   int first = 1;
-  double Hlast = 0., Hfirst = 0.;
+  double Hlast = 0., Hfirst = 0., Hextra;
 
   printf("\nPlease input the layer sequences, for example, if you have two lattices: A and B,\n");
   printf("and you want to have 4 layers A, 5 layers B and then 3 layers A, input A4 B5 A3.\n");
+  printf("If extra distance between different lattices is needed, just insert a number between\n");
+  printf("them, for example: A4 0.5 B5 0.4 A4 B5...; multiple numbers will add multiple distances.\n");
   printf("If you want to form the 2nd A layers from its first layer in the unit cell, use\n");
   printf("lower case 'a' instead of 'A'. Now, input your sequences: ");
   if (strlen(gets(str)) > 1) {
     char *ptr = strtok(str," \n\r\t\f");
     while (ptr != NULL){
-      zflag = 0;
+      zflag = 0; Hextra = 0.;
       int ilat = ptr[0] - 'A';
       if (ilat > nlat){ ilat = ptr[0] - 'a'; zflag = 1;}
       if (ilat >=0 && ilat < nlat){
@@ -590,13 +599,14 @@ void Driver::FormLayers()
         int ntm_new = 0;
         for (int i=0; i<nl_new; i++) ntm_new += latt->numlayer[(i+zprev[ilat])%latt->nlayer];
 
-        double Hbelow = 0.5*latt->h[(latt->nlayer-1+zprev[ilat])%latt->nlayer];
+        double Hbelow = latt->h[(latt->nlayer-1+zprev[ilat])%latt->nlayer];
         if (first){
           first = 0;
+          Hlast = 0.;
           Hfirst = Hbelow;
           H = -Hfirst;
         }
-        if (nl_new > 0) H += Hbelow;
+        if (nl_new > 0) H += MAX(Hlast,Hbelow);
 
         ntm_new *= (mynx[ilat]*myny[ilat]);
         natom += ntm_new;
@@ -621,8 +631,11 @@ void Driver::FormLayers()
           Hlast = latt->h[il];
           H += Hlast;
         }
-        if (nl_new > 0) H -= 0.5*Hlast;
+        if (nl_new > 0) H -= Hlast;
         zprev[ilat] += nl_new%latt->nlayer;
+      } else {
+        Hextra = atof(ptr);
+        H += Hextra;
       }
 
       ptr = strtok(NULL, " \n\r\t\f");
@@ -632,7 +645,7 @@ void Driver::FormLayers()
   printf("\nThe layer sequences realized is: %s\n", realized);
   printf("In total, %d layers and %d atoms are created.\n", nz, iatom);
 
-  H += Hfirst;
+  H += MAX(Hlast,Hfirst);
   latt = NULL; alat = 1.;
   latvec[2][0] = latvec[2][1] = 0.; latvec[2][2] = H;
 
