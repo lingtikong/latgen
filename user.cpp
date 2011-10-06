@@ -108,7 +108,7 @@ USER::USER() : lattice()
         printf("Please input [type xs ys zs layerID] for atom %d: ", i+1);
         if (count_words(gets(str)) < 4) continue;
         nr = sscanf(str,"%d %lg %lg %lg %d", &attyp[i],&atpos[i][0], &atpos[i][1], &atpos[i][2], &layer[i]);
-        if (nr == 4) break;
+        if (nr == 5) break;
       }
     }
   }
