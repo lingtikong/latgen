@@ -18,9 +18,9 @@ HCP::HCP() : lattice()
   // print out the menu
   printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
   printf("Please input the lattice constant of the HCP lattice [1]:");
-  if (count_words(gets(str)) > 0) sscanf(str,"%lg",&alat);
+  if (count_words(gets(str)) > 0) alat = atof(strtok(str, " \t\n\r\f"));
   printf("Please input the value of c/a ratio or c (negative) [1.633]: ");
-  if (count_words(gets(str)) > 0) sscanf(str,"%lg",&ca);
+  if (count_words(gets(str)) > 0) ca = atof(strtok(str, " \t\n\r\f"));
   if (ca < 0.) ca = -ca/alat;
   printf("The lattice constants of your HCP: a = %g, c/a = %g.\n", alat, ca);
 
@@ -30,7 +30,7 @@ HCP::HCP() : lattice()
   printf("   2. (100);         5. Graphene;\n");
   printf("   3. (110);\n");
   printf("Your  choice [1]: ");
-  if (count_words(gets(str)) > 0) sscanf(str,"%d",&orient);
+  if (count_words(gets(str)) > 0) orient = atoi(strtok(str, " \t\n\r\f"));
   printf("You selected: %d", orient);
   printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
   
@@ -82,7 +82,7 @@ void HCP::HCP001()
   printf("   5. Rectangle, long along x;\n");
   printf("   6. Rectangle, long along y;\n");
   printf("Your  choice [5]: ");
-  if (count_words(gets(str)) > 0) sscanf(str,"%d",&surftype);
+  if (count_words(gets(str)) > 0) surftype = atoi(strtok(str, " \t\n\r\f"));
   printf("You selected: %d", surftype);
   printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
   for (int i=0; i<3; i++){
@@ -428,7 +428,7 @@ void HCP::Graphene()
   printf("   5. Rectangle, long along x;\n");
   printf("   6. Rectangle, long along y;\n");
   printf("Your  choice [5]: ");
-  if (count_words(gets(str)) > 0) sscanf(str,"%d",&surftype);
+  if (count_words(gets(str)) > 0) surftype = atoi(strtok(str, " \t\n\r\f"));
   printf("You selected: %d", surftype);
   printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
   for (int i=0; i<3; i++){
