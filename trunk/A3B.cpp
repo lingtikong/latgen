@@ -22,7 +22,7 @@ A3B::A3B() : lattice()
   printf("   1. A3B;\n");
   printf("   2. AB3;\n");
   printf("Your choice[1]: ");
-  if (count_words(gets(str)) > 0) sscanf(str,"%d", &ctype);
+  if (count_words(gets(str)) > 0) ctype = atoi(strtok(str, " \t\n\r\f"));
   printf("You selected  : %d\n", ctype);
   if (ctype == 1){ip1 = 1; ip2=2;}
   else {ip1=2; ip2=1;}
@@ -34,14 +34,14 @@ A3B::A3B() : lattice()
   printf("   3. D022;        7. L60;\n");
   printf("   4. D03;\n");
   printf("Your choice[1]: ");
-  if (count_words(gets(str)) > 0) sscanf(str,"%d",&lattype);
+  if (count_words(gets(str)) > 0) lattype = atoi(strtok(str, " \t\n\r\f"));
   printf("You selected  : %d\n", lattype);
 
   printf("Please input the lattice constant of the A3B lattice [1.]:");
-  if (count_words(gets(str)) > 0) sscanf(str,"%lg",&alat);
+  if (count_words(gets(str)) > 0) alat = atof(strtok(str, " \t\n\r\f"));
   if (lattype == 2 || lattype == 3 || lattype == 7){
     printf("Please input the c/a ratio of your lattice [1.]:");
-    if (count_words(gets(str)) > 0) sscanf(str,"%lg",&ca);
+    if (count_words(gets(str)) > 0) ca = atof(strtok(str, " \t\n\r\f"));
   }
   printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
   
@@ -97,7 +97,7 @@ void A3B::A3B_A15()
   printf("   2. (110), long along y;\n");
   printf("   3. (111), long along x, orthogonal;\n");
   printf("Your  choice [1]: ");
-  if (count_words(gets(str)) > 0) sscanf(str,"%d",&surftype);
+  if (count_words(gets(str)) > 0) surftype = atoi(strtok(str, " \t\n\r\f"));
   printf("You selected: %d\n", surftype);
   printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
   for (int i=0; i<3; i++){
@@ -466,7 +466,7 @@ void A3B::A3B_D019()
   printf("   3. (100), orthogonal;\n");
   printf("   4. (1-10), conventional;\n");
   printf("Your  choice [1]: ");
-  if (count_words(gets(str)) > 0) sscanf(str,"%d",&surftype);
+  if (count_words(gets(str)) > 0) surftype = atoi(strtok(str, " \t\n\r\f"));
   printf("You selected: %d\n", surftype);
   printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
   
@@ -902,7 +902,7 @@ void A3B::A3B_D022()
   printf("   3. (110), long along y, orthogonal;\n");
   printf("   4. primitive cell;\n");
   printf("Your  choice [1]: ");
-  if (count_words(gets(str)) > 0) sscanf(str,"%d",&surftype);
+  if (count_words(gets(str)) > 0) surftype = atoi(strtok(str, " \t\n\r\f"));
   printf("You selected: %d\n", surftype);
   printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
   for (int i=0; i<3; i++){
@@ -1223,7 +1223,7 @@ void A3B::A3B_D03()
   printf("   4. (111), long along y, orthogonal;\n");
   printf("   5. primitive cell;\n");
   printf("Your  choice [1]: ");
-  if (count_words(gets(str)) > 0) sscanf(str,"%d",&surftype);
+  if (count_words(gets(str)) > 0) surftype = atoi(strtok(str, " \t\n\r\f"));
   printf("You selected: %d\n", surftype);
   printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
   for (int i=0; i<3; i++){
@@ -1700,7 +1700,7 @@ void A3B::A3B_D09()
   printf("   2. (110), orthogonal, long along y;\n");
   printf("   3. (111), orthogonal, long along y;\n");
   printf("Your  choice [1]: ");
-  if (count_words(gets(str)) > 0) sscanf(str,"%d",&surftype);
+  if (count_words(gets(str)) > 0) surftype = atoi(strtok(str, " \t\n\r\f"));
   printf("You selected: %d\n", surftype);
   printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
   for (int i=0; i<3; i++){
@@ -1996,7 +1996,7 @@ void A3B::A3B_L12()
   printf("   2. (110), orthogonal, long along y;\n");
   printf("   3. (111), orthogonal, long along y;\n");
   printf("Your  choice [1]: ");
-  if (count_words(gets(str)) > 0) sscanf(str,"%d",&surftype);
+  if (count_words(gets(str)) > 0) surftype = atoi(strtok(str, " \t\n\r\f"));
   printf("You selected: %d\n", surftype);
   printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
   for (int i=0; i<3; i++){
@@ -2292,7 +2292,7 @@ void A3B::A3B_L60()
   printf("   2. (100), conventional;\n");
   printf("   3. (110), orthogonal, long along y;\n");
   printf("Your  choice [1]: ");
-  if (count_words(gets(str)) > 0) sscanf(str,"%d",&surftype);
+  if (count_words(gets(str)) > 0) surftype = atoi(strtok(str, " \t\n\r\f"));
   printf("You selected: %d\n", surftype);
   printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
   for (int i=0; i<3; i++){

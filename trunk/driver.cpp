@@ -52,7 +52,7 @@ int Driver::ShowMenu(const int flag)
   }
   for (int i=0; i<70; i++) printf("-");
   printf("\nYour choice [1]: ");
-  if (strlen(gets(str)) > 0) sscanf(str,"%d", &ltype);
+  if (strlen(gets(str)) > 0) ltype = atoi(strtok(str," \t\n\r\f"));
   printf("You selected: %d", ltype);
   printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
 
@@ -123,14 +123,16 @@ void Driver::generate()
   while (1){
     printf("Please input the dimensions in x, y, and z directions: ");
     if (latt->count_words(gets(str)) < 3) continue;
-    sscanf(str,"%d %d %d", &nx, &ny, &nz);
+    nx = atoi(strtok(str,  " \t\n\r\f"));
+    ny = atoi(strtok(NULL, " \t\n\r\f"));
+    nz = atoi(strtok(NULL, " \t\n\r\f"));
     natom = nx*ny*nz*latt->nucell;
     if (natom > 0) break;
   }
 
   printf("Your system would be %d x %d x %d with %d atoms.\n",nx,ny,nz,natom);
   printf("Please indicate which direction should goes fast(1:x; other: z)[1]: ");
-  if (latt->count_words(gets(str)) > 0) sscanf(str,"%d", &leading_dir);
+  if (latt->count_words(gets(str)) > 0) leading_dir = atoi(strtok(str, " \t\n\r\f"));
   for (int i=0; i<70; i++) printf("="); printf("\n");
 
   atpos = memory->create(atpos, natom, 3, "driver->generate:atpos");
@@ -368,7 +370,7 @@ void Driver::modify()
     else printf("  0. Done.\n");
     printf("Your choice [0]: ");
 
-    if (strlen(gets(str)) >0) sscanf(str,"%d",&job);
+    if (strlen(gets(str)) >0) job = atoi(strtok(str, " \t\n\r\f"));
 
     printf("You selected: %d", job);
     printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
@@ -412,7 +414,7 @@ void Driver::solidsol()
     }
     printf("The desired region will be along the %d-th direction within [%g %g].\n", dir+1, lo, hi);
     printf("Will you limit the solid solution (0) inside or (1) outside the region?[0]: ");
-    if (strlen(gets(str)) > 0) sscanf(str,"%d", &outside);
+    if (strlen(gets(str)) > 0) outside = atoi(strtok(str, " \t\n\r\f"));
     
     nrange = 0;
     for (int i=0; i<natom; i++){
@@ -434,14 +436,16 @@ void Driver::solidsol()
   int ipsrc, idsrc, numsub, ipdes, iddes;
   do {
     printf("\nPlease input the atomic type to be substituted: ");
-    scanf("%d", &ipsrc); while (getchar() != '\n');
+    while (strlen(gets(str)) < 1);
+    ipsrc = atoi(strtok(str, " \t\n\r\f"));
     idsrc = lookup(ipsrc);
   } while (idsrc <0);
   printf("Total # of atoms with type %d is %d.\n", ipsrc, numtype[idsrc]);
   double frac;
   do {
     printf("Please input the fraction or total # of atoms to be replaced: ");
-    scanf("%lg", &frac); while (getchar() != '\n');
+    while (strlen(gets(str)) < 1);
+    frac = atof(strtok(str, " \t\n\r\f"));
   } while (frac<0. || int(frac) > numtype[idsrc]);
   if (frac < 1.) numsub = int(frac*double(numtype[idsrc]));
   else numsub = int(frac);
@@ -450,13 +454,15 @@ void Driver::solidsol()
 
   do {
     printf("Please input the atomic type to be assigned: ");
-    scanf("%d", &ipdes); while (getchar() != '\n');
+    while (strlen(gets(str)) < 1);
+    ipdes = atoi(strtok(str, " \t\n\r\f"));
     iddes = lookup(ipdes);
     if (iddes >= 0){
-      printf("***Note: assigned type already exist, continue? (0= no, 1=yes):");
-      int flag;
-      scanf("%d", &flag); while (getchar() != '\n');
-      if (flag == 1) iddes = -2;
+      printf("***Note: assigned type already exist, continue? (0= no, 1=yes)[1]:");
+      if (strlen(gets(str)) > 0){
+        int flag = atoi(strtok(str, " \t\n\r\f"));
+        if (flag == 1) iddes = -2;
+      }
     }
   } while (iddes >= 0);
 
@@ -499,7 +505,7 @@ void Driver::FormLayers()
   printf("\n\n>>>>>>======  To form multilayers with multiple lattices  ======<<<<<<\n");
   printf("NOTE: The 3rd axis of these lattices must be perpendicular to the other 2!\n");
   printf("\nPlease input the number of lattices in your multi-layer system: ");
-  if (strlen(gets(str)) > 0) sscanf(str,"%d", &nlat);
+  if (strlen(gets(str)) > 0) nlat = atoi(strtok(str," \t\n\r\f"));
   if (nlat < 1) return;
 
   lattice *latts[nlat];
@@ -520,39 +526,61 @@ void Driver::FormLayers()
 
   idum = 0;
   printf("\nYou have defined %d lattices: ", nlat);
-  for (int i=0; i<nlat; i++) printf(" %c = %s;", 'A'+i, latts[i]->name);
-  printf("\nWhich one will be used to define the lateral size of your cell? (A-%c)[A]: ", 'A'+nlat-1);
-  if (strlen(gets(str)) > 0){
-    char ptr;
-    sscanf(str,"%c", &ptr);
-    if (ptr > 'Z') ptr -= ('a' - 'A');
-    idum = ptr - 'A';
-  }
-  if (idum < 0) idum = 0;
+  for (int i=0; i<nlat; i++) printf(" %c = %s;", 'A'+i, latts[i]->name); printf("\n");
   
   mynx = memory->create(mynx, nlat, "mynx");
   myny = memory->create(myny, nlat, "myny");
-  double lx, ly, lx0=0., ly0=0.;
   for (int ilat=0; ilat<nlat; ilat++){
     printf("Please input the lateral extensions (nx & ny) for lattice %c: ", 'A'+ilat);
     while (1){
-      scanf("%d %d", &mynx[ilat], &myny[ilat]); while (getchar() != '\n');
-      if (mynx[ilat] > 0 && myny[ilat] > 0) break;
-    }
-    if (idum == ilat){
-      nx = mynx[ilat]; ny = myny[ilat]; nz = 0;
-      for (int j=0; j<3; j++){
-        latvec[0][j] = nx*latts[ilat]->latvec[0][j]*latts[ilat]->alat;
-        latvec[1][j] = ny*latts[ilat]->latvec[1][j]*latts[ilat]->alat;
-        lx0 += latvec[0][j]*latvec[0][j];
-        ly0 += latvec[1][j]*latvec[1][j];
+      if ( latts[0]->count_words(gets(str)) == 2 ){
+        mynx[ilat] = atoi(strtok(str, " \t\n\r\f"));
+        myny[ilat] = atoi(strtok(NULL," \t\n\r\f"));
+       if (mynx[ilat] > 0 && myny[ilat] > 0) break;
       }
     }
   }
+
+  nx = mynx[0]; ny = myny[0]; nz = 0;
+  for (int j=0; j<3; j++){
+    latvec[0][j] = latvec[1][j] = 0.;
+  }
+
+  printf("\nThe surface vectors for each lattice will be:\n");
+  for (int i=0; i<nlat; i++){
+    printf("  %c: [", i+'A');
+    for (int j=0; j<3; j++){
+      double xi = mynx[i]*latts[i]->latvec[0][j]*latts[i]->alat;
+      printf("%g ", xi);
+      latvec[0][j] += xi;
+    }
+    printf("] [");
+    for (int j=0; j<3; j++){
+      double yi = myny[i]*latts[i]->latvec[1][j]*latts[i]->alat;
+      printf("%g ", yi);
+      latvec[1][j] += yi;
+    }
+    printf("]\n");
+  }
+  for (int j=0; j<3; j++){
+    latvec[0][j] /= double(nlat);
+    latvec[1][j] /= double(nlat);
+  }
+  printf("Please input your desired surface vectors [%g %g %g, %g %g %g]: ",
+    latvec[0][0], latvec[0][1], latvec[0][2], latvec[1][0], latvec[1][1], latvec[1][2]);
+  if ( latts[0]->count_words(gets(str)) == 6 ){
+    char *ptr = strtok(str," \n\r\t\f");
+    for (int i=0; i<2; i++)
+    for (int j=0; j<3; j++){ latvec[i][j] = atof(ptr); ptr = strtok(NULL, " \n\r\t\f");}
+  }
+
+  double lx, ly, lx0=0., ly0=0.;
+  for (int j=0; j<3; j++){
+    lx0 += latvec[0][j]*latvec[0][j];
+    ly0 += latvec[1][j]*latvec[1][j];
+  }
   lx0 = sqrt(lx0); ly0 = sqrt(ly0);
 
-  printf("\nThe simulation cell in the lateral direction will be: [%g %g %g], [%g %g %g]\n",
-  latvec[0][0], latvec[0][1], latvec[0][2], latvec[1][0], latvec[1][1], latvec[1][2]);
   for (int i=0; i<nlat; i++){
     lx = ly = 0.;
     for (int j=0; j<3; j++){

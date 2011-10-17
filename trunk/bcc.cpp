@@ -18,7 +18,7 @@ BCC::BCC() : lattice()
   alat = 1.;
   printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
   printf("Please input the lattice constant of the BCC lattice [1.]: ");
-  if (count_words(gets(str)) > 0) sscanf(str,"%lg",&alat);
+  if (count_words(gets(str)) > 0) alat = atof(strtok(str, " \t\n\r\f"));
 
   int orient = 1;
   printf("Please selection the orientation of the BCC lattice:\n");
@@ -27,7 +27,7 @@ BCC::BCC() : lattice()
   printf("   3. (111);\n");
   printf("   4. primitive cell;\n");
   printf("Your  choice [1]: ");
-  if (count_words(gets(str)) > 0) sscanf(str,"%d",&orient);
+  if (count_words(gets(str)) > 0) orient = atoi(strtok(str, " \t\n\r\f"));
   printf("You selected: %d", orient);
   printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
   
@@ -73,7 +73,7 @@ void BCC::BCC001()
   printf("   1. conventional orientation;\n");
   printf("   2. B2 structure;\n");
   printf("Your  choice [1]: ");
-  if (count_words(gets(str)) > 0) sscanf(str,"%d",&surftype);
+  if (count_words(gets(str)) > 0) surftype = atoi(strtok(str, " \t\n\r\f"));
   printf("You selected: %d", surftype);
   printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
   for (int i=0; i<3; i++){
@@ -155,7 +155,7 @@ void BCC::BCC110()
   printf("   1. orthogonal, long side along x\n");
   printf("   2. orthogonal, long side along y\n");
   printf("Your  choice [1]: ");
-  if (count_words(gets(str)) > 0) sscanf(str,"%d",&surftype);
+  if (count_words(gets(str)) > 0) surftype = atoi(strtok(str, " \t\n\r\f"));
   printf("You selected: %d", surftype);
   printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
   
@@ -258,7 +258,7 @@ void BCC::BCC111()
   printf("   1. orthogonal, long side along x\n");
   printf("   2. orthogonal, long side along y\n");
   printf("Your  choice [1]: ");
-  if (count_words(gets(str)) > 0) sscanf(str,"%d",&surftype);
+  if (count_words(gets(str)) > 0) surftype = atoi(strtok(str, " \t\n\r\f"));
   printf("You selected: %d", surftype);
   printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
   

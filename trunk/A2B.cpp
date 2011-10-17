@@ -22,7 +22,7 @@ A2B::A2B() : lattice()
   printf("   1. A2B;\n");
   printf("   2. AB2;\n");
   printf("Your choice[1]: ");
-  if (count_words(gets(str)) > 0) sscanf(str,"%d", &ctype);
+  if (count_words(gets(str)) > 0) ctype = atoi(strtok(str, " \t\n\r\f"));
   printf("You selected  : %d\n", ctype);
   if (ctype == 1){ip1 = 1; ip2=2;}
   else {ip1=2; ip2=1;}
@@ -33,14 +33,14 @@ A2B::A2B() : lattice()
   printf("   2. C15 (Cu2Mg);\n");
   printf("   3. C32 (AlB2);\n");
   printf("Your choice[1]: ");
-  if (count_words(gets(str)) > 0) sscanf(str,"%d",&lattype);
+  if (count_words(gets(str)) > 0) lattype = atoi(strtok(str, " \t\n\r\f"));
   printf("You selected  : %d\n", lattype);
 
   printf("Please input the lattice constant of the A2B lattice [1.]:");
-  if (count_words(gets(str)) > 0) sscanf(str,"%lg",&alat);
+  if (count_words(gets(str)) > 0) alat = atof(strtok(str, " \t\n\r\f"));
   if (lattype == 3){
     printf("Please input the c/a ratio of your lattice [1.]:");
-    if (count_words(gets(str)) > 0) sscanf(str,"%lg",&ca);
+    if (count_words(gets(str)) > 0) ca = atof(strtok(str, " \t\n\r\f"));
   }
   printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
   
@@ -86,7 +86,7 @@ void A2B::A2B_C1()
   printf("   4. (111), long along x, orthogonal;\n");
   printf("   5. primitive cell;\n");
   printf("Your  choice [1]: ");
-  if (count_words(gets(str)) > 0) sscanf(str,"%d",&surftype);
+  if (count_words(gets(str)) > 0) surftype = atoi(strtok(str, " \t\n\r\f"));
   printf("You selected: %d\n", surftype);
   printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
   for (int i=0; i<3; i++){
@@ -475,7 +475,7 @@ void A2B::A2B_C15()
   printf("   4. (111), long along x, orthogonal;\n");
   printf("   5. primitive cell;\n");
   printf("Your  choice [1]: ");
-  if (count_words(gets(str)) > 0) sscanf(str,"%d",&surftype);
+  if (count_words(gets(str)) > 0) surftype = atoi(strtok(str, " \t\n\r\f"));
   printf("You selected: %d\n", surftype);
   printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
   for (int i=0; i<3; i++){
@@ -1134,7 +1134,7 @@ void A2B::A2B_C32()
   printf("   4. (110), long along y;\n");
   printf("   5. (1-10), long along y;\n");
   printf("Your  choice [1]: ");
-  if (count_words(gets(str)) > 0) sscanf(str,"%d",&surftype);
+  if (count_words(gets(str)) > 0) surftype = atoi(strtok(str, " \t\n\r\f"));
   printf("You selected: %d\n", surftype);
   printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
   for (int i=0; i<3; i++){

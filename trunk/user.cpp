@@ -38,10 +38,12 @@ USER::USER() : lattice()
     //  sx1 sy1 sz1 layer-ID
     //  ...
     fgets(str,MAX_LINE_LENGTH,fp); if (feof(fp)){fclose(fp); return;}
-    sscanf(str,"%lg",&alat);
+    alat = atof(strtok(str, " \t\n\r\f"));
     for (int i=0; i<3; i++){
       fgets(str,MAX_LINE_LENGTH,fp); if (feof(fp)){fclose(fp); return;}
-      sscanf(str,"%lg %lg %lg",&latvec[i][0], &latvec[i][1], &latvec[i][2]);
+      latvec[i][0] = atoi(strtok(str,  " \t\n\r\f"));
+      latvec[i][1] = atoi(strtok(NULL, " \t\n\r\f"));
+      latvec[i][2] = atoi(strtok(NULL, " \t\n\r\f"));
     }
     fgets(str,MAX_LINE_LENGTH,fp); if (feof(fp)){fclose(fp); return;}
     ntype = count_words(str);
@@ -64,7 +66,10 @@ USER::USER() : lattice()
     for (int ip=0; ip<ntype; ip++){
       for (int i=0; i<ntm[ip]; i++){
         fgets(str,MAX_LINE_LENGTH,fp); if (feof(fp)){fclose(fp); return;}
-        sscanf(str,"%lg %lg %lg", &atpos[iatom][0],&atpos[iatom][1],&atpos[iatom][2], &layer[iatom]);
+        atpos[iatom][0] = atof(strtok(str,  " \t\n\r\f"));
+        atpos[iatom][1] = atof(strtok(NULL, " \t\n\r\f"));
+        atpos[iatom][2] = atof(strtok(NULL, " \t\n\r\f"));
+        layer[iatom]    = atoi(strtok(NULL, " \t\n\r\f"));
         attyp[iatom++] = ip+1;
       }
     }
@@ -74,26 +79,27 @@ USER::USER() : lattice()
     // ask for lattice constant
     alat = 1.;
     printf("\nPlease input the lattice constant of the USER lattice [1.0]: ");
-    if (count_words(gets(str))>0) sscanf(str,"%lg",&alat);
+    if (count_words(gets(str))>0) alat = atof(strtok(str, " \t\n\r\f"));
 
     // ask for lattice vectors
     for (int i=0; i<3; i++){
       while (1){
         printf("Please input the lattice vector A%d: ", i+1);
         if (count_words(gets(str))<3) continue;
-        int nr = sscanf(str,"%lg %lg %lg", &latvec[i][0], &latvec[i][1], &latvec[i][2]);
-        if (nr == 3) break;
+        latvec[i][0] = atof(strtok(str,  " \t\n\r\f"));
+        latvec[i][1] = atof(strtok(NULL, " \t\n\r\f"));
+        latvec[i][2] = atof(strtok(NULL, " \t\n\r\f"));
       }
     }
     // ask for # of atoms and # of atom types
     nucell = ntype = 1;
     printf("Please input the number of atoms per unit cell [1]: ");
-    if (count_words(gets(str)) > 0) sscanf(str,"%d",&nucell);
+    if (count_words(gets(str)) > 0) nucell = atoi(strtok(str, " \t\n\r\f"));
     if (nucell < 1) return;
   
     if (nucell != 1){
       printf("Please input the number of atom types in cell [1]: ");
-      if (count_words(gets(str))>0) sscanf(str,"%d",&ntype);
+      if (count_words(gets(str))>0) ntype = atoi(strtok(str, " \t\n\r\f"));
       if (ntype < 1) return;
       if (ntype > nucell) ntype = nucell;
     }
@@ -103,13 +109,13 @@ USER::USER() : lattice()
     layer = new int[nucell];
     // ask for atom coordinates and types
     for (int i=0; i<nucell; i++){
-      int nr;
-      while (1){
-        printf("Please input [type xs ys zs layerID] for atom %d: ", i+1);
-        if (count_words(gets(str)) < 4) continue;
-        nr = sscanf(str,"%d %lg %lg %lg %d", &attyp[i],&atpos[i][0], &atpos[i][1], &atpos[i][2], &layer[i]);
-        if (nr == 5) break;
-      }
+      do printf("Please input [type xs ys zs layerID] for atom %d: ", i+1);
+      while (count_words(gets(str)) < 5);
+      attyp[i]    = atoi(strtok(str,  " \t\n\r\f"));
+      atpos[i][0] = atof(strtok(NULL, " \t\n\r\f"));
+      atpos[i][1] = atof(strtok(NULL, " \t\n\r\f"));
+      atpos[i][2] = atof(strtok(NULL, " \t\n\r\f"));
+      layer[i]    = atoi(strtok(NULL, " \t\n\r\f"));
     }
   }
   printf(""); for (int i=0; i<70; i++) printf("="); printf("\n");
