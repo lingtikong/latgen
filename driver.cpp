@@ -602,7 +602,7 @@ void Driver::FormLayers()
 
   char realized[MAXLINE]; strcpy(realized, "");
 
-  int first = 1;
+  int first = 1, flag_no_interlayer = 0;
   double Hlast = 0., Hfirst = 0., Hextra;
 
   printf("\nPlease input the layer sequences, for example, if you have two lattices: A and B,\n");
@@ -634,7 +634,10 @@ void Driver::FormLayers()
           Hfirst = Hbelow;
           H = -Hfirst;
         }
-        if (nl_new > 0) H += MAX(Hlast,Hbelow);
+        if (nl_new > 0){
+          if (flag_no_interlayer) flag_no_interlayer = 0;
+          else H += MAX(Hlast,Hbelow);
+        }
 
         ntm_new *= (mynx[ilat]*myny[ilat]);
         natom += ntm_new;
@@ -661,8 +664,14 @@ void Driver::FormLayers()
         }
         if (nl_new > 0) H -= Hlast;
         zprev[ilat] += nl_new%latt->nlayer;
+
+      } else if (strcmp(ptr, "-z") == 0){
+        flag_no_interlayer = 1;
+        strcat(realized," ");strcat(realized, ptr);
+
       } else {
         Hextra = atof(ptr);
+        strcat(realized," ");strcat(realized, ptr);
         H += Hextra;
       }
 
@@ -673,7 +682,7 @@ void Driver::FormLayers()
   printf("\nThe layer sequences realized is: %s\n", realized);
   printf("In total, %d layers and %d atoms are created.\n", nz, iatom);
 
-  H += MAX(Hlast,Hfirst);
+  if (flag_no_interlayer == 0) H += MAX(Hlast,Hfirst);
   latt = NULL; alat = 1.;
   latvec[2][0] = latvec[2][1] = 0.; latvec[2][2] = H;
 
