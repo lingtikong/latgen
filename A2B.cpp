@@ -96,7 +96,7 @@ void A2B::A2B_C1()
   // initialize according to surface type
   switch (surftype){
   case 1:
-    name = new char[12];
+    name = memory->create(name,12,"A2B:name");
     strcpy(name, "A2B-C1(001)");
 
     ntype  = 2;
@@ -106,9 +106,9 @@ void A2B::A2B_C1()
     latvec[1][1] = 1./sqrt(2.);
     latvec[2][2] = 1.;
 
-    atpos = memory->create(atpos,nucell, 3, "A2B_C1_001_atpos");
-    attyp = new int[nucell];
-    layer = new int[nucell];
+    atpos = memory->create(atpos, nucell, 3, "A2B:atpos");
+    attyp = memory->create(attyp, nucell, "A2B:attyp");
+    layer = memory->create(layer, nucell, "A2B:layer");
 
     attyp[0] = ip1;
     atpos[0][0] = 0.;
@@ -149,7 +149,7 @@ void A2B::A2B_C1()
     initialized = 1;
     break;
   case 2:
-    name = new char[12];
+    name = memory->create(name,12,"A2B:name");
     strcpy(name, "A2B-C1(001)");
 
     ntype  = 2;
@@ -159,9 +159,9 @@ void A2B::A2B_C1()
     latvec[1][1] = 1.;
     latvec[2][2] = 1.;
 
-    atpos = memory->create(atpos,nucell, 3, "A2B_C1_001_atpos");
-    attyp = new int[nucell];
-    layer = new int[nucell];
+    atpos = memory->create(atpos, nucell, 3, "A2B:atpos");
+    attyp = memory->create(attyp, nucell, "A2B:attyp");
+    layer = memory->create(layer, nucell, "A2B:layer");
 
     attyp[0] = ip1;
     layer[0] = 0;
@@ -238,7 +238,7 @@ void A2B::A2B_C1()
     initialized = 1;
     break;
   case 3:
-    name = new char[12];
+    name = memory->create(name,12,"A2B:name");
     strcpy(name, "A2B-C1(110)");
 
     ntype  = 2;
@@ -248,9 +248,9 @@ void A2B::A2B_C1()
     latvec[1][1] = 1./sqrt(2.);
     latvec[2][2] = 1./sqrt(2.);
 
-    atpos = memory->create(atpos,nucell, 3, "A2B_C1_110_atpos");
-    attyp = new int[nucell];
-    layer = new int[nucell];
+    atpos = memory->create(atpos, nucell, 3, "A2B:atpos");
+    attyp = memory->create(attyp, nucell, "A2B:attyp");
+    layer = memory->create(layer, nucell, "A2B:layer");
 
     attyp[0] = ip2;
     layer[0] = 0;
@@ -291,7 +291,7 @@ void A2B::A2B_C1()
     initialized = 1;
     break;
   case 4:
-    name = new char[12];
+    name = memory->create(name,12,"A2B:name");
     strcpy(name, "A2B-C1(111)");
 
     ntype  = 2;
@@ -301,9 +301,9 @@ void A2B::A2B_C1()
     latvec[1][1] = sqrt(2.)/2.;
     latvec[2][2] = sqrt(3.);
 
-    atpos = memory->create(atpos,nucell, 3, "A2B_C1_111_atpos");
-    attyp = new int[nucell];
-    layer = new int[nucell];
+    atpos = memory->create(atpos, nucell, 3, "A2B:atpos");
+    attyp = memory->create(attyp, nucell, "A2B:attyp");
+    layer = memory->create(layer, nucell, "A2B:layer");
 
     attyp[0] = ip1;
     layer[0] = 0;
@@ -416,7 +416,7 @@ void A2B::A2B_C1()
     initialized = 1;
     break;
   case 5:
-    name = new char[17];
+    name = memory->create(name,17,"A2B:name");
     strcpy(name, "A2B-C1-primitive");
 
     ntype  = 2;
@@ -429,9 +429,9 @@ void A2B::A2B_C1()
     latvec[2][0] = 0.5;
     latvec[2][1] = 0.5;
 
-    atpos = memory->create(atpos,nucell, 3, "A2B_C1_primitive_atpos");
-    attyp = new int[nucell];
-    layer = new int[nucell];
+    atpos = memory->create(atpos, nucell, 3, "A2B:atpos");
+    attyp = memory->create(attyp, nucell, "A2B:attyp");
+    layer = memory->create(layer, nucell, "A2B:layer");
 
     attyp[0] = ip1;
     layer[0] = 0;
@@ -485,7 +485,7 @@ void A2B::A2B_C15()
   // initialize according to surface type
   switch (surftype){
   case 1:
-    name = new char[13];
+    name = memory->create(name,13,"A2B:name");
     strcpy(name, "A2B-C15(001)");
 
     ntype  = 2;
@@ -495,9 +495,9 @@ void A2B::A2B_C15()
     latvec[1][1] = 1./sqrt(2.);
     latvec[2][2] = 1.;
 
-    atpos = memory->create(atpos,nucell, 3, "A2B_C15_001_atpos");
-    attyp = new int[nucell];
-    layer = new int[nucell];
+    atpos = memory->create(atpos, nucell, 3, "A2B:atpos");
+    attyp = memory->create(attyp, nucell, "A2B:attyp");
+    layer = memory->create(layer, nucell, "A2B:layer");
 
     attyp[0] = ip1;
     layer[0] = 0;
@@ -574,7 +574,7 @@ void A2B::A2B_C15()
     initialized = 1;
     break;
   case 2:
-    name = new char[13];
+    name = memory->create(name,13,"A2B:name");
     strcpy(name, "A2B-C15(001)");
 
     ntype  = 2;
@@ -584,9 +584,9 @@ void A2B::A2B_C15()
     latvec[1][1] = 1.;
     latvec[2][2] = 1.;
 
-    atpos = memory->create(atpos,nucell, 3, "A2B_C15_001_atpos");
-    attyp = new int[nucell];
-    layer = new int[nucell];
+    atpos = memory->create(atpos, nucell, 3, "A2B:atpos");
+    attyp = memory->create(attyp, nucell, "A2B:attyp");
+    layer = memory->create(layer, nucell, "A2B:layer");
 
     attyp[0] = ip1;
     layer[0] = 0;
@@ -735,7 +735,7 @@ void A2B::A2B_C15()
     initialized = 1;
     break;
   case 3:
-    name = new char[13];
+    name = memory->create(name,13,"A2B:name");
     strcpy(name, "A2B-C15(110)");
 
     ntype  = 2;
@@ -745,9 +745,9 @@ void A2B::A2B_C15()
     latvec[1][1] = 1./sqrt(2.);
     latvec[2][2] = 1./sqrt(2.);
 
-    atpos = memory->create(atpos,nucell, 3, "A2B_C15_110_atpos");
-    attyp = new int[nucell];
-    layer = new int[nucell];
+    atpos = memory->create(atpos, nucell, 3, "A2B:atpos");
+    attyp = memory->create(attyp, nucell, "A2B:attyp");
+    layer = memory->create(layer, nucell, "A2B:layer");
 
     attyp[0] = ip2;
     layer[0] = 0;
@@ -824,7 +824,7 @@ void A2B::A2B_C15()
     initialized = 1;
     break;
   case 4:
-    name = new char[13];
+    name = memory->create(name,13,"A2B:name");
     strcpy(name, "A2B-C15(111)");
 
     ntype  = 2;
@@ -834,9 +834,9 @@ void A2B::A2B_C15()
     latvec[1][1] = sqrt(6.)/2.;
     latvec[2][2] = sqrt(3.);
 
-    atpos = memory->create(atpos,nucell, 3, "A2B_C15_111_atpos");
-    attyp = new int[nucell];
-    layer = new int[nucell];
+    atpos = memory->create(atpos, nucell, 3, "A2B:atpos");
+    attyp = memory->create(attyp, nucell, "A2B:attyp");
+    layer = memory->create(layer, nucell, "A2B:layer");
 
     attyp[0] = ip2;
     layer[0] = 0;
@@ -1057,7 +1057,7 @@ void A2B::A2B_C15()
     initialized = 1;
     break;
   case 5:
-    name = new char[18];
+    name = memory->create(name,18,"A2B:name");
     strcpy(name, "A2B-C15-primitive");
 
     ntype  = 2;
@@ -1070,9 +1070,9 @@ void A2B::A2B_C15()
     latvec[2][0] = 0.5;
     latvec[2][1] = 0.5;
 
-    atpos = memory->create(atpos,nucell, 3, "A2B_C15_primitive_atpos");
-    attyp = new int[nucell];
-    layer = new int[nucell];
+    atpos = memory->create(atpos, nucell, 3, "A2B:atpos");
+    attyp = memory->create(attyp, nucell, "A2B:attyp");
+    layer = memory->create(layer, nucell, "A2B:layer");
 
     attyp[0] = ip1;
     layer[0] = 2;
@@ -1144,7 +1144,7 @@ void A2B::A2B_C32()
   // initialize according to surface type
   switch (surftype){
   case 1:
-    name = new char[13];
+    name = memory->create(name,13,"A2B:name");
     strcpy(name, "A2B-C32(001)");
 
     ntype  = 2;
@@ -1155,9 +1155,9 @@ void A2B::A2B_C32()
     latvec[1][1] = sqrt(3.)/2.;
     latvec[2][2] = ca;
 
-    atpos = memory->create(atpos,nucell, 3, "A2B_C32_001_atpos");
-    attyp = new int[nucell];
-    layer = new int[nucell];
+    atpos = memory->create(atpos, nucell, 3, "A2B:atpos");
+    attyp = memory->create(attyp, nucell, "A2B:attyp");
+    layer = memory->create(layer, nucell, "A2B:layer");
 
     attyp[0] = ip2;
     layer[0] = 0;
@@ -1180,7 +1180,7 @@ void A2B::A2B_C32()
     initialized = 1;
     break;
   case 2:
-    name = new char[13];
+    name = memory->create(name,13,"A2B:name");
     strcpy(name, "A2B-C32(001)");
 
     ntype  = 2;
@@ -1190,9 +1190,9 @@ void A2B::A2B_C32()
     latvec[1][1] = sqrt(3.);
     latvec[2][2] = ca;
 
-    atpos = memory->create(atpos,nucell, 3, "A2B_C32_001_atpos");
-    attyp = new int[nucell];
-    layer = new int[nucell];
+    atpos = memory->create(atpos, nucell, 3, "A2B:atpos");
+    attyp = memory->create(attyp, nucell, "A2B:attyp");
+    layer = memory->create(layer, nucell, "A2B:layer");
 
     attyp[0] = ip2;
     layer[0] = 0;
@@ -1233,7 +1233,7 @@ void A2B::A2B_C32()
     initialized = 1;
     break;
   case 3:
-    name = new char[13];
+    name = memory->create(name,13,"A2B:name");
     strcpy(name, "A2B-C32(100)");
 
     ntype  = 2;
@@ -1243,9 +1243,9 @@ void A2B::A2B_C32()
     latvec[1][1] = ca;
     latvec[2][2] = sqrt(3.);
 
-    atpos = memory->create(atpos,nucell, 3, "A2B_C32_100_atpos");
-    attyp = new int[nucell];
-    layer = new int[nucell];
+    atpos = memory->create(atpos, nucell, 3, "A2B:atpos");
+    attyp = memory->create(attyp, nucell, "A2B:attyp");
+    layer = memory->create(layer, nucell, "A2B:layer");
 
     attyp[0] = ip2;
     layer[0] = 0;
@@ -1286,7 +1286,7 @@ void A2B::A2B_C32()
     initialized = 1;
     break;
   case 4:
-    name = new char[13];
+    name = memory->create(name,13,"A2B:name");
     strcpy(name, "A2B-C32(110)");
 
     ntype  = 2;
@@ -1296,9 +1296,9 @@ void A2B::A2B_C32()
     latvec[1][1] = sqrt(3.);
     latvec[2][2] = 1.;
 
-    atpos = memory->create(atpos,nucell, 3, "A2B_C32_110_atpos");
-    attyp = new int[nucell];
-    layer = new int[nucell];
+    atpos = memory->create(atpos, nucell, 3, "A2B:atpos");
+    attyp = memory->create(attyp, nucell, "A2B:attyp");
+    layer = memory->create(layer, nucell, "A2B:layer");
 
     attyp[0] = ip2;
     layer[0] = 0;
@@ -1339,7 +1339,7 @@ void A2B::A2B_C32()
     initialized = 1;
     break;
   case 5:
-    name = new char[14];
+    name = memory->create(name,14,"A2B:name");
     strcpy(name, "A2B-C32(1-10)");
 
     ntype  = 2;
@@ -1349,9 +1349,9 @@ void A2B::A2B_C32()
     latvec[1][1] = ca;
     latvec[2][2] = sqrt(3.);
 
-    atpos = memory->create(atpos,nucell, 3, "A2B_C32_(1-10)_atpos");
-    attyp = new int[nucell];
-    layer = new int[nucell];
+    atpos = memory->create(atpos, nucell, 3, "A2B_C32_(1-10)_atpos");
+    attyp = memory->create(attyp, nucell, "A2B:attyp");
+    layer = memory->create(layer, nucell, "A2B:layer");
 
     attyp[0] = ip2;
     layer[0] = 0;

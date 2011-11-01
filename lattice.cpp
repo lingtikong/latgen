@@ -33,11 +33,11 @@ lattice::lattice()
 lattice::~lattice()
 {
   if (atpos) memory->destroy(atpos);
-  if (attyp) delete []attyp;
-  if (name ) delete []name;
-  if (layer) delete []layer;
-  if (numlayer) delete []numlayer;
-  if (h       ) delete []h;
+  if (attyp) memory->destroy(attyp);
+  if (name ) memory->destroy(name);
+  if (layer) memory->destroy(layer);
+  if (numlayer) memory->destroy(numlayer);
+  if (h       ) memory->destroy(h);
   
   delete memory;
 }
@@ -141,10 +141,10 @@ void lattice::setup()
   nlayer++;
 
   // get the height above each layer
-  if (h) delete []h;
-  if (numlayer) delete []numlayer;
-  h = new double[nlayer];
-  numlayer = new int[nlayer];
+  if (h) memory->destroy(h);
+  if (numlayer) memory->destroy(numlayer);
+  h = memory->create(h, nlayer, "lattice->setup:h");
+  numlayer = memory->create(numlayer, nlayer, "lattice->setup:numlayer");
 
   for (int i=0; i<nlayer; i++) numlayer[i] = 0;
   for (int i=0; i<nucell; i++) numlayer[layer[i]]++;

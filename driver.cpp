@@ -82,7 +82,7 @@ return rflag;
 void Driver::MainMenu()
 {
   if ( ShowMenu(0) ){
-    name = new char[strlen(latt->name)+1];
+    name = memory->create(name, strlen(latt->name)+1, "driver->MainMenu:name");
     strcpy(name, latt->name);
     alat = latt->alat;
    
@@ -98,17 +98,18 @@ return;
 ------------------------------------------------------------------------- */
 Driver::~Driver()
 {
-  if (atpos!= NULL) memory->destroy(atpos);
-  if (attyp!= NULL) memory->destroy(attyp);
-  if (xmap != NULL) delete []xmap;
-  if (ymap != NULL) delete []ymap;
-  if (zmap != NULL) delete []zmap;
-  if (umap != NULL) delete []umap;
-  if (latt != NULL) delete latt;
-  if (name != NULL) delete []name;
+  memory->destroy(atpos);
+  memory->destroy(attyp);
+  memory->destroy(xmap);
+  memory->destroy(ymap);
+  memory->destroy(zmap);
+  memory->destroy(umap);
+  memory->destroy(name);
 
-  if (typeID!= NULL) delete []typeID;
-  if (numtype!= NULL) delete []numtype;
+  if (latt != NULL) delete latt;
+
+  memory->destroy(typeID);
+  memory->destroy(numtype);
   if (random != NULL) delete random;
 }
 
@@ -137,10 +138,10 @@ void Driver::generate()
 
   atpos = memory->create(atpos, natom, 3, "driver->generate:atpos");
   attyp = memory->create(attyp, natom, "driver->generate:attyp");
-  xmap = new int[natom];
-  ymap = new int[natom];
-  zmap = new int[natom];
-  umap = new int[natom];
+  xmap = memory->create(xmap, natom, "driver->generate:xmap");
+  ymap = memory->create(ymap, natom, "driver->generate:ymap");
+  zmap = memory->create(zmap, natom, "driver->generate:zmap");
+  umap = memory->create(umap, natom, "driver->generate:umap");
 
   int iatom = 0;
   if ( leading_dir == 1){
@@ -209,10 +210,10 @@ void Driver::typescan()
 {
   // allocate memory
   int typmax = 10;
-  if (typeID != NULL) delete []typeID;
-  if (numtype!= NULL) delete []numtype;
-  typeID  = new int[typmax];
-  numtype = new int[typmax];
+  if (typeID != NULL) memory->destroy(typeID);
+  if (numtype!= NULL) memory->destroy(numtype);
+  typeID  = memory->create(typeID,  typmax, "driver->typescan:typeID");
+  numtype = memory->create(numtype, typmax, "driver->typescan:numtype");
   for (int i=0; i<typmax; i++) numtype[i] = 0;
 
   ntype = 0;
@@ -221,18 +222,9 @@ void Driver::typescan()
     int id = lookup(attyp[i]);
     if (id < 0){
       if (ntype == typmax){
-        int *int1 = new int[ntype];
-        int *int2 = new int[ntype];
-        for (int k=0; k<ntype; k++){int1[k] = typeID[k]; int2[k] = numtype[k];}
-        delete []typeID;
-        delete []numtype;
-
         typmax += 5;
-        typeID  = new int[typmax];
-        numtype = new int[typmax];
-        for (int k=0; k<ntype; k++){typeID[k]=int1[k]; numtype[k]=int2[k];}
-        for (int k=ntype; k<typmax; k++) numtype[k] = 0;
-        delete []int1; delete []int2;
+        typeID  = memory->grow(typeID, typmax, "driver->typescan:typeID");
+        numtype = memory->grow(numtype,typmax, "driver->typescan:numtype");
       }
       typeID[ntype] = attyp[i];
       id            = ntype;
@@ -240,6 +232,46 @@ void Driver::typescan()
     }
     numtype[id]++;
   }
+return;
+}
+
+/* ----------------------------------------------------------------------
+   method to reset the atomic type ID
+------------------------------------------------------------------------- */
+void Driver::ResetTypeID()
+{
+  char str[MAXLINE];
+  printf("\n"); for (int i=0; i<70; i++) printf("=");
+  printf("\nThere are %d atomic types in system, and their IDs are:\nIndex : ", ntype);
+  for (int i=0; i<ntype; i++) printf("%4d", i+1); printf("\nTypeID: ");
+  for (int i=0; i<ntype; i++) printf("%4d", typeID[i]);
+  printf("\nPlease input the new type IDs in sequence, enter to skip: ");
+  if (strlen(gets(str)) > 0){
+    int newID[ntype], num=0;
+    char *ptr;
+    ptr = strtok(str, " \t\n\r\f");
+    while (ptr != NULL){
+      newID[num] = atoi(ptr);
+      if (++num >= ntype) break;
+      ptr = strtok(NULL, " \t\n\r\f");
+    }
+    if (num == ntype){
+      printf("\nThe new type IDs are:\nIndex : ");
+      for (int i=0; i<ntype; i++) printf("%4d", i+1); printf("\nTypeID: ");
+      for (int i=0; i<ntype; i++) printf("%4d", newID[i]);
+      printf("\nIs this what you want? (y/n)[y]: ");
+      if (strlen(gets(str)) < 1 || (strcmp(str,"n") != 0 && strcmp(str,"N") !=0) ){
+        for (int i=0; i<natom; i++){
+          int id = lookup(attyp[i]);
+          attyp[i] = newID[id];
+        }
+
+        typescan();
+      }
+    }
+  }
+  for (int i=0; i<70; i++) printf("="); printf("\n");
+
 return;
 }
 
@@ -306,7 +338,7 @@ void Driver::write()
   // write the xyz position file 
   fp = fopen(posfile, "w");
   fprintf(fp, "%d\n", natom);
-  fprintf(fp, "%s cell with dimension %d x %d x %d and a = %g\n", name, nx, ny, nz, alat);
+  fprintf(fp, "%s cell with dimension %dx%dx%d and a= %g\n", name, nx, ny, nz, alat);
   int nr = 3;
   if (natom < nr) nr = natom;
   for (int i=0; i<nr; i++){
@@ -365,6 +397,7 @@ void Driver::modify()
     printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
     printf("Please select the modification you want to do:\n");
     printf("  1. Create substitutional solid solution;\n");
+    printf("  2. Reset atomic types;\n");
 
     if (ncycle == 1) printf("  0. Nothing.\n");
     else printf("  0. Done.\n");
@@ -377,6 +410,7 @@ void Driver::modify()
    
     switch (job){ 
     case 1: solidsol(); break;
+    case 2: ResetTypeID(); break;
     default: return;
     }
 
@@ -541,7 +575,7 @@ void Driver::FormLayers()
     }
   }
 
-  nx = mynx[0]; ny = myny[0]; nz = 0;
+  nx = ny = nz = 0;
   for (int j=0; j<3; j++){
     latvec[0][j] = latvec[1][j] = 0.;
   }
@@ -686,9 +720,13 @@ void Driver::FormLayers()
   latt = NULL; alat = 1.;
   latvec[2][0] = latvec[2][1] = 0.; latvec[2][2] = H;
 
-  strcpy(str,"Multilayer of:");
-  for (int i=0; i<nlat; i++){strcat(str," "); strcat(str,latts[i]->name);}
-  name = new char [strlen(str)+1]; strcpy(name, str);
+  strcpy(str,"Multilayer: ");
+  for (int i=0; i<nlat; i++){
+    char info[MAXLINE];
+    sprintf(info, "%dx%d-%s ", mynx[i], myny[i], latts[i]->name);
+    strcat(str,info);
+  }
+  name = memory->create(name, strlen(str)+1, "driver->FormLayers"); strcpy(name, str);
 
   double tmp[2];
   for (int i=0; i<natom; i++){
@@ -699,6 +737,8 @@ void Driver::FormLayers()
 
   for (int i=0; i<nlat; i++) delete latts[i];
 
+  memory->destroy(mynx);
+  memory->destroy(myny);
   // find the total # of types and # of atoms for each type
   typescan();
 

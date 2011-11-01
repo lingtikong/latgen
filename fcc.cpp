@@ -92,7 +92,7 @@ void FCC::FCC001()
   for (int i=0; i<3; i++){
     for (int j=0; j<3; j++) latvec[i][j] = 0.;
   }
-  name = new char[9];
+  name = memory->create(name,9,"FCC:name");
   strcpy(name, "FCC(001)");
 
   // initialize according to surface type
@@ -105,9 +105,9 @@ void FCC::FCC001()
     latvec[1][1] = 1./sqrt(2.);
     latvec[2][2] = 1.;
 
-    atpos = memory->create(atpos,nucell, 3, "FCC001_atpos");
-    attyp = new int[nucell];
-    layer = new int[nucell];
+    atpos = memory->create(atpos, nucell, 3, "FCC001_atpos");
+    attyp = memory->create(attyp, nucell, "FCC:attyp");
+    layer = memory->create(layer, nucell, "FCC:layer");
   
     
     for (int i=0; i<nucell; i++) attyp[i] = 1;
@@ -131,9 +131,9 @@ void FCC::FCC001()
     latvec[1][1] = 1.;
     latvec[2][2] = 1.;
 
-    atpos = memory->create(atpos,nucell, 3, "FCC001_atpos");
-    attyp = new int[nucell];
-    layer = new int[nucell];
+    atpos = memory->create(atpos, nucell, 3, "FCC001_atpos");
+    attyp = memory->create(attyp, nucell, "FCC:attyp");
+    layer = memory->create(layer, nucell, "FCC:layer");
     
     for (int i=0; i<nucell; i++) attyp[i] = 1;
     layer[0]    = 0;
@@ -184,7 +184,7 @@ void FCC::FCC110()
   for (int i=0; i<3; i++){
     for (int j=0; j<3; j++) latvec[i][j] = 0.;
   }
-  name = new char[9];
+  name = memory->create(name,9,"FCC:name");
   strcpy(name, "FCC(110)");
 
   // initialize according to surface type
@@ -197,9 +197,9 @@ void FCC::FCC110()
     latvec[1][1] = 1.;
     latvec[2][2] = 0.5*sqrt(2.);
 
-    atpos = memory->create(atpos,nucell, 3, "FCC110_atpos");
-    attyp = new int[nucell];
-    layer = new int[nucell];
+    atpos = memory->create(atpos, nucell, 3, "FCC110_atpos");
+    attyp = memory->create(attyp, nucell, "FCC:attyp");
+    layer = memory->create(layer, nucell, "FCC:layer");
     
     for (int i=0; i<nucell; i++) attyp[i] = 1;
     layer[0]    = 0;
@@ -222,9 +222,9 @@ void FCC::FCC110()
     latvec[1][1] = sqrt(2.)*0.5;
     latvec[2][2] = sqrt(2.)*0.5;
 
-    atpos = memory->create(atpos,nucell, 3, "FCC110_atpos");
-    attyp = new int[nucell];
-    layer = new int[nucell];
+    atpos = memory->create(atpos, nucell, 3, "FCC110_atpos");
+    attyp = memory->create(attyp, nucell, "FCC:attyp");
+    layer = memory->create(layer, nucell, "FCC:layer");
     
     for (int i=0; i<nucell; i++) attyp[i] = 1;
 
@@ -270,7 +270,7 @@ void FCC::FCC111()
   for (int i=0; i<3; i++){
     for (int j=0; j<3; j++) latvec[i][j] = 0.;
   }
-  name = new char[9];
+  name = memory->create(name,9,"FCC:name");
   strcpy(name, "FCC(111)");
 
   // initialize according to surface type
@@ -284,9 +284,9 @@ void FCC::FCC111()
     latvec[1][1] = sqrt(0.375);
     latvec[2][2] = sqrt(3.);
 
-    atpos = memory->create(atpos,nucell, 3, "FCC111_atpos");
-    attyp = new int[nucell];
-    layer = new int[nucell];
+    atpos = memory->create(atpos, nucell, 3, "FCC111_atpos");
+    attyp = memory->create(attyp, nucell, "FCC:attyp");
+    layer = memory->create(layer, nucell, "FCC:layer");
     
     for (int i=0; i<nucell; i++) attyp[i] = 1;
 
@@ -316,9 +316,9 @@ void FCC::FCC111()
     latvec[1][1] = sqrt(0.5);
     latvec[2][2] = sqrt(3.);
 
-    atpos = memory->create(atpos,nucell, 3, "FCC111_atpos");
-    attyp = new int[nucell];
-    layer = new int[nucell];
+    atpos = memory->create(atpos, nucell, 3, "FCC111_atpos");
+    attyp = memory->create(attyp, nucell, "FCC:attyp");
+    layer = memory->create(layer, nucell, "FCC:layer");
 
     for (int i=0; i<nucell; i++) attyp[i] = 1;
 
@@ -348,9 +348,9 @@ void FCC::FCC111()
     latvec[1][1] =  sqrt(0.375);
     latvec[2][2] =  sqrt(3.);
 
-    atpos = memory->create(atpos,nucell, 3, "FCC111_atpos");
-    attyp = new int[nucell];
-    layer = new int[nucell];
+    atpos = memory->create(atpos, nucell, 3, "FCC111_atpos");
+    attyp = memory->create(attyp, nucell, "FCC:attyp");
+    layer = memory->create(layer, nucell, "FCC:layer");
 
     for (int i=0; i<nucell; i++) attyp[i] = 1;
 
@@ -380,9 +380,9 @@ void FCC::FCC111()
     latvec[1][1] =  sqrt(0.5);
     latvec[2][2] =  sqrt(3.);
 
-    atpos = memory->create(atpos,nucell, 3, "FCC111_atpos");
-    attyp = new int[nucell];
-    layer = new int[nucell];
+    atpos = memory->create(atpos, nucell, 3, "FCC111_atpos");
+    attyp = memory->create(attyp, nucell, "FCC:attyp");
+    layer = memory->create(layer, nucell, "FCC:layer");
 
     for (int i=0; i<nucell; i++) attyp[i] = 1;
 
@@ -411,9 +411,9 @@ void FCC::FCC111()
     latvec[1][1] =  sqrt(0.5);
     latvec[2][2] =  sqrt(3.);
 
-    atpos = memory->create(atpos,nucell, 3, "FCC111_atpos");
-    attyp = new int[nucell];
-    layer = new int[nucell];
+    atpos = memory->create(atpos, nucell, 3, "FCC111_atpos");
+    attyp = memory->create(attyp, nucell, "FCC:attyp");
+    layer = memory->create(layer, nucell, "FCC:layer");
 
     for (int i=0; i<nucell; i++) attyp[i] = 1;
 
@@ -457,9 +457,9 @@ void FCC::FCC111()
     latvec[1][1] = sqrt(1.5);
     latvec[2][2] = sqrt(3.);
 
-    atpos = memory->create(atpos,nucell, 3, "FCC111_atpos");
-    attyp = new int[nucell];
-    layer = new int[nucell];
+    atpos = memory->create(atpos, nucell, 3, "FCC111_atpos");
+    attyp = memory->create(attyp, nucell, "FCC:attyp");
+    layer = memory->create(layer, nucell, "FCC:layer");
 
     for (int i=0; i<nucell; i++) attyp[i] = 1;
 
@@ -509,7 +509,7 @@ void FCC::Primitive()
   for (int i=0; i<3; i++){
     for (int j=0; j<3; j++) latvec[i][j] = 0.;
   }
-  name = new char[9];
+  name = memory->create(name,9,"FCC:name");
   strcpy(name, "FCC-prim");
 
   nucell = 1;
@@ -522,8 +522,8 @@ void FCC::Primitive()
   latvec[2][0] =  0.5;
   latvec[2][1] =  0.5;
 
-  atpos = memory->create(atpos,nucell, 3, "Primitive_atpos");
-  attyp = new int[nucell]; layer = new int[nucell];
+  atpos = memory->create(atpos, nucell, 3, "Primitive_atpos");
+  attyp = memory->create(attyp, nucell, "FCC:attyp"); layer = memory->create(layer, nucell, "FCC:layer");
   
   for (int i=0; i<nucell; i++) attyp[i] = 1;
   layer[0]    = 0;
@@ -543,7 +543,7 @@ void FCC::DiamondPrim()
   for (int i=0; i<3; i++){
     for (int j=0; j<3; j++) latvec[i][j] = 0.;
   }
-  name = new char[9];
+  name = memory->create(name,9,"FCC:name");
   strcpy(name, "Dia-prim");
 
   nucell = 2;
@@ -556,8 +556,8 @@ void FCC::DiamondPrim()
   latvec[2][0] =  0.5;
   latvec[2][1] =  0.5;
 
-  atpos = memory->create(atpos,nucell, 3, "Primitive_atpos");
-  attyp = new int[nucell]; layer = new int[nucell];
+  atpos = memory->create(atpos, nucell, 3, "Primitive_atpos");
+  attyp = memory->create(attyp, nucell, "FCC:attyp"); layer = memory->create(layer, nucell, "FCC:layer");
   
   for (int i=0; i<nucell; i++) attyp[i] = 1;
   layer[0]    = 0;
@@ -582,7 +582,7 @@ void FCC::DiamondConv()
   for (int i=0; i<3; i++){
     for (int j=0; j<3; j++) latvec[i][j] = 0.;
   }
-  name = new char[9];
+  name = memory->create(name,9,"FCC:name");
   strcpy(name, "Dia-conv");
 
   nucell = 8;
@@ -592,8 +592,8 @@ void FCC::DiamondConv()
   latvec[1][1] = 1.;
   latvec[2][2] = 1.;
 
-  atpos = memory->create(atpos,nucell, 3, "Primitive_atpos");
-  attyp = new int[nucell]; layer = new int[nucell];
+  atpos = memory->create(atpos, nucell, 3, "Primitive_atpos");
+  attyp = memory->create(attyp, nucell, "FCC:attyp"); layer = memory->create(layer, nucell, "FCC:layer");
   
   for (int i=0; i<nucell; i++) attyp[i] = 1;
   layer[0]    = 0;
@@ -648,7 +648,7 @@ void FCC::NaClPrim()
   for (int i=0; i<3; i++){
     for (int j=0; j<3; j++) latvec[i][j] = 0.;
   }
-  name = new char[10];
+  name = memory->create(name,10,"FCC:name");
   strcpy(name, "NaCl-prim");
 
   nucell = 2;
@@ -661,8 +661,8 @@ void FCC::NaClPrim()
   latvec[2][0] =  0.5;
   latvec[2][1] =  0.5;
 
-  atpos = memory->create(atpos,nucell, 3, "NaCl_prim_atpos");
-  attyp = new int[nucell]; layer = new int[nucell];
+  atpos = memory->create(atpos, nucell, 3, "NaCl_prim_atpos");
+  attyp = memory->create(attyp, nucell, "FCC:attyp"); layer = memory->create(layer, nucell, "FCC:layer");
   
   attyp[0] = 1;
   attyp[1] = 2;
@@ -689,7 +689,7 @@ void FCC::NaClConv()
   for (int i=0; i<3; i++){
     for (int j=0; j<3; j++) latvec[i][j] = 0.;
   }
-  name = new char[10];
+  name = memory->create(name,10,"FCC:name");
   strcpy(name, "NaCl-conv");
 
   nucell = 8;
@@ -699,8 +699,9 @@ void FCC::NaClConv()
   latvec[1][1] = 1.;
   latvec[2][2] = 1.;
 
-  atpos = memory->create(atpos,nucell, 3, "NaCl_conv_atpos");
-  attyp = new int[nucell]; layer = new int[nucell];
+  atpos = memory->create(atpos, nucell, 3, "NaCl_conv_atpos");
+  attyp = memory->create(attyp, nucell, "FCC:attyp");
+  layer = memory->create(layer, nucell, "FCC:layer");
   
   for (int i=0; i<nucell; i+=2) attyp[i] = 1;
   for (int i=1; i<nucell; i+=2) attyp[i] = 2;
