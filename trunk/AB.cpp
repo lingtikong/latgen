@@ -92,7 +92,7 @@ void AB::AB_B1()
   // initialize according to surface type
   switch (surftype){
   case 1:
-    name = new char[11];
+    name = memory->create(name,11,"AB:name");
     strcpy(name, "AB-B1(001)");
 
     ntype  = 2;
@@ -102,9 +102,9 @@ void AB::AB_B1()
     latvec[1][1] = 1./sqrt(2.);
     latvec[2][2] = 1.;
 
-    atpos = memory->create(atpos,nucell, 3, "AB_B1_001_atpos");
-    attyp = new int[nucell];
-    layer = new int[nucell];
+    atpos = memory->create(atpos, nucell, 3, "AB:atpos");
+    attyp = memory->create(attyp, nucell, "AB:attyp");
+    layer = memory->create(layer, nucell, "AB:layer");
     
     attyp[0] = 2;
     layer[0]    = 0;
@@ -133,7 +133,7 @@ void AB::AB_B1()
     initialized = 1;
     break;
   case 2:
-    name = new char[11];
+    name = memory->create(name,11,"AB:name");
     strcpy(name, "AB-B1(001)");
 
     ntype  = 2;
@@ -143,9 +143,9 @@ void AB::AB_B1()
     latvec[1][1] = 1.;
     latvec[2][2] = 1.;
 
-    atpos = memory->create(atpos,nucell, 3, "AB_B1_100_atpos");
-    attyp = new int[nucell];
-    layer = new int[nucell];
+    atpos = memory->create(atpos, nucell, 3, "AB:atpos");
+    attyp = memory->create(attyp, nucell, "AB:attyp");
+    layer = memory->create(layer, nucell, "AB:layer");
 
     attyp[0] = 2;
     layer[0]    = 0;
@@ -198,7 +198,7 @@ void AB::AB_B1()
     initialized = 1;
     break;
   case 3:
-    name = new char[11];
+    name = memory->create(name,11,"AB:name");
     strcpy(name, "AB-B1(110)");
 
     ntype  = 2;
@@ -208,9 +208,9 @@ void AB::AB_B1()
     latvec[1][1] = 1./sqrt(2.);
     latvec[2][2] = 1./sqrt(2.);
 
-    atpos = memory->create(atpos,nucell, 3, "AB_B1_110_atpos");
-    attyp = new int[nucell];
-    layer = new int[nucell];
+    atpos = memory->create(atpos, nucell, 3, "AB:atpos");
+    attyp = memory->create(attyp, nucell, "AB:attyp");
+    layer = memory->create(layer, nucell, "AB:layer");
     
     attyp[0] = 1;
     layer[0]    = 0;
@@ -239,7 +239,7 @@ void AB::AB_B1()
     initialized = 1;
     break;
   case 4:
-    name = new char[11];
+    name = memory->create(name,11,"AB:name");
     strcpy(name, "AB-B1(111)");
 
     ntype  = 2;
@@ -249,9 +249,9 @@ void AB::AB_B1()
     latvec[1][1] = 1./sqrt(2.);
     latvec[2][2] = sqrt(3.);
 
-    atpos = memory->create(atpos,nucell, 3, "AB_B1_111_atpos");
-    attyp = new int[nucell];
-    layer = new int[nucell];
+    atpos = memory->create(atpos, nucell, 3, "AB:atpos");
+    attyp = memory->create(attyp, nucell, "AB:attyp");
+    layer = memory->create(layer, nucell, "AB:layer");
     
     attyp[0] = 1;
     layer[0]    = 0;
@@ -328,7 +328,7 @@ void AB::AB_B1()
     initialized = 1;
     break;
   case 5:
-    name = new char[16];
+    name = memory->create(name,16,"AB:name");
     strcpy(name, "AB-B1-primitive");
 
     ntype  = 2;
@@ -341,9 +341,9 @@ void AB::AB_B1()
     latvec[2][0] = 0.5;
     latvec[2][1] = 0.5;
 
-    atpos = memory->create(atpos,nucell, 3, "AB_B1_prim_atpos");
-    attyp = new int[nucell];
-    layer = new int[nucell];
+    atpos = memory->create(atpos, nucell, 3, "AB:atpos");
+    attyp = memory->create(attyp, nucell, "AB:attyp");
+    layer = memory->create(layer, nucell, "AB:layer");
     
     attyp[0] = 1;
     layer[0]    = 0;
@@ -390,7 +390,7 @@ void AB::AB_B2()
   // initialize according to surface type
   switch (surftype){
   case 1:
-    name = new char[11];
+    name = memory->create(name,11,"AB:name");
     strcpy(name, "AB-B2(001)");
 
     ntype  = 2;
@@ -400,9 +400,9 @@ void AB::AB_B2()
     latvec[1][1] = 1.;
     latvec[2][2] = 1.;
 
-    atpos = memory->create(atpos,nucell, 3, "AB_B2_001_atpos");
-    attyp = new int[nucell];
-    layer = new int[nucell];
+    atpos = memory->create(atpos, nucell, 3, "AB:atpos");
+    attyp = memory->create(attyp, nucell, "AB:attyp");
+    layer = memory->create(layer, nucell, "AB:layer");
     
     attyp[0]    = 1;
     layer[0]    = 0;
@@ -419,7 +419,7 @@ void AB::AB_B2()
     initialized = 1;
     break;
   case 2:
-    name = new char[11];
+    name = memory->create(name,11,"AB:name");
     strcpy(name, "AB-B2(110)");
 
     ntype  = 2;
@@ -429,9 +429,9 @@ void AB::AB_B2()
     latvec[1][1] = sqrt(2.);
     latvec[2][2] = sqrt(2.);
 
-    atpos = memory->create(atpos,nucell, 3, "AB_B2_110_atpos");
-    attyp = new int[nucell];
-    layer = new int[nucell];
+    atpos = memory->create(atpos, nucell, 3, "AB:atpos");
+    attyp = memory->create(attyp, nucell, "AB:attyp");
+    layer = memory->create(layer, nucell, "AB:layer");
     
     attyp[0] = 2;
     layer[0]    = 0;
@@ -460,7 +460,7 @@ void AB::AB_B2()
     initialized = 1;
     break;
   case 3:
-    name = new char[11];
+    name = memory->create(name,11,"AB:name");
     strcpy(name, "AB-B2(111)");
 
     ntype  = 2;
@@ -470,9 +470,9 @@ void AB::AB_B2()
     latvec[1][1] = sqrt(6.);
     latvec[2][2] = sqrt(3.);
 
-    atpos = memory->create(atpos,nucell, 3, "AB_B2_111_atpos");
-    attyp = new int[nucell];
-    layer = new int[nucell];
+    atpos = memory->create(atpos, nucell, 3, "AB:atpos");
+    attyp = memory->create(attyp, nucell, "AB:attyp");
+    layer = memory->create(layer, nucell, "AB:layer");
     
     attyp[0] = 2;
     layer[0]    = 0;
@@ -580,7 +580,7 @@ void AB::AB_B3()
   // initialize according to surface type
   switch (surftype){
   case 1:
-    name = new char[11];
+    name = memory->create(name,11,"AB:name");
     strcpy(name, "AB-B3(100)");
 
     ntype  = 2;
@@ -590,9 +590,9 @@ void AB::AB_B3()
     latvec[1][1] = 1./sqrt(2.);
     latvec[2][2] = 1.;
 
-    atpos = memory->create(atpos,nucell, 3, "AB_B3_001_atpos");
-    attyp = new int[nucell];
-    layer = new int[nucell];
+    atpos = memory->create(atpos, nucell, 3, "AB:atpos");
+    attyp = memory->create(attyp, nucell, "AB:attyp");
+    layer = memory->create(layer, nucell, "AB:layer");
     
     attyp[0] = 1;
     layer[0]    = 0;
@@ -621,7 +621,7 @@ void AB::AB_B3()
     initialized = 1;
     break;
   case 2:
-    name = new char[11];
+    name = memory->create(name,11,"AB:name");
     strcpy(name, "AB-B3(100)");
 
     ntype  = 2;
@@ -631,9 +631,9 @@ void AB::AB_B3()
     latvec[1][1] = 1.;
     latvec[2][2] = 1.;
 
-    atpos = memory->create(atpos,nucell, 3, "AB_B3_100_atpos");
-    attyp = new int[nucell];
-    layer = new int[nucell];
+    atpos = memory->create(atpos, nucell, 3, "AB:atpos");
+    attyp = memory->create(attyp, nucell, "AB:attyp");
+    layer = memory->create(layer, nucell, "AB:layer");
     
     attyp[0] = 1;
     layer[0]    = 0;
@@ -686,7 +686,7 @@ void AB::AB_B3()
     initialized = 1;
     break;
   case 3:
-    name = new char[11];
+    name = memory->create(name,11,"AB:name");
     strcpy(name, "AB-B3(110)");
 
     ntype  = 2;
@@ -696,9 +696,9 @@ void AB::AB_B3()
     latvec[1][1] = 1./sqrt(2.);
     latvec[2][2] = 1./sqrt(2.);
 
-    atpos = memory->create(atpos,nucell, 3, "AB_B3_110_atpos");
-    attyp = new int[nucell];
-    layer = new int[nucell];
+    atpos = memory->create(atpos, nucell, 3, "AB:atpos");
+    attyp = memory->create(attyp, nucell, "AB:attyp");
+    layer = memory->create(layer, nucell, "AB:layer");
     
     attyp[0] = 1;
     layer[0]    = 0;
@@ -727,7 +727,7 @@ void AB::AB_B3()
     initialized = 1;
     break;
   case 4:
-    name = new char[11];
+    name = memory->create(name,11,"AB:name");
     strcpy(name, "AB-B3(111)");
 
     ntype  = 2;
@@ -737,9 +737,9 @@ void AB::AB_B3()
     latvec[1][1] = sqrt(6.)*0.5;
     latvec[2][2] = sqrt(3.);
 
-    atpos = memory->create(atpos,nucell, 3, "AB_B3_111_atpos");
-    attyp = new int[nucell];
-    layer = new int[nucell];
+    atpos = memory->create(atpos, nucell, 3, "AB:atpos");
+    attyp = memory->create(attyp, nucell, "AB:attyp");
+    layer = memory->create(layer, nucell, "AB:layer");
     
     attyp[0] = 1;
     layer[0]    = 0;
@@ -816,7 +816,7 @@ void AB::AB_B3()
     initialized = 1;
     break;
   case 5:
-    name = new char[16];
+    name = memory->create(name,16,"AB:name");
     strcpy(name, "AB-B3-primitive");
 
     ntype  = 2;
@@ -829,9 +829,9 @@ void AB::AB_B3()
     latvec[2][0] = 0.5;
     latvec[2][1] = 0.5;
 
-    atpos = memory->create(atpos,nucell, 3, "AB_B3_primitive_atpos");
-    attyp = new int[nucell];
-    layer = new int[nucell];
+    atpos = memory->create(atpos, nucell, 3, "AB:atpos");
+    attyp = memory->create(attyp, nucell, "AB:attyp");
+    layer = memory->create(layer, nucell, "AB:layer");
     
     attyp[0] = 1;
     layer[0]    = 0;
@@ -878,7 +878,7 @@ void AB::AB_L10()
   // initialize according to surface type
   switch (surftype){
   case 1:
-    name = new char[12];
+    name = memory->create(name,12,"AB:name");
     strcpy(name, "AB-L10(001)");
 
     ntype  = 2;
@@ -888,9 +888,9 @@ void AB::AB_L10()
     latvec[1][1] = 1.;
     latvec[2][2] = ca;
 
-    atpos = memory->create(atpos,nucell, 3, "AB_L10_001_atpos");
-    attyp = new int[nucell];
-    layer = new int[nucell];
+    atpos = memory->create(atpos, nucell, 3, "AB:atpos");
+    attyp = memory->create(attyp, nucell, "AB:attyp");
+    layer = memory->create(layer, nucell, "AB:layer");
 
     attyp[0] = 1;
     layer[0]    = 0;
@@ -919,7 +919,7 @@ void AB::AB_L10()
     initialized = 1;
     break;
   case 2:
-    name = new char[14];
+    name = memory->create(name,14,"AB:name");
     strcpy(name, "AB-L10(100)");
 
     ntype  = 2;
@@ -929,9 +929,9 @@ void AB::AB_L10()
     latvec[1][1] = ca;
     latvec[2][2] = 1.;
 
-    atpos = memory->create(atpos,nucell, 3, "AB_L10_100_atpos");
-    attyp = new int[nucell];
-    layer = new int[nucell];
+    atpos = memory->create(atpos, nucell, 3, "AB:atpos");
+    attyp = memory->create(attyp, nucell, "AB:attyp");
+    layer = memory->create(layer, nucell, "AB:layer");
     
     attyp[0] = 2;
     layer[0]    = 0;
@@ -960,7 +960,7 @@ void AB::AB_L10()
     initialized = 1;
     break;
   case 3:
-    name = new char[12];
+    name = memory->create(name,12,"AB:name");
     strcpy(name, "AB-L10(110)");
 
     ntype  = 2;
@@ -970,9 +970,9 @@ void AB::AB_L10()
     latvec[1][1] = sqrt(2.);
     latvec[2][2] = sqrt(2.)/2.;
 
-    atpos = memory->create(atpos,nucell, 3, "AB_L10_110_atpos");
-    attyp = new int[nucell];
-    layer = new int[nucell];
+    atpos = memory->create(atpos, nucell, 3, "AB:atpos");
+    attyp = memory->create(attyp, nucell, "AB:attyp");
+    layer = memory->create(layer, nucell, "AB:layer");
     
     attyp[0] = 1;
     layer[0]    = 0;
@@ -1001,7 +1001,7 @@ void AB::AB_L10()
     initialized = 1;
     break;
   case 4:
-    name = new char[17];
+    name = memory->create(name,17,"AB:name");
     strcpy(name, "AB-L10-primitive");
 
     ntype  = 2;
@@ -1011,9 +1011,9 @@ void AB::AB_L10()
     latvec[1][1] = 1./sqrt(2.);
     latvec[2][2] = ca;
 
-    atpos = memory->create(atpos,nucell, 3, "AB_L10_primitive_atpos");
-    attyp = new int[nucell];
-    layer = new int[nucell];
+    atpos = memory->create(atpos, nucell, 3, "AB:atpos");
+    attyp = memory->create(attyp, nucell, "AB:attyp");
+    layer = memory->create(layer, nucell, "AB:layer");
     
     attyp[0] = 1;
     layer[0]    = 0;
@@ -1061,7 +1061,7 @@ void AB::AB_NiAs()
   // initialize according to surface type
   switch (surftype){
   case 1:
-    name = new char[13];
+    name = memory->create(name,13,"AB:name");
     strcpy(name, "AB-NiAs(001)");
 
     ntype  = 2;
@@ -1072,9 +1072,9 @@ void AB::AB_NiAs()
     latvec[1][1] = sqrt(3.)/2.;
     latvec[2][2] = ca;
 
-    atpos = memory->create(atpos,nucell, 3, "AB_NiAs_001_atpos");
-    attyp = new int[nucell];
-    layer = new int[nucell];
+    atpos = memory->create(atpos, nucell, 3, "AB:atpos");
+    attyp = memory->create(attyp, nucell, "AB:attyp");
+    layer = memory->create(layer, nucell, "AB:layer");
 
     attyp[0] = 1;
     layer[0]    = 0;
@@ -1103,7 +1103,7 @@ void AB::AB_NiAs()
     initialized = 1;
     break;
   case 2:
-    name = new char[13];
+    name = memory->create(name,13,"AB:name");
     strcpy(name, "AB-NiAs(001)");
 
     ntype  = 2;
@@ -1113,9 +1113,9 @@ void AB::AB_NiAs()
     latvec[1][1] = sqrt(3.);
     latvec[2][2] = ca;
 
-    atpos = memory->create(atpos,nucell, 3, "AB_NiAs_001_atpos");
-    attyp = new int[nucell];
-    layer = new int[nucell];
+    atpos = memory->create(atpos, nucell, 3, "AB:atpos");
+    attyp = memory->create(attyp, nucell, "AB:attyp");
+    layer = memory->create(layer, nucell, "AB:layer");
 
     attyp[0] = 1;
     layer[0]    = 0;
@@ -1168,7 +1168,7 @@ void AB::AB_NiAs()
     initialized = 1;
     break;
   case 3:
-    name = new char[13];
+    name = memory->create(name,13,"AB:name");
     strcpy(name, "AB-NiAs(100)");
 
     ntype  = 2;
@@ -1178,9 +1178,9 @@ void AB::AB_NiAs()
     latvec[1][1] = ca;
     latvec[2][2] = sqrt(3.);
 
-    atpos = memory->create(atpos,nucell, 3, "AB_NiAs_100_atpos");
-    attyp = new int[nucell];
-    layer = new int[nucell];
+    atpos = memory->create(atpos, nucell, 3, "AB:atpos");
+    attyp = memory->create(attyp, nucell, "AB:attyp");
+    layer = memory->create(layer, nucell, "AB:layer");
 
     attyp[0] = 1;
     layer[0]    = 0;
@@ -1233,7 +1233,7 @@ void AB::AB_NiAs()
     initialized = 1;
     break;
   case 4:
-    name = new char[13];
+    name = memory->create(name,13,"AB:name");
     strcpy(name, "AB-NiAs(110)");
 
     ntype  = 2;
@@ -1243,9 +1243,9 @@ void AB::AB_NiAs()
     latvec[1][1] = sqrt(3.);
     latvec[2][2] = 1.;
 
-    atpos = memory->create(atpos,nucell, 3, "AB_NiAs_110_atpos");
-    attyp = new int[nucell];
-    layer = new int[nucell];
+    atpos = memory->create(atpos, nucell, 3, "AB:atpos");
+    attyp = memory->create(attyp, nucell, "AB:attyp");
+    layer = memory->create(layer, nucell, "AB:layer");
 
     attyp[0] = 2;
     layer[0]    = 0;
@@ -1298,7 +1298,7 @@ void AB::AB_NiAs()
     initialized = 1;
     break;
   case 5:
-    name = new char[14];
+    name = memory->create(name,14,"AB:name");
     strcpy(name, "AB-NiAs(1-10)");
 
     ntype  = 2;
@@ -1308,9 +1308,9 @@ void AB::AB_NiAs()
     latvec[1][1] = ca;
     latvec[2][2] = sqrt(3.);
 
-    atpos = memory->create(atpos,nucell, 3, "AB_NiAs_1m0_atpos");
-    attyp = new int[nucell];
-    layer = new int[nucell];
+    atpos = memory->create(atpos, nucell, 3, "AB:atpos");
+    attyp = memory->create(attyp, nucell, "AB:attyp");
+    layer = memory->create(layer, nucell, "AB:layer");
 
     attyp[0] = 1;
     layer[0]    = 0;

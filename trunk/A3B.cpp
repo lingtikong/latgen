@@ -107,7 +107,7 @@ void A3B::A3B_A15()
   // initialize according to surface type
   switch (surftype){
   case 1:
-    name = new char[13];
+    name = memory->create(name,13,"A3B:name");
     strcpy(name, "A3B-A15(001)");
 
     ntype  = 2;
@@ -117,9 +117,9 @@ void A3B::A3B_A15()
     latvec[1][1] = 1.;
     latvec[2][2] = 1.;
 
-    atpos = memory->create(atpos,nucell, 3, "A3B_A15_001_atpos");
-    attyp = new int[nucell];
-    layer = new int[nucell];
+    atpos = memory->create(atpos, nucell, 3, "A3B:atpos");
+    attyp = memory->create(attyp, nucell, "A3B:attyp");
+    layer = memory->create(layer, nucell, "A3B:layer");
     
     attyp[0]    = ip2;
     layer[0]    = 0;
@@ -172,7 +172,7 @@ void A3B::A3B_A15()
     initialized = 1;
     break;
   case 2:
-    name = new char[13];
+    name = memory->create(name,13,"A3B:name");
     strcpy(name, "A3B-A15(110)");
 
     ntype  = 2;
@@ -182,9 +182,9 @@ void A3B::A3B_A15()
     latvec[1][1] = sqrt(2.);
     latvec[2][2] = sqrt(2.);
 
-    atpos = memory->create(atpos,nucell, 3, "A3B_A15_110_atpos");
-    attyp = new int[nucell];
-    layer = new int[nucell];
+    atpos = memory->create(atpos, nucell, 3, "A3B:atpos");
+    attyp = memory->create(attyp, nucell, "A3B:attyp");
+    layer = memory->create(layer, nucell, "A3B:layer");
     
     attyp[0]    = ip2;
     layer[0]    = 0;
@@ -285,7 +285,7 @@ void A3B::A3B_A15()
     initialized = 1;
     break;
   case 3:
-    name = new char[13];
+    name = memory->create(name,13,"A3B:name");
     strcpy(name, "A3B-A15(111)");
 
     ntype  = 2;
@@ -295,9 +295,9 @@ void A3B::A3B_A15()
     latvec[1][1] = sqrt(2.);
     latvec[2][2] = sqrt(3.)/2.;
 
-    atpos = memory->create(atpos,nucell, 3, "A3B_A15_111_atpos");
-    attyp = new int[nucell];
-    layer = new int[nucell];
+    atpos = memory->create(atpos, nucell, 3, "A3B:atpos");
+    attyp = memory->create(attyp, nucell, "A3B:attyp");
+    layer = memory->create(layer, nucell, "A3B:layer");
     
     attyp[0]    = ip2;
     layer[0]    = 0;
@@ -477,7 +477,7 @@ void A3B::A3B_D019()
   // initialize according to surface type
   switch (surftype){
   case 1:
-    name = new char[14];
+    name = memory->create(name,14,"A3B:name");
     strcpy(name, "A3B-D019(001)");
 
     ntype  = 2;
@@ -488,9 +488,9 @@ void A3B::A3B_D019()
     latvec[1][1] = sqrt(3.)*0.5;
     latvec[2][2] = ca;
 
-    atpos = memory->create(atpos,nucell, 3, "A3B_D019_001_atpos");
-    attyp = new int[nucell];
-    layer = new int[nucell];
+    atpos = memory->create(atpos, nucell, 3, "A3B:atpos");
+    attyp = memory->create(attyp, nucell, "A3B:attyp");
+    layer = memory->create(layer, nucell, "A3B:layer");
     
     attyp[0]    = ip2;
     layer[0]    = 0;
@@ -543,7 +543,7 @@ void A3B::A3B_D019()
     initialized = 1;
     break;
   case 2:
-    name = new char[14];
+    name = memory->create(name,14,"A3B:name");
     strcpy(name, "A3B-D019(001)");
 
     ntype  = 2;
@@ -553,9 +553,9 @@ void A3B::A3B_D019()
     latvec[1][1] = sqrt(3.);
     latvec[2][2] = ca;
 
-    atpos = memory->create(atpos,nucell, 3, "A3B_D019_001_atpos");
-    attyp = new int[nucell];
-    layer = new int[nucell];
+    atpos = memory->create(atpos, nucell, 3, "A3B:atpos");
+    attyp = memory->create(attyp, nucell, "A3B:attyp");
+    layer = memory->create(layer, nucell, "A3B:layer");
     
     attyp[0]    = ip2;
     layer[0]    = 0;
@@ -656,7 +656,7 @@ void A3B::A3B_D019()
     initialized = 1;
     break;
   case 3:
-    name = new char[14];
+    name = memory->create(name,14,"A3B:name");
     strcpy(name, "A3B-D019(100)");
 
     ntype  = 2;
@@ -666,9 +666,9 @@ void A3B::A3B_D019()
     latvec[1][1] = ca;
     latvec[2][2] = sqrt(3.);
 
-    atpos = memory->create(atpos,nucell, 3, "A3B_D019_100_atpos");
-    attyp = new int[nucell];
-    layer = new int[nucell];
+    atpos = memory->create(atpos, nucell, 3, "A3B:atpos");
+    attyp = memory->create(attyp, nucell, "A3B:attyp");
+    layer = memory->create(layer, nucell, "A3B:layer");
     
     attyp[0]    = ip1;
     layer[0]    = 0;
@@ -769,7 +769,7 @@ void A3B::A3B_D019()
     initialized = 1;
     break;
   case 4:
-    name = new char[14];
+    name = memory->create(name,14,"A3B:name");
     strcpy(name, "A3B-D019(110)");
 
     ntype  = 2;
@@ -779,9 +779,9 @@ void A3B::A3B_D019()
     latvec[1][1] = ca;
     latvec[2][2] = sqrt(3.);
 
-    atpos = memory->create(atpos,nucell, 3, "A3B_D019_110_atpos");
-    attyp = new int[nucell];
-    layer = new int[nucell];
+    atpos = memory->create(atpos, nucell, 3, "A3B:atpos");
+    attyp = memory->create(attyp, nucell, "A3B:attyp");
+    layer = memory->create(layer, nucell, "A3B:layer");
     
     attyp[0] = ip1;
     layer[0]    = 0;
@@ -912,7 +912,7 @@ void A3B::A3B_D022()
   // initialize according to surface type
   switch (surftype){
   case 1:
-    name = new char[14];
+    name = memory->create(name,14,"A3B:name");
     strcpy(name, "A3B-D022(001)");
 
     ntype  = 2;
@@ -922,9 +922,9 @@ void A3B::A3B_D022()
     latvec[1][1] = 1.;
     latvec[2][2] = ca;
 
-    atpos = memory->create(atpos,nucell, 3, "A3B_D022_001_atpos");
-    attyp = new int[nucell];
-    layer = new int[nucell];
+    atpos = memory->create(atpos, nucell, 3, "A3B:atpos");
+    attyp = memory->create(attyp, nucell, "A3B:attyp");
+    layer = memory->create(layer, nucell, "A3B:layer");
     
     attyp[0]    = ip2;
     layer[0]    = 0;
@@ -977,7 +977,7 @@ void A3B::A3B_D022()
     initialized = 1;
     break;
   case 2:
-    name = new char[14];
+    name = memory->create(name,14,"A3B:name");
     strcpy(name, "A3B-D022(100)");
 
     ntype  = 2;
@@ -987,9 +987,9 @@ void A3B::A3B_D022()
     latvec[1][1] = ca;
     latvec[2][2] = 1.;
 
-    atpos = memory->create(atpos,nucell, 3, "A3B_D022_100_atpos");
-    attyp = new int[nucell];
-    layer = new int[nucell];
+    atpos = memory->create(atpos, nucell, 3, "A3B:atpos");
+    attyp = memory->create(attyp, nucell, "A3B:attyp");
+    layer = memory->create(layer, nucell, "A3B:layer");
     
     attyp[0]    = ip2;
     layer[0]    = 0;
@@ -1042,7 +1042,7 @@ void A3B::A3B_D022()
     initialized = 1;
     break;
   case 3:
-    name = new char[14];
+    name = memory->create(name,14,"A3B:name");
     strcpy(name, "A3B-D022(110)");
 
     ntype  = 2;
@@ -1052,9 +1052,9 @@ void A3B::A3B_D022()
     latvec[1][1] = ca;
     latvec[2][2] = sqrt(2.);
 
-    atpos = memory->create(atpos,nucell, 3, "A3B_110_atpos");
-    attyp = new int[nucell];
-    layer = new int[nucell];
+    atpos = memory->create(atpos, nucell, 3, "A3B:atpos");
+    attyp = memory->create(attyp, nucell, "A3B:attyp");
+    layer = memory->create(layer, nucell, "A3B:layer");
     
     attyp[0]    = ip2;
     layer[0]    = 0;
@@ -1155,7 +1155,7 @@ void A3B::A3B_D022()
     initialized = 1;
     break;
   case 4:
-    name = new char[19];
+    name = memory->create(name,19,"A3B:name");
     strcpy(name, "A3B-D022-primitive");
 
     ntype  = 2;
@@ -1171,9 +1171,9 @@ void A3B::A3B_D022()
     latvec[2][1] =  0.5;
     latvec[2][2] = -0.5;
 
-    atpos = memory->create(atpos,nucell, 3, "A3B_D022_primitive_atpos");
-    attyp = new int[nucell];
-    layer = new int[nucell];
+    atpos = memory->create(atpos, nucell, 3, "A3B:atpos");
+    attyp = memory->create(attyp, nucell, "A3B:attyp");
+    layer = memory->create(layer, nucell, "A3B:layer");
     
     attyp[0]    = ip2;
     layer[0]    = 0;
@@ -1233,7 +1233,7 @@ void A3B::A3B_D03()
   // initialize according to surface type
   switch (surftype){
   case 1:
-    name = new char[13];
+    name = memory->create(name,13,"A3B:name");
     strcpy(name, "A3B-D03(001)");
 
     ntype  = 2;
@@ -1243,9 +1243,9 @@ void A3B::A3B_D03()
     latvec[1][1] = 1./sqrt(2.);
     latvec[2][2] = 1.;
 
-    atpos = memory->create(atpos,nucell, 3, "A3B_D03_001_atpos");
-    attyp = new int[nucell];
-    layer = new int[nucell];
+    atpos = memory->create(atpos, nucell, 3, "A3B:atpos");
+    attyp = memory->create(attyp, nucell, "A3B:attyp");
+    layer = memory->create(layer, nucell, "A3B:layer");
 
     attyp[0] = ip1;
     layer[0]    = 0;
@@ -1298,7 +1298,7 @@ void A3B::A3B_D03()
     initialized = 1;
     break;
   case 2:
-    name = new char[14];
+    name = memory->create(name,14,"A3B:name");
     strcpy(name, "A3B-D03(100)");
 
     ntype  = 2;
@@ -1308,9 +1308,9 @@ void A3B::A3B_D03()
     latvec[1][1] = 1.;
     latvec[2][2] = 1.;
 
-    atpos = memory->create(atpos,nucell, 3, "A3B_D03_100_atpos");
-    attyp = new int[nucell];
-    layer = new int[nucell];
+    atpos = memory->create(atpos, nucell, 3, "A3B:atpos");
+    attyp = memory->create(attyp, nucell, "A3B:attyp");
+    layer = memory->create(layer, nucell, "A3B:layer");
     
     attyp[0] = ip1;
     layer[0]    = 0;
@@ -1411,7 +1411,7 @@ void A3B::A3B_D03()
     initialized = 1;
     break;
   case 3:
-    name = new char[13];
+    name = memory->create(name,13,"A3B:name");
     strcpy(name, "A3B-D03(110)");
 
     ntype  = 2;
@@ -1421,9 +1421,9 @@ void A3B::A3B_D03()
     latvec[1][1] = sqrt(2.);
     latvec[2][2] = sqrt(2.);
 
-    atpos = memory->create(atpos,nucell, 3, "A3B_D03_110_atpos");
-    attyp = new int[nucell];
-    layer = new int[nucell];
+    atpos = memory->create(atpos, nucell, 3, "A3B:atpos");
+    attyp = memory->create(attyp, nucell, "A3B:attyp");
+    layer = memory->create(layer, nucell, "A3B:layer");
     
     attyp[0] = ip1;
     layer[0]    = 0;
@@ -1476,7 +1476,7 @@ void A3B::A3B_D03()
     initialized = 1;
     break;
   case 4:
-    name = new char[13];
+    name = memory->create(name,13,"A3B:name");
     strcpy(name, "A3B-D03(111)");
 
     ntype  = 2;
@@ -1486,9 +1486,9 @@ void A3B::A3B_D03()
     latvec[1][1] = sqrt(6.)/2.;
     latvec[2][2] = sqrt(3.);
 
-    atpos = memory->create(atpos,nucell, 3, "A3B_D03_111_atpos");
-    attyp = new int[nucell];
-    layer = new int[nucell];
+    atpos = memory->create(atpos, nucell, 3, "A3B:atpos");
+    attyp = memory->create(attyp, nucell, "A3B:attyp");
+    layer = memory->create(layer, nucell, "A3B:layer");
     
     attyp[0] = ip2;
     layer[0]    = 0;
@@ -1637,7 +1637,7 @@ void A3B::A3B_D03()
     initialized = 1;
     break;
   case 5:
-    name = new char[18];
+    name = memory->create(name,18,"A3B:name");
     strcpy(name, "A3B-D03-primitive");
 
     ntype  = 2;
@@ -1650,9 +1650,9 @@ void A3B::A3B_D03()
     latvec[2][0] = 0.5;
     latvec[2][1] = 0.5;
 
-    atpos = memory->create(atpos,nucell, 3, "A3B_D03_primitive_atpos");
-    attyp = new int[nucell];
-    layer = new int[nucell];
+    atpos = memory->create(atpos, nucell, 3, "A3B:atpos");
+    attyp = memory->create(attyp, nucell, "A3B:attyp");
+    layer = memory->create(layer, nucell, "A3B:layer");
     
     attyp[0] = ip2;
     layer[0]    = 0;
@@ -1710,7 +1710,7 @@ void A3B::A3B_D09()
   // initialize according to surface type
   switch (surftype){
   case 1:
-    name = new char[13];
+    name = memory->create(name,13,"A3B:name");
     strcpy(name, "A3B-D09(001)");
 
     ntype  = 2;
@@ -1720,9 +1720,9 @@ void A3B::A3B_D09()
     latvec[1][1] = 1.;
     latvec[2][2] = 1.;
 
-    atpos = memory->create(atpos,nucell, 3, "A3B_D09_001_atpos");
-    attyp = new int[nucell];
-    layer = new int[nucell];
+    atpos = memory->create(atpos, nucell, 3, "A3B:atpos");
+    attyp = memory->create(attyp, nucell, "A3B:attyp");
+    layer = memory->create(layer, nucell, "A3B:layer");
 
     attyp[0] = ip1;
     layer[0]    = 0;
@@ -1751,7 +1751,7 @@ void A3B::A3B_D09()
     initialized = 1;
     break;
   case 2:
-    name = new char[13];
+    name = memory->create(name,13,"A3B:name");
     strcpy(name, "A3B-D09(110)");
 
     ntype  = 2;
@@ -1761,9 +1761,9 @@ void A3B::A3B_D09()
     latvec[1][1] = sqrt(2.);
     latvec[2][2] = sqrt(2.);
 
-    atpos = memory->create(atpos,nucell, 3, "A3B_D09_110_atpos");
-    attyp = new int[nucell];
-    layer = new int[nucell];
+    atpos = memory->create(atpos, nucell, 3, "A3B:atpos");
+    attyp = memory->create(attyp, nucell, "A3B:attyp");
+    layer = memory->create(layer, nucell, "A3B:layer");
     
     attyp[0] = ip1;
     layer[0]    = 0;
@@ -1816,7 +1816,7 @@ void A3B::A3B_D09()
     initialized = 1;
     break;
   case 3:
-    name = new char[13];
+    name = memory->create(name,13,"A3B:name");
     strcpy(name, "A3B-D09(111)");
 
     ntype  = 2;
@@ -1826,9 +1826,9 @@ void A3B::A3B_D09()
     latvec[1][1] = sqrt(6.);
     latvec[2][2] = sqrt(3.);
 
-    atpos = memory->create(atpos,nucell, 3, "A3B_D09_111_atpos");
-    attyp = new int[nucell];
-    layer = new int[nucell];
+    atpos = memory->create(atpos, nucell, 3, "A3B:atpos");
+    attyp = memory->create(attyp, nucell, "A3B:attyp");
+    layer = memory->create(layer, nucell, "A3B:layer");
 
     attyp[0] = ip2;
     layer[0]    = 0;
@@ -2006,7 +2006,7 @@ void A3B::A3B_L12()
   // initialize according to surface type
   switch (surftype){
   case 1:
-    name = new char[13];
+    name = memory->create(name,13,"A3B:name");
     strcpy(name, "A3B-L12(001)");
 
     ntype  = 2;
@@ -2016,9 +2016,9 @@ void A3B::A3B_L12()
     latvec[1][1] = 1.;
     latvec[2][2] = 1.;
 
-    atpos = memory->create(atpos,nucell, 3, "A3B_L12_001_atpos");
-    attyp = new int[nucell];
-    layer = new int[nucell];
+    atpos = memory->create(atpos, nucell, 3, "A3B:atpos");
+    attyp = memory->create(attyp, nucell, "A3B:attyp");
+    layer = memory->create(layer, nucell, "A3B:layer");
 
     attyp[0] = ip2;
     layer[0]    = 0;
@@ -2047,7 +2047,7 @@ void A3B::A3B_L12()
     initialized = 1;
     break;
   case 2:
-    name = new char[13];
+    name = memory->create(name,13,"A3B:name");
     strcpy(name, "A3B-L12(110)");
 
     ntype  = 2;
@@ -2057,9 +2057,9 @@ void A3B::A3B_L12()
     latvec[1][1] = sqrt(2.);
     latvec[2][2] = sqrt(2.);
 
-    atpos = memory->create(atpos,nucell, 3, "A3B_L12_110_atpos");
-    attyp = new int[nucell];
-    layer = new int[nucell];
+    atpos = memory->create(atpos, nucell, 3, "A3B:atpos");
+    attyp = memory->create(attyp, nucell, "A3B:attyp");
+    layer = memory->create(layer, nucell, "A3B:layer");
     
     attyp[0] = ip1;
     layer[0]    = 0;
@@ -2112,7 +2112,7 @@ void A3B::A3B_L12()
     initialized = 1;
     break;
   case 3:
-    name = new char[13];
+    name = memory->create(name,13,"A3B:name");
     strcpy(name, "A3B-L12(111)");
 
     ntype  = 2;
@@ -2122,9 +2122,9 @@ void A3B::A3B_L12()
     latvec[1][1] = sqrt(6.);
     latvec[2][2] = sqrt(3.);
 
-    atpos = memory->create(atpos,nucell, 3, "A3B_L12_111_atpos");
-    attyp = new int[nucell];
-    layer = new int[nucell];
+    atpos = memory->create(atpos, nucell, 3, "A3B:atpos");
+    attyp = memory->create(attyp, nucell, "A3B:attyp");
+    layer = memory->create(layer, nucell, "A3B:layer");
 
     attyp[0] = ip1;
     layer[0]    = 0;
@@ -2302,7 +2302,7 @@ void A3B::A3B_L60()
   // initialize according to surface type
   switch (surftype){
   case 1:
-    name = new char[13];
+    name = memory->create(name,13,"A3B:name");
     strcpy(name, "A3B-L60(001)");
 
     ntype  = 2;
@@ -2312,9 +2312,9 @@ void A3B::A3B_L60()
     latvec[1][1] = 1.;
     latvec[2][2] = ca;
 
-    atpos = memory->create(atpos,nucell, 3, "A3B_L60_001_atpos");
-    attyp = new int[nucell];
-    layer = new int[nucell];
+    atpos = memory->create(atpos, nucell, 3, "A3B:atpos");
+    attyp = memory->create(attyp, nucell, "A3B:attyp");
+    layer = memory->create(layer, nucell, "A3B:layer");
 
     attyp[0] = ip1;
     layer[0]    = 0;
@@ -2343,7 +2343,7 @@ void A3B::A3B_L60()
     initialized = 1;
     break;
   case 2:
-    name = new char[13];
+    name = memory->create(name,13,"A3B:name");
     strcpy(name, "A3B-L60(100)");
 
     ntype  = 2;
@@ -2353,9 +2353,9 @@ void A3B::A3B_L60()
     latvec[1][1] = ca;
     latvec[2][2] = 1.;
 
-    atpos = memory->create(atpos,nucell, 3, "A3B_L60_100_atpos");
-    attyp = new int[nucell];
-    layer = new int[nucell];
+    atpos = memory->create(atpos, nucell, 3, "A3B:atpos");
+    attyp = memory->create(attyp, nucell, "A3B:attyp");
+    layer = memory->create(layer, nucell, "A3B:layer");
     
     attyp[0] = ip1;
     layer[0]    = 0;
@@ -2384,7 +2384,7 @@ void A3B::A3B_L60()
     initialized = 1;
     break;
   case 3:
-    name = new char[13];
+    name = memory->create(name,13,"A3B:name");
     strcpy(name, "A3B-L60(110)");
 
     ntype  = 2;
@@ -2394,9 +2394,9 @@ void A3B::A3B_L60()
     latvec[1][1] = sqrt(2.);
     latvec[2][2] = sqrt(2.);
 
-    atpos = memory->create(atpos,nucell, 3, "A3B_L60_110_atpos");
-    attyp = new int[nucell];
-    layer = new int[nucell];
+    atpos = memory->create(atpos, nucell, 3, "A3B:atpos");
+    attyp = memory->create(attyp, nucell, "A3B:attyp");
+    layer = memory->create(layer, nucell, "A3B:layer");
 
     attyp[0] = ip1;
     layer[0]    = 0;
