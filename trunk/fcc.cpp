@@ -4,7 +4,7 @@
 #include "string.h"
 #include "math.h"
 
-#define MAX_LINE_LENGTH 256
+#define MAXLINE 256
 
 using namespace std;
 
@@ -13,12 +13,12 @@ using namespace std;
 ------------------------------------------------------------------------- */
 FCC::FCC() : lattice()
 {
-  char str[MAX_LINE_LENGTH];
+  char str[MAXLINE];
   alat = 1.;
   // print out the menu
   printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
   printf("Please input the lattice constant of the FCC lattice [1.]: ");
-  if (count_words(gets(str)) > 0) alat = atof(strtok(str, " \t\n\r\f"));
+  if (count_words(fgets(str,MAXLINE,stdin)) > 0) alat = atof(strtok(str, " \t\n\r\f"));
 
   int orient = 3;
   printf("Please selection the orientation of the FCC lattice:\n");
@@ -28,7 +28,7 @@ FCC::FCC() : lattice()
   printf("   4. Primitive cell;       8. NaCl convertion cell;\n");
   for (int i=0; i<70; i++) printf("-");
   printf("\nYour  choice [3]: ");
-  if (count_words(gets(str)) > 0) orient = atoi(strtok(str, " \t\n\r\f"));
+  if (count_words(fgets(str,MAXLINE,stdin)) > 0) orient = atoi(strtok(str, " \t\n\r\f"));
   printf("You selected: %d", orient);
   printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
   
@@ -78,7 +78,7 @@ FCC::~FCC()
 ------------------------------------------------------------------------- */
 void FCC::FCC001()
 {
-  char str[MAX_LINE_LENGTH];
+  char str[MAXLINE];
   int surftype = 2;
   // print out the menu
   printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
@@ -86,7 +86,7 @@ void FCC::FCC001()
   printf("   1. primitive, horizental orientation;\n");
   printf("   2. conventional orientation;\n");
   printf("Your  choice [2]: ");
-  if (count_words(gets(str)) > 0) surftype = atoi(strtok(str, " \t\n\r\f"));
+  if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = atoi(strtok(str, " \t\n\r\f"));
   printf("You selected: %d", surftype);
   printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
   for (int i=0; i<3; i++){
@@ -169,7 +169,7 @@ return;
 ------------------------------------------------------------------------- */
 void FCC::FCC110()
 {
-  char str[MAX_LINE_LENGTH];
+  char str[MAXLINE];
   int surftype = 1;
   // print out the menu
   printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
@@ -177,7 +177,7 @@ void FCC::FCC110()
   printf("   1. orthogonal, long side along x\n");
   printf("   2. orthogonal, long side along y\n");
   printf("Your  choice [1]: ");
-  if (count_words(gets(str)) > 0) surftype = atoi(strtok(str, " \t\n\r\f"));
+  if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = atoi(strtok(str, " \t\n\r\f"));
   printf("You selected: %d", surftype);
   printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
   
@@ -251,7 +251,7 @@ return;
 ------------------------------------------------------------------------- */
 void FCC::FCC111()
 {
-  char str[MAX_LINE_LENGTH];
+  char str[MAXLINE];
   int surftype = 5;
   // print out the menu
   printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
@@ -263,7 +263,7 @@ void FCC::FCC111()
   printf("   5. orthogonal long side along x;\n");
   printf("   6. orthogonal long side along y;\n");
   printf("Your  choice [5]: ");
-  if (count_words(gets(str)) > 0) surftype = atoi(strtok(str, " \t\n\r\f"));
+  if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = atoi(strtok(str, " \t\n\r\f"));
   printf("You selected: %d", surftype);
   printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
   

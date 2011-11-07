@@ -38,6 +38,8 @@ private:
   // private modification methods
   void solidsol(void);            // method to create subsutitutional solid solution
   void ResetTypeID(void);         // method to reset the atomic type ID
+
+  int count_words(const char *);
 };
 
 #endif
