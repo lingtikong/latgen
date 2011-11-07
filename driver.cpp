@@ -52,7 +52,7 @@ int Driver::ShowMenu(const int flag)
   }
   for (int i=0; i<70; i++) printf("-");
   printf("\nYour choice [1]: ");
-  if (strlen(gets(str)) > 0) ltype = atoi(strtok(str," \t\n\r\f"));
+  if (count_words(fgets(str,MAXLINE,stdin)) > 0) ltype = atoi(strtok(str," \t\n\r\f"));
   printf("You selected: %d", ltype);
   printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
 
@@ -71,8 +71,9 @@ int Driver::ShowMenu(const int flag)
   if ( rflag ){
     // re-orient the lattice
     printf("Would you like to re-orient the unit cell to comply with LAMMPS? (y/n)[n]: ");
-    if (strlen(gets(str)) > 0){
-      if (strcmp(str,"y")==0 || strcmp(str,"Y")==0) latt->OrientLattice();
+    if (count_words(fgets(str,MAXLINE,stdin)) > 0){
+      char *flag = strtok(str," \t\n\r\f");
+      if (strcmp(flag,"y")==0 || strcmp(flag,"Y")==0) latt->OrientLattice();
     }
   }
 
@@ -123,7 +124,7 @@ void Driver::generate()
   printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
   while (1){
     printf("Please input the dimensions in x, y, and z directions: ");
-    if (latt->count_words(gets(str)) < 3) continue;
+    if (count_words(fgets(str,MAXLINE,stdin)) < 3) continue;
     nx = atoi(strtok(str,  " \t\n\r\f"));
     ny = atoi(strtok(NULL, " \t\n\r\f"));
     nz = atoi(strtok(NULL, " \t\n\r\f"));
@@ -133,7 +134,7 @@ void Driver::generate()
 
   printf("Your system would be %d x %d x %d with %d atoms.\n",nx,ny,nz,natom);
   printf("Please indicate which direction should goes fast(1:x; other: z)[1]: ");
-  if (latt->count_words(gets(str)) > 0) leading_dir = atoi(strtok(str, " \t\n\r\f"));
+  if (count_words(fgets(str,MAXLINE,stdin)) > 0) leading_dir = atoi(strtok(str, " \t\n\r\f"));
   for (int i=0; i<70; i++) printf("="); printf("\n");
 
   atpos = memory->create(atpos, natom, 3, "driver->generate:atpos");
@@ -246,7 +247,7 @@ void Driver::ResetTypeID()
   for (int i=0; i<ntype; i++) printf("%4d", i+1); printf("\nTypeID: ");
   for (int i=0; i<ntype; i++) printf("%4d", typeID[i]);
   printf("\nPlease input the new type IDs in sequence, enter to skip: ");
-  if (strlen(gets(str)) > 0){
+  if (count_words(fgets(str,MAXLINE,stdin)) > 0){
     int newID[ntype], num=0;
     char *ptr;
     ptr = strtok(str, " \t\n\r\f");
@@ -260,7 +261,9 @@ void Driver::ResetTypeID()
       for (int i=0; i<ntype; i++) printf("%4d", i+1); printf("\nTypeID: ");
       for (int i=0; i<ntype; i++) printf("%4d", newID[i]);
       printf("\nIs this what you want? (y/n)[y]: ");
-      if (strlen(gets(str)) < 1 || (strcmp(str,"n") != 0 && strcmp(str,"N") !=0) ){
+      int nw = count_words(fgets(str,MAXLINE,stdin));
+      char *flag = strtok(str, " \t\n\r\f");
+      if ( nw < 1 || ((strcmp(flag,"n") != 0) && (strcmp(flag,"N") != 0))){
         for (int i=0; i<natom; i++){
           int id = lookup(attyp[i]);
           attyp[i] = newID[id];
@@ -298,20 +301,20 @@ void Driver::write()
 
   printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
   printf("Please input the filename of the output xyz file [atomcfg.xyz]: ");
-  if (strlen(gets(str)) > 0){
+  if (count_words(fgets(str,MAXLINE,stdin)) > 0){
     int n = strlen(str) + 1;
     posfile = new char[n];
-    strcpy(posfile, str);
+    strcpy(posfile, strtok(str," \t\n\r\f"));
   } else {
     posfile = new char[12];
     strcpy(posfile, "atomcfg.xyz");
   }
   if (flag_lmp_data){
     printf("Please input the filename of the lammps atomic file [data.pos]: ");
-    if (strlen(gets(str)) > 0){
+    if (count_words(fgets(str,MAXLINE,stdin)) > 0){
       int n = strlen(str) + 1;
       lmpfile = new char[n];
-      strcpy(lmpfile, str);
+      strcpy(lmpfile, strtok(str," \t\n\r\f"));
     } else {
       lmpfile = new char[9];
       strcpy(lmpfile, "data.pos");
@@ -320,10 +323,10 @@ void Driver::write()
 
   if (xmap){
     printf("Please input the filename of the output map file [map.in]: ");
-    if (strlen(gets(str)) > 0){
+    if (count_words(fgets(str,MAXLINE,stdin)) > 0){
       int n = strlen(str) + 1;
       mapfile = new char[n];
-      strcpy(mapfile, str);
+      strcpy(mapfile, strtok(str," \t\n\r\f"));
     } else {
       mapfile = new char[7];
       strcpy(mapfile, "map.in");
@@ -403,7 +406,7 @@ void Driver::modify()
     else printf("  0. Done.\n");
     printf("Your choice [0]: ");
 
-    if (strlen(gets(str)) >0) job = atoi(strtok(str, " \t\n\r\f"));
+    if (count_words(fgets(str,MAXLINE,stdin)) >0) job = atoi(strtok(str, " \t\n\r\f"));
 
     printf("You selected: %d", job);
     printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
@@ -428,27 +431,31 @@ void Driver::solidsol()
   printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
   int lrange = 0, nrange;
   printf("Limit the solid solution within a region? (y/n)[n]: ");
-  if (strlen(gets(str)) > 0) if (strcmp(str,"y") == 0 || strcmp(str,"Y")== 0) lrange = 1;
+  if (count_words(fgets(str,MAXLINE,stdin)) > 0){
+    char *flag = strtok(str, " \r\n\t\f");
+    if (strcmp(flag,"y") == 0 || strcmp(flag,"Y")== 0) lrange = 1;
+  }
   int dir = 2, outside = 0;
   double lo, hi;
   if (lrange){
     printf("Please input the normal direction of the region [z]: ");
-    if (strlen(gets(str)) > 0){
-      if (strcmp(str,"x") == 0 || strcmp(str,"X")== 0) dir = 0;
-      else if (strcmp(str,"y") == 0 || strcmp(str,"Y")== 0) dir = 1;
+    if (count_words(fgets(str,MAXLINE,stdin)) > 0){
+      char *flag = strtok(str," \t\n\r\f");
+      if (strcmp(flag,"x") == 0 || strcmp(flag,"X")== 0) dir = 0;
+      else if (strcmp(flag,"y") == 0 || strcmp(flag,"Y")== 0) dir = 1;
       else dir = 2;
     }
     lo = 0.; hi = latvec[dir][dir];
     printf("The lattice vector along the selected direction: %g %g %g\n", latvec[dir][0], latvec[dir][1], latvec[dir][2]);
     printf("Please input the lower and upper limit of the region [0 %lg]: ", latvec[dir][dir]);
-    if (strlen(gets(str)) > 0){
+    if (count_words(fgets(str,MAXLINE,stdin)) > 0){
       char *ptr;
       ptr = strtok(str," \t\n\r\f");  if (ptr != NULL) lo = atof(ptr);
       ptr = strtok(NULL," \t\n\r\f"); if (ptr != NULL) hi = atof(ptr);
     }
     printf("The desired region will be along the %d-th direction within [%g %g].\n", dir+1, lo, hi);
     printf("Will you limit the solid solution (0) inside or (1) outside the region?[0]: ");
-    if (strlen(gets(str)) > 0) outside = atoi(strtok(str, " \t\n\r\f"));
+    if (count_words(fgets(str,MAXLINE,stdin)) > 0) outside = atoi(strtok(str, " \t\n\r\f"));
     
     nrange = 0;
     for (int i=0; i<natom; i++){
@@ -468,37 +475,43 @@ void Driver::solidsol()
   for (int i=0; i<ntype; i++) printf(" %d", numtype[i]); printf("\n");
 
   int ipsrc, idsrc, numsub, ipdes, iddes;
-  do {
+  while (1){
     printf("\nPlease input the atomic type to be substituted: ");
-    while (strlen(gets(str)) < 1);
+    while (count_words(fgets(str,MAXLINE,stdin)) < 1);
     ipsrc = atoi(strtok(str, " \t\n\r\f"));
     idsrc = lookup(ipsrc);
-  } while (idsrc <0);
+
+    if (idsrc >= 0) break;
+  }
   printf("Total # of atoms with type %d is %d.\n", ipsrc, numtype[idsrc]);
   double frac;
-  do {
+  while (1){
     printf("Please input the fraction or total # of atoms to be replaced: ");
-    while (strlen(gets(str)) < 1);
+    while (count_words(fgets(str,MAXLINE,stdin)) < 1);
     frac = atof(strtok(str, " \t\n\r\f"));
-  } while (frac<0. || int(frac) > numtype[idsrc]);
+
+    if (frac >= 0. && int(frac) <= numtype[idsrc]) break;
+  }
   if (frac < 1.) numsub = int(frac*double(numtype[idsrc]));
   else numsub = int(frac);
   printf("There will be %d atoms with type %d to be replaced.\n", numsub, ipsrc);
   if (numsub < 1) return;
 
-  do {
+  while (1){
     printf("Please input the atomic type to be assigned: ");
-    while (strlen(gets(str)) < 1);
+    while (count_words(fgets(str,MAXLINE,stdin)) < 1);
     ipdes = atoi(strtok(str, " \t\n\r\f"));
     iddes = lookup(ipdes);
     if (iddes >= 0){
       printf("***Note: assigned type already exist, continue? (0= no, 1=yes)[1]:");
-      if (strlen(gets(str)) > 0){
+      if (count_words(fgets(str,MAXLINE,stdin)) > 0){
         int flag = atoi(strtok(str, " \t\n\r\f"));
         if (flag == 1) iddes = -2;
       }
     }
-  } while (iddes >= 0);
+
+    if (iddes < 0) break;
+  }
 
   // create random number generator if not created; current time as seed;
   if (random == NULL){
@@ -539,7 +552,7 @@ void Driver::FormLayers()
   printf("\n\n>>>>>>======  To form multilayers with multiple lattices  ======<<<<<<\n");
   printf("NOTE: The 3rd axis of these lattices must be perpendicular to the other 2!\n");
   printf("\nPlease input the number of lattices in your multi-layer system: ");
-  if (strlen(gets(str)) > 0) nlat = atoi(strtok(str," \t\n\r\f"));
+  if (count_words(fgets(str,MAXLINE,stdin)) > 0) nlat = atoi(strtok(str," \t\n\r\f"));
   if (nlat < 1) return;
 
   lattice *latts[nlat];
@@ -567,7 +580,7 @@ void Driver::FormLayers()
   for (int ilat=0; ilat<nlat; ilat++){
     printf("Please input the lateral extensions (nx & ny) for lattice %c: ", 'A'+ilat);
     while (1){
-      if ( latts[0]->count_words(gets(str)) == 2 ){
+      if ( count_words(fgets(str,MAXLINE,stdin)) == 2 ){
         mynx[ilat] = atoi(strtok(str, " \t\n\r\f"));
         myny[ilat] = atoi(strtok(NULL," \t\n\r\f"));
        if (mynx[ilat] > 0 && myny[ilat] > 0) break;
@@ -602,7 +615,7 @@ void Driver::FormLayers()
   }
   printf("Please input your desired surface vectors [%g %g %g, %g %g %g]: ",
     latvec[0][0], latvec[0][1], latvec[0][2], latvec[1][0], latvec[1][1], latvec[1][2]);
-  if ( latts[0]->count_words(gets(str)) == 6 ){
+  if ( count_words(fgets(str,MAXLINE,stdin)) == 6 ){
     char *ptr = strtok(str," \n\r\t\f");
     for (int i=0; i<2; i++)
     for (int j=0; j<3; j++){ latvec[i][j] = atof(ptr); ptr = strtok(NULL, " \n\r\t\f");}
@@ -645,7 +658,7 @@ void Driver::FormLayers()
   printf("them, for example: A4 0.5 B5 0.4 A4 B5...; multiple numbers will add multiple distances.\n");
   printf("If you want to form the 2nd A layers from its first layer in the unit cell, use\n");
   printf("lower case 'a' instead of 'A'. Now, input your sequences: ");
-  if (strlen(gets(str)) > 1) {
+  if (count_words(fgets(str,MAXLINE,stdin)) > 1) {
     char *ptr = strtok(str," \n\r\t\f");
     while (ptr != NULL){
       zflag = 0; Hextra = 0.;
@@ -743,4 +756,27 @@ void Driver::FormLayers()
   typescan();
 
 return;
+}
+
+/*------------------------------------------------------------------------------
+ * Method to count # of words in a string, without destroying the string
+ *----------------------------------------------------------------------------*/
+int Driver::count_words(const char *line)
+{
+  int n = strlen(line) + 1;
+  char *copy = (char *) memory->smalloc(n*sizeof(char),"copy");
+  strcpy(copy,line);
+
+  char *ptr;
+  if (ptr = strchr(copy,'#')) *ptr = '\0';
+
+  if (strtok(copy," \t\n\r\f") == NULL) {
+    memory->sfree(copy);
+    return 0;
+  }
+  n = 1;
+  while (strtok(NULL," \t\n\r\f")) n++;
+
+  memory->sfree(copy);
+  return n;
 }

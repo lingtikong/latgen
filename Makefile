@@ -2,7 +2,7 @@
 # compiler and flags
 CC     = g++
 LINK   = $(CC)
-CFLAGS = -O3 -Wall $(DEBUG)
+CFLAGS = -O3 $(DEBUG)
 #
 OFLAGS = -O3 $(DEBUG)
 INC    = $(FFTINC) $(LPKINC) $(USRINC)

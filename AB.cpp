@@ -4,7 +4,7 @@
 #include "string.h"
 #include "math.h"
 
-#define MAX_LINE_LENGTH 256
+#define MAXLINE 256
 
 using namespace std;
 
@@ -13,7 +13,7 @@ using namespace std;
 ------------------------------------------------------------------------- */
 AB::AB() : lattice()
 {
-  char str[MAX_LINE_LENGTH];
+  char str[MAXLINE];
   alat = 1.; ca = 1.;
   // print out the menu
   printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
@@ -23,14 +23,14 @@ AB::AB() : lattice()
   printf("   2. B2 (CsCl);        5. B81 (a-NiAs);\n");
   printf("   3. B3 (Zincblende);\n");
   printf("Your choice[1]: ");
-  if (count_words(gets(str)) > 0) lattype = atoi(strtok(str, " \t\n\r\f"));
+  if (count_words(fgets(str,MAXLINE,stdin)) > 0) lattype = atoi(strtok(str, " \t\n\r\f"));
   printf("You selected  : %d\n", lattype);
 
   printf("Please input the lattice constant of the AB lattice [1.]:");
-  if (count_words(gets(str)) > 0) alat = atof(strtok(str, " \t\n\r\f"));
+  if (count_words(fgets(str,MAXLINE,stdin)) > 0) alat = atof(strtok(str, " \t\n\r\f"));
   if (lattype == 4 || lattype == 5){
     printf("Please input the c/a ratio of your lattice [1.]:");
-    if (count_words(gets(str)) > 0) ca = atof(strtok(str, " \t\n\r\f"));
+    if (count_words(fgets(str,MAXLINE,stdin)) > 0) ca = atof(strtok(str, " \t\n\r\f"));
   }
   printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
   
@@ -71,7 +71,7 @@ AB::~AB()
 ------------------------------------------------------------------------- */
 void AB::AB_B1()
 {
-  char str[MAX_LINE_LENGTH];
+  char str[MAXLINE];
   int surftype = 1;
   // print out the menu
   printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
@@ -82,7 +82,7 @@ void AB::AB_B1()
   printf("   4. (111), long along x, orthogonal;\n");
   printf("   5. primitive cell;\n");
   printf("Your  choice [1]: ");
-  if (count_words(gets(str)) > 0) surftype = atoi(strtok(str, " \t\n\r\f"));
+  if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = atoi(strtok(str, " \t\n\r\f"));
   printf("You selected: %d", surftype);
   printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
   for (int i=0; i<3; i++){
@@ -370,7 +370,7 @@ return;
 ------------------------------------------------------------------------- */
 void AB::AB_B2()
 {
-  char str[MAX_LINE_LENGTH];
+  char str[MAXLINE];
   int surftype = 1;
   // print out the menu
   printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
@@ -379,7 +379,7 @@ void AB::AB_B2()
   printf("   2. (110);\n");
   printf("   3. (111);\n");
   printf("Your  choice [1]: ");
-  if (count_words(gets(str)) > 0) surftype = atoi(strtok(str, " \t\n\r\f"));
+  if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = atoi(strtok(str, " \t\n\r\f"));
   printf("You selected: %d", surftype);
   printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
   
@@ -559,7 +559,7 @@ return;
 ------------------------------------------------------------------------- */
 void AB::AB_B3()
 {
-  char str[MAX_LINE_LENGTH];
+  char str[MAXLINE];
   int surftype = 1;
   // print out the menu
   printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
@@ -570,7 +570,7 @@ void AB::AB_B3()
   printf("   4. (111), long along y, orthogonal;\n");
   printf("   5. primitive;\n");
   printf("Your  choice [1]: ");
-  if (count_words(gets(str)) > 0) surftype = atoi(strtok(str, " \t\n\r\f"));
+  if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = atoi(strtok(str, " \t\n\r\f"));
   printf("You selected: %d", surftype);
   printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
   for (int i=0; i<3; i++){
@@ -858,7 +858,7 @@ return;
 ------------------------------------------------------------------------- */
 void AB::AB_L10()
 {
-  char str[MAX_LINE_LENGTH];
+  char str[MAXLINE];
   int surftype = 1;
   // print out the menu
   printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
@@ -868,7 +868,7 @@ void AB::AB_L10()
   printf("   3. (110), long along y, orthogonal;\n");
   printf("   4. primitive cell;\n");
   printf("Your  choice [1]: ");
-  if (count_words(gets(str)) > 0) surftype = atoi(strtok(str, " \t\n\r\f"));
+  if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = atoi(strtok(str, " \t\n\r\f"));
   printf("You selected: %d", surftype);
   printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
   for (int i=0; i<3; i++){
@@ -1040,7 +1040,7 @@ return;
 ------------------------------------------------------------------------- */
 void AB::AB_NiAs()
 {
-  char str[MAX_LINE_LENGTH];
+  char str[MAXLINE];
   int surftype = 1;
   // print out the menu
   printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
@@ -1051,7 +1051,7 @@ void AB::AB_NiAs()
   printf("   4. (110), orthogonal, long along y;\n");
   printf("   5. (1-10), orthogonal, long along y;\n");
   printf("Your  choice [1]: ");
-  if (count_words(gets(str)) > 0) surftype = atoi(strtok(str, " \t\n\r\f"));
+  if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = atoi(strtok(str, " \t\n\r\f"));
   printf("You selected: %d", surftype);
   printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
   for (int i=0; i<3; i++){
