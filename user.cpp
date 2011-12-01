@@ -21,7 +21,7 @@ USER::USER() : lattice()
   printf("Would you like to read the lattice info from a file?(y/n)[n]: ");
   fgets(str,MAXLINE,stdin);
   char *flag = strtok(str," \t\n\r\f");
-  if (strcmp(flag,"y")==0 || strcmp(flag,"Y")==0){
+  if (flag != NULL && (strcmp(flag,"y")==0 || strcmp(flag,"Y")==0)){
     FILE *fp;
     do printf("\nPlease input the name of the file that contains the lattice info: ");
     while (count_words(fgets(str,MAXLINE,stdin)) < 1);
@@ -91,6 +91,8 @@ USER::USER() : lattice()
         latvec[i][0] = atof(strtok(str,  " \t\n\r\f"));
         latvec[i][1] = atof(strtok(NULL, " \t\n\r\f"));
         latvec[i][2] = atof(strtok(NULL, " \t\n\r\f"));
+
+        break;
       }
     }
     // ask for # of atoms and # of atom types
