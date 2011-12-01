@@ -123,7 +123,7 @@ void Driver::generate()
   int leading_dir = 1;
   printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
   while (1){
-    printf("Please input the dimensions in x, y, and z directions: ");
+    printf("Please input the extensions in x, y, and z directions: ");
     if (count_words(fgets(str,MAXLINE,stdin)) < 3) continue;
     nx = atoi(strtok(str,  " \t\n\r\f"));
     ny = atoi(strtok(NULL, " \t\n\r\f"));
