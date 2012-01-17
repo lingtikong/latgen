@@ -33,7 +33,7 @@ public:
 
   void OrientLattice();// to orient the lattice, following the rule of LAMMPS.
   void RotateLattice(double *);            // rotate the lattice
-  void RotateLattice(double *, double **); // rotate the lattice, but keep latvec
+  void RotateLattice(double *, double [3][3]); // rotate the lattice, but keep latvec
 
   int count_words(const char *);
 

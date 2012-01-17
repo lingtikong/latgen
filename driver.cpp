@@ -50,12 +50,11 @@ int Driver::ShowMenu(const int flag)
     printf(" 7. User defined;              |  0. Exit.\n");
   } else {
     printf(" 7. User defined;              |  8. Multi-layer.\n");
-    for (int i=0; i<70; i++) printf("-");
+    for (int i=0; i<70; i++) printf("-"); printf("\n");
 #ifdef Poly
-    printf("\n 9. Polycrystal;               |  0. Exit.\n");
-#else
-    printf("\n 0. Exit.\n");
+    printf(" 9. Polycrystal;               | ");
 #endif
+    printf(" 0. Exit.\n");
   }
   for (int i=0; i<70; i++) printf("-");
   printf("\nYour choice [1]: ");

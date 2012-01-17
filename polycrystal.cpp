@@ -63,13 +63,21 @@ void Driver::PolyCrystal()
   printf("Please input the desired number of grains in your box: ");
   while (1) if (count_words(fgets(str,MAXLINE,stdin)) > 0){
     ngrain = atoi(strtok(str, " \t\n\r\f"));
-    if (ngrain > 0) break;
+    if (ngrain > 1) break;
   }
   
+  // atoms in different grain can be assigned as different type
+  int type_by_grain = 0;
+  printf("Would you like to assign different atomic types for different grains? (y/n)[n]: ");
+  if (count_words(fgets(str,MAXLINE,stdin)) > 0){
+    char *ptr = strtok(str, " \n\t\r\f");
+    if (strcmp(ptr,"y")==0 || strcmp(ptr,"Y")==0) type_by_grain = 1;
+  }
+
   bpbc[0] = bpbc[1] = bpbc[2] = false;
-  for (int idim=0; idim<3; idim++) if (pbc[idim]) bpbc[idim] = true;
+  for (int idim=0; idim<3; idim++) if (pbc[idim] == 1) bpbc[idim] = true;
   // now create the box (container)
-  container con(lo[0], hi[0], lo[1], hi[1], lo[2], hi[2],10,10,10,bpbc[0],bpbc[1],bpbc[2],8);
+  container con(lo[0],hi[0],lo[1],hi[1],lo[2],hi[2],10,10,10,bpbc[0],bpbc[1],bpbc[2],8);
   
   // create random number generator if not created; current time as seed;
   if (random == NULL){
@@ -111,19 +119,20 @@ void Driver::PolyCrystal()
   // now to generate the polycrystal
   if (cl.start()) do if (con.compute_cell(c,cl)){
     // rotated the lattice randomly
-    double **latvec = memory->create(latvec,3,3,"polycrystal:latvec");
+    double rotated[3][3];
     double ang[3];
     for (int i=0; i<3; i++) ang[i] = random->uniform();
-    latt->RotateLattice(&ang[0], latvec);
+    latt->RotateLattice(&ang[0], rotated);
 
     // get the radius of the grain
-    double rmax = sqrt(0.25*c.max_radius_squared());
+    double rmax2 = 0.25*c.max_radius_squared();
+    double rmax = sqrt(rmax2);
     double cvol = c.volume();
     double area = c.surface_area();
 
-    int nx = int(rmax/latt->hx)+1;
-    int ny = int(rmax/latt->hy)+1;
-    int nz = int(rmax/latt->hz)+1;
+    int nx = int(rmax/latt->hx+0.5)+2;
+    int ny = int(rmax/latt->hy+0.5)+2;
+    int nz = int(rmax/latt->hz+0.5)+2;
 
     // get the id and center position of the grain
     double xc, yc, zc, xp[3], rx, ry, rz;
@@ -131,23 +140,29 @@ void Driver::PolyCrystal()
     cl.pos(xc,yc,zc);
     
     int n_in_grain = 0;
+
     // now to create local atoms
-    for (int i=-nx; i<nx; i++)
-    for (int j=-ny; j<ny; j++)
-    for (int k=-nz; k<nz; k++)
-    for (int m=0; m<latt->nucell; m++){
-      rx = double(i) + latt->atpos[m][0];
-      ry = double(j) + latt->atpos[m][1];
-      rz = double(k) + latt->atpos[m][2];
+    for (int ix=-nx; ix<=nx; ix++)
+    for (int iy=-ny; iy<=ny; iy++)
+    for (int iz=-nz; iz<=nz; iz++)
+    for (int iu=0; iu<latt->nucell; iu++){
+      rx = double(ix) + latt->atpos[iu][0];
+      ry = double(iy) + latt->atpos[iu][1];
+      rz = double(iz) + latt->atpos[iu][2];
 
-      xp[0] = xc + (rx*latvec[0][0]+ry*latvec[1][0]+rz*latvec[2][0])*latt->alat;
-      xp[1] = yc + (rx*latvec[0][1]+ry*latvec[1][1]+rz*latvec[2][1])*latt->alat;
-      xp[2] = zc + (rx*latvec[0][2]+ry*latvec[1][2]+rz*latvec[2][2])*latt->alat;
+      xp[0] = (rx*rotated[0][0]+ry*rotated[1][0]+rz*rotated[2][0])*latt->alat;
+      xp[1] = (rx*rotated[0][1]+ry*rotated[1][1]+rz*rotated[2][1])*latt->alat;
+      xp[2] = (rx*rotated[0][2]+ry*rotated[1][2]+rz*rotated[2][2])*latt->alat;
 
-      for (int ii=0; ii<3; ii++){
-        if (pbc[ii]){
-          if (xp[ii] < lo[ii]) xp[ii] += box[ii];
-          if (xp[ii] >=hi[ii]) xp[ii] -= box[ii];
+      double r2 = xp[0]*xp[0] + xp[1]*xp[1] + xp[2]*xp[2];
+      if (r2 > rmax2) continue;
+
+      xp[0] += xc; xp[1] += yc; xp[2] += zc;
+
+      for (int idim=0; idim<3; idim++){
+        if (pbc[idim]){
+          if (xp[idim] < lo[idim]) xp[idim] += box[idim];
+          if (xp[idim] >=hi[idim]) xp[idim] -= box[idim];
         }
       }
 
@@ -162,8 +177,11 @@ void Driver::PolyCrystal()
         }
 
         for (int idim=0; idim<3; idim++) atpos[natom][idim] = xp[idim];
-        attyp[natom++] = latt->attyp[m];
-        n_in_grain++;
+
+        if (type_by_grain) attyp[natom] = latt->attyp[iu] + (id-1)*latt->ntype;
+        else attyp[natom] = latt->attyp[iu];
+
+        natom++; n_in_grain++;
       }
     }
 
@@ -173,7 +191,7 @@ void Driver::PolyCrystal()
 
   fclose(fp);
   printf("Done! Total # of atoms: %d\n", natom);
-  printf("WARNING: there might be overlaped atoms, check by yourself!\n\n");
+  printf("WARNING: there might be overlaped atoms, check by yourself!!!\n\n");
 
   // Output files for diagnosic purposes
   con.draw_cells_gnuplot("grain_cell_info");
