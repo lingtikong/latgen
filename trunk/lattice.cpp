@@ -200,7 +200,7 @@ return;
 /*------------------------------------------------------------------------------
  * Method to rotate the lattice. angles are in unit of 2*pi
  *----------------------------------------------------------------------------*/
-void lattice::RotateLattice(double *angles, double **rotated)
+void lattice::RotateLattice(double *angles, double rotated[][3])
 {
   const double tPI = 8.*atan(1.);
   double cosa = cos(angles[0]*tPI);
