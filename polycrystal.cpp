@@ -11,6 +11,8 @@
 using namespace voro;
 
 #define MAXLINE 512
+#define MAX(a,b) ((a) > (b) ? (a) : (b))
+#define MIN(a,b) ((a) < (b) ? (a) : (b))
 
 /*------------------------------------------------------------------------------
  * Method to create polycrystals
@@ -76,14 +78,17 @@ void Driver::PolyCrystal()
 
   bpbc[0] = bpbc[1] = bpbc[2] = false;
   for (int idim=0; idim<3; idim++) if (pbc[idim] == 1) bpbc[idim] = true;
+
+  int ngd = MAX(2,ngrain/2);
   // now create the box (container)
-  container con(lo[0],hi[0],lo[1],hi[1],lo[2],hi[2],10,10,10,bpbc[0],bpbc[1],bpbc[2],8);
+  container con(lo[0],hi[0],lo[1],hi[1],lo[2],hi[2],ngd,ngd,ngd,bpbc[0],bpbc[1],bpbc[2],8);
   
   // create random number generator if not created; current time as seed;
   if (random == NULL){
     time_t ctime;
     time(&ctime);
-    random = new RanPark((int) ctime);
+    //random = new RanPark((int) ctime);
+    random = new RanPark(100);
   }
 
   // insert grain centers into the container
@@ -119,8 +124,7 @@ void Driver::PolyCrystal()
   // now to generate the polycrystal
   if (cl.start()) do if (con.compute_cell(c,cl)){
     // rotated the lattice randomly
-    double rotated[3][3];
-    double ang[3];
+    double rotated[3][3], ang[3];
     for (int i=0; i<3; i++) ang[i] = random->uniform();
     latt->RotateLattice(&ang[0], rotated);
 
@@ -130,9 +134,9 @@ void Driver::PolyCrystal()
     double cvol = c.volume();
     double area = c.surface_area();
 
-    int nx = int(rmax/latt->hx+0.5)+2;
-    int ny = int(rmax/latt->hy+0.5)+2;
-    int nz = int(rmax/latt->hz+0.5)+2;
+    int nxmax = int(1.5*rmax/latt->hx+0.5)+1;
+    int nymax = int(1.5*rmax/latt->hy+0.5)+1;
+    int nzmax = int(1.5*rmax/latt->hz+0.5)+1;
 
     // get the id and center position of the grain
     double xc, yc, zc, xp[3], rx, ry, rz;
@@ -142,9 +146,9 @@ void Driver::PolyCrystal()
     int n_in_grain = 0;
 
     // now to create local atoms
-    for (int ix=-nx; ix<=nx; ix++)
-    for (int iy=-ny; iy<=ny; iy++)
-    for (int iz=-nz; iz<=nz; iz++)
+    for (int ix=-nxmax; ix<=nxmax; ix++)
+    for (int iy=-nymax; iy<=nymax; iy++)
+    for (int iz=-nzmax; iz<=nzmax; iz++)
     for (int iu=0; iu<latt->nucell; iu++){
       rx = double(ix) + latt->atpos[iu][0];
       ry = double(iy) + latt->atpos[iu][1];
@@ -159,15 +163,18 @@ void Driver::PolyCrystal()
 
       xp[0] += xc; xp[1] += yc; xp[2] += zc;
 
+      int inside = 1;
       for (int idim=0; idim<3; idim++){
         if (pbc[idim]){
           if (xp[idim] < lo[idim]) xp[idim] += box[idim];
           if (xp[idim] >=hi[idim]) xp[idim] -= box[idim];
         }
+        if (xp[idim] < lo[idim] || xp[idim] > hi[idim]) inside = 0;
       }
+      if (inside != 1) continue;
 
       int ifnd;
-      con.find_voronoi_cell(xp[0],xp[1],xp[2],rx,ry,rz,ifnd);
+      if (!con.find_voronoi_cell(xp[0],xp[1],xp[2],rx,ry,rz,ifnd)) continue;
 
       if (ifnd == id){
         if (natom >= nmax){
