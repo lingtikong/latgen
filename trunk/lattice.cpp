@@ -13,7 +13,7 @@
 lattice::lattice()
 {
   initialized = 0;
-  flag_z_perp_xy = 0;
+  perp_x = perp_y = perp_z = 0;
   nlayer = nucell = ntype = 0;
 
   name = NULL;
@@ -167,12 +167,124 @@ void lattice::setup()
   for (int i=0; i<3; i++) pos1 += (atpos[i0][i]+double(i/2)) * latvec[i][2];
   h[nlayer-1] = (pos1-pos0)*alat;
 
-  // check if A3 is perpendicular to both A1 and A2
-  double A3dA1, A3dA2;
-  A3dA1 = A3dA2 = 0.;
-  for (int i=0; i<3; i++){ A3dA1 += latvec[0][i]*latvec[2][i]; A3dA2 += latvec[1][i]*latvec[2][i];}
-  if ( (A3dA1+A3dA2) < 1.e-6 ) flag_z_perp_xy = 1;
+  // get the length of each vector
+  lx = sqrt(DotProd(latvec[0], latvec[0]))*alat;
+  ly = sqrt(DotProd(latvec[1], latvec[1]))*alat;
+  lz = sqrt(DotProd(latvec[2], latvec[2]))*alat;
+
+  // get the norm vector of each pair
+  double Nxy[3], Nxz[3], Nyz[3];
+  Cross(latvec[0], latvec[1], Nxy);
+  Cross(latvec[0], latvec[2], Nxz);
+  Cross(latvec[1], latvec[2], Nyz);
+  double Sxy = sqrt(DotProd(&Nxy[0],&Nxy[0]));
+  double Sxz = sqrt(DotProd(&Nxz[0],&Nxz[0]));
+  double Syz = sqrt(DotProd(&Nyz[0],&Nyz[0]));
+  double vola = DotProd(&Nxy[0], latvec[2])*alat;
+  hx = vola/Syz;
+  hy = vola/Sxz;
+  hz = vola/Sxy;
+
+  // check if one basic vector is perpendicular to the remaing two
+  double AdotB = DotProd(latvec[0], latvec[1]);
+  double AdotC = DotProd(latvec[0], latvec[2]);
+  double BdotC = DotProd(latvec[1], latvec[2]);
+
+  if ( (AdotB+AdotC) < 1.e-8 ) perp_x = 1;
+  if ( (AdotB+BdotC) < 1.e-8 ) perp_y = 1;
+  if ( (AdotC+BdotC) < 1.e-8 ) perp_z = 1;
 
 return;
 }
 
+/*------------------------------------------------------------------------------
+ * Method to rotate the lattice. angles are in unit of 2*pi
+ *----------------------------------------------------------------------------*/
+void lattice::RotateLattice(double *angles, double **rotated)
+{
+  const double tPI = 8.*atan(1.);
+  double cosa = cos(angles[0]*tPI);
+  double sina = sin(angles[0]*tPI);
+  double cosb = cos(angles[1]*tPI);
+  double sinb = sin(angles[1]*tPI);
+  double cosg = cos(angles[2]*tPI);
+  double sing = sin(angles[2]*tPI);
+
+  double rot[3][3];
+  rot[0][0] = cosb*cosg;
+  rot[0][1] = cosb*sing;
+  rot[0][2] = -sinb;
+  rot[1][0] = sina * sinb * cosg - cosa * sing;
+  rot[1][1] = sina * sinb * sing + cosa * cosg;
+  rot[1][2] = sina * cosb;
+  rot[2][0] = cosa * sinb * cosg + sina * sing;
+  rot[2][1] = cosa * sinb * sing - sina * cosg;
+  rot[2][2] = cosa * cosb;
+
+  for (int i=0; i<3; i++)
+  for (int j=0; j<3; j++) rotated[i][j] = 0.;
+
+  for (int i=0; i<3; i++)
+  for (int j=0; j<3; j++)
+  for (int k=0; k<3; k++) rotated[i][j] += rot[i][k] * latvec[k][j];
+
+return;
+}
+
+/*------------------------------------------------------------------------------
+ * Method to rotate the lattice. angles are in unit of 2*pi
+ *----------------------------------------------------------------------------*/
+void lattice::RotateLattice(double *angles)
+{
+  const double tPI = 8.*atan(1.);
+  double cosa = cos(angles[0]*tPI);
+  double sina = sin(angles[0]*tPI);
+  double cosb = cos(angles[1]*tPI);
+  double sinb = sin(angles[1]*tPI);
+  double cosg = cos(angles[2]*tPI);
+  double sing = sin(angles[2]*tPI);
+
+  double rot[3][3];
+  rot[0][0] = cosb*cosg;
+  rot[0][1] = cosb*sing;
+  rot[0][2] = -sinb;
+  rot[1][0] = sina * sinb * cosg - cosa * sing;
+  rot[1][1] = sina * sinb * sing + cosa * cosg;
+  rot[1][2] = sina * cosb;
+  rot[2][0] = cosa * sinb * cosg + sina * sing;
+  rot[2][1] = cosa * sinb * sing - sina * cosg;
+  rot[2][2] = cosa * cosb;
+
+  double rotated[3][3];
+  for (int i=0; i<3; i++)
+  for (int j=0; j<3; j++) rotated[i][j] = 0.;
+
+  for (int i=0; i<3; i++)
+  for (int j=0; j<3; j++)
+  for (int k=0; k<3; k++) rotated[i][j] += rot[i][k] * latvec[k][j];
+
+  for (int i=0; i<3; i++)
+  for (int j=0; j<3; j++) latvec[i][j] = rotated[i][j];
+
+return;
+}
+
+/*------------------------------------------------------------------------------
+ * Private method to get the cross product of two vectors; C[3] = A[3] X B[3]
+ *----------------------------------------------------------------------------*/
+void lattice::Cross(double *A, double *B, double *C)
+{
+   C[0] = A[1] * B[2] - A[2] * B[1];
+   C[1] = A[2] * B[0] - A[0] * B[2];
+   C[2] = A[0] * B[1] - A[1] * B[0];
+
+return;
+}
+
+/*------------------------------------------------------------------------------
+ * Private method to get the dot product of two vectors of dim 3
+ *----------------------------------------------------------------------------*/
+double lattice::DotProd(double *A, double *B)
+{
+return A[0]*B[0] + A[1]*B[1] + A[2]*B[2];
+}
