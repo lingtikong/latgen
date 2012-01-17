@@ -2,11 +2,11 @@
 # compiler and flags
 CC     = g++
 LINK   = $(CC)
-CFLAGS = -O3 $(DEBUG)
+CFLAGS = -O3 $(UFLAG) $(DEBUG)
 #
 OFLAGS = -O3 $(DEBUG)
-INC    = $(FFTINC) $(LPKINC) $(USRINC)
-LIB    = $(FFTLIB) $(LPKLIB) $(USRLIB)
+INC    = $(FFTINC) $(LPKINC) $(USRINC) $(VoroINC)
+LIB    = $(FFTLIB) $(LPKLIB) $(USRLIB) $(VoroLIB)
 #
 # fftw 3 library; not needed by this code
 #FFTINC    = -I/opt/fftw/fftw3/include
@@ -16,6 +16,12 @@ LIB    = $(FFTLIB) $(LPKLIB) $(USRLIB)
 #LPKINC = -I/opt/clapack/3.2.1/include
 #LPKLIB = -L/opt/clapack/3.2.1/lib -lclapack -lblas -lf2c -lm
 
+# Voro++
+#VoroINC = -I/home/konglt/resource/voro_svn/src
+#VoroLIB = -L/home/konglt/resource/voro_svn/src -lvoro++
+
+# User flag
+#UFLAG = -DPoly
 # Debug flags
 #DEBUG = -g
 #====================================================================

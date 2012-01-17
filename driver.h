@@ -16,6 +16,9 @@ public:
   void write();     // method to write the atomic configuration (xyz) and mapping info
 
   void FormLayers();
+#ifdef Poly
+  void PolyCrystal();
+#endif
 
 private:
   int ShowMenu(int);

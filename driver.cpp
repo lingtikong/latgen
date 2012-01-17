@@ -25,6 +25,9 @@ Driver::Driver()
 
   memory = new Memory();
 
+  for (int i=0; i<3; i++)
+  for (int j=0; j<3; j++) latvec[i][j] = 0.;
+
   MainMenu();
 
 return;
@@ -37,18 +40,22 @@ int Driver::ShowMenu(const int flag)
 
   // print out the menu
   printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
-  if (flag) printf("Please select the lattice type for lattice: %c\n", flag+'A'-1);
+  if (flag>0) printf("Please select the lattice type for lattice: %c\n", flag+'A'-1);
   else printf("Please select the lattice type of your system:\n");
   printf(" 1. FCC/NaCl/Diamond;          |  4. A3B;\n");
   printf(" 2. BCC;                       |  5. A2B;\n");
   printf(" 3. HCP/Graphene;              |  6. AB;\n");
   for (int i=0; i<31; i++) printf("-"); printf("+"); for (int i=0; i<38; i++) printf("-"); printf("\n");
-  if (flag){
+  if (flag != 0){
     printf(" 7. User defined;              |  0. Exit.\n");
   } else {
     printf(" 7. User defined;              |  8. Multi-layer.\n");
     for (int i=0; i<70; i++) printf("-");
+#ifdef Poly
+    printf("\n 9. Polycrystal;               |  0. Exit.\n");
+#else
     printf("\n 0. Exit.\n");
+#endif
   }
   for (int i=0; i<70; i++) printf("-");
   printf("\nYour choice [1]: ");
@@ -64,16 +71,19 @@ int Driver::ShowMenu(const int flag)
   case 5: latt = new A2B(); break;
   case 6: latt = new AB(); break;
   case 7: latt = new USER(); break;
-  case 8: if (! flag) FormLayers(); break;
+  case 8: if (flag == 0) FormLayers(); break;
+#ifdef Poly
+  case 9: if (flag == 0) PolyCrystal(); break;
+#endif
   default: exit(1);}
 
-  int rflag = 8-ltype;
-  if ( rflag ){
+  int rflag = 8 - ltype;
+  if (flag == 0 && rflag > 0){
     // re-orient the lattice
     printf("Would you like to re-orient the unit cell to comply with LAMMPS? (y/n)[n]: ");
     if (count_words(fgets(str,MAXLINE,stdin)) > 0){
-      char *flag = strtok(str," \t\n\r\f");
-      if (strcmp(flag,"y")==0 || strcmp(flag,"Y")==0) latt->OrientLattice();
+      char *ptr = strtok(str," \t\n\r\f");
+      if (strcmp(ptr,"y")==0 || strcmp(ptr,"Y")==0) latt->OrientLattice();
     }
   }
 
@@ -82,7 +92,7 @@ return rflag;
 
 void Driver::MainMenu()
 {
-  if ( ShowMenu(0) ){
+  if ( ShowMenu(0) > 0 ){
     name = memory->create(name, strlen(latt->name)+1, "driver->MainMenu:name");
     strcpy(name, latt->name);
     alat = latt->alat;
@@ -543,6 +553,9 @@ void Driver::solidsol()
 return;
 }
 
+/*------------------------------------------------------------------------------
+ * Method to form multilayers
+ *----------------------------------------------------------------------------*/
 void Driver::FormLayers()
 {
   int nlat = 1, idum;
@@ -565,7 +578,7 @@ void Driver::FormLayers()
 
   for (int i=0; i<nlat; i++){
     printf("\n>>>>>>   Lattice info for lattice: %c - %s    <<<<<", 'A'+i, latts[i]->name);
-    if (latts[i]->flag_z_perp_xy == 0)
+    if (latts[i]->perp_z == 0)
       printf("\nWARNING: A3 is not perpendicular to A1 and A2, this lattice cannot be used to form layers!\n");
 
     latts[i]->display();
