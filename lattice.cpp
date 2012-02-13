@@ -3,6 +3,8 @@
 #include "stdio.h"
 #include "string.h"
 #include "math.h"
+#include <list>
+#include <map>
 
 #define MAX(a,b) ((a) > (b) ? (a) : (b))
 #define MIN(a,b) ((a) < (b) ? (a) : (b))
@@ -135,10 +137,21 @@ int lattice::count_words(const char *line)
 void lattice::setup()
 {
   if (initialized == 0) return;
-  // get the # of layers in the unit cell
-  nlayer = 0;
-  for (int i=0; i<nucell; i++) nlayer = MAX(nlayer, layer[i]);
-  nlayer++;
+  // get the layer ID
+  std::list<double> zlist;
+  std::list<double>::iterator it;
+  std::map<double,int> zmap;
+
+  zlist.clear();
+  for (int i=0; i<nucell; i++) zlist.push_back(atpos[i][2]);
+  zlist.sort(); zlist.unique();
+
+  layer = memory->create(layer, nucell, "lattice:setup:layers");
+  int il = 0;
+  for (it = zlist.begin(); it != zlist.end(); it++) zmap[*it] = il++;
+  for (int i=0; i<nucell; i++) layer[i] = zmap[atpos[i][2]];
+  nlayer = (int) zmap.size();
+  zlist.clear(); zmap.clear();
 
   // get the height above each layer
   if (h) memory->destroy(h);

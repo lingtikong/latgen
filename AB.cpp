@@ -104,28 +104,23 @@ void AB::AB_B1()
 
     atpos = memory->create(atpos, nucell, 3, "AB:atpos");
     attyp = memory->create(attyp, nucell, "AB:attyp");
-    layer = memory->create(layer, nucell, "AB:layer");
     
     attyp[0] = 2;
-    layer[0]    = 0;
     atpos[0][0] = 0.5;
     atpos[0][1] = 0.5;
     atpos[0][2] = 0.;
     
     attyp[1] = 1;
-    layer[1]    = 0;
     atpos[1][0] = 0.;
     atpos[1][1] = 0.;
     atpos[1][2] = 0.;
     
     attyp[2] = 2;
-    layer[2]    = 1;
     atpos[2][0] = 0.;
     atpos[2][1] = 0.;
     atpos[2][2] = 0.5;
     
     attyp[3] = 1;
-    layer[3]    = 1;
     atpos[3][0] = 0.5;
     atpos[3][1] = 0.5;
     atpos[3][2] = 0.5;
@@ -145,52 +140,43 @@ void AB::AB_B1()
 
     atpos = memory->create(atpos, nucell, 3, "AB:atpos");
     attyp = memory->create(attyp, nucell, "AB:attyp");
-    layer = memory->create(layer, nucell, "AB:layer");
 
     attyp[0] = 2;
-    layer[0]    = 0;
     atpos[0][0] = 0.5;
     atpos[0][1] = 0.;
     atpos[0][2] = 0.;
     
     attyp[1] = 2;
-    layer[1]    = 0;
     atpos[1][0] = 0.;
     atpos[1][1] = 0.5;
     atpos[1][2] = 0.;
     
     attyp[2] = 1;
-    layer[2]    = 0;
     atpos[2][0] = 0.;
     atpos[2][1] = 0.;
     atpos[2][2] = 0.;
     
     attyp[3] = 1;
-    layer[3]    = 0;
     atpos[3][0] = 0.5;
     atpos[3][1] = 0.5;
     atpos[3][2] = 0.;
     
     attyp[4] = 2;
-    layer[4]    = 1;
     atpos[4][0] = 0.5;
     atpos[4][1] = 0.5;
     atpos[4][2] = 0.5;
     
     attyp[5] = 2;
-    layer[5]    = 1;
     atpos[5][0] = 0.;
     atpos[5][1] = 0.;
     atpos[5][2] = 0.5;
     
     attyp[6] = 1;
-    layer[6]    = 1;
     atpos[6][0] = 0.;
     atpos[6][1] = 0.5;
     atpos[6][2] = 0.5;
     
     attyp[7] = 1;
-    layer[7]    = 1;
     atpos[7][0] = 0.5;
     atpos[7][1] = 0.;
     atpos[7][2] = 0.5;
@@ -210,28 +196,23 @@ void AB::AB_B1()
 
     atpos = memory->create(atpos, nucell, 3, "AB:atpos");
     attyp = memory->create(attyp, nucell, "AB:attyp");
-    layer = memory->create(layer, nucell, "AB:layer");
     
     attyp[0] = 1;
-    layer[0]    = 0;
     atpos[0][0] = 0.;
     atpos[0][1] = 0.;
     atpos[0][2] = 0.;
     
     attyp[1] = 2;
-    layer[1]    = 0;
     atpos[1][0] = 0.5;
     atpos[1][1] = 0.;
     atpos[1][2] = 0.;
     
     attyp[2] = 2;
-    layer[2]    = 1;
     atpos[2][0] = 0;
     atpos[2][1] = 0.5;
     atpos[2][2] = 0.5;
     
     attyp[3] = 1;
-    layer[3]    = 1;
     atpos[3][0] = 0.5;
     atpos[3][1] = 0.5;
     atpos[3][2] = 0.5;
@@ -251,76 +232,63 @@ void AB::AB_B1()
 
     atpos = memory->create(atpos, nucell, 3, "AB:atpos");
     attyp = memory->create(attyp, nucell, "AB:attyp");
-    layer = memory->create(layer, nucell, "AB:layer");
     
     attyp[0] = 1;
-    layer[0]    = 0;
     atpos[0][0] = 0.;
     atpos[0][1] = 0.;
     atpos[0][2] = 0.;
     
     attyp[1] = 1;
-    layer[1]    = 0;
     atpos[1][0] = 0.5;
     atpos[1][1] = 0.5;
     atpos[1][2] = 0.;
     
     attyp[2] = 2;
-    layer[2]    = 1;
     atpos[2][0] = 1./3.;
     atpos[2][1] = 0.;
     atpos[2][2] = 1./6.;
     
     attyp[3] = 2;
-    layer[3]    = 1;
     atpos[3][0] = 5./6.;
     atpos[3][1] = 0.5;
     atpos[3][2] = 1./6.;
     
     attyp[4] = 1;
-    layer[4]    = 1;
     atpos[4][0] = 2./3.;
     atpos[4][1] = 0.;
     atpos[4][2] = 1./3.;
     
     attyp[5] = 1;
-    layer[5]    = 1;
     atpos[5][0] = 1./6.;
     atpos[5][1] = 0.5;
     atpos[5][2] = 1./3.;
     
     attyp[6] = 2;
-    layer[6]    = 2;
     atpos[6][0] = 0.;
     atpos[6][1] = 0.;
     atpos[6][2] = 0.5;
     
     attyp[7] = 2;
-    layer[7]    = 2;
     atpos[7][0] = 0.5;
     atpos[7][1] = 0.5;
     atpos[7][2] = 0.5;
     
     attyp[8] = 1;
-    layer[8]    = 3;
     atpos[8][0] = 1./3.;
     atpos[8][1] = 0.;
     atpos[8][2] = 2./3.;
     
     attyp[9] = 1;
-    layer[9]    = 2;
     atpos[9][0] = 5./6.;
     atpos[9][1] = 0.5;
     atpos[9][2] = 2./3.;
     
     attyp[10] = 2;
-    layer[10]    = 3;
     atpos[10][0] = 2./3.;
     atpos[10][1] = 0.;
     atpos[10][2] = 5./6.;
     
     attyp[11] = 2;
-    layer[11]    = 3;
     atpos[11][0] = 1./6.;
     atpos[11][1] = 0.5;
     atpos[11][2] = 5./6.;
@@ -343,16 +311,13 @@ void AB::AB_B1()
 
     atpos = memory->create(atpos, nucell, 3, "AB:atpos");
     attyp = memory->create(attyp, nucell, "AB:attyp");
-    layer = memory->create(layer, nucell, "AB:layer");
     
     attyp[0] = 1;
-    layer[0]    = 0;
     atpos[0][0] = 0.;
     atpos[0][1] = 0.;
     atpos[0][2] = 0.;
     
     attyp[1] = 2;
-    layer[1]    = 1;
     atpos[1][0] = 0.5;
     atpos[1][1] = 0.5;
     atpos[1][2] = 0.5;
@@ -402,16 +367,13 @@ void AB::AB_B2()
 
     atpos = memory->create(atpos, nucell, 3, "AB:atpos");
     attyp = memory->create(attyp, nucell, "AB:attyp");
-    layer = memory->create(layer, nucell, "AB:layer");
     
     attyp[0]    = 1;
-    layer[0]    = 0;
     atpos[0][0] = 0.;
     atpos[0][1] = 0.;
     atpos[0][2] = 0.;
 
     attyp[1]    = 2;
-    layer[1]    = 1;
     atpos[1][0] = 0.5;
     atpos[1][1] = 0.5;
     atpos[1][2] = 0.5;
@@ -431,28 +393,23 @@ void AB::AB_B2()
 
     atpos = memory->create(atpos, nucell, 3, "AB:atpos");
     attyp = memory->create(attyp, nucell, "AB:attyp");
-    layer = memory->create(layer, nucell, "AB:layer");
     
     attyp[0] = 2;
-    layer[0]    = 0;
     atpos[0][0] = 0.;
     atpos[0][1] = 0.;
     atpos[0][2] = 0.;
     
     attyp[1] = 1;
-    layer[1]    = 0;
     atpos[1][0] = 0.5;
     atpos[1][1] = 0.5;
     atpos[1][2] = 0.;
     
     attyp[2] = 2;
-    layer[2]    = 1;
     atpos[2][0] = 0.;
     atpos[2][1] = 0.5;
     atpos[2][2] = 0.5;
     
     attyp[3] = 1;
-    layer[3]    = 1;
     atpos[3][0] = 0.5;
     atpos[3][1] = 0.;
     atpos[3][2] = 0.5;
@@ -472,76 +429,63 @@ void AB::AB_B2()
 
     atpos = memory->create(atpos, nucell, 3, "AB:atpos");
     attyp = memory->create(attyp, nucell, "AB:attyp");
-    layer = memory->create(layer, nucell, "AB:layer");
     
     attyp[0] = 2;
-    layer[0]    = 0;
     atpos[0][0] = 0.;
     atpos[0][1] = 0.;
     atpos[0][2] = 0.;
     
     attyp[1] = 2;
-    layer[1]    = 0;
     atpos[1][0] = 0.5;
     atpos[1][1] = 0.5;
     atpos[1][2] = 0.;
     
     attyp[2] = 1;
-    layer[2]    = 1;
     atpos[2][0] = 0.;
     atpos[2][1] = 2./3.;
     atpos[2][2] = 1./6.;
     
     attyp[3] = 1;
-    layer[3]    = 1;
     atpos[3][0] = 0.5;
     atpos[3][1] = 1./6.;
     atpos[3][2] = 1./6.;
     
     attyp[4] = 2;
-    layer[4]    = 2;
     atpos[4][0] = 0.;
     atpos[4][1] = 1./3.;
     atpos[4][2] = 1./3.;
     
     attyp[5] = 2;
-    layer[5]    = 2;
     atpos[5][0] = 0.5;
     atpos[5][1] = 5./6.;
     atpos[5][2] = 1./3.;
     
     attyp[6] = 1;
-    layer[6]    = 3;
     atpos[6][0] = 0.;
     atpos[6][1] = 0.;
     atpos[6][2] = 0.5;
     
     attyp[7] = 1;
-    layer[7]    = 3;
     atpos[7][0] = 0.5;
     atpos[7][1] = 0.5;
     atpos[7][2] = 0.5;
     
     attyp[8] = 2;
-    layer[8]    = 4;
     atpos[8][0] = 0.;
     atpos[8][1] = 2./3.;
     atpos[8][2] = 2./3.;
     
     attyp[9] = 2;
-    layer[9]    = 4;
     atpos[9][0] = 0.5;
     atpos[9][1] = 1./6.;
     atpos[9][2] = 2./3.;
     
     attyp[10] = 1;
-    layer[10]    = 5;
     atpos[10][0] = 0.;
     atpos[10][1] = 1./3.;
     atpos[10][2] = 5./6.;
     
     attyp[11] = 1;
-    layer[11]    = 5;
     atpos[11][0] = 0.5;
     atpos[11][1] = 5./6.;
     atpos[11][2] = 5./6.;
@@ -592,28 +536,23 @@ void AB::AB_B3()
 
     atpos = memory->create(atpos, nucell, 3, "AB:atpos");
     attyp = memory->create(attyp, nucell, "AB:attyp");
-    layer = memory->create(layer, nucell, "AB:layer");
     
     attyp[0] = 1;
-    layer[0]    = 0;
     atpos[0][0] = 0.;
     atpos[0][1] = 0.;
     atpos[0][2] = 0.;
     
     attyp[1] = 2;
-    layer[1]    = 1;
     atpos[1][0] = 0.;
     atpos[1][1] = 0.50;
     atpos[1][2] = 0.25;
     
     attyp[2] = 1;
-    layer[2]    = 2;
     atpos[2][0] = 0.50;
     atpos[2][1] = 0.50;
     atpos[2][2] = 0.50;
     
     attyp[3] = 2;
-    layer[3]    = 3;
     atpos[3][0] = 0.50;
     atpos[3][1] = 0.00;
     atpos[3][2] = 0.75;
@@ -633,52 +572,43 @@ void AB::AB_B3()
 
     atpos = memory->create(atpos, nucell, 3, "AB:atpos");
     attyp = memory->create(attyp, nucell, "AB:attyp");
-    layer = memory->create(layer, nucell, "AB:layer");
     
     attyp[0] = 1;
-    layer[0]    = 0;
     atpos[0][0] = 0.;
     atpos[0][1] = 0.;
     atpos[0][2] = 0.;
     
     attyp[1] = 1;
-    layer[1]    = 0;
     atpos[1][0] = 0.5;
     atpos[1][1] = 0.5;
     atpos[1][2] = 0.;
     
     attyp[2] = 2;
-    layer[2]    = 1;
     atpos[2][0] = 0.25;
     atpos[2][1] = 0.25;
     atpos[2][2] = 0.25;
     
     attyp[3] = 2;
-    layer[3]    = 1;
     atpos[3][0] = 0.75;
     atpos[3][1] = 0.75;
     atpos[3][2] = 0.25;
     
     attyp[4] = 1;
-    layer[4]    = 2;
     atpos[4][0] = 0.;
     atpos[4][1] = 0.5;
     atpos[4][2] = 0.5;
     
     attyp[5] = 1;
-    layer[5]    = 2;
     atpos[5][0] = 0.5;
     atpos[5][1] = 0.;
     atpos[5][2] = 0.5;
     
     attyp[6] = 2;
-    layer[6]    = 3;
     atpos[6][0] = 0.75;
     atpos[6][1] = 0.25;
     atpos[6][2] = 0.75;
     
     attyp[7] = 2;
-    layer[7]    = 3;
     atpos[7][0] = 0.25;
     atpos[7][1] = 0.75;
     atpos[7][2] = 0.75;
@@ -698,28 +628,23 @@ void AB::AB_B3()
 
     atpos = memory->create(atpos, nucell, 3, "AB:atpos");
     attyp = memory->create(attyp, nucell, "AB:attyp");
-    layer = memory->create(layer, nucell, "AB:layer");
     
     attyp[0] = 1;
-    layer[0]    = 0;
     atpos[0][0] = 0.;
     atpos[0][1] = 0.;
     atpos[0][2] = 0.;
 
     attyp[1] = 2;
-    layer[1]    = 0;
     atpos[1][0] = 0.75;
     atpos[1][1] = 0.50;
     atpos[1][2] = 0.;
     
     attyp[2] = 2;
-    layer[2]    = 1;
     atpos[2][0] = 0.25;
     atpos[2][1] = 0.;
     atpos[2][2] = 0.50;
     
     attyp[3] = 1;
-    layer[3]    = 1;
     atpos[3][0] = 0.5;
     atpos[3][1] = 0.5;
     atpos[3][2] = 0.5;
@@ -739,76 +664,63 @@ void AB::AB_B3()
 
     atpos = memory->create(atpos, nucell, 3, "AB:atpos");
     attyp = memory->create(attyp, nucell, "AB:attyp");
-    layer = memory->create(layer, nucell, "AB:layer");
     
     attyp[0] = 1;
-    layer[0]    = 0;
     atpos[0][0] = 0.;
     atpos[0][1] = 0.;
     atpos[0][2] = 0.;
     
     attyp[1] = 1;
-    layer[1]    = 0;
     atpos[1][0] = 0.50;
     atpos[1][1] = 0.50;
     atpos[1][2] = 0.;
     
     attyp[2] = 2;
-    layer[2]    = 1;
     atpos[2][0] = 0.;
     atpos[2][1] = 0.;
     atpos[2][2] = 0.25;
     
     attyp[3] = 2;
-    layer[3]    = 1;
     atpos[3][0] = 0.5;
     atpos[3][1] = 0.5;
     atpos[3][2] = 0.25;
     
     attyp[4] = 1;
-    layer[4]    = 2;
     atpos[4][0] = 0.;
     atpos[4][1] = 2./3.;
     atpos[4][2] = 1./3.;
     
     attyp[5] = 1;
-    layer[5]    = 2;
     atpos[5][0] = 0.5;
     atpos[5][1] = 1./6.;
     atpos[5][2] = 1./3.;
     
     attyp[6] = 2;
-    layer[6]    = 3;
     atpos[6][0] = 0.;
     atpos[6][1] = 2./3.;
     atpos[6][2] = 7./12.;
     
     attyp[7] = 2;
-    layer[7]    = 3;
     atpos[7][0] = 0.5;
     atpos[7][1] = 1./6.;
     atpos[7][2] = 7./12.;
     
     attyp[8] = 1;
-    layer[8]    = 4;
     atpos[8][0] = 0.;
     atpos[8][1] = 1./3.;
     atpos[8][2] = 2./3.;
     
     attyp[9] = 1;
-    layer[9]    = 4;
     atpos[9][0] = 0.5;
     atpos[9][1] = 5./6.;
     atpos[9][2] = 2./3.;
     
     attyp[10] = 2;
-    layer[10]    = 5;
     atpos[10][0] = 0.5;
     atpos[10][1] = 5./6.;
     atpos[10][2] = 11./12.;
     
     attyp[11] = 2;
-    layer[11]    = 5;
     atpos[11][0] = 0.;
     atpos[11][1] = 1./3.;
     atpos[11][2] = 11./12.;
@@ -831,16 +743,13 @@ void AB::AB_B3()
 
     atpos = memory->create(atpos, nucell, 3, "AB:atpos");
     attyp = memory->create(attyp, nucell, "AB:attyp");
-    layer = memory->create(layer, nucell, "AB:layer");
     
     attyp[0] = 1;
-    layer[0]    = 0;
     atpos[0][0] = 0.;
     atpos[0][1] = 0.;
     atpos[0][2] = 0.;
 
     attyp[1] = 2;
-    layer[1]    = 1;
     atpos[1][0] = 0.25;
     atpos[1][1] = 0.25;
     atpos[1][2] = 0.25;
@@ -890,28 +799,23 @@ void AB::AB_L10()
 
     atpos = memory->create(atpos, nucell, 3, "AB:atpos");
     attyp = memory->create(attyp, nucell, "AB:attyp");
-    layer = memory->create(layer, nucell, "AB:layer");
 
     attyp[0] = 1;
-    layer[0]    = 0;
     atpos[0][0] = 0.;
     atpos[0][1] = 0.;
     atpos[0][2] = 0.;
     
     attyp[1] = 1;
-    layer[1]    = 0;
     atpos[1][0] = 0.5;
     atpos[1][1] = 0.5;
     atpos[1][2] = 0.;
     
     attyp[2] = 2;
-    layer[2]    = 1;
     atpos[2][0] = 0.5;
     atpos[2][1] = 0.;
     atpos[2][2] = 0.5;
     
     attyp[3] = 2;
-    layer[3]    = 1;
     atpos[3][0] = 0.;
     atpos[3][1] = 0.5;
     atpos[3][2] = 0.5;
@@ -931,28 +835,23 @@ void AB::AB_L10()
 
     atpos = memory->create(atpos, nucell, 3, "AB:atpos");
     attyp = memory->create(attyp, nucell, "AB:attyp");
-    layer = memory->create(layer, nucell, "AB:layer");
     
     attyp[0] = 2;
-    layer[0]    = 0;
     atpos[0][0] = 0.5;
     atpos[0][1] = 0.5;
     atpos[0][2] = 0.;
     
     attyp[1] = 1;
-    layer[1]    = 0;
     atpos[1][0] = 0.;
     atpos[1][1] = 0.;
     atpos[1][2] = 0.;
     
     attyp[2] = 2;
-    layer[2]    = 1;
     atpos[2][0] = 0.;
     atpos[2][1] = 0.5;
     atpos[2][2] = 0.5;
     
     attyp[3] = 1;
-    layer[3]    = 1;
     atpos[3][0] = 0.5;
     atpos[3][1] = 0.;
     atpos[3][2] = 0.5;
@@ -972,28 +871,23 @@ void AB::AB_L10()
 
     atpos = memory->create(atpos, nucell, 3, "AB:atpos");
     attyp = memory->create(attyp, nucell, "AB:attyp");
-    layer = memory->create(layer, nucell, "AB:layer");
     
     attyp[0] = 1;
-    layer[0]    = 0;
     atpos[0][0] = 0.;
     atpos[0][1] = 0.;
     atpos[0][2] = 0.;
     
     attyp[1] = 1;
-    layer[1]    = 0;
     atpos[1][0] = 0.;
     atpos[1][1] = 0.5;
     atpos[1][2] = 0.;
     
     attyp[2] = 2;
-    layer[2]    = 1;
     atpos[2][0] = 0.5;
     atpos[2][1] = 0.75;
     atpos[2][2] = 0.5;
     
     attyp[3] = 2;
-    layer[3]    = 1;
     atpos[3][0] = 0.5;
     atpos[3][1] = 0.25;
     atpos[3][2] = 0.5;
@@ -1013,16 +907,13 @@ void AB::AB_L10()
 
     atpos = memory->create(atpos, nucell, 3, "AB:atpos");
     attyp = memory->create(attyp, nucell, "AB:attyp");
-    layer = memory->create(layer, nucell, "AB:layer");
     
     attyp[0] = 1;
-    layer[0]    = 0;
     atpos[0][0] = 0.;
     atpos[0][1] = 0.;
     atpos[0][2] = 0.;
     
     attyp[1] = 2;
-    layer[1]    = 1;
     atpos[1][0] = 0.5;
     atpos[1][1] = 0.5;
     atpos[1][2] = 0.5;
@@ -1074,28 +965,23 @@ void AB::AB_NiAs()
 
     atpos = memory->create(atpos, nucell, 3, "AB:atpos");
     attyp = memory->create(attyp, nucell, "AB:attyp");
-    layer = memory->create(layer, nucell, "AB:layer");
 
     attyp[0] = 1;
-    layer[0]    = 0;
     atpos[0][0] = 0.;
     atpos[0][1] = 0.;
     atpos[0][2] = 0.;
     
     attyp[1] = 2;
-    layer[1]    = 1;
     atpos[1][0] = 1./3.;
     atpos[1][1] = 2./3.;
     atpos[1][2] = 0.25;
     
     attyp[2] = 1;
-    layer[2]    = 2;
     atpos[2][0] = 0.;
     atpos[2][1] = 0.;
     atpos[2][2] = 0.5;
     
     attyp[3] = 2;
-    layer[3]    = 3;
     atpos[3][0] = 2./3.;
     atpos[3][1] = 1./3.;
     atpos[3][2] = 0.75;
@@ -1115,52 +1001,43 @@ void AB::AB_NiAs()
 
     atpos = memory->create(atpos, nucell, 3, "AB:atpos");
     attyp = memory->create(attyp, nucell, "AB:attyp");
-    layer = memory->create(layer, nucell, "AB:layer");
 
     attyp[0] = 1;
-    layer[0]    = 0;
     atpos[0][0] = 0.;
     atpos[0][1] = 0.;
     atpos[0][2] = 0.;
     
     attyp[1] = 1;
-    layer[1]    = 0;
     atpos[1][0] = 0.5;
     atpos[1][1] = 0.5;
     atpos[1][2] = 0.;
     
     attyp[2] = 2;
-    layer[2]    = 1;
     atpos[2][0] = 0.;
     atpos[2][1] = 2./3.;
     atpos[2][2] = 0.25;
     
     attyp[3] = 2;
-    layer[3]    = 1;
     atpos[3][0] = 0.5;
     atpos[3][1] = 1./6.;
     atpos[3][2] = 0.25;
     
     attyp[4] = 1;
-    layer[4]    = 2;
     atpos[4][0] = 0.;
     atpos[4][1] = 0.;
     atpos[4][2] = 0.5;
     
     attyp[5] = 1;
-    layer[5]    = 2;
     atpos[5][0] = 0.5;
     atpos[5][1] = 0.5;
     atpos[5][2] = 0.5;
     
     attyp[6] = 2;
-    layer[6]    = 3;
     atpos[6][0] = 0.;
     atpos[6][1] = 1./3.;
     atpos[6][2] = 0.75;
     
     attyp[7] = 2;
-    layer[7]    = 3;
     atpos[7][0] = 0.5;
     atpos[7][1] = 5./6.;
     atpos[7][2] = 0.75;
@@ -1180,52 +1057,43 @@ void AB::AB_NiAs()
 
     atpos = memory->create(atpos, nucell, 3, "AB:atpos");
     attyp = memory->create(attyp, nucell, "AB:attyp");
-    layer = memory->create(layer, nucell, "AB:layer");
 
     attyp[0] = 1;
-    layer[0]    = 0;
     atpos[0][0] = 0.;
     atpos[0][1] = 0.;
     atpos[0][2] = 0.;
     
     attyp[1] = 1;
-    layer[1]    = 0;
     atpos[1][0] = 0.;
     atpos[1][1] = 0.5;
     atpos[1][2] = 0.;
     
     attyp[2] = 2;
-    layer[2]    = 1;
     atpos[2][0] = 0.5;
     atpos[2][1] = 0.25;
     atpos[2][2] = 1./6.;
     
     attyp[3] = 2;
-    layer[3]    = 2;
     atpos[3][0] = 0.;
     atpos[3][1] = 0.75;
     atpos[3][2] = 1./3.;
     
     attyp[4] = 1;
-    layer[4]    = 3;
     atpos[4][0] = 0.5;
     atpos[4][1] = 0.;
     atpos[4][2] = 0.5;
     
     attyp[5] = 1;
-    layer[5]    = 3;
     atpos[5][0] = 0.5;
     atpos[5][1] = 0.5;
     atpos[5][2] = 0.5;
     
     attyp[6] = 2;
-    layer[6]    = 4;
     atpos[6][0] = 0.;
     atpos[6][1] = 0.25;
     atpos[6][2] = 2./3.;
     
     attyp[7] = 2;
-    layer[7]    = 5;
     atpos[7][0] = 0.5;
     atpos[7][1] = 0.75;
     atpos[7][2] = 5./6.;
@@ -1245,52 +1113,43 @@ void AB::AB_NiAs()
 
     atpos = memory->create(atpos, nucell, 3, "AB:atpos");
     attyp = memory->create(attyp, nucell, "AB:attyp");
-    layer = memory->create(layer, nucell, "AB:layer");
 
     attyp[0] = 2;
-    layer[0]    = 0;
     atpos[0][0] = 0.25;
     atpos[0][1] = 1./3.;
     atpos[0][2] = 0.;
     
     attyp[1] = 2;
-    layer[1]    = 0;
     atpos[1][0] = 0.75;
     atpos[1][1] = 2./3.;
     atpos[1][2] = 0.;
     
     attyp[2] = 1;
-    layer[2]    = 0;
     atpos[2][0] = 0.;
     atpos[2][1] = 0.;
     atpos[2][2] = 0.;
     
     attyp[3] = 1;
-    layer[3]    = 0;
     atpos[3][0] = 0.5;
     atpos[3][1] = 0.;
     atpos[3][2] = 0.;
     
     attyp[4] = 2;
-    layer[4]    = 1;
     atpos[4][0] = 0.25;
     atpos[4][1] = 5./6.;
     atpos[4][2] = 0.5;
     
     attyp[5] = 2;
-    layer[5]    = 1;
     atpos[5][0] = 0.75;
     atpos[5][1] = 1./6.;
     atpos[5][2] = 0.5;
     
     attyp[6] = 1;
-    layer[6]    = 1;
     atpos[6][0] = 0.;
     atpos[6][1] = 0.5;
     atpos[6][2] = 0.5;
     
     attyp[7] = 1;
-    layer[7]    = 1;
     atpos[7][0] = 0.5;
     atpos[7][1] = 0.5;
     atpos[7][2] = 0.5;
@@ -1310,52 +1169,43 @@ void AB::AB_NiAs()
 
     atpos = memory->create(atpos, nucell, 3, "AB:atpos");
     attyp = memory->create(attyp, nucell, "AB:attyp");
-    layer = memory->create(layer, nucell, "AB:layer");
 
     attyp[0] = 1;
-    layer[0]    = 0;
     atpos[0][0] = 0.;
     atpos[0][1] = 0.;
     atpos[0][2] = 0.;
     
     attyp[1] = 1;
-    layer[1]    = 0;
     atpos[1][0] = 0.;
     atpos[1][1] = 0.5;
     atpos[1][2] = 0.;
     
     attyp[2] = 2;
-    layer[2]    = 1;
     atpos[2][0] = 0.5;
     atpos[2][1] = 0.75;
     atpos[2][2] = 1./6.;
     
     attyp[3] = 2;
-    layer[3]    = 2;
     atpos[3][0] = 0.;
     atpos[3][1] = 0.25;
     atpos[3][2] = 1./3.;
     
     attyp[4] = 1;
-    layer[4]    = 3;
     atpos[4][0] = 0.5;
     atpos[4][1] = 0.;
     atpos[4][2] = 0.5;
     
     attyp[5] = 1;
-    layer[5]    = 3;
     atpos[5][0] = 0.5;
     atpos[5][1] = 0.5;
     atpos[5][2] = 0.5;
     
     attyp[6] = 2;
-    layer[6]    = 4;
     atpos[6][0] = 0.;
     atpos[6][1] = 0.75;
     atpos[6][2] = 2./3.;
     
     attyp[7] = 2;
-    layer[7]    = 5;
     atpos[7][0] = 0.5;
     atpos[7][1] = 0.25;
     atpos[7][2] = 5./6.;

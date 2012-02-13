@@ -131,15 +131,13 @@ void Driver::generate()
   char str[MAXLINE];
   int leading_dir = 1;
   printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
-  while (1){
-    printf("Please input the extensions in x, y, and z directions: ");
-    if (count_words(fgets(str,MAXLINE,stdin)) < 3) continue;
-    nx = atoi(strtok(str,  " \t\n\r\f"));
-    ny = atoi(strtok(NULL, " \t\n\r\f"));
-    nz = atoi(strtok(NULL, " \t\n\r\f"));
-    natom = nx*ny*nz*latt->nucell;
-    if (natom > 0) break;
-  }
+  printf("Please input the extensions in x, y, and z directions: ");
+  if (count_words(fgets(str,MAXLINE,stdin)) < 3) exit(2);
+  nx = atoi(strtok(str,  " \t\n\r\f"));
+  ny = atoi(strtok(NULL, " \t\n\r\f"));
+  nz = atoi(strtok(NULL, " \t\n\r\f"));
+  natom = nx*ny*nz*latt->nucell;
+  if (natom < 1) exit(3);
 
   printf("Your system would be %d x %d x %d with %d atoms.\n",nx,ny,nz,natom);
   printf("Please indicate which direction should goes fast(1:x; other: z)[1]: ");

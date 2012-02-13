@@ -37,7 +37,7 @@ USER::USER() : lattice()
     //  yx yy yz
     //  zx zy zz
     //  ntype1 ntype2 ntype3 ...
-    //  sx1 sy1 sz1 layer-ID
+    //  sx1 sy1 sz1
     //  ...
     fgets(str,MAXLINE,fp); if (feof(fp)){fclose(fp); return;}
     alat = atof(strtok(str, " \t\n\r\f"));
@@ -62,7 +62,6 @@ USER::USER() : lattice()
 
     atpos = memory->create(atpos, nucell, 3, "USER_atpos");
     attyp = memory->create(attyp, nucell, "USER:attyp");
-    layer = memory->create(layer, nucell, "USER:layer");
 
     int iatom =0;
     for (int ip=0; ip<ntype; ip++){
@@ -71,7 +70,6 @@ USER::USER() : lattice()
         atpos[iatom][0] = atof(strtok(str,  " \t\n\r\f"));
         atpos[iatom][1] = atof(strtok(NULL, " \t\n\r\f"));
         atpos[iatom][2] = atof(strtok(NULL, " \t\n\r\f"));
-        layer[iatom]    = atoi(strtok(NULL, " \t\n\r\f"));
         attyp[iatom++] = ip+1;
       }
     }
@@ -110,16 +108,14 @@ USER::USER() : lattice()
       
     atpos = memory->create(atpos, nucell, 3, "USER_atpos");
     attyp = memory->create(attyp, nucell, "USER:attyp");
-    layer = memory->create(layer, nucell, "USER:layer");
     // ask for atom coordinates and types
     for (int i=0; i<nucell; i++){
-      do printf("Please input [type xs ys zs layerID] for atom %d: ", i+1);
-      while (count_words(fgets(str,MAXLINE,stdin)) < 5);
+      do printf("Please input [type xs ys zs] for atom %d: ", i+1);
+      while (count_words(fgets(str,MAXLINE,stdin)) < 4);
       attyp[i]    = atoi(strtok(str,  " \t\n\r\f"));
       atpos[i][0] = atof(strtok(NULL, " \t\n\r\f"));
       atpos[i][1] = atof(strtok(NULL, " \t\n\r\f"));
       atpos[i][2] = atof(strtok(NULL, " \t\n\r\f"));
-      layer[i]    = atoi(strtok(NULL, " \t\n\r\f"));
     }
   }
   for (int i=0; i<70; i++) printf("="); printf("\n");
