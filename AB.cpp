@@ -21,14 +21,14 @@ AB::AB() : lattice()
   printf("Please select the type of your lattice:\n");
   printf("   1. B1 (NaCl);        4. L10 (CuAu);\n");
   printf("   2. B2 (CsCl);        5. B81 (a-NiAs);\n");
-  printf("   3. B3 (Zincblende);\n");
+  printf("   3. B3 (Zincblende);  6. B4 (Wurtzite);\n");
   printf("Your choice[1]: ");
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) lattype = atoi(strtok(str, " \t\n\r\f"));
   printf("You selected  : %d\n", lattype);
 
   printf("Please input the lattice constant of the AB lattice [1.]:");
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) alat = atof(strtok(str, " \t\n\r\f"));
-  if (lattype == 4 || lattype == 5){
+  if (lattype == 4 || lattype == 5 || lattype == 6){
     printf("Please input the c/a ratio of your lattice [1.]:");
     if (count_words(fgets(str,MAXLINE,stdin)) > 0) ca = atof(strtok(str, " \t\n\r\f"));
   }
@@ -51,6 +51,9 @@ AB::AB() : lattice()
     break;
   case 5:
     AB_NiAs();
+    break;
+  case 6:
+    AB_B4();
     break;
   default:
     break;
@@ -1209,6 +1212,70 @@ void AB::AB_NiAs()
     atpos[7][0] = 0.5;
     atpos[7][1] = 0.25;
     atpos[7][2] = 5./6.;
+
+    initialized = 1;
+    break;
+  default:
+    break;
+  }
+return;
+}
+
+/* ----------------------------------------------------------------------
+   Initialize for B4 (Wurtzite) lattice
+------------------------------------------------------------------------- */
+void AB::AB_B4()
+{
+  char str[MAXLINE];
+  int surftype = 1;
+  // print out the menu
+  printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
+  printf("Please selection the type of AB-B3 surface:\n");
+  printf("   1. (001), conventional;\n");
+  printf("Your  choice [1]: ");
+  if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = atoi(strtok(str, " \t\n\r\f"));
+  printf("You selected: %d", surftype);
+  printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
+  for (int i=0; i<3; i++){
+    for (int j=0; j<3; j++) latvec[i][j] = 0.;
+  }
+
+  // initialize according to surface type
+  switch (surftype){
+  case 1:
+    name = memory->create(name,11,"AB:name");
+    strcpy(name, "AB-B4(001)");
+
+    ntype  = 2;
+    nucell = 4;
+    
+    latvec[0][0] = 1.;
+    latvec[1][0] = 0.5;
+    latvec[1][1] = sqrt(0.75);
+    latvec[2][2] = ca;
+
+    atpos = memory->create(atpos, nucell, 3, "AB:atpos");
+    attyp = memory->create(attyp, nucell, "AB:attyp");
+    
+    attyp[0]    = 1;
+    atpos[0][0] = 0.;
+    atpos[0][1] = 0.;
+    atpos[0][2] = 0.;
+
+    attyp[1]    = 1;
+    atpos[1][0] = 1./3.;
+    atpos[1][1] = 1./3.;
+    atpos[1][2] = 0.5;
+
+    attyp[2]    = 2;
+    atpos[2][0] = 0.;
+    atpos[2][1] = 0.;
+    atpos[2][2] = 0.375;
+
+    attyp[3]    = 2;
+    atpos[3][0] = 1./3.;
+    atpos[3][1] = 1./3.;
+    atpos[3][2] = 0.875;
 
     initialized = 1;
     break;

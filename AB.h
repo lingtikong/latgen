@@ -13,6 +13,7 @@ private:
   void AB_B1();
   void AB_B2();
   void AB_B3();
+  void AB_B4();
   void AB_L10();
   void AB_NiAs();
 

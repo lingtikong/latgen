@@ -31,7 +31,7 @@ USER::USER() : lattice()
       printf("Error: File %s not found!\n", fname);
       return;
     }
-    // if read from file, the file would be similar to vasp POSCAR
+    // if read from file, the file would be similar to vasp POSCAR (direct)
     //  alat
     //  xx xy xz
     //  yx yy yz
