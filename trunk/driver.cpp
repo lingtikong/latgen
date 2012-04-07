@@ -92,13 +92,15 @@ return rflag;
 void Driver::MainMenu()
 {
   if ( ShowMenu(0) > 0 ){
-    name = memory->create(name, strlen(latt->name)+1, "driver->MainMenu:name");
-    strcpy(name, latt->name);
-    alat = latt->alat;
+    if (latt->initialized){
+      name = memory->create(name, strlen(latt->name)+1, "driver->MainMenu:name");
+      strcpy(name, latt->name);
+      alat = latt->alat;
    
-    latt->display();
+      latt->display();
 
-    generate();
+      generate();
+    }
   }
 return;
 }

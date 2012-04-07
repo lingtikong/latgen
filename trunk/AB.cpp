@@ -29,8 +29,10 @@ AB::AB() : lattice()
   printf("Please input the lattice constant of the AB lattice [1.]:");
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) alat = atof(strtok(str, " \t\n\r\f"));
   if (lattype == 4 || lattype == 5 || lattype == 6){
-    printf("Please input the c/a ratio of your lattice [1.]:");
+    if (lattype == 6) ca = sqrt(8./3.);
+    printf("Please input the c/a ratio or c (negative) of your lattice [%g]: ", ca);
     if (count_words(fgets(str,MAXLINE,stdin)) > 0) ca = atof(strtok(str, " \t\n\r\f"));
+    if (ca < 0.) ca = -ca/alat;
   }
   printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
   
@@ -1228,10 +1230,16 @@ void AB::AB_B4()
 {
   char str[MAXLINE];
   int surftype = 1;
+  double u = 0.375;
   // print out the menu
   printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
-  printf("Please selection the type of AB-B3 surface:\n");
-  printf("   1. (001), conventional;\n");
+  printf("Please indicate the relative position of the two lattices along c [%g]: ", u);
+  if (count_words(fgets(str,MAXLINE,stdin)) > 0) u = atof(strtok(str, " \t\n\r\f"));
+  printf("\nPlease selection the type of AB-B4 surface:\n");
+  printf("   1. (001), gamma =  60 degree;\n");
+  printf("   2. (001), gamma = 120 degree;\n");
+  printf("   3. (001), orthogonal, long x;\n");
+  printf("   4. (001), orthogonal, long y;\n");
   printf("Your  choice [1]: ");
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = atoi(strtok(str, " \t\n\r\f"));
   printf("You selected: %d", surftype);
@@ -1270,12 +1278,160 @@ void AB::AB_B4()
     attyp[2]    = 2;
     atpos[2][0] = 0.;
     atpos[2][1] = 0.;
-    atpos[2][2] = 0.375;
+    atpos[2][2] = u;
 
     attyp[3]    = 2;
     atpos[3][0] = 1./3.;
     atpos[3][1] = 1./3.;
-    atpos[3][2] = 0.875;
+    atpos[3][2] = 0.5+u;
+
+    initialized = 1;
+    break;
+  case 2:
+    name = memory->create(name,11,"AB:name");
+    strcpy(name, "AB-B4(001)");
+
+    ntype  = 2;
+    nucell = 4;
+    
+    latvec[0][0] = 1.;
+    latvec[1][0] =-0.5;
+    latvec[1][1] = sqrt(0.75);
+    latvec[2][2] = ca;
+
+    atpos = memory->create(atpos, nucell, 3, "AB:atpos");
+    attyp = memory->create(attyp, nucell, "AB:attyp");
+    
+    attyp[0]    = 1;
+    atpos[0][0] = 0.;
+    atpos[0][1] = 0.;
+    atpos[0][2] = 0.;
+
+    attyp[1]    = 1;
+    atpos[1][0] = 2./3.;
+    atpos[1][1] = 1./3.;
+    atpos[1][2] = 0.5;
+
+    attyp[2]    = 2;
+    atpos[2][0] = 0.;
+    atpos[2][1] = 0.;
+    atpos[2][2] = u;
+
+    attyp[3]    = 2;
+    atpos[3][0] = 2./3.;
+    atpos[3][1] = 1./3.;
+    atpos[3][2] = 0.5+u;
+
+    initialized = 1;
+    break;
+  case 3:
+    name = memory->create(name,11,"AB:name");
+    strcpy(name, "AB-B4(001)");
+
+    nucell = 8;
+    ntype  = 2;
+
+    latvec[0][0] = sqrt(3.0);
+    latvec[1][1] = 1.;
+    latvec[2][2] = ca;
+
+    atpos = memory->create(atpos, nucell, 3, "AB:atpos");
+    attyp = memory->create(attyp, nucell, "AB:attyp");
+
+    attyp[0]    = 1;
+    atpos[0][0] = 0.;
+    atpos[0][1] = 0.;
+    atpos[0][2] = 0.;
+
+    attyp[1]    = 1;
+    atpos[1][0] = 0.5;
+    atpos[1][1] = 0.5;
+    atpos[1][2] = 0.;
+
+    attyp[2]    = 1;
+    atpos[2][0] = 1./6.;
+    atpos[2][1] = 0.5;
+    atpos[2][2] = 0.5;
+
+    attyp[3]    = 1;
+    atpos[3][0] = 2./3.;
+    atpos[3][1] = 0.0;
+    atpos[3][2] = 0.5;
+
+    attyp[4]    = 2;
+    atpos[4][0] = 0.;
+    atpos[4][1] = 0.;
+    atpos[4][2] = 0.+u;
+
+    attyp[5]    = 2;
+    atpos[5][0] = 0.5;
+    atpos[5][1] = 0.5;
+    atpos[5][2] = 0.+u;
+
+    attyp[6]    = 2;
+    atpos[6][0] = 1./6.;
+    atpos[6][1] = 0.5;
+    atpos[6][2] = 0.5+u;
+
+    attyp[7]    = 2;
+    atpos[7][0] = 2./3.;
+    atpos[7][1] = 0.0;
+    atpos[7][2] = 0.5+u;
+
+    initialized = 1;
+    break;
+  case 4:
+    name = memory->create(name,11,"AB:name");
+    strcpy(name, "AB-B4(001)");
+    nucell = 8;
+    ntype  = 2;
+
+    latvec[0][0] = 1.;
+    latvec[1][1] = sqrt(3.0);
+    latvec[2][2] = ca;
+
+    atpos = memory->create(atpos, nucell, 3, "AB:atpos");
+    attyp = memory->create(attyp, nucell, "AB:attyp");
+
+    attyp[0]    = 1;
+    atpos[0][0] = 0.;
+    atpos[0][1] = 0.;
+    atpos[0][2] = 0.;
+
+    attyp[1]    = 1;
+    atpos[1][0] = 0.5;
+    atpos[1][1] = 0.5;
+    atpos[1][2] = 0.;
+
+    attyp[2]    = 1;
+    atpos[2][0] = 0.5;
+    atpos[2][1] = 1./6.;
+    atpos[2][2] = 0.5;
+
+    attyp[3]    = 1;
+    atpos[3][0] = 0.0;
+    atpos[3][1] = 2./3.;
+    atpos[3][2] = 0.5;
+
+    attyp[4]    = 2;
+    atpos[4][0] = 0.;
+    atpos[4][1] = 0.;
+    atpos[4][2] = u;
+
+    attyp[5]    = 2;
+    atpos[5][0] = 0.5;
+    atpos[5][1] = 0.5;
+    atpos[5][2] = u;
+
+    attyp[6]    = 2;
+    atpos[6][0] = 0.5;
+    atpos[6][1] = 1./6.;
+    atpos[6][2] = 0.5+u;
+
+    attyp[7]    = 2;
+    atpos[7][0] = 0.0;
+    atpos[7][1] = 2./3.;
+    atpos[7][2] = 0.5+u;
 
     initialized = 1;
     break;
