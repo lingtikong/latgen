@@ -16,7 +16,8 @@ private:
   void AB_B4();
   void AB_L10();
   void AB_NiAs();
+  void AB_Perov();
 
-  double ca;
+  double ba, ca;
 };
 #endif
