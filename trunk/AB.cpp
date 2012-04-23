@@ -22,6 +22,9 @@ AB::AB() : lattice()
   printf("   1. B1 (NaCl);        4. L10 (CuAu);\n");
   printf("   2. B2 (CsCl);        5. B81 (a-NiAs);\n");
   printf("   3. B3 (Zincblende);  6. B4 (Wurtzite);\n");
+  for (int i=0; i<70; i++) printf("-"); printf("\n");
+  printf("   7. Perovskite;\n");
+  for (int i=0; i<70; i++) printf("-"); printf("\n");
   printf("Your choice[1]: ");
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) lattype = atoi(strtok(str, " \t\n\r\f"));
   printf("You selected  : %d\n", lattype);
@@ -56,6 +59,9 @@ AB::AB() : lattice()
     break;
   case 6:
     AB_B4();
+    break;
+  case 7:
+    AB_Perov();
     break;
   default:
     break;

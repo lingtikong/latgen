@@ -44,7 +44,7 @@ int Driver::ShowMenu(const int flag)
   else printf("Please select the lattice type of your system:\n");
   printf(" 1. FCC/NaCl/Diamond;          |  4. A3B;\n");
   printf(" 2. BCC;                       |  5. A2B;\n");
-  printf(" 3. HCP/Graphene;              |  6. AB;\n");
+  printf(" 3. HCP/Graphene;              |  6. AB & ABXn;\n");
   for (int i=0; i<31; i++) printf("-"); printf("+"); for (int i=0; i<38; i++) printf("-"); printf("\n");
   if (flag != 0){
     printf(" 7. User defined;              |  0. Exit.\n");
@@ -92,15 +92,15 @@ return rflag;
 void Driver::MainMenu()
 {
   if ( ShowMenu(0) > 0 ){
-    if (latt->initialized){
-      name = memory->create(name, strlen(latt->name)+1, "driver->MainMenu:name");
-      strcpy(name, latt->name);
-      alat = latt->alat;
-   
-      latt->display();
+    if (latt->initialized == 0) exit(2);
 
-      generate();
-    }
+    name = memory->create(name, strlen(latt->name)+1, "driver->MainMenu:name");
+    strcpy(name, latt->name);
+    alat = latt->alat;
+  
+    latt->display();
+
+    generate();
   }
 return;
 }
