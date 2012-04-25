@@ -42,7 +42,7 @@ int Driver::ShowMenu(const int flag)
   printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
   if (flag>0) printf("Please select the lattice type for lattice: %c\n", flag+'A'-1);
   else printf("Please select the lattice type of your system:\n");
-  printf(" 1. FCC/NaCl/Diamond;          |  4. A3B;\n");
+  printf(" 1. FCC/Diamond;               |  4. A3B;\n");
   printf(" 2. BCC;                       |  5. A2B;\n");
   printf(" 3. HCP/Graphene;              |  6. AB & ABXn;\n");
   for (int i=0; i<31; i++) printf("-"); printf("+"); for (int i=0; i<38; i++) printf("-"); printf("\n");
