@@ -15,8 +15,8 @@ private:
   void FCC111();
   void Primitive();
   void DiamondPrim();
-  void DiamondConv();
-  void NaClPrim();
-  void NaClConv();
+  void Diamond001();
+  void Diamond110();
+  void Diamond111();
 };
 #endif
