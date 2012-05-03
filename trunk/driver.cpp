@@ -661,8 +661,11 @@ void Driver::FormLayers()
 
   char realized[MAXLINE]; strcpy(realized, "");
 
+  int istr = 0; // start layer ID
   int first = 1, flag_no_interlayer = 0;
   double Hlast = 0., Hfirst = 0., Hextra;
+  double shift[2];
+  shift[0] = shift[1] = 0.; // define shift of a lattice, in unit of basis vectors
 
   printf("\nPlease input the layer sequences, for example, if you have two lattices: A and B,\n");
   printf("and you want to have 4 layers A, 5 layers B and then 3 layers A, input A4 B5 A3.\n");
@@ -681,6 +684,8 @@ void Driver::FormLayers()
 
         strcat(realized," ");strcat(realized, ptr);
         if (zflag) zprev[ilat] = 0;
+        zprev[ilat] += istr;
+
         ptr[0] = ' ';
         int nl_new  = atoi(ptr);
         int ntm_new = 0;
@@ -709,8 +714,8 @@ void Driver::FormLayers()
             if ( latt->layer[ia] == il ){
               for (int i=0; i<mynx[ilat]; i++)
               for (int j=0; j<myny[ilat]; j++){
-                atpos[iatom][0] = (double(i)+latt->atpos[ia][0])/double(mynx[ilat]);
-                atpos[iatom][1] = (double(j)+latt->atpos[ia][1])/double(myny[ilat]);
+                atpos[iatom][0] = (double(i)+latt->atpos[ia][0]+shift[0])/double(mynx[ilat]);
+                atpos[iatom][1] = (double(j)+latt->atpos[ia][1]+shift[1])/double(myny[ilat]);
                 atpos[iatom][2] = H;
                 attyp[iatom++]  = latt->attyp[ia] + ntprev[ilat];
               }
@@ -723,6 +728,27 @@ void Driver::FormLayers()
         }
         if (nl_new > 0) H -= Hlast;
         zprev[ilat] += nl_new%latt->nlayer;
+        shift[0] = shift[1] = 0.;
+        istr = 0;
+
+      } else if (strcmp(ptr, "-s") == 0){ // to define the start layer of each lattice, must be defined before this lattice
+        ptr = strtok(NULL, " \n\r\t\f");
+        if (ptr){
+          istr = atoi(ptr);
+          strcat(realized," -s ");strcat(realized, ptr);
+        }
+
+      } else if (strcmp(ptr, "-S") == 0){ // to define the shift in xy direction of the lattice, in unit of unit cell basis vectors, must be defined before the lattice
+        char *s0 = strtok(NULL, " \n\r\t\f");
+        char *s1 = strtok(NULL, " \n\r\t\f");
+        if (s0 && s1){
+          shift[0] = atof(s0);
+          shift[1] = atof(s1);
+
+          strcat(realized," -S ");
+          strcat(realized, s0);
+          strcat(realized, s1);
+        }
 
       } else if (strcmp(ptr, "-z") == 0){
         flag_no_interlayer = 1;
