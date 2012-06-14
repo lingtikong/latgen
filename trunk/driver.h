@@ -29,7 +29,8 @@ private:
 
   char *name;
   double alat;
-  int nx, ny, nz, natom, ntype;   // size in three dimension and total number of atoms
+  int nx, ny, nz, nucell;         // size in three dimension and # of atoms per unit cell
+  int natom, ntype;               // otal number of atoms and atom types
   int *attyp, *numtype, *typeID;  // array to store the atomic types for all
   int *xmap, *ymap, *zmap, *umap; // arrays to store the mapping info
   double **atpos, latvec[3][3];   // arrays to store the atomic positions and lattice info

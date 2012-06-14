@@ -138,7 +138,8 @@ void Driver::generate()
   nx = atoi(strtok(str,  " \t\n\r\f"));
   ny = atoi(strtok(NULL, " \t\n\r\f"));
   nz = atoi(strtok(NULL, " \t\n\r\f"));
-  natom = nx*ny*nz*latt->nucell;
+  nucell = latt->nucell;
+  natom = nx*ny*nz*nucell;
   if (natom < 1) exit(3);
 
   printf("Your system would be %d x %d x %d with %d atoms.\n",nx,ny,nz,natom);
@@ -383,7 +384,7 @@ void Driver::write()
   // write the map file, useful to fix_phonon only.
   if (xmap){
      fp = fopen(mapfile, "w");
-     fprintf(fp,"%d %d %d %d\n", nx, ny, nz, latt->nucell);
+     fprintf(fp,"%d %d %d %d\n", nx, ny, nz, nucell);
      fprintf(fp,"Map file for %dx%dx%d %s cell.\n",nx,ny,nz, name);
      for (int i=0; i<natom; i++)
        fprintf(fp,"%d %d %d %d %d\n", xmap[i], ymap[i], zmap[i], umap[i], i+1);
@@ -661,6 +662,10 @@ void Driver::FormLayers()
 
   char realized[MAXLINE]; strcpy(realized, "");
 
+  // prepare for map info if only one lattice is selected, suggesting layered structure
+  int fmap = 0;
+  if (nlat == 1) fmap = 1;
+
   int istr = 0; // start layer ID
   int first = 1, flag_no_interlayer = 0;
   double Hlast = 0., Hfirst = 0., Hextra;
@@ -707,6 +712,16 @@ void Driver::FormLayers()
         natom += ntm_new;
         atpos = memory->grow(atpos, natom, 3, "atpos");
         attyp = memory->grow(attyp, natom, "attyp");
+        if (fmap){
+          xmap = memory->grow(xmap, natom, "xmap");
+          ymap = memory->grow(ymap, natom, "ymap");
+          zmap = memory->grow(zmap, natom, "zmap");
+          umap = memory->grow(umap, natom, "umap");
+
+          nx = mynx[ilat];
+          ny = myny[ilat];
+          nucell = 0;
+        }
 
         for (int k=0; k<nl_new; k++){
           int il = (k+zprev[ilat])%latt->nlayer;
@@ -717,8 +732,18 @@ void Driver::FormLayers()
                 atpos[iatom][0] = (double(i)+latt->atpos[ia][0]+shift[0])/double(mynx[ilat]);
                 atpos[iatom][1] = (double(j)+latt->atpos[ia][1]+shift[1])/double(myny[ilat]);
                 atpos[iatom][2] = H;
+
+                if (fmap){
+                  xmap[iatom] = i;
+                  ymap[iatom] = j;
+                  zmap[iatom] = 0;
+                  umap[iatom] = nucell;
+                }
+
                 attyp[iatom++]  = latt->attyp[ia] + ntprev[ilat];
+
               }
+              nucell++;
             }
           }
           nz++;
@@ -766,6 +791,7 @@ void Driver::FormLayers()
 
   printf("\nThe layer sequences realized is: %s\n", realized);
   printf("In total, %d layers and %d atoms are created.\n", nz, iatom);
+  if (fmap) nz = 1;
 
   if (flag_no_interlayer == 0) H += MAX(Hlast,Hfirst);
   latt = NULL; alat = 1.;
