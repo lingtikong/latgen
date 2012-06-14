@@ -16,15 +16,15 @@ AB::AB() : lattice()
   char str[MAXLINE];
   alat = 1.; ca = 1.;
   // print out the menu
-  printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
+  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
   int lattype = 1;
   printf("Please select the type of your lattice:\n");
   printf("   1. B1 (NaCl);        4. L10 (CuAu);\n");
   printf("   2. B2 (CsCl);        5. B81 (a-NiAs);\n");
   printf("   3. B3 (Zincblende);  6. B4 (Wurtzite);\n");
-  for (int i=0; i<70; i++) printf("-"); printf("\n");
+  for (int i=0; i<14; i++) printf("-----"); printf("\n");
   printf("   7. Perovskite;\n");
-  for (int i=0; i<70; i++) printf("-"); printf("\n");
+  for (int i=0; i<14; i++) printf("-----"); printf("\n");
   printf("Your choice[1]: ");
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) lattype = atoi(strtok(str, " \t\n\r\f"));
   printf("You selected  : %d\n", lattype);
@@ -37,7 +37,7 @@ AB::AB() : lattice()
     if (count_words(fgets(str,MAXLINE,stdin)) > 0) ca = atof(strtok(str, " \t\n\r\f"));
     if (ca < 0.) ca = -ca/alat;
   }
-  printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
+  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
   
   // initialize according to orientation
   initialized = 0;
@@ -85,7 +85,7 @@ void AB::AB_B1()
   char str[MAXLINE];
   int surftype = 1;
   // print out the menu
-  printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
+  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
   printf("Please selection the type of AB-B1 (NaCl) surface:\n");
   printf("   1. (001), small;\n");
   printf("   2. (001), conventional;\n");
@@ -95,7 +95,7 @@ void AB::AB_B1()
   printf("Your  choice [1]: ");
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = atoi(strtok(str, " \t\n\r\f"));
   printf("You selected: %d", surftype);
-  printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
+  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
   for (int i=0; i<3; i++){
     for (int j=0; j<3; j++) latvec[i][j] = 0.;
   }
@@ -349,7 +349,7 @@ void AB::AB_B2()
   char str[MAXLINE];
   int surftype = 1;
   // print out the menu
-  printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
+  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
   printf("Please selection the type of AB-B2 (CsCl) surface:\n");
   printf("   1. (100);\n");
   printf("   2. (110);\n");
@@ -357,7 +357,7 @@ void AB::AB_B2()
   printf("Your  choice [1]: ");
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = atoi(strtok(str, " \t\n\r\f"));
   printf("You selected: %d", surftype);
-  printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
+  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
   
   for (int i=0; i<3; i++){
     for (int j=0; j<3; j++) latvec[i][j] = 0.;
@@ -517,7 +517,7 @@ void AB::AB_B3()
   char str[MAXLINE];
   int surftype = 1;
   // print out the menu
-  printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
+  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
   printf("Please selection the type of AB-B3 surface:\n");
   printf("   1. (100), small;\n");
   printf("   2. (100), conventional;\n");
@@ -527,7 +527,7 @@ void AB::AB_B3()
   printf("Your  choice [1]: ");
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = atoi(strtok(str, " \t\n\r\f"));
   printf("You selected: %d", surftype);
-  printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
+  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
   for (int i=0; i<3; i++){
     for (int j=0; j<3; j++) latvec[i][j] = 0.;
   }
@@ -781,7 +781,7 @@ void AB::AB_L10()
   char str[MAXLINE];
   int surftype = 1;
   // print out the menu
-  printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
+  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
   printf("Please selection the type of AB-L10 surface:\n");
   printf("   1. (001);\n");
   printf("   2. (100);\n");
@@ -790,7 +790,7 @@ void AB::AB_L10()
   printf("Your  choice [1]: ");
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = atoi(strtok(str, " \t\n\r\f"));
   printf("You selected: %d", surftype);
-  printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
+  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
   for (int i=0; i<3; i++){
     for (int j=0; j<3; j++) latvec[i][j] = 0.;
   }
@@ -945,7 +945,7 @@ void AB::AB_NiAs()
   char str[MAXLINE];
   int surftype = 1;
   // print out the menu
-  printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
+  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
   printf("Please selection the type of AB-a-NiAs surface:\n");
   printf("   1. (001), conventional;\n");
   printf("   2. (001), orthogonal;\n");
@@ -955,7 +955,7 @@ void AB::AB_NiAs()
   printf("Your  choice [1]: ");
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = atoi(strtok(str, " \t\n\r\f"));
   printf("You selected: %d", surftype);
-  printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
+  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
   for (int i=0; i<3; i++){
     for (int j=0; j<3; j++) latvec[i][j] = 0.;
   }
@@ -1238,7 +1238,7 @@ void AB::AB_B4()
   int surftype = 1;
   double u = 0.375;
   // print out the menu
-  printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
+  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
   printf("Please indicate the relative position of the two lattices along c [%g]: ", u);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) u = atof(strtok(str, " \t\n\r\f"));
   printf("\nPlease selection the type of AB-B4 surface:\n");
@@ -1249,7 +1249,7 @@ void AB::AB_B4()
   printf("Your  choice [1]: ");
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = atoi(strtok(str, " \t\n\r\f"));
   printf("You selected: %d", surftype);
-  printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
+  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
   for (int i=0; i<3; i++){
     for (int j=0; j<3; j++) latvec[i][j] = 0.;
   }

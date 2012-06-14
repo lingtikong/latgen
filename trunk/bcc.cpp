@@ -16,7 +16,7 @@ BCC::BCC() : lattice()
   char str[MAXLINE];
   // print out the menu
   alat = 1.;
-  printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
+  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
   printf("Please input the lattice constant of the BCC lattice [1.]: ");
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) alat = atof(strtok(str, " \t\n\r\f"));
 
@@ -29,7 +29,7 @@ BCC::BCC() : lattice()
   printf("Your  choice [1]: ");
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) orient = atoi(strtok(str, " \t\n\r\f"));
   printf("You selected: %d", orient);
-  printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
+  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
   
   // initialize according to orientation
   initialized = 0;
@@ -68,14 +68,14 @@ void BCC::BCC001()
   char str[MAXLINE];
   int surftype = 1;
   // print out the menu
-  printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
+  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
   printf("Please selection the type of BCC(001) surface:\n");
   printf("   1. conventional orientation;\n");
   printf("   2. B2 structure;\n");
   printf("Your  choice [1]: ");
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = atoi(strtok(str, " \t\n\r\f"));
   printf("You selected: %d", surftype);
-  printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
+  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
   for (int i=0; i<3; i++){
     for (int j=0; j<3; j++) latvec[i][j] = 0.;
   }
@@ -144,14 +144,14 @@ void BCC::BCC110()
   char str[MAXLINE];
   int surftype=1;
   // print out the menu
-  printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
+  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
   printf("Please selection the type of BCC(110) surface:\n");
   printf("   1. orthogonal, long side along x\n");
   printf("   2. orthogonal, long side along y\n");
   printf("Your  choice [1]: ");
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = atoi(strtok(str, " \t\n\r\f"));
   printf("You selected: %d", surftype);
-  printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
+  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
   
   for (int i=0; i<3; i++){
     for (int j=0; j<3; j++) latvec[i][j] = 0.;
@@ -237,14 +237,14 @@ void BCC::BCC111()
   char str[MAXLINE];
   int surftype =1;
   // print out the menu
-  printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
+  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
   printf("Please selection the type of BCC(111) surface:\n");
   printf("   1. orthogonal, long side along x\n");
   printf("   2. orthogonal, long side along y\n");
   printf("Your  choice [1]: ");
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = atoi(strtok(str, " \t\n\r\f"));
   printf("You selected: %d", surftype);
-  printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
+  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
   
   for (int i=0; i<3; i++){
     for (int j=0; j<3; j++) latvec[i][j] = 0.;

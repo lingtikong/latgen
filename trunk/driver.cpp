@@ -39,7 +39,7 @@ int Driver::ShowMenu(const int flag)
   char str[MAXLINE];
 
   // print out the menu
-  printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
+  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
   if (flag>0) printf("Please select the lattice type for lattice: %c\n", flag+'A'-1);
   else printf("Please select the lattice type of your system:\n");
   printf(" 1. FCC/Diamond;               |  4. A3B;\n");
@@ -50,17 +50,17 @@ int Driver::ShowMenu(const int flag)
     printf(" 7. User defined;              |  0. Exit.\n");
   } else {
     printf(" 7. User defined;              |  8. Multi-layer.\n");
-    for (int i=0; i<70; i++) printf("-"); printf("\n");
+    for (int i=0; i<14; i++) printf("-----"); printf("\n");
 #ifdef Poly
     printf(" 9. Polycrystal;               | ");
 #endif
     printf(" 0. Exit.\n");
   }
-  for (int i=0; i<70; i++) printf("-");
+  for (int i=0; i<14; i++) printf("-----");
   printf("\nYour choice [1]: ");
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) ltype = atoi(strtok(str," \t\n\r\f"));
   printf("You selected: %d", ltype);
-  printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
+  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
 
   switch (ltype){
   case 1: latt = new FCC(); break;
@@ -132,7 +132,7 @@ void Driver::generate()
 {
   char str[MAXLINE];
   int leading_dir = 1;
-  printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
+  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
   printf("Please input the extensions in x, y, and z directions: ");
   if (count_words(fgets(str,MAXLINE,stdin)) < 3) exit(2);
   nx = atoi(strtok(str,  " \t\n\r\f"));
@@ -145,7 +145,7 @@ void Driver::generate()
   printf("Your system would be %d x %d x %d with %d atoms.\n",nx,ny,nz,natom);
   printf("Please indicate which direction should goes fast(1:x; other: z)[1]: ");
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) leading_dir = atoi(strtok(str, " \t\n\r\f"));
-  for (int i=0; i<70; i++) printf("="); printf("\n");
+  for (int i=0; i<14; i++) printf("====="); printf("\n");
 
   atpos = memory->create(atpos, natom, 3, "driver->generate:atpos");
   attyp = memory->create(attyp, natom, "driver->generate:attyp");
@@ -252,7 +252,7 @@ return;
 void Driver::ResetTypeID()
 {
   char str[MAXLINE];
-  printf("\n"); for (int i=0; i<70; i++) printf("=");
+  printf("\n"); for (int i=0; i<14; i++) printf("=====");
   printf("\nThere are %d atomic types in system, and their IDs are:\nIndex : ", ntype);
   for (int i=0; i<ntype; i++) printf("%4d", i+1); printf("\nTypeID: ");
   for (int i=0; i<ntype; i++) printf("%4d", typeID[i]);
@@ -283,7 +283,7 @@ void Driver::ResetTypeID()
       }
     }
   }
-  for (int i=0; i<70; i++) printf("="); printf("\n");
+  for (int i=0; i<14; i++) printf("====="); printf("\n");
 
 return;
 }
@@ -309,7 +309,7 @@ void Driver::write()
   int flag_lmp_data = 1;
   if (latvec[0][1]*latvec[0][1]+latvec[0][2]*latvec[0][2]+latvec[1][2]*latvec[1][2] > 1.e-6) flag_lmp_data = 0;
 
-  printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
+  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
   printf("Please input the filename of the output xyz file [atomcfg.xyz]: ");
   if (count_words(fgets(str,MAXLINE,stdin)) > 0){
     int n = strlen(str) + 1;
@@ -346,7 +346,7 @@ void Driver::write()
   printf("\nThe atomic configuration will be written to files %s", posfile);
   if (flag_lmp_data) printf(" and %s\n", lmpfile); else printf("\n");
   if (xmap) printf("The FFT map information  will be written to file: %s\n", mapfile);
-  for (int i=0; i<70; i++) printf("="); printf("\n");
+  for (int i=0; i<14; i++) printf("====="); printf("\n");
 
   // write the xyz position file 
   fp = fopen(posfile, "w");
@@ -407,7 +407,7 @@ void Driver::modify()
   while (ncycle){
     int job=0;
     // to display the menu for modification
-    printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
+    printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
     printf("Please select the modification you want to do:\n");
     printf("  1. Create substitutional solid solution;\n");
     printf("  2. Reset atomic types;\n");
@@ -419,7 +419,7 @@ void Driver::modify()
     if (count_words(fgets(str,MAXLINE,stdin)) >0) job = atoi(strtok(str, " \t\n\r\f"));
 
     printf("You selected: %d", job);
-    printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
+    printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
    
     switch (job){ 
     case 1: solidsol(); break;
@@ -438,7 +438,7 @@ return;
 void Driver::solidsol()
 {
   char str[MAXLINE];
-  printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
+  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
   int lrange = 0, nrange;
   printf("Limit the solid solution within a region? (y/n)[n]: ");
   if (count_words(fgets(str,MAXLINE,stdin)) > 0){
