@@ -16,7 +16,7 @@ HCP::HCP() : lattice()
   char str[MAXLINE];
   alat = 1.; ca = sqrt(8./3.);
   // print out the menu
-  printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
+  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
   printf("Please input the lattice constant of the HCP lattice [1]:");
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) alat = atof(strtok(str, " \t\n\r\f"));
   printf("Please input the value of c/a ratio or c (negative) [1.633]: ");
@@ -32,7 +32,7 @@ HCP::HCP() : lattice()
   printf("Your  choice [1]: ");
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) orient = atoi(strtok(str, " \t\n\r\f"));
   printf("You selected: %d", orient);
-  printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
+  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
   
   // initialize according to orientation
   initialized = 0;
@@ -73,7 +73,7 @@ void HCP::HCP001()
   char str[MAXLINE];
   int surftype = 5;
   // print out the menu
-  printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
+  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
   printf("Please select the type of HCP(001) surface:\n");
   printf("   1. U along x,  60 degree;\n");
   printf("   2. V along y,  60 degree;\n");
@@ -84,7 +84,7 @@ void HCP::HCP001()
   printf("Your  choice [5]: ");
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = atoi(strtok(str, " \t\n\r\f"));
   printf("You selected: %d", surftype);
-  printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
+  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
   for (int i=0; i<3; i++){
     for (int j=0; j<3; j++) latvec[i][j] = 0.;
   }
@@ -390,7 +390,7 @@ void HCP::Graphene()
   char str[MAXLINE];
   int surftype = 5;
   // print out the menu
-  printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
+  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
   printf("   1. Primitive, U along x,  60 degree;\n");
   printf("   2. Primitive, V along y,  60 degree;\n");
   printf("   3. Primitive, U along x, 120 degree;\n");
@@ -400,7 +400,7 @@ void HCP::Graphene()
   printf("Your  choice [5]: ");
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = atoi(strtok(str, " \t\n\r\f"));
   printf("You selected: %d", surftype);
-  printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
+  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
   for (int i=0; i<3; i++){
     for (int j=0; j<3; j++) latvec[i][j] = 0.;
   }

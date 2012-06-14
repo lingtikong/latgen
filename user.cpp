@@ -17,7 +17,7 @@ USER::USER() : lattice()
   name = memory->create(name,10,"user:name");
   strcpy(name, "USER_LATT");
   char str[MAXLINE];
-  printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
+  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
   printf("Would you like to read the lattice info from a file?(y/n)[n]: ");
   fgets(str,MAXLINE,stdin);
   char *flag = strtok(str," \t\n\r\f");
@@ -118,7 +118,7 @@ USER::USER() : lattice()
       atpos[i][2] = atof(strtok(NULL, " \t\n\r\f"));
     }
   }
-  for (int i=0; i<70; i++) printf("="); printf("\n");
+  for (int i=0; i<14; i++) printf("====="); printf("\n");
   initialized = 1;
 
 return;

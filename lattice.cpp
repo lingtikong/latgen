@@ -62,18 +62,18 @@ void lattice::display()
   for (int i=0; i<nlayer; i++) printf(" %d", numlayer[i]); printf("\n");
   printf("Expected height above each layer  :");
   for (int i=0; i<nlayer; i++) printf(" %g", h[i]); printf("\n");
-  for (int i=0; i<70; i++) printf("-");
+  for (int i=0; i<14; i++) printf("-----");
   printf("\nLattice vectors:\n");
   for (int i=0; i<3; i++){
     for(int j=0; j<3; j++) printf("%lf ", latvec[i][j]*alat);
     printf("\n");
   }
-  for (int i=0; i<70; i++) printf("-");
+  for (int i=0; i<14; i++) printf("-----");
   printf("\nBasis (Fractional coordinate & type):\n");
   for (int i=0; i<nucell; i++){
     printf("%lf %lf %lf %d\n", atpos[i][0], atpos[i][1], atpos[i][2], attyp[i]);
   }
-  for (int i=0; i<70; i++) printf("="); printf("\n\n");
+  for (int i=0; i<14; i++) printf("====="); printf("\n\n");
 }
 
 /*------------------------------------------------------------------------------

@@ -17,7 +17,7 @@ A2B::A2B() : lattice()
   alat = 1.; ca = 1.;
   int ctype = 1;
   // print out the menu
-  printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
+  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
   printf("Please select the composition of your lattice:\n");
   printf("   1. A2B;\n");
   printf("   2. AB2;\n");
@@ -42,7 +42,7 @@ A2B::A2B() : lattice()
     printf("Please input the c/a ratio of your lattice [1.]:");
     if (count_words(fgets(str,MAXLINE,stdin)) > 0) ca = atof(strtok(str, " \t\n\r\f"));
   }
-  printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
+  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
   
   // initialize according to orientation
   initialized = 0;
@@ -78,7 +78,7 @@ void A2B::A2B_C1()
   char str[MAXLINE];
   int surftype = 1;
   // print out the menu
-  printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
+  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
   printf("Please selection the type of A2B-C1 surface:\n");
   printf("   1. (001), small;\n");
   printf("   2. (001), conventional;\n");
@@ -88,7 +88,7 @@ void A2B::A2B_C1()
   printf("Your  choice [1]: ");
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = atoi(strtok(str, " \t\n\r\f"));
   printf("You selected: %d\n", surftype);
-  printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
+  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
   for (int i=0; i<3; i++){
     for (int j=0; j<3; j++) latvec[i][j] = 0.;
   }
@@ -417,7 +417,7 @@ void A2B::A2B_C15()
   char str[MAXLINE];
   int surftype = 1;
   // print out the menu
-  printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
+  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
   printf("Please selection the type of A2B-C15 surface:\n");
   printf("   1. (001), small;\n");
   printf("   2. (001), conventional;\n");
@@ -427,7 +427,7 @@ void A2B::A2B_C15()
   printf("Your  choice [1]: ");
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = atoi(strtok(str, " \t\n\r\f"));
   printf("You selected: %d\n", surftype);
-  printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
+  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
   for (int i=0; i<3; i++){
     for (int j=0; j<3; j++) latvec[i][j] = 0.;
   }
@@ -981,7 +981,7 @@ void A2B::A2B_C32()
   char str[MAXLINE];
   int surftype = 1;
   // print out the menu
-  printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
+  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
   printf("Please selection the type of A2B-C32 surface:\n");
   printf("   1. (001), conventional;\n");
   printf("   2. (001), orthogonal;\n");
@@ -991,7 +991,7 @@ void A2B::A2B_C32()
   printf("Your  choice [1]: ");
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = atoi(strtok(str, " \t\n\r\f"));
   printf("You selected: %d\n", surftype);
-  printf("\n"); for (int i=0; i<70; i++) printf("="); printf("\n");
+  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
   for (int i=0; i<3; i++){
     for (int j=0; j<3; j++) latvec[i][j] = 0.;
   }

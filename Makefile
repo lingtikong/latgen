@@ -1,6 +1,6 @@
 .SUFFIXES : .o .cpp
 # compiler and flags
-CC     = g++
+CC     = g++ -Wno-unused-result
 LINK   = $(CC)
 CFLAGS = -O3 $(UFLAG) $(DEBUG)
 #
