@@ -678,7 +678,7 @@ void Driver::FormLayers()
   printf("them, for example: A4 0.5 B5 0.4 A4 B5...; multiple numbers will add multiple distances.\n");
   printf("If you want to form the 2nd A layers from its first layer in the unit cell, use\n");
   printf("lower case 'a' instead of 'A'. Now, input your sequences: ");
-  if (count_words(fgets(str,MAXLINE,stdin)) > 1) {
+  if (count_words(fgets(str,MAXLINE,stdin)) > 0) {
     char *ptr = strtok(str," \n\r\t\f");
     while (ptr != NULL){
       zflag = 0; Hextra = 0.;
