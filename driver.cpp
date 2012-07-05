@@ -346,6 +346,10 @@ void Driver::write()
   printf("\nThe atomic configuration will be written to files %s", posfile);
   if (flag_lmp_data) printf(" and %s\n", lmpfile); else printf("\n");
   if (xmap) printf("The FFT map information  will be written to file: %s\n", mapfile);
+  if (natom < 3){
+    printf("\nThe basis vectors of your system is:\n");
+    for (int i=0; i<3; i++) printf("  %16.16e %16.16e %16.16e\n", latvec[i][0], latvec[i][1], latvec[i][2]);
+  }
   for (int i=0; i<14; i++) printf("====="); printf("\n");
 
   // write the xyz position file 
