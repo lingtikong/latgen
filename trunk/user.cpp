@@ -43,9 +43,9 @@ USER::USER() : lattice()
     alat = atof(strtok(str, " \t\n\r\f"));
     for (int i=0; i<3; i++){
       fgets(str,MAXLINE,fp); if (feof(fp)){fclose(fp); return;}
-      latvec[i][0] = atoi(strtok(str,  " \t\n\r\f"));
-      latvec[i][1] = atoi(strtok(NULL, " \t\n\r\f"));
-      latvec[i][2] = atoi(strtok(NULL, " \t\n\r\f"));
+      latvec[i][0] = atof(strtok(str,  " \t\n\r\f"));
+      latvec[i][1] = atof(strtok(NULL, " \t\n\r\f"));
+      latvec[i][2] = atof(strtok(NULL, " \t\n\r\f"));
     }
     fgets(str,MAXLINE,fp); if (feof(fp)){fclose(fp); return;}
     ntype = count_words(str);
