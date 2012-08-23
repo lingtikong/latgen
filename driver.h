@@ -4,6 +4,8 @@
 #include "lists.h"
 #include "random.h"
 #include "memory.h"
+#include "elements.h"
+#include <map>
 
 class Driver{
 public:
@@ -43,6 +45,10 @@ private:
   // private modification methods
   void solidsol(void);            // method to create subsutitutional solid solution
   void ResetTypeID(void);         // method to reset the atomic type ID
+  void MapElement(void);          // method to map atomic type to real elements
+
+  ChemElements * element;
+  std::map<int,int> type2num;
 
   int count_words(const char *);
 };

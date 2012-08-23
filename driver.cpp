@@ -20,6 +20,7 @@ Driver::Driver()
   atpos = NULL;
   attyp = NULL;
   random = NULL;
+  element = NULL;
   typeID = numtype = NULL;
   xmap = ymap = zmap = umap = NULL;
 
@@ -118,11 +119,16 @@ Driver::~Driver()
   memory->destroy(umap);
   memory->destroy(name);
 
+  type2num.clear();
+
   if (latt != NULL) delete latt;
+  if (element != NULL) delete element;
 
   memory->destroy(typeID);
   memory->destroy(numtype);
   if (random != NULL) delete random;
+
+  delete memory;
 }
 
 /* ----------------------------------------------------------------------
@@ -289,6 +295,40 @@ return;
 }
 
 /* ----------------------------------------------------------------------
+ * method to map atomic type to real element
+ * ---------------------------------------------------------------------- */
+void Driver::MapElement()
+{
+  char str[MAXLINE];
+  printf("\n"); for (int i=0; i<14; i++) printf("=====");
+  printf("\nThere are %d atomic types in system, and their IDs are:\nIndex : ", ntype);
+  for (int i=0; i<ntype; i++) printf("%4d", i+1); printf("\nTypeID: ");
+  for (int i=0; i<ntype; i++) printf("%4d", typeID[i]);
+  printf("\nPlease input the element symbols in sequence, enter to skip: ");
+  if (count_words(fgets(str,MAXLINE,stdin)) >= ntype){
+
+    if (element == NULL) element = new ChemElements();
+    type2num.clear();
+
+    char *ptr = strtok(str, " \t\n\r\f");
+    for (int i=0; i<ntype; i++){
+      int ip = typeID[i];
+      type2num[ip] = element->Name2Num(ptr);
+
+      ptr = strtok(NULL, " \t\n\r\f");
+    }
+    printf("Element:");
+    for (int i=0; i<ntype; i++){
+      char ename[3];
+      int ip = typeID[i]; element->Num2Name(type2num[ip],ename);
+      printf("%4s", ename);
+    } printf("\n");
+  }
+  for (int i=0; i<14; i++) printf("====="); printf("\n");
+
+return;
+}
+/* ----------------------------------------------------------------------
    method to find the ID of the current atomic type
 ------------------------------------------------------------------------- */
 int Driver::lookup(int ip)
@@ -358,12 +398,24 @@ void Driver::write()
   fprintf(fp, "%s cell with dimension %dx%dx%d and a= %g\n", name, nx, ny, nz, alat);
   int nr = 3;
   if (natom < nr) nr = natom;
-  for (int i=0; i<nr; i++){
-    fprintf(fp,"%d %16.16e %16.16e %16.16e crystal_vector %d %16.16e %16.16e %16.16e\n", attyp[i], atpos[i][0],
-    atpos[i][1], atpos[i][2], i+1, latvec[i][0], latvec[i][1], latvec[i][2]);
+  if (type2num.size() == ntype){
+    char ename[3];
+    for (int i=0; i<nr; i++){
+      int ip = attyp[i]; element->Num2Name(type2num[ip], ename);
+      fprintf(fp,"%2s %16.16e %16.16e %16.16e crystal_vector %d %16.16e %16.16e %16.16e\n", ename, atpos[i][0],
+      atpos[i][1], atpos[i][2], i+1, latvec[i][0], latvec[i][1], latvec[i][2]);
+    }
+    for (int i=nr; i<natom; i++){
+      int ip = attyp[i]; element->Num2Name(type2num[ip], ename);
+      fprintf(fp,"%2s %16.16e %16.16e %16.16e\n", ename, atpos[i][0], atpos[i][1], atpos[i][2]);
+    }
+  } else {
+    for (int i=0; i<nr; i++){
+      fprintf(fp,"%d %16.16e %16.16e %16.16e crystal_vector %d %16.16e %16.16e %16.16e\n", attyp[i], atpos[i][0],
+      atpos[i][1], atpos[i][2], i+1, latvec[i][0], latvec[i][1], latvec[i][2]);
+    }
+    for (int i=nr; i<natom; i++) fprintf(fp,"%d %16.16e %16.16e %16.16e\n", attyp[i], atpos[i][0], atpos[i][1], atpos[i][2]);
   }
-  for (int i=nr; i<natom; i++)
-    fprintf(fp,"%d %16.16e %16.16e %16.16e\n", attyp[i], atpos[i][0], atpos[i][1], atpos[i][2]);
   fclose(fp);
   delete []posfile;
 
@@ -378,6 +430,16 @@ void Driver::write()
     fprintf(fp, " 0. %20.14f  zlo zhi\n", latvec[2][2]);
     if ( latvec[1][0]*latvec[1][0] + latvec[2][0]*latvec[2][0] + latvec[2][1]*latvec[2][1] > 1.e-8 )
       fprintf(fp, "%20.14f %20.14f %20.14f xy xz yz\n", latvec[1][0], latvec[2][0], latvec[2][1]);
+
+    if (type2num.size() == ntype){
+      fprintf(fp, "\nMasses\n\n");
+
+      for (std::map<int,int>::iterator it = type2num.begin(); it != type2num.end(); it++){
+        int ip = (*it).first; int num = (*it).second;
+        fprintf(fp,"%d %g\n", ip, element->Num2Mass(num));
+      }
+    }
+
     fprintf(fp, "\nAtoms\n\n");
   
     for (int i=0; i<natom; i++) fprintf(fp,"%d %d %20.14f %20.14f %20.14f\n", i+1, attyp[i], atpos[i][0], atpos[i][1], atpos[i][2]);
@@ -415,6 +477,7 @@ void Driver::modify()
     printf("Please select the modification you want to do:\n");
     printf("  1. Create substitutional solid solution;\n");
     printf("  2. Reset atomic types;\n");
+    printf("  3. Map atomic type to elements;\n");
 
     if (ncycle == 1) printf("  0. Nothing.\n");
     else printf("  0. Done.\n");
@@ -426,8 +489,9 @@ void Driver::modify()
     printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
    
     switch (job){ 
-    case 1: solidsol(); break;
+    case 1: solidsol();    break;
     case 2: ResetTypeID(); break;
+    case 3: MapElement();  break;
     default: return;
     }
 
