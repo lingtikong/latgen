@@ -383,7 +383,7 @@ void Driver::write()
     } 
   }
 
-  printf("\nThe atomic configuration will be written to files %s", posfile);
+  printf("\nThe atomic configuration will be written to: %s", posfile);
   if (flag_lmp_data) printf(" and %s\n", lmpfile); else printf("\n");
   if (xmap) printf("The FFT map information  will be written to file: %s\n", mapfile);
   if (natom < 3){
@@ -431,6 +431,7 @@ void Driver::write()
     if ( latvec[1][0]*latvec[1][0] + latvec[2][0]*latvec[2][0] + latvec[2][1]*latvec[2][1] > 1.e-8 )
       fprintf(fp, "%20.14f %20.14f %20.14f xy xz yz\n", latvec[1][0], latvec[2][0], latvec[2][1]);
 
+    // write atomic mass info (g/mol) if element mapping is done
     if (type2num.size() == ntype){
       fprintf(fp, "\nMasses\n\n");
 
