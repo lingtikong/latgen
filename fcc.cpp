@@ -945,7 +945,7 @@ void FCC::Diamond111()
     initialized = 1;
     break;
 
-  case 5:
+  case 6:
     nucell = 12;
     ntype  = 1;
     
@@ -1019,7 +1019,7 @@ void FCC::Diamond111()
     initialized = 1;
     break;
 
-  case 6:
+  case 5:
     nucell = 12;
     ntype  = 1;
     
