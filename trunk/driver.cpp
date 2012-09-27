@@ -60,8 +60,8 @@ int Driver::ShowMenu(const int flag)
   for (int i=0; i<14; i++) printf("-----");
   printf("\nYour choice [1]: ");
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) ltype = atoi(strtok(str," \t\n\r\f"));
-  printf("You selected: %d", ltype);
-  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
+  printf("You selected: %d\n", ltype);
+  for (int i=0; i<14; i++) printf("====="); printf("\n");
 
   switch (ltype){
   case 1: latt = new FCC(); break;
@@ -244,8 +244,7 @@ void Driver::typescan()
         numtype = memory->grow(numtype,typmax, "driver->typescan:numtype");
       }
       typeID[ntype] = attyp[i];
-      id            = ntype;
-      ntype++;
+      id            = ntype++;
     }
     numtype[id]++;
   }
@@ -261,7 +260,8 @@ void Driver::ResetTypeID()
   printf("\n"); for (int i=0; i<14; i++) printf("=====");
   printf("\nThere are %d atomic types in system, and their IDs are:\nIndex : ", ntype);
   for (int i=0; i<ntype; i++) printf("%4d", i+1); printf("\nTypeID: ");
-  for (int i=0; i<ntype; i++) printf("%4d", typeID[i]);
+  for (int i=0; i<ntype; i++) printf("%4d", typeID[i]); printf("\nNatTyp: ");
+  for (int i=0; i<ntype; i++) printf("%4d", numtype[i]);
   printf("\nPlease input the new type IDs in sequence, enter to skip: ");
   if (count_words(fgets(str,MAXLINE,stdin)) > 0){
     int newID[ntype], num=0;
@@ -303,7 +303,8 @@ void Driver::MapElement()
   printf("\n"); for (int i=0; i<14; i++) printf("=====");
   printf("\nThere are %d atomic types in system, and their IDs are:\nIndex : ", ntype);
   for (int i=0; i<ntype; i++) printf("%4d", i+1); printf("\nTypeID: ");
-  for (int i=0; i<ntype; i++) printf("%4d", typeID[i]);
+  for (int i=0; i<ntype; i++) printf("%4d", typeID[i]); printf("\nNatTyp: ");
+  for (int i=0; i<ntype; i++) printf("%4d", numtype[i]);
   printf("\nPlease input the element symbols in sequence, enter to skip: ");
   if (count_words(fgets(str,MAXLINE,stdin)) >= ntype){
 
@@ -507,90 +508,174 @@ return;
 void Driver::solidsol()
 {
   char str[MAXLINE];
+  int job = 0;
   printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
-  int lrange = 0, nrange;
-  printf("Limit the solid solution within a region? (y/n)[n]: ");
-  if (count_words(fgets(str,MAXLINE,stdin)) > 0){
-    char *flag = strtok(str, " \r\n\t\f");
-    if (strcmp(flag,"y") == 0 || strcmp(flag,"Y")== 0) lrange = 1;
+  printf("Please select the region to create the solid solution:\n");
+  printf("  1. Limit solid solution inside/outside a block region;\n");
+  printf("  2. Limit solid solution inside/outside a spherical region;\n");
+  printf("  3. Union of 1 & 2;\n");
+  printf("  4. Intersection of 1 & 2;\n");
+  printf("  5. All atoms in the box;\n");
+  printf("  0. Return;\nYour choice [%d]: ", job);
+  if (count_words(fgets(str,MAXLINE,stdin)) > 0) job = atoi(strtok(str," \t\n\r\f"));
+  printf("You selected: %d\n", job);
+  if (job < 1 || job > 5){
+    for (int i=0; i<14; i++) printf("====="); printf("\n");
+    return;
   }
-  int dir = 2, outside = 0;
-  double lo, hi;
-  if (lrange){
-    printf("Please input the normal direction of the region [z]: ");
-    if (count_words(fgets(str,MAXLINE,stdin)) > 0){
-      char *flag = strtok(str," \t\n\r\f");
-      if (strcmp(flag,"x") == 0 || strcmp(flag,"X")== 0) dir = 0;
-      else if (strcmp(flag,"y") == 0 || strcmp(flag,"Y")== 0) dir = 1;
-      else dir = 2;
-    }
-    lo = 0.; hi = latvec[dir][dir];
-    printf("The lattice vector along the selected direction: %g %g %g\n", latvec[dir][0], latvec[dir][1], latvec[dir][2]);
-    printf("Please input the lower and upper limit of the region [0 %lg]: ", latvec[dir][dir]);
-    if (count_words(fgets(str,MAXLINE,stdin)) > 0){
-      char *ptr;
-      ptr = strtok(str," \t\n\r\f");  if (ptr != NULL) lo = atof(ptr);
-      ptr = strtok(NULL," \t\n\r\f"); if (ptr != NULL) hi = atof(ptr);
-    }
-    printf("The desired region will be along the %d-th direction within [%g %g].\n", dir+1, lo, hi);
-    printf("Will you limit the solid solution (0) inside or (1) outside the region?[0]: ");
-    if (count_words(fgets(str,MAXLINE,stdin)) > 0) outside = atoi(strtok(str, " \t\n\r\f"));
-    
-    nrange = 0;
-    for (int i=0; i<natom; i++){
-      if (outside){
-        if (atpos[i][dir] < lo || atpos[i][dir] > hi) nrange++;
+
+  double block[6], cpos[3], radius;
+  int flag, logand = 1, nsel, atsel[natom];
+  for (int id = 0; id<natom; id++) atsel[id] = 1;
+  if (job==1 || job==3 || job==4) flag |= 1;
+  if (job==2 || job==3 || job==4) flag |= 2;
+  if (job==3) logand = 0;
+
+  if (flag & 1){ // block region needed
+    printf("\nThe basis vectors that define the current simulation box is:\n");
+    for (int idim=0; idim<3; idim++) printf("  A%d: %lg %lg %lg\n", idim, latvec[idim][0], latvec[idim][1], latvec[idim][2]); 
+    printf("Please input the bounds of the block region, in the format of `xlo xhi ylo yhi zlo zhi pos`,\n");
+    printf("where `pos` is either `i` or `o`, indicating inside or outside the block. If no limit in certain\n");
+    printf("direction, use `NULL`. For non-orthogonal box, this might not work well.\nPlease input them now: ");
+    if (count_words(fgets(str,MAXLINE,stdin)) >= 7){
+      char *ptr = strtok(str," \t\n\r\f");
+      for (int i=0; i<6; i++){
+        if (strcmp(ptr, "NULL") == 0) block[i] = double(i%2)*latvec[i/2][i/2];
+        else block[i] = atof(ptr);
+
+        ptr = strtok(NULL, " \n\t\r\f");
+      }
+      int inside = 1;
+      if (strcmp(ptr,"o")==0 || strcmp(ptr,"O")==0){
+        inside = 0;
+        printf("\nAtoms outside block region bounded by [%g %g], [%g %g], [%g %g]\n",
+        block[0], block[1], block[2], block[3], block[4], block[5]);
       } else {
-        if (atpos[i][dir] >= lo && atpos[i][dir] <= hi) nrange++;
+        printf("\nAtoms inside block region bounded by [%g %g], [%g %g], [%g %g]\n",
+        block[0], block[1], block[2], block[3], block[4], block[5]);
+      }
+      printf("will be used to create the substitutional solid solution.\n");
+
+      for (int i=0; i<natom; i++){
+        if (inside){
+          if (atpos[i][0]<block[0] || atpos[i][0]>block[1] ||
+              atpos[i][1]<block[2] || atpos[i][1]>block[3] ||
+              atpos[i][2]<block[4] || atpos[i][2]>block[5] ) atsel[i] = 0;
+        } else {
+          if (atpos[i][0]>block[0] && atpos[i][0]<block[1] &&
+              atpos[i][1]>block[2] && atpos[i][1]<block[3] &&
+              atpos[i][2]>block[4] && atpos[i][2]<block[5] ) atsel[i] = 0;
+        }
       }
     }
   }
-  printf("Total number of atoms in the system: %d\n", natom);
-  if (lrange) printf("Total number of atoms in the region: %d\n", nrange);
+
+  nsel = 0;
+  for (int i=0; i<natom; i++) nsel += atsel[i];
+
+  if (flag & 2){ // spherical region needed
+    printf("\nThe basis vectors that define the current simulation box is:\n");
+    for (int idim=0; idim<3; idim++) printf("A%d: %lg %lg %lg\n", idim, latvec[idim][0], latvec[idim][1], latvec[idim][2]); 
+    printf("There are %d atoms in current selection. Please input the necessary parameters that define the\n", nsel);
+    printf("spherical region in the format of `x y z r pos`, where `pos` is either `i` or `o`, indicating\n");
+    printf("inside or outside the block. Please input them now: ");
+    if (count_words(fgets(str,MAXLINE,stdin)) >= 5){
+      char *ptr = strtok(str," \t\n\r\f");
+      for (int i=0; i<3; i++){
+        cpos[i] = atof(ptr);
+        ptr = strtok(NULL, " \n\t\r\f");
+      }
+      radius = atof(ptr);
+
+      int inside = 1;
+      ptr = strtok(NULL, " \n\t\r\f");
+      if (strcmp(ptr,"o")==0 || strcmp(ptr,"O")==0){
+        inside = 0;
+        printf("\nAtoms outside sphere centered at [%g %g %g] with radius of %g\n", cpos[0], cpos[1], cpos[2], radius);
+      } else {
+        printf("\nAtoms inside sphere centered at [%g %g %g] with radius of %g\n", cpos[0], cpos[1], cpos[2], radius);
+      }
+      printf(" will be used to create the substitutional solid solution.\n");
+      radius *= radius;
+
+      for (int i=0; i<natom; i++){
+        double r2 = 0.;
+        for (int idim=0; idim<3; idim++){
+          double dx = atpos[i][idim]-cpos[idim];
+          r2 += dx*dx;
+        }
+        if (logand){
+          if (inside==1 && r2>radius) atsel[i] = 0;
+          if (inside==0 && r2<radius) atsel[i] = 0;
+        } else {
+          if (inside==1 && r2<radius) atsel[i] = 1;
+          if (inside==0 && r2>radius) atsel[i] = 1;
+        }
+      }
+    }
+  }
+  nsel = 0;
+  int nsel_type[ntype];
+  for (int i=0; i<ntype; i++) nsel_type[i] = 0;
+  printf("%d %d\n", attyp[0], attyp[1]);
+
+  for (int i=0; i<natom; i++){
+    nsel += atsel[i];
+    int ip = lookup(attyp[i]);
+    nsel_type[ip] += atsel[i];
+  }
+
+  printf("\nTotal number of atoms in the system: %d\n", natom);
   printf("Total number of atomimc types      : %d\n", ntype);
   printf("Atomic type number for each type   :");
   for (int i=0; i<ntype; i++) printf(" %d", typeID[i]);
   printf("\nNumber of atoms for each  type     :");
   for (int i=0; i<ntype; i++) printf(" %d", numtype[i]); printf("\n");
+  printf("\nNumber of atoms in selection for each type:");
+  for (int i=0; i<ntype; i++) printf(" %d", nsel_type[i]); printf("\n");
 
-  int ipsrc, idsrc, numsub, ipdes, iddes;
-  while (1){
+  int ipsrc, idsrc=-1, numsub;
+  do {
     printf("\nPlease input the atomic type to be substituted: ");
     while (count_words(fgets(str,MAXLINE,stdin)) < 1);
     ipsrc = atoi(strtok(str, " \t\n\r\f"));
     idsrc = lookup(ipsrc);
+  } while (idsrc < 0);
 
-    if (idsrc >= 0) break;
+  printf("Total # of atoms with type %d in selection is %d.\n", ipsrc, nsel_type[idsrc]);
+  if (nsel_type[idsrc] < 1){
+    printf("Not enough atoms to create substitutional solid solution.\n");
+    for (int i=0; i<14; i++) printf("====="); printf("\n");
+    return;
   }
-  printf("Total # of atoms with type %d is %d.\n", ipsrc, numtype[idsrc]);
-  double frac;
-  while (1){
+
+  double frac = -1.;
+  do {
     printf("Please input the fraction or total # of atoms to be replaced: ");
     while (count_words(fgets(str,MAXLINE,stdin)) < 1);
     frac = atof(strtok(str, " \t\n\r\f"));
+  } while (frac <= 0. || int(frac) > nsel_type[idsrc]);
 
-    if (frac >= 0. && int(frac) <= numtype[idsrc]) break;
-  }
-  if (frac < 1.) numsub = int(frac*double(numtype[idsrc]));
+  if (frac < 1.) numsub = MIN(int(frac*double(nsel_type[idsrc])+0.5), nsel_type[idsrc]);
   else numsub = int(frac);
   printf("There will be %d atoms with type %d to be replaced.\n", numsub, ipsrc);
   if (numsub < 1) return;
 
-  while (1){
+  int ipdes, iddes = 1;
+  do {
     printf("Please input the atomic type to be assigned: ");
     while (count_words(fgets(str,MAXLINE,stdin)) < 1);
     ipdes = atoi(strtok(str, " \t\n\r\f"));
     iddes = lookup(ipdes);
     if (iddes >= 0){
-      printf("***Note: assigned type already exist, continue? (0= no, 1=yes)[1]:");
+      iddes = -1;
+      printf("***Note: assigned type already exist, continue? (y/n)[y]: ");
       if (count_words(fgets(str,MAXLINE,stdin)) > 0){
-        int flag = atoi(strtok(str, " \t\n\r\f"));
-        if (flag == 1) iddes = -2;
+        char *ptr = strtok(str, " \t\n\r\f");
+        if (strcmp(ptr,"n")==0 || strcmp(ptr,"N")==0) iddes = 1;
       }
     }
-
-    if (iddes < 0) break;
-  }
+  } while (iddes > 0);
 
   // create random number generator if not created; current time as seed;
   if (random == NULL){
@@ -603,15 +688,9 @@ void Driver::solidsol()
   int isub =0;
   while (isub < numsub){
     int i = int(random->uniform()*double(natom));
-    if (attyp[i] == ipsrc){
-      if (lrange){
-        if (outside){
-          if (atpos[i][dir] >= lo && atpos[i][dir] <= hi) continue;
-        } else {
-          if (atpos[i][dir] < lo || atpos[i][dir] > hi) continue;
-        }
-      }
+    if (atsel[i] == 0) continue;
 
+    if (attyp[i] == ipsrc){
       attyp[i] = ipdes;
       isub++;
     }
@@ -619,6 +698,8 @@ void Driver::solidsol()
 
   // reset type info
   typescan();
+
+  for (int i=0; i<14; i++) printf("====="); printf("\n");
 return;
 }
 
