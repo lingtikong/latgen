@@ -329,6 +329,7 @@ void Driver::MapElement()
 
 return;
 }
+
 /* ----------------------------------------------------------------------
    method to find the ID of the current atomic type
 ------------------------------------------------------------------------- */
@@ -829,7 +830,8 @@ void Driver::FormLayers()
   printf("If you want to form the 2nd A layers from its first layer in the unit cell, use\n");
   printf("lower case 'a' instead of 'A'. Now, input your sequences: ");
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) {
-    char *ptr = strtok(str," \n\r\t\f");
+    char *ptr; if (ptr = strchr(str,'#')) *ptr = '\0';
+    ptr = strtok(str," \n\r\t\f");
     while (ptr != NULL){
       zflag = 0; Hextra = 0.;
       int ilat = ptr[0] - 'A';

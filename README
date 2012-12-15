@@ -21,21 +21,18 @@ orientation:
 0  1  0
 0  0  1
 4
-0.  0.  0.   0
-0.5 0.5 0.   0
-0.5 0.  0.5  1
-0.  0.5 05   1
+0.  0.  0. 
+0.5 0.5 0.
+0.5 0.  0.5
+0.  0.5 0.5 
 ########################################
 
 The first line is the lattice constant or scaling factor of the lattice,
 the 2nd-4th lines are the basis vectors that define the unit cell.
 The 5th line lists the number of atoms for each kind of element; here we
 just have one kind of element, and 4 atoms in a convention cell of FCC Cu.
-From the 6th line, the coordinates and layer-ID (starts from 0, along A3)
-are listed. The coordinates are in the reduced unit, i.e., in unit of
-alat * A1, alat * A2, alat * A3.
-Layer-ID simply shows the layering sequence of each atom along the third
-basis vector.
+From the 6th line, the coordinates are listed. The coordinates are in the
+reduced unit, i.e., in unit of alat * A1, alat * A2, alat * A3.
 
 Please note that this code is written for personal use only, no support
 or warranty will be provided. But if any bug found, feel free to drop a line
