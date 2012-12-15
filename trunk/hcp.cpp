@@ -8,9 +8,9 @@
 
 using namespace std;
 
-/* ----------------------------------------------------------------------
-   To select the orientation of the lattice
-------------------------------------------------------------------------- */
+/*-----------------------------------------------------------------------
+ * To select the orientation of the lattice
+ *----------------------------------------------------------------------- */
 HCP::HCP() : lattice()
 {
   char str[MAXLINE];
@@ -28,7 +28,7 @@ HCP::HCP() : lattice()
   printf("Please select the orientation of the HCP lattice:\n");
   printf("   1. (001);         4. (-110); \n");
   printf("   2. (100);         5. Graphene;\n");
-  printf("   3. (110);\n");
+  printf("   3. (110);         6. Graphite;\n");
   printf("Your  choice [1]: ");
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) orient = atoi(strtok(str, " \t\n\r\f"));
   printf("You selected: %d", orient);
@@ -51,23 +51,25 @@ HCP::HCP() : lattice()
     break;
   case 5:
     Graphene();
+  case 6:
+    Graphite();
   default:
     break;
   }
 
 }
 
-/* ----------------------------------------------------------------------
-   Deconstructor does nothing
-------------------------------------------------------------------------- */
+/*-----------------------------------------------------------------------
+ * Deconstructor does nothing
+ *----------------------------------------------------------------------- */
 HCP::~HCP()
 {
 
 }
 
-/* ----------------------------------------------------------------------
-   Initialize for (001) orientation
-------------------------------------------------------------------------- */
+/*-----------------------------------------------------------------------
+ * Initialize for (001) orientation
+ *----------------------------------------------------------------------- */
 void HCP::HCP001()
 {
   char str[MAXLINE];
@@ -251,9 +253,9 @@ void HCP::HCP001()
 return;
 }
 
-/* ----------------------------------------------------------------------
-   Initialize for (110) orientation
-------------------------------------------------------------------------- */
+/*-----------------------------------------------------------------------
+ * Initialize for (110) orientation
+ *----------------------------------------------------------------------- */
 void HCP::HCP100()
 {
   for (int i=0; i<3; i++){
@@ -295,9 +297,9 @@ void HCP::HCP100()
 return;
 }
 
-/* ----------------------------------------------------------------------
-   Initialize for (110) orientation
-------------------------------------------------------------------------- */
+/*-----------------------------------------------------------------------
+ * Initialize for (110) orientation
+ *----------------------------------------------------------------------- */
 void HCP::HCP110()
 {
   for (int i=0; i<3; i++){
@@ -339,9 +341,9 @@ void HCP::HCP110()
 return;
 }
 
-/* ----------------------------------------------------------------------
-   Initialize for (-110) orientation
-------------------------------------------------------------------------- */
+/*-----------------------------------------------------------------------
+ * Initialize for (-110) orientation
+ *----------------------------------------------------------------------- */
 void HCP::HCPm10()
 {
   for (int i=0; i<3; i++){
@@ -383,8 +385,9 @@ void HCP::HCPm10()
 return;
 }
 
-/* ----------------------------------------------------------------------
-------------------------------------------------------------------------- */
+/*-----------------------------------------------------------------------
+ * Graphene with different orientations
+ *----------------------------------------------------------------------- */
 void HCP::Graphene()
 {
   char str[MAXLINE];
@@ -566,3 +569,254 @@ void HCP::Graphene()
   }
 return;
 }
+
+/*-----------------------------------------------------------------------
+ * Graphite with different orientations
+ *----------------------------------------------------------------------- */
+void HCP::Graphite()
+{
+  char str[MAXLINE];
+  int surftype = 5;
+  // print out the menu
+  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
+  printf("   1. Primitive, U along x,  60 degree;\n");
+  printf("   2. Primitive, V along y,  60 degree;\n");
+  printf("   3. Primitive, U along x, 120 degree;\n");
+  printf("   4. Primitive, V along y, 120 degree;\n");
+  printf("   5. Rectangle, long along x;\n");
+  printf("   6. Rectangle, long along y;\n");
+  printf("Your  choice [5]: ");
+  if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = atoi(strtok(str, " \t\n\r\f"));
+  printf("You selected: %d", surftype);
+  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
+  for (int i=0; i<3; i++){
+    for (int j=0; j<3; j++) latvec[i][j] = 0.;
+  }
+  name = memory->create(name,9,"HCP:name");
+  strcpy(name, "Graphite");
+
+  // initialize according to surface type
+  switch (surftype){
+  case 1:
+    nucell = 4;
+    ntype  = 1;
+    
+    latvec[0][0] = 1.;
+    latvec[1][0] = 0.5;
+    latvec[1][1] = sqrt(0.75);
+    latvec[2][2] = ca;
+
+    atpos = memory->create(atpos, nucell, 3, "Graphite_atpos");
+    attyp = memory->create(attyp, nucell, "HCP:attyp");
+    
+    for (int i=0; i<nucell; i++) attyp[i] = 1;
+    atpos[0][0] = 0.;
+    atpos[0][1] = 0.;
+    atpos[0][2] = 0.;
+
+    atpos[1][0] = 1./3.;
+    atpos[1][1] = 1./3.;
+    atpos[1][2] = 0.;
+
+    atpos[2][0] = 0.;
+    atpos[2][1] = 0.;
+    atpos[2][2] = 0.5;
+
+    atpos[3][0] = 2./3.;
+    atpos[3][1] = 2./3.;
+    atpos[3][2] = 0.5;
+
+    initialized = 1;
+    break;
+  case 2:
+    nucell = 4;
+    ntype  = 1;
+    
+    latvec[0][0] = sqrt(0.75);
+    latvec[0][1] = 0.5;
+    latvec[1][1] = 1.;
+    latvec[2][2] = ca;
+
+    atpos = memory->create(atpos, nucell, 3, "Graphite_atpos");
+    attyp = memory->create(attyp, nucell, "HCP:attyp");
+    
+    for (int i=0; i<nucell; i++) attyp[i] = 1;
+    atpos[0][0] = 0.;
+    atpos[0][1] = 0.;
+    atpos[0][2] = 0.;
+
+    atpos[1][0] = 1./3.;
+    atpos[1][1] = 1./3.;
+    atpos[1][2] = 0.;
+
+    atpos[2][0] = 0.;
+    atpos[2][1] = 0.;
+    atpos[2][2] = 0.5;
+
+    atpos[3][0] = 2./3.;
+    atpos[3][1] = 2./3.;
+    atpos[3][2] = 0.5;
+
+    initialized = 1;
+    break;
+  case 3:
+    nucell = 4;
+    ntype  = 1;
+    
+    latvec[0][0] =  1.;
+    latvec[1][0] = -0.5;
+    latvec[1][1] =  sqrt(0.75);
+    latvec[2][2] = ca;
+
+    atpos = memory->create(atpos, nucell, 3, "Graphite_atpos");
+    attyp = memory->create(attyp, nucell, "HCP:attyp");
+    
+    for (int i=0; i<nucell; i++) attyp[i] = 1;
+    atpos[0][0] = 0.;
+    atpos[0][1] = 0.;
+    atpos[0][2] = 0.;
+
+    atpos[1][0] = 1./3.;
+    atpos[1][1] = 2./3.;
+    atpos[1][2] = 0.;
+
+    atpos[2][0] = 0.;
+    atpos[2][1] = 0.;
+    atpos[2][2] = 0.5;
+
+    atpos[3][0] = 2./3.;
+    atpos[3][1] = 1./3.;
+    atpos[3][2] = 0.5;
+
+    initialized = 1;
+    break;
+  case 4:
+    nucell = 4;
+    ntype  = 1;
+    
+    latvec[0][0] = sqrt(0.75);
+    latvec[0][1] = -0.5;
+    latvec[1][1] = 1.;
+    latvec[2][2] = ca;
+
+    atpos = memory->create(atpos, nucell, 3, "Graphite_atpos");
+    attyp = memory->create(attyp, nucell, "HCP:attyp");
+    
+    for (int i=0; i<nucell; i++) attyp[i] = 1;
+    atpos[0][0] = 0.;
+    atpos[0][1] = 0.;
+    atpos[0][2] = 0.;
+
+    atpos[1][0] = 1./3.;
+    atpos[1][1] = 2./3.;
+    atpos[1][2] = 0.;
+
+    atpos[2][0] = 0.;
+    atpos[2][1] = 0.;
+    atpos[2][2] = 0.5;
+
+    atpos[3][0] = 2./3.;
+    atpos[3][1] = 1./3.;
+    atpos[3][2] = 0.5;
+
+    initialized = 1;
+    break;
+  case 5:
+    nucell = 8;
+    ntype  = 1;
+
+    latvec[0][0] = sqrt(3.0);
+    latvec[1][1] = 1.;
+    latvec[2][2] = ca;
+
+    atpos = memory->create(atpos, nucell, 3, "Graphite_atpos");
+    attyp = memory->create(attyp, nucell, "HCP:attyp");
+
+    for (int i=0; i<nucell; i++) attyp[i] = 1;
+    atpos[0][0] = 0.;
+    atpos[0][1] = 0.;
+    atpos[0][2] = 0.;
+
+    atpos[1][0] = 1./3.;
+    atpos[1][1] = 0.;
+    atpos[1][2] = 0.;
+
+    atpos[2][0] = 0.5;
+    atpos[2][1] = 0.5;
+    atpos[2][2] = 0.;
+
+    atpos[3][0] = 5./6.;
+    atpos[3][1] = 0.5;
+    atpos[3][2] = 0.;
+
+    atpos[4][0] = 0.;
+    atpos[4][1] = 0.;
+    atpos[4][2] = 0.5;
+
+    atpos[5][0] = 2./3.;
+    atpos[5][1] = 0.;
+    atpos[5][2] = 0.5;
+
+    atpos[6][0] = 0.5;
+    atpos[6][1] = 0.5;
+    atpos[6][2] = 0.5;
+
+    atpos[7][0] = 1./6.;
+    atpos[7][1] = 0.5;
+    atpos[7][2] = 0.5;
+
+    initialized = 1;
+    break;
+  case 6:
+    nucell = 8;
+    ntype  = 1;
+
+    latvec[0][0] = 1.;
+    latvec[1][1] = sqrt(3.0);
+    latvec[2][2] = ca;
+
+    atpos = memory->create(atpos, nucell, 3, "Graphite_atpos");
+    attyp = memory->create(attyp, nucell, "HCP:attyp");
+
+    for (int i=0; i<nucell; i++) attyp[i] = 1;
+    atpos[0][0] = 0.;
+    atpos[0][1] = 0.;
+    atpos[0][2] = 0.;
+
+    atpos[1][0] = 0.;
+    atpos[1][1] = 1./3.;
+    atpos[1][2] = 0.;
+
+    atpos[2][0] = 0.5;
+    atpos[2][1] = 0.5;
+    atpos[2][2] = 0.;
+
+    atpos[3][0] = 0.5;
+    atpos[3][1] = 5./6.;
+    atpos[3][2] = 0.;
+
+    atpos[4][0] = 0.;
+    atpos[4][1] = 0.;
+    atpos[4][2] = 0.5;
+
+    atpos[5][0] = 0.;
+    atpos[5][1] = 2./3.;
+    atpos[5][2] = 0.5;
+
+    atpos[6][0] = 0.5;
+    atpos[6][1] = 0.5;
+    atpos[6][2] = 0.5;
+
+    atpos[7][0] = 0.5;
+    atpos[7][1] = 1./6.;
+    atpos[7][2] = 0.5;
+
+    initialized = 1;
+    break;
+  default:
+    break;
+  }
+return;
+}
+
+/*-----------------------------------------------------------------------*/
