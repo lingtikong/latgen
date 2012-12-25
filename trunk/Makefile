@@ -45,6 +45,9 @@ clean:
 tar:
 	rm -f ${BASE}.tar; tar -czvf ${BASE}.tar.gz *.cpp  *.h Makefile README
 
+ver:
+	@echo "#define VERSION `svn info|grep Revision|cut -d: -f2`" > version.h
+
 .f.o:
 	$(FC) $(FFLAGS) $(FREE) $(MPI) ${INC} -c $<
 .f90.o:

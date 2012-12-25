@@ -51,8 +51,10 @@ HCP::HCP() : lattice()
     break;
   case 5:
     Graphene();
+    break;
   case 6:
     Graphite();
+    break;
   default:
     break;
   }

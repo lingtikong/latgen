@@ -26,6 +26,7 @@ public:
 private:
   int ShowMenu(int);
   void MainMenu();
+  void ShowVersion();
 
   lattice *latt;
 

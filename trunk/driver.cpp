@@ -4,6 +4,7 @@
 #include "string.h"
 #include <time.h>
 #include <math.h>
+#include "version.h"
 
 #define MAXLINE 512
 #define MAX(a,b) ((a) > (b) ? (a) : (b))
@@ -29,6 +30,7 @@ Driver::Driver()
   for (int i=0; i<3; i++)
   for (int j=0; j<3; j++) latvec[i][j] = 0.;
 
+  ShowVersion();
   MainMenu();
 
 return;
@@ -996,3 +998,12 @@ int Driver::count_words(const char *line)
   memory->sfree(copy);
   return n;
 }
+
+/*------------------------------------------------------------------------------
+ * Private method to show the version info
+ *----------------------------------------------------------------------------*/
+void Driver::ShowVersion()
+{
+  printf("\nLatGen  version 1.%d, compiled on %s.", VERSION, __DATE__);
+}
+/*----------------------------------------------------------------------------*/
