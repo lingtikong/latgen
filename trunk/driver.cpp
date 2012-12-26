@@ -6,6 +6,7 @@
 #include <math.h>
 #include "version.h"
 
+#define ZERO   1.e-8
 #define MAXLINE 512
 #define MAX(a,b) ((a) > (b) ? (a) : (b))
 #define MIN(a,b) ((a) < (b) ? (a) : (b))
@@ -561,15 +562,18 @@ void Driver::solidsol()
 
       for (int i=0; i<natom; i++){
         if (inside){
-          if (atpos[i][0]<block[0] || atpos[i][0]>block[1] ||
-              atpos[i][1]<block[2] || atpos[i][1]>block[3] ||
-              atpos[i][2]<block[4] || atpos[i][2]>block[5] ) atsel[i] = 0;
+          if (atpos[i][0] - block[0] < ZERO || atpos[i][0] - block[1] >-ZERO||
+              atpos[i][1] - block[2] < ZERO || atpos[i][1] - block[3] >-ZERO||
+              atpos[i][2] - block[4] < ZERO || atpos[i][2] - block[5] >-ZERO) atsel[i] = 0;
         } else {
-          if (atpos[i][0]>block[0] && atpos[i][0]<block[1] &&
-              atpos[i][1]>block[2] && atpos[i][1]<block[3] &&
-              atpos[i][2]>block[4] && atpos[i][2]<block[5] ) atsel[i] = 0;
+          if (atpos[i][0] - block[0] >-ZERO && atpos[i][0] - block[1] < ZERO &&
+              atpos[i][1] - block[2] >-ZERO && atpos[i][1] - block[3] < ZERO &&
+              atpos[i][2] - block[4] >-ZERO && atpos[i][2] - block[5] < ZERO ) atsel[i] = 0;
         }
       }
+    } else {
+      printf("\nNo input read, operation terminated!\n");
+      for (int i=0; i<14; i++) printf("====="); printf("\n");
     }
   }
 
@@ -620,7 +624,6 @@ void Driver::solidsol()
   nsel = 0;
   int nsel_type[ntype];
   for (int i=0; i<ntype; i++) nsel_type[i] = 0;
-  printf("%d %d\n", attyp[0], attyp[1]);
 
   for (int i=0; i<natom; i++){
     nsel += atsel[i];
@@ -629,6 +632,7 @@ void Driver::solidsol()
   }
 
   printf("\nTotal number of atoms in the system: %d\n", natom);
+  printf("Total number of atoms in selection : %d\n", nsel);
   printf("Total number of atomimc types      : %d\n", ntype);
   printf("Atomic type number for each type   :");
   for (int i=0; i<ntype; i++) printf(" %d", typeID[i]);
@@ -638,12 +642,15 @@ void Driver::solidsol()
   for (int i=0; i<ntype; i++) printf(" %d", nsel_type[i]); printf("\n");
 
   int ipsrc, idsrc=-1, numsub;
-  do {
-    printf("\nPlease input the atomic type to be substituted: ");
-    while (count_words(fgets(str,MAXLINE,stdin)) < 1);
-    ipsrc = atoi(strtok(str, " \t\n\r\f"));
-    idsrc = lookup(ipsrc);
-  } while (idsrc < 0);
+  printf("\nPlease input the atomic type to be substituted: ");
+  while (count_words(fgets(str,MAXLINE,stdin)) < 1);
+  ipsrc = atoi(strtok(str, " \t\n\r\f"));
+  idsrc = lookup(ipsrc);
+  if (idsrc < 0){
+    printf("\nInput atomic type not found, operation terminated!\n");
+    for (int i=0; i<14; i++) printf("====="); printf("\n");
+    return;
+  }
 
   printf("Total # of atoms with type %d in selection is %d.\n", ipsrc, nsel_type[idsrc]);
   if (nsel_type[idsrc] < 1){
@@ -653,11 +660,14 @@ void Driver::solidsol()
   }
 
   double frac = -1.;
-  do {
-    printf("Please input the fraction or total # of atoms to be replaced: ");
-    while (count_words(fgets(str,MAXLINE,stdin)) < 1);
-    frac = atof(strtok(str, " \t\n\r\f"));
-  } while (frac <= 0. || int(frac) > nsel_type[idsrc]);
+  printf("Please input the fraction or total # of atoms to be replaced: ");
+  while (count_words(fgets(str,MAXLINE,stdin)) < 1);
+  frac = atof(strtok(str, " \t\n\r\f"));
+  if (frac <= 0. || int(frac) > nsel_type[idsrc]){
+    printf("Not enough atoms to create substitutional solid solution.\n");
+    for (int i=0; i<14; i++) printf("====="); printf("\n");
+    return;
+  }
 
   if (frac < 1.) numsub = MIN(int(frac*double(nsel_type[idsrc])+0.5), nsel_type[idsrc]);
   else numsub = int(frac);
@@ -701,6 +711,26 @@ void Driver::solidsol()
 
   // reset type info
   typescan();
+
+  // atomic type info after replacement
+  int newsel_type[ntype];
+  for (int i=0; i<ntype; i++) newsel_type[i] = 0;
+
+  for (int i=0; i<natom; i++){
+    nsel += atsel[i];
+    int ip = lookup(attyp[i]);
+    newsel_type[ip] += atsel[i];
+  }
+  printf("\nSystem info after creation of solid solution:\n");
+  printf("  Total number of atoms in the system: %d\n", natom);
+  printf("  Total number of atoms in selection : %d\n", nsel);
+  printf("  Total number of atomimc types      : %d\n", ntype);
+  printf("  Atomic type number for each type   :");
+  for (int i=0; i<ntype; i++) printf(" %d", typeID[i]);
+  printf("\n  Number of atoms for each  type     :");
+  for (int i=0; i<ntype; i++) printf(" %d", numtype[i]); printf("\n");
+  printf("\n  Number of atoms in selection for each type:");
+  for (int i=0; i<ntype; i++) printf(" %d", newsel_type[i]); printf("\n");
 
   for (int i=0; i<14; i++) printf("====="); printf("\n");
 return;
@@ -1004,6 +1034,6 @@ int Driver::count_words(const char *line)
  *----------------------------------------------------------------------------*/
 void Driver::ShowVersion()
 {
-  printf("\nLatGen  version 1.%d, compiled on %s.", VERSION, __DATE__);
+  printf("\nLatGen  version 1.%d, compiled on %s.\n", VERSION, __DATE__);
 }
 /*----------------------------------------------------------------------------*/

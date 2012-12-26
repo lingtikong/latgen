@@ -29,7 +29,7 @@ AB::AB() : lattice()
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) lattype = atoi(strtok(str, " \t\n\r\f"));
   printf("You selected  : %d\n", lattype);
 
-  printf("Please input the lattice constant of the AB lattice [1.]:");
+  printf("Please input the lattice constant of the AB lattice [1.]: ");
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) alat = atof(strtok(str, " \t\n\r\f"));
   if (lattype == 4 || lattype == 5 || lattype == 6){
     if (lattype == 6) ca = sqrt(8./3.);
