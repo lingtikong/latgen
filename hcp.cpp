@@ -29,9 +29,9 @@ HCP::HCP() : lattice()
   printf("   1. (001);         4. (-110); \n");
   printf("   2. (100);         5. Graphene;\n");
   printf("   3. (110);         6. Graphite;\n");
-  printf("Your  choice [1]: ");
+  printf("Your choice [%d]: ", orient);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) orient = atoi(strtok(str, " \t\n\r\f"));
-  printf("You selected: %d", orient);
+  printf("You   selected : %d", orient);
   printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
   
   // initialize according to orientation
@@ -85,9 +85,9 @@ void HCP::HCP001()
   printf("   4. V along y, 120 degree;\n");
   printf("   5. Rectangle, long along x;\n");
   printf("   6. Rectangle, long along y;\n");
-  printf("Your  choice [5]: ");
+  printf("Your choice [%d]: ", surftype);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = atoi(strtok(str, " \t\n\r\f"));
-  printf("You selected: %d", surftype);
+  printf("You   selected : %d", surftype);
   printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
   for (int i=0; i<3; i++){
     for (int j=0; j<3; j++) latvec[i][j] = 0.;
@@ -402,9 +402,9 @@ void HCP::Graphene()
   printf("   4. Primitive, V along y, 120 degree;\n");
   printf("   5. Rectangle, long along x;\n");
   printf("   6. Rectangle, long along y;\n");
-  printf("Your  choice [5]: ");
+  printf("Your choice [%d]: ", surftype);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = atoi(strtok(str, " \t\n\r\f"));
-  printf("You selected: %d", surftype);
+  printf("You   selected : %d", surftype);
   printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
   for (int i=0; i<3; i++){
     for (int j=0; j<3; j++) latvec[i][j] = 0.;
@@ -587,9 +587,9 @@ void HCP::Graphite()
   printf("   4. Primitive, V along y, 120 degree;\n");
   printf("   5. Rectangle, long along x;\n");
   printf("   6. Rectangle, long along y;\n");
-  printf("Your  choice [5]: ");
+  printf("Your choice [%d]: ", surftype);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = atoi(strtok(str, " \t\n\r\f"));
-  printf("You selected: %d", surftype);
+  printf("You   selected : %d", surftype);
   printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
   for (int i=0; i<3; i++){
     for (int j=0; j<3; j++) latvec[i][j] = 0.;
