@@ -27,9 +27,9 @@ FCC::FCC() : lattice()
   printf("   3. (111);                7. Diamond (110);\n");
   printf("   4. Primitive cell;       8. Diamond (111);\n");
   for (int i=0; i<14; i++) printf("-----");
-  printf("\nYour  choice [3]: ");
+  printf("\nYour choice [%d]: ", orient);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) orient = atoi(strtok(str, " \t\n\r\f"));
-  printf("You selected: %d", orient);
+  printf("You   selected : %d", orient);
   printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
   
   // initialize according to orientation
@@ -85,9 +85,9 @@ void FCC::FCC001()
   printf("Please selection the type of FCC(001) surface:\n");
   printf("   1. primitive, horizental orientation;\n");
   printf("   2. conventional orientation;\n");
-  printf("Your  choice [2]: ");
+  printf("Your choice [%d]: ", surftype);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = atoi(strtok(str, " \t\n\r\f"));
-  printf("You selected: %d", surftype);
+  printf("You   selected : %d", surftype);
   printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
   for (int i=0; i<3; i++){
     for (int j=0; j<3; j++) latvec[i][j] = 0.;
@@ -168,9 +168,9 @@ void FCC::FCC110()
   printf("Please selection the type of FCC(110) surface:\n");
   printf("   1. orthogonal, long side along x\n");
   printf("   2. orthogonal, long side along y\n");
-  printf("Your  choice [1]: ");
+  printf("Your choice [%d]: ", surftype);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = atoi(strtok(str, " \t\n\r\f"));
-  printf("You selected: %d", surftype);
+  printf("You   selected : %d", surftype);
   printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
   
   for (int i=0; i<3; i++){
@@ -248,9 +248,9 @@ void FCC::FCC111()
   printf("   4. hexgonal V along y, 120 deg;\n");
   printf("   5. orthogonal long side along x;\n");
   printf("   6. orthogonal long side along y;\n");
-  printf("Your  choice [5]: ");
+  printf("Your choice [%d]: ", surftype);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = atoi(strtok(str, " \t\n\r\f"));
-  printf("You selected: %d", surftype);
+  printf("You   selected : %d", surftype);
   printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
   
   for (int i=0; i<3; i++){
@@ -539,9 +539,9 @@ void FCC::Diamond001()
   printf("Please selection the type of Diamond (001):\n");
   printf("   1. Conventional cubic;\n");
   printf("   2. Orthogonal, x//[110], y//[-110];\n");
-  printf("Your  choice [1]: ");
+  printf("Your choice [%d]: ", surftype);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = atoi(strtok(str, " \t\n\r\f"));
-  printf("You selected: %d", surftype);
+  printf("You   selected : %d", surftype);
   printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
 
   for (int i=0; i<3; i++){
@@ -648,9 +648,9 @@ void FCC::Diamond110()
   printf("Please selection the type of Diamond (110):\n");
   printf("   1. x//[001], y//[110];\n");
   printf("   2. x//[110], y//[001];\n");
-  printf("Your  choice [1]: ");
+  printf("Your choice [%d]: ", surftype);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = atoi(strtok(str, " \t\n\r\f"));
-  printf("You selected: %d", surftype);
+  printf("You   selected : %d", surftype);
   printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
 
   for (int i=0; i<3; i++){
@@ -748,9 +748,9 @@ void FCC::Diamond111()
   printf("   4. y//[110], gamma = 60 deg;\n");
   printf("   5. Orthogonal, long along x;\n");
   printf("   6. Orthogonal, long along y;\n");
-  printf("Your  choice [1]: ");
+  printf("Your choice [%d]: ", surftype);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = atoi(strtok(str, " \t\n\r\f"));
-  printf("You selected: %d", surftype);
+  printf("You   selected : %d", surftype);
   printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
 
   for (int i=0; i<3; i++){

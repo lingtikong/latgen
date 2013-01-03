@@ -21,9 +21,9 @@ void AB::AB_Perov()
   printf("   5. (111), gamma = 120deg;     6. (111), orthogonal, x//[100];\n");
   printf("   7. (111), orth., x//[110];\n");
   for (int i=0; i<14; i++) printf("-----");
-  printf("\nYour  choice [1]: ");
+  printf("\nYour choice [%d]: ", orient);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) orient = atoi(strtok(str, " \t\n\r\f"));
-  printf("You selected: %d", orient);
+  printf("You   selected : %d", orient);
   printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
   
   for (int i=0; i<3; i++){
@@ -706,3 +706,5 @@ void AB::AB_Perov()
   }
 return;
 }
+
+/* --------------------------------------------------------------------*/

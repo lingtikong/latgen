@@ -26,9 +26,9 @@ BCC::BCC() : lattice()
   printf("   2. (110);\n");
   printf("   3. (111);\n");
   printf("   4. primitive cell;\n");
-  printf("Your  choice [1]: ");
+  printf("Your choice [%d]: ", orient);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) orient = atoi(strtok(str, " \t\n\r\f"));
-  printf("You selected: %d", orient);
+  printf("You   selected : %d", orient);
   printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
   
   // initialize according to orientation
@@ -72,9 +72,9 @@ void BCC::BCC001()
   printf("Please selection the type of BCC(001) surface:\n");
   printf("   1. conventional orientation;\n");
   printf("   2. B2 structure;\n");
-  printf("Your  choice [1]: ");
+  printf("Your choice [%d]: ", surftype);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = atoi(strtok(str, " \t\n\r\f"));
-  printf("You selected: %d", surftype);
+  printf("You   selected : %d", surftype);
   printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
   for (int i=0; i<3; i++){
     for (int j=0; j<3; j++) latvec[i][j] = 0.;
@@ -148,9 +148,9 @@ void BCC::BCC110()
   printf("Please selection the type of BCC(110) surface:\n");
   printf("   1. orthogonal, long side along x\n");
   printf("   2. orthogonal, long side along y\n");
-  printf("Your  choice [1]: ");
+  printf("Your choice [%d]: ", surftype);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = atoi(strtok(str, " \t\n\r\f"));
-  printf("You selected: %d", surftype);
+  printf("You   selected : %d", surftype);
   printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
   
   for (int i=0; i<3; i++){
@@ -241,9 +241,9 @@ void BCC::BCC111()
   printf("Please selection the type of BCC(111) surface:\n");
   printf("   1. orthogonal, long side along x\n");
   printf("   2. orthogonal, long side along y\n");
-  printf("Your  choice [1]: ");
+  printf("Your choice [%d]: ", surftype);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = atoi(strtok(str, " \t\n\r\f"));
-  printf("You selected: %d", surftype);
+  printf("You   selected : %d", surftype);
   printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
   
   for (int i=0; i<3; i++){
