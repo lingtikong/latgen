@@ -22,7 +22,7 @@ HCP::HCP() : lattice()
   printf("Please input the value of c/a ratio or c (negative) [1.633]: ");
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) ca = atof(strtok(str, " \t\n\r\f"));
   if (ca < 0.) ca = -ca/alat;
-  printf("The lattice constants of your HCP: a = %g, c/a = %g.\n", alat, ca);
+  printf("The lattice constants of your HCP: a = %g, c/a = %g.\n\n", alat, ca);
 
   int orient = 1;
   printf("Please select the orientation of the HCP lattice:\n");
@@ -596,6 +596,13 @@ void HCP::Graphite()
   }
   name = memory->create(name,9,"HCP:name");
   strcpy(name, "Graphite");
+
+  if (abs(ca-2.725) > 0.1){
+    printf("\nThe experimental c/a for graphite is ~2.725, while yours is %g, if you\n", ca);
+    printf("want to redefine it, input now, enter to keep c/a = %g: ", ca);
+    if (count_words(fgets(str,MAXLINE,stdin)) > 0) ca = atof(strtok(str, " \t\n\r\f"));
+    printf("The adopted c/a will be: %g\n\n", ca);
+  }
 
   // initialize according to surface type
   switch (surftype){
