@@ -17,11 +17,11 @@ LIB    = $(FFTLIB) $(LPKLIB) $(USRLIB) $(VoroLIB)
 #LPKLIB = -L/opt/clapack/3.2.1/lib -lclapack -lblas -lf2c -lm
 
 # Voro++
-#VoroINC = -I/home/faculty/konglt/resource/voro_svn/src
-#VoroLIB = -L/home/faculty/konglt/resource/voro_svn/src -lvoro++
+VoroINC = -I/home/faculty/konglt/resource/voro_svn/src
+VoroLIB = -L/home/faculty/konglt/resource/voro_svn/src -lvoro++
 
 # User flag
-#UFLAG = -DPoly
+UFLAG = -DPoly
 # Debug flags
 #DEBUG = -g
 #====================================================================

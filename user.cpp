@@ -14,7 +14,7 @@ using namespace std;
 USER::USER() : lattice()
 {
   initialized = 0;
-  name = memory->create(name,10,"user:name");
+  memory->create(name,10,"user:name");
   strcpy(name, "USER_LATT");
   char str[MAXLINE];
   printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
@@ -60,8 +60,8 @@ USER::USER() : lattice()
       nucell += ntm[i];
     }
 
-    atpos = memory->create(atpos, nucell, 3, "USER_atpos");
-    attyp = memory->create(attyp, nucell, "USER:attyp");
+    memory->create(atpos, nucell, 3, "USER_atpos");
+    memory->create(attyp, nucell, "USER:attyp");
 
     int iatom =0;
     for (int ip=0; ip<ntype; ip++){
@@ -106,8 +106,8 @@ USER::USER() : lattice()
       if (ntype > nucell) ntype = nucell;
     }
       
-    atpos = memory->create(atpos, nucell, 3, "USER_atpos");
-    attyp = memory->create(attyp, nucell, "USER:attyp");
+    memory->create(atpos, nucell, 3, "USER_atpos");
+    memory->create(attyp, nucell, "USER:attyp");
     // ask for atom coordinates and types
     for (int i=0; i<nucell; i++){
       do printf("Please input [type xs ys zs] for atom %d: ", i+1);

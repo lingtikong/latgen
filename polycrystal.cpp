@@ -32,7 +32,7 @@ void Driver::PolyCrystal()
   // ask for lattice info
   while ( ShowMenu(-1) < 1 );
   latt->display();
-  name = memory->create(name,strlen(latt->name)+20,"polycrystal:name");
+  memory->create(name,strlen(latt->name)+20,"polycrystal:name");
   sprintf(name,"Polycrystal of %s", latt->name);
 
   if (latt->perp_x != 1 || latt->perp_y != 1 || latt->perp_z != 1){
@@ -88,8 +88,8 @@ void Driver::PolyCrystal()
     }
 
     if (ngrain > 0){
-      grains = memory->create(grains, ngrain, 3, "grains");
-      orient = memory->create(orient, ngrain, 3, "orient");
+      memory->create(grains, ngrain, 3, "grains");
+      memory->create(orient, ngrain, 3, "orient");
 
       int igrain = 0;
       // remaining ngrain effective lines: x y z alpha beta gamma
@@ -151,8 +151,8 @@ void Driver::PolyCrystal()
     }
 
     // create the grains and set their orientations randomly
-    grains = memory->create(grains, ngrain, 3, "grains");
-    orient = memory->create(orient, ngrain, 3, "orient");
+    memory->create(grains, ngrain, 3, "grains");
+    memory->create(orient, ngrain, 3, "orient");
 
     for (int ii=0; ii<ngrain; ii++){
       for (int idim=0; idim< 3; idim++){
@@ -202,8 +202,8 @@ void Driver::PolyCrystal()
   fprintf(fp,"# id xc yc zc vol surfarea rmax natom\n");
 
   // prepare array for inserting atoms
-  atpos = memory->grow(atpos,nmax,3,"atpos");
-  attyp = memory->grow(attyp,nmax,"attyp");
+  memory->grow(atpos,nmax,3,"atpos");
+  memory->grow(attyp,nmax,"attyp");
 
   // Create a loop class to iterate over all of the grains in the box
   c_loop_all cl(con);

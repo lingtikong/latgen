@@ -114,7 +114,8 @@ return;
 int lattice::count_words(const char *line)
 {
   int n = strlen(line) + 1;
-  char *copy = (char *) memory->smalloc(n*sizeof(char),"copy");
+  char *copy;
+  memory->create(copy, n, "copy");
   strcpy(copy,line);
 
   char *ptr;
@@ -146,7 +147,7 @@ void lattice::setup()
   for (int i=0; i<nucell; i++) zlist.push_back(atpos[i][2]);
   zlist.sort(); zlist.unique();
 
-  layer = memory->create(layer, nucell, "lattice:setup:layers");
+  memory->create(layer, nucell, "lattice:setup:layers");
   int il = 0;
   for (it = zlist.begin(); it != zlist.end(); it++) zmap[*it] = il++;
   for (int i=0; i<nucell; i++) layer[i] = zmap[atpos[i][2]];
@@ -156,8 +157,8 @@ void lattice::setup()
   // get the height above each layer
   if (h) memory->destroy(h);
   if (numlayer) memory->destroy(numlayer);
-  h = memory->create(h, nlayer, "lattice->setup:h");
-  numlayer = memory->create(numlayer, nlayer, "lattice->setup:numlayer");
+  memory->create(h, nlayer, "lattice->setup:h");
+  memory->create(numlayer, nlayer, "lattice->setup:numlayer");
 
   for (int i=0; i<nlayer; i++) numlayer[i] = 0;
   for (int i=0; i<nucell; i++) numlayer[layer[i]]++;
