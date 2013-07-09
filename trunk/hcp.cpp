@@ -92,7 +92,7 @@ void HCP::HCP001()
   for (int i=0; i<3; i++){
     for (int j=0; j<3; j++) latvec[i][j] = 0.;
   }
-  name = memory->create(name,9,"HCP:name");
+  memory->create(name,9,"HCP:name");
   strcpy(name, "HCP(001)");
 
   // initialize according to surface type
@@ -106,8 +106,8 @@ void HCP::HCP001()
     latvec[1][1] = sqrt(0.75);
     latvec[2][2] = ca;
 
-    atpos = memory->create(atpos, nucell, 3, "HCP001_atpos");
-    attyp = memory->create(attyp, nucell, "HCP:attyp");
+    memory->create(atpos, nucell, 3, "HCP001_atpos");
+    memory->create(attyp, nucell, "HCP:attyp");
     
     for (int i=0; i<nucell; i++) attyp[i] = 1;
     atpos[0][0] = 0.;
@@ -129,8 +129,8 @@ void HCP::HCP001()
     latvec[1][1] = 1.;
     latvec[2][2] = ca;
 
-    atpos = memory->create(atpos, nucell, 3, "HCP001_atpos");
-    attyp = memory->create(attyp, nucell, "HCP:attyp");
+    memory->create(atpos, nucell, 3, "HCP001_atpos");
+    memory->create(attyp, nucell, "HCP:attyp");
     
     for (int i=0; i<nucell; i++) attyp[i] = 1;
     atpos[0][0] = 0.;
@@ -152,8 +152,8 @@ void HCP::HCP001()
     latvec[1][1] =  sqrt(0.75);
     latvec[2][2] = ca;
 
-    atpos = memory->create(atpos, nucell, 3, "HCP001_atpos");
-    attyp = memory->create(attyp, nucell, "HCP:attyp");
+    memory->create(atpos, nucell, 3, "HCP001_atpos");
+    memory->create(attyp, nucell, "HCP:attyp");
     
     for (int i=0; i<nucell; i++) attyp[i] = 1;
     atpos[0][0] = 0.;
@@ -175,8 +175,8 @@ void HCP::HCP001()
     latvec[1][1] = 1.;
     latvec[2][2] = ca;
 
-    atpos = memory->create(atpos, nucell, 3, "HCP001_atpos");
-    attyp = memory->create(attyp, nucell, "HCP:attyp");
+    memory->create(atpos, nucell, 3, "HCP001_atpos");
+    memory->create(attyp, nucell, "HCP:attyp");
     
     for (int i=0; i<nucell; i++) attyp[i] = 1;
     atpos[0][0] = 0.;
@@ -197,8 +197,8 @@ void HCP::HCP001()
     latvec[1][1] = 1.;
     latvec[2][2] = ca;
 
-    atpos = memory->create(atpos, nucell, 3, "HCP001_atpos");
-    attyp = memory->create(attyp, nucell, "HCP:attyp");
+    memory->create(atpos, nucell, 3, "HCP001_atpos");
+    memory->create(attyp, nucell, "HCP:attyp");
 
     for (int i=0; i<nucell; i++) attyp[i] = 1;
     atpos[0][0] = 0.;
@@ -227,8 +227,8 @@ void HCP::HCP001()
     latvec[1][1] = sqrt(3.0);
     latvec[2][2] = ca;
 
-    atpos = memory->create(atpos, nucell, 3, "HCP001_atpos");
-    attyp = memory->create(attyp, nucell, "HCP:attyp");
+    memory->create(atpos, nucell, 3, "HCP001_atpos");
+    memory->create(attyp, nucell, "HCP:attyp");
 
     for (int i=0; i<nucell; i++) attyp[i] = 1;
     atpos[0][0] = 0.;
@@ -263,7 +263,7 @@ void HCP::HCP100()
   for (int i=0; i<3; i++){
     for (int j=0; j<3; j++) latvec[i][j] = 0.;
   }
-  name = memory->create(name,9,"HCP:name");
+  memory->create(name,9,"HCP:name");
   strcpy(name, "HCP(100)");
 
   // initialize
@@ -274,8 +274,8 @@ void HCP::HCP100()
   latvec[1][1] = ca;
   latvec[2][2] = sqrt(3.);
 
-  atpos = memory->create(atpos, nucell, 3, "HCP100_atpos");
-  attyp = memory->create(attyp, nucell, "HCP:attyp");
+  memory->create(atpos, nucell, 3, "HCP100_atpos");
+  memory->create(attyp, nucell, "HCP:attyp");
     
   for (int i=0; i<nucell; i++) attyp[i] = 1;
   atpos[0][0] = 0.50;
@@ -307,7 +307,7 @@ void HCP::HCP110()
   for (int i=0; i<3; i++){
     for (int j=0; j<3; j++) latvec[i][j] = 0.;
   }
-  name = memory->create(name,9,"HCP:name");
+  memory->create(name,9,"HCP:name");
   strcpy(name, "HCP(110)");
 
   // initialize
@@ -318,8 +318,8 @@ void HCP::HCP110()
   latvec[1][1] = sqrt(3.);
   latvec[2][2] = 1.;
 
-  atpos = memory->create(atpos, nucell, 3, "HCP110_atpos");
-  attyp = memory->create(attyp, nucell, "HCP:attyp");
+  memory->create(atpos, nucell, 3, "HCP110_atpos");
+  memory->create(attyp, nucell, "HCP:attyp");
     
   for (int i=0; i<nucell; i++) attyp[i] = 1;
   atpos[0][0] = 0.25;
@@ -351,7 +351,7 @@ void HCP::HCPm10()
   for (int i=0; i<3; i++){
     for (int j=0; j<3; j++) latvec[i][j] = 0.;
   }
-  name = memory->create(name,10,"HCP:name");
+  memory->create(name,10,"HCP:name");
   strcpy(name, "HCP(-110)");
 
   // initialize
@@ -362,8 +362,8 @@ void HCP::HCPm10()
   latvec[1][1] = ca;
   latvec[2][2] = sqrt(3.);
 
-  atpos = memory->create(atpos, nucell, 3, "HCPm10_atpos");
-  attyp = memory->create(attyp, nucell, "HCP:attyp");
+  memory->create(atpos, nucell, 3, "HCPm10_atpos");
+  memory->create(attyp, nucell, "HCP:attyp");
     
   for (int i=0; i<nucell; i++) attyp[i] = 1;
   atpos[0][0] = 0.50;
@@ -409,7 +409,7 @@ void HCP::Graphene()
   for (int i=0; i<3; i++){
     for (int j=0; j<3; j++) latvec[i][j] = 0.;
   }
-  name = memory->create(name,9,"HCP:name");
+  memory->create(name,9,"HCP:name");
   strcpy(name, "Graphene");
 
   // initialize according to surface type
@@ -423,8 +423,8 @@ void HCP::Graphene()
     latvec[1][1] = sqrt(0.75);
     latvec[2][2] = ca;
 
-    atpos = memory->create(atpos, nucell, 3, "Graphene_atpos");
-    attyp = memory->create(attyp, nucell, "HCP:attyp");
+    memory->create(atpos, nucell, 3, "Graphene_atpos");
+    memory->create(attyp, nucell, "HCP:attyp");
     
     for (int i=0; i<nucell; i++) attyp[i] = 1;
     atpos[0][0] = 0.;
@@ -446,8 +446,8 @@ void HCP::Graphene()
     latvec[1][1] = 1.;
     latvec[2][2] = ca;
 
-    atpos = memory->create(atpos, nucell, 3, "Graphene_atpos");
-    attyp = memory->create(attyp, nucell, "HCP:attyp");
+    memory->create(atpos, nucell, 3, "Graphene_atpos");
+    memory->create(attyp, nucell, "HCP:attyp");
     
     for (int i=0; i<nucell; i++) attyp[i] = 1;
     atpos[0][0] = 0.;
@@ -469,8 +469,8 @@ void HCP::Graphene()
     latvec[1][1] =  sqrt(0.75);
     latvec[2][2] = ca;
 
-    atpos = memory->create(atpos, nucell, 3, "Graphene_atpos");
-    attyp = memory->create(attyp, nucell, "HCP:attyp");
+    memory->create(atpos, nucell, 3, "Graphene_atpos");
+    memory->create(attyp, nucell, "HCP:attyp");
     
     for (int i=0; i<nucell; i++) attyp[i] = 1;
     atpos[0][0] = 0.;
@@ -492,8 +492,8 @@ void HCP::Graphene()
     latvec[1][1] = 1.;
     latvec[2][2] = ca;
 
-    atpos = memory->create(atpos, nucell, 3, "Graphene_atpos");
-    attyp = memory->create(attyp, nucell, "HCP:attyp");
+    memory->create(atpos, nucell, 3, "Graphene_atpos");
+    memory->create(attyp, nucell, "HCP:attyp");
     
     for (int i=0; i<nucell; i++) attyp[i] = 1;
     atpos[0][0] = 0.;
@@ -514,8 +514,8 @@ void HCP::Graphene()
     latvec[1][1] = 1.;
     latvec[2][2] = ca;
 
-    atpos = memory->create(atpos, nucell, 3, "Graphene_atpos");
-    attyp = memory->create(attyp, nucell, "HCP:attyp");
+    memory->create(atpos, nucell, 3, "Graphene_atpos");
+    memory->create(attyp, nucell, "HCP:attyp");
 
     for (int i=0; i<nucell; i++) attyp[i] = 1;
     atpos[0][0] = 0.;
@@ -544,8 +544,8 @@ void HCP::Graphene()
     latvec[1][1] = sqrt(3.0);
     latvec[2][2] = ca;
 
-    atpos = memory->create(atpos, nucell, 3, "Graphene_atpos");
-    attyp = memory->create(attyp, nucell, "HCP:attyp");
+    memory->create(atpos, nucell, 3, "Graphene_atpos");
+    memory->create(attyp, nucell, "HCP:attyp");
 
     for (int i=0; i<nucell; i++) attyp[i] = 1;
     atpos[0][0] = 0.;
@@ -594,7 +594,7 @@ void HCP::Graphite()
   for (int i=0; i<3; i++){
     for (int j=0; j<3; j++) latvec[i][j] = 0.;
   }
-  name = memory->create(name,9,"HCP:name");
+  memory->create(name,9,"HCP:name");
   strcpy(name, "Graphite");
 
   if (abs(ca-2.725) > 0.1){
@@ -615,8 +615,8 @@ void HCP::Graphite()
     latvec[1][1] = sqrt(0.75);
     latvec[2][2] = ca;
 
-    atpos = memory->create(atpos, nucell, 3, "Graphite_atpos");
-    attyp = memory->create(attyp, nucell, "HCP:attyp");
+    memory->create(atpos, nucell, 3, "Graphite_atpos");
+    memory->create(attyp, nucell, "HCP:attyp");
     
     for (int i=0; i<nucell; i++) attyp[i] = 1;
     atpos[0][0] = 0.;
@@ -646,8 +646,8 @@ void HCP::Graphite()
     latvec[1][1] = 1.;
     latvec[2][2] = ca;
 
-    atpos = memory->create(atpos, nucell, 3, "Graphite_atpos");
-    attyp = memory->create(attyp, nucell, "HCP:attyp");
+    memory->create(atpos, nucell, 3, "Graphite_atpos");
+    memory->create(attyp, nucell, "HCP:attyp");
     
     for (int i=0; i<nucell; i++) attyp[i] = 1;
     atpos[0][0] = 0.;
@@ -677,8 +677,8 @@ void HCP::Graphite()
     latvec[1][1] =  sqrt(0.75);
     latvec[2][2] = ca;
 
-    atpos = memory->create(atpos, nucell, 3, "Graphite_atpos");
-    attyp = memory->create(attyp, nucell, "HCP:attyp");
+    memory->create(atpos, nucell, 3, "Graphite_atpos");
+    memory->create(attyp, nucell, "HCP:attyp");
     
     for (int i=0; i<nucell; i++) attyp[i] = 1;
     atpos[0][0] = 0.;
@@ -708,8 +708,8 @@ void HCP::Graphite()
     latvec[1][1] = 1.;
     latvec[2][2] = ca;
 
-    atpos = memory->create(atpos, nucell, 3, "Graphite_atpos");
-    attyp = memory->create(attyp, nucell, "HCP:attyp");
+    memory->create(atpos, nucell, 3, "Graphite_atpos");
+    memory->create(attyp, nucell, "HCP:attyp");
     
     for (int i=0; i<nucell; i++) attyp[i] = 1;
     atpos[0][0] = 0.;
@@ -738,8 +738,8 @@ void HCP::Graphite()
     latvec[1][1] = 1.;
     latvec[2][2] = ca;
 
-    atpos = memory->create(atpos, nucell, 3, "Graphite_atpos");
-    attyp = memory->create(attyp, nucell, "HCP:attyp");
+    memory->create(atpos, nucell, 3, "Graphite_atpos");
+    memory->create(attyp, nucell, "HCP:attyp");
 
     for (int i=0; i<nucell; i++) attyp[i] = 1;
     atpos[0][0] = 0.;
@@ -784,8 +784,8 @@ void HCP::Graphite()
     latvec[1][1] = sqrt(3.0);
     latvec[2][2] = ca;
 
-    atpos = memory->create(atpos, nucell, 3, "Graphite_atpos");
-    attyp = memory->create(attyp, nucell, "HCP:attyp");
+    memory->create(atpos, nucell, 3, "Graphite_atpos");
+    memory->create(attyp, nucell, "HCP:attyp");
 
     for (int i=0; i<nucell; i++) attyp[i] = 1;
     atpos[0][0] = 0.;

@@ -92,7 +92,7 @@ void FCC::FCC001()
   for (int i=0; i<3; i++){
     for (int j=0; j<3; j++) latvec[i][j] = 0.;
   }
-  name = memory->create(name,9,"FCC:name");
+  memory->create(name,9,"FCC:name");
   strcpy(name, "FCC(001)");
 
   // initialize according to surface type
@@ -105,8 +105,8 @@ void FCC::FCC001()
     latvec[1][1] = 1./sqrt(2.);
     latvec[2][2] = 1.;
 
-    atpos = memory->create(atpos, nucell, 3, "FCC001_atpos");
-    attyp = memory->create(attyp, nucell, "FCC:attyp");
+    memory->create(atpos, nucell, 3, "FCC001_atpos");
+    memory->create(attyp, nucell, "FCC:attyp");
   
     
     for (int i=0; i<nucell; i++) attyp[i] = 1;
@@ -128,8 +128,8 @@ void FCC::FCC001()
     latvec[1][1] = 1.;
     latvec[2][2] = 1.;
 
-    atpos = memory->create(atpos, nucell, 3, "FCC001_atpos");
-    attyp = memory->create(attyp, nucell, "FCC:attyp");
+    memory->create(atpos, nucell, 3, "FCC001_atpos");
+    memory->create(attyp, nucell, "FCC:attyp");
     
     for (int i=0; i<nucell; i++) attyp[i] = 1;
     atpos[0][0] = 0.;
@@ -176,7 +176,7 @@ void FCC::FCC110()
   for (int i=0; i<3; i++){
     for (int j=0; j<3; j++) latvec[i][j] = 0.;
   }
-  name = memory->create(name,9,"FCC:name");
+  memory->create(name,9,"FCC:name");
   strcpy(name, "FCC(110)");
 
   // initialize according to surface type
@@ -189,8 +189,8 @@ void FCC::FCC110()
     latvec[1][1] = 1.;
     latvec[2][2] = 0.5*sqrt(2.);
 
-    atpos = memory->create(atpos, nucell, 3, "FCC110_atpos");
-    attyp = memory->create(attyp, nucell, "FCC:attyp");
+    memory->create(atpos, nucell, 3, "FCC110_atpos");
+    memory->create(attyp, nucell, "FCC:attyp");
     
     for (int i=0; i<nucell; i++) attyp[i] = 1;
     atpos[0][0] = 0.;
@@ -211,8 +211,8 @@ void FCC::FCC110()
     latvec[1][1] = sqrt(2.)*0.5;
     latvec[2][2] = sqrt(2.)*0.5;
 
-    atpos = memory->create(atpos, nucell, 3, "FCC110_atpos");
-    attyp = memory->create(attyp, nucell, "FCC:attyp");
+    memory->create(atpos, nucell, 3, "FCC110_atpos");
+    memory->create(attyp, nucell, "FCC:attyp");
     
     for (int i=0; i<nucell; i++) attyp[i] = 1;
 
@@ -256,7 +256,7 @@ void FCC::FCC111()
   for (int i=0; i<3; i++){
     for (int j=0; j<3; j++) latvec[i][j] = 0.;
   }
-  name = memory->create(name,9,"FCC:name");
+  memory->create(name,9,"FCC:name");
   strcpy(name, "FCC(111)");
 
   // initialize according to surface type
@@ -270,8 +270,8 @@ void FCC::FCC111()
     latvec[1][1] = sqrt(0.375);
     latvec[2][2] = sqrt(3.);
 
-    atpos = memory->create(atpos, nucell, 3, "FCC111_atpos");
-    attyp = memory->create(attyp, nucell, "FCC:attyp");
+    memory->create(atpos, nucell, 3, "FCC111_atpos");
+    memory->create(attyp, nucell, "FCC:attyp");
     
     for (int i=0; i<nucell; i++) attyp[i] = 1;
 
@@ -298,8 +298,8 @@ void FCC::FCC111()
     latvec[1][1] = sqrt(0.5);
     latvec[2][2] = sqrt(3.);
 
-    atpos = memory->create(atpos, nucell, 3, "FCC111_atpos");
-    attyp = memory->create(attyp, nucell, "FCC:attyp");
+    memory->create(atpos, nucell, 3, "FCC111_atpos");
+    memory->create(attyp, nucell, "FCC:attyp");
 
     for (int i=0; i<nucell; i++) attyp[i] = 1;
 
@@ -326,8 +326,8 @@ void FCC::FCC111()
     latvec[1][1] =  sqrt(0.375);
     latvec[2][2] =  sqrt(3.);
 
-    atpos = memory->create(atpos, nucell, 3, "FCC111_atpos");
-    attyp = memory->create(attyp, nucell, "FCC:attyp");
+    memory->create(atpos, nucell, 3, "FCC111_atpos");
+    memory->create(attyp, nucell, "FCC:attyp");
 
     for (int i=0; i<nucell; i++) attyp[i] = 1;
 
@@ -354,8 +354,8 @@ void FCC::FCC111()
     latvec[1][1] =  sqrt(0.5);
     latvec[2][2] =  sqrt(3.);
 
-    atpos = memory->create(atpos, nucell, 3, "FCC111_atpos");
-    attyp = memory->create(attyp, nucell, "FCC:attyp");
+    memory->create(atpos, nucell, 3, "FCC111_atpos");
+    memory->create(attyp, nucell, "FCC:attyp");
 
     for (int i=0; i<nucell; i++) attyp[i] = 1;
 
@@ -381,8 +381,8 @@ void FCC::FCC111()
     latvec[1][1] =  sqrt(0.5);
     latvec[2][2] =  sqrt(3.);
 
-    atpos = memory->create(atpos, nucell, 3, "FCC111_atpos");
-    attyp = memory->create(attyp, nucell, "FCC:attyp");
+    memory->create(atpos, nucell, 3, "FCC111_atpos");
+    memory->create(attyp, nucell, "FCC:attyp");
 
     for (int i=0; i<nucell; i++) attyp[i] = 1;
 
@@ -420,8 +420,8 @@ void FCC::FCC111()
     latvec[1][1] = sqrt(1.5);
     latvec[2][2] = sqrt(3.);
 
-    atpos = memory->create(atpos, nucell, 3, "FCC111_atpos");
-    attyp = memory->create(attyp, nucell, "FCC:attyp");
+    memory->create(atpos, nucell, 3, "FCC111_atpos");
+    memory->create(attyp, nucell, "FCC:attyp");
 
     for (int i=0; i<nucell; i++) attyp[i] = 1;
 
@@ -465,7 +465,7 @@ void FCC::Primitive()
   for (int i=0; i<3; i++){
     for (int j=0; j<3; j++) latvec[i][j] = 0.;
   }
-  name = memory->create(name,9,"FCC:name");
+  memory->create(name,9,"FCC:name");
   strcpy(name, "FCC-prim");
 
   nucell = 1;
@@ -478,8 +478,8 @@ void FCC::Primitive()
   latvec[2][0] =  0.5;
   latvec[2][1] =  0.5;
 
-  atpos = memory->create(atpos,nucell,3,"Primitive:atpos");
-  attyp = memory->create(attyp,nucell,"Primitive:attyp");
+  memory->create(atpos,nucell,3,"Primitive:atpos");
+  memory->create(attyp,nucell,"Primitive:attyp");
   
   for (int i=0; i<nucell; i++) attyp[i] = 1;
   atpos[0][0] = 0.;
@@ -498,7 +498,7 @@ void FCC::DiamondPrim()
   for (int i=0; i<3; i++){
     for (int j=0; j<3; j++) latvec[i][j] = 0.;
   }
-  name = memory->create(name,9,"FCC:name");
+  memory->create(name,9,"FCC:name");
   strcpy(name, "Dia-prim");
 
   nucell = 2;
@@ -511,8 +511,8 @@ void FCC::DiamondPrim()
   latvec[2][0] =  0.5;
   latvec[2][1] =  0.5;
 
-  atpos = memory->create(atpos, nucell, 3, "Primitive:atpos");
-  attyp = memory->create(attyp, nucell, "Primitive:attyp");
+  memory->create(atpos, nucell, 3, "Primitive:atpos");
+  memory->create(attyp, nucell, "Primitive:attyp");
   
   for (int i=0; i<nucell; i++) attyp[i] = 1;
   atpos[0][0] = 0.;
@@ -547,7 +547,7 @@ void FCC::Diamond001()
   for (int i=0; i<3; i++){
     for (int j=0; j<3; j++) latvec[i][j] = 0.;
   }
-  name = memory->create(name,13,"Dia001:name");
+  memory->create(name,13,"Dia001:name");
   strcpy(name, "Diamond(001)");
 
   switch (surftype){
@@ -559,8 +559,8 @@ void FCC::Diamond001()
     latvec[1][1] = 1.;
     latvec[2][2] = 1.;
   
-    atpos = memory->create(atpos,nucell,3,"Dia001:atpos");
-    attyp = memory->create(attyp,nucell,"Dia001:atpos");
+    memory->create(atpos,nucell,3,"Dia001:atpos");
+    memory->create(attyp,nucell,"Dia001:atpos");
     
     for (int i=0; i<nucell; i++) attyp[i] = 1;
     atpos[0][0] = 0.;
@@ -604,8 +604,8 @@ void FCC::Diamond001()
     latvec[0][0] = latvec[1][1] = sqrt(0.5);
     latvec[2][2] = 1.;
     
-    atpos = memory->create(atpos,nucell,3,"atpos");
-    attyp = memory->create(attyp,nucell,"attyp");
+    memory->create(atpos,nucell,3,"atpos");
+    memory->create(attyp,nucell,"attyp");
     
     attyp[0] =  1;
     atpos[0][0] = 0.;
@@ -656,7 +656,7 @@ void FCC::Diamond110()
   for (int i=0; i<3; i++){
     for (int j=0; j<3; j++) latvec[i][j] = 0.;
   }
-  name = memory->create(name,13,"Dia:name");
+  memory->create(name,13,"Dia:name");
   strcpy(name, "Diamond(110)");
 
   switch (surftype){
@@ -667,8 +667,8 @@ void FCC::Diamond110()
     latvec[0][0] = 1.;
     latvec[1][1] = latvec[2][2] = sqrt(0.5);
     
-    atpos = memory->create(atpos,nucell,3,"atpos");
-    attyp = memory->create(attyp,nucell,"attyp");
+    memory->create(atpos,nucell,3,"atpos");
+    memory->create(attyp,nucell,"attyp");
     
     attyp[0] =  1;
     atpos[0][0] = 0.;
@@ -700,8 +700,8 @@ void FCC::Diamond110()
     latvec[1][1] = 1.;
     latvec[0][0] = latvec[2][2] = sqrt(0.5);
     
-    atpos = memory->create(atpos,nucell,3,"atpos");
-    attyp = memory->create(attyp,nucell,"attyp");
+    memory->create(atpos,nucell,3,"atpos");
+    memory->create(attyp,nucell,"attyp");
     
     attyp[0] =  1;
     atpos[0][0] = 0.;
@@ -756,7 +756,7 @@ void FCC::Diamond111()
   for (int i=0; i<3; i++){
     for (int j=0; j<3; j++) latvec[i][j] = 0.;
   }
-  name = memory->create(name,13,"Dia:name");
+  memory->create(name,13,"Dia:name");
   strcpy(name, "Diamond(111)");
 
   // some constants
@@ -775,8 +775,8 @@ void FCC::Diamond111()
     latvec[1][1] =  sqrt(0.375);
     latvec[2][2] =  sqrt(3.);
     
-    atpos = memory->create(atpos,nucell,3,"atpos");
-    attyp = memory->create(attyp,nucell,"attyp");
+    memory->create(atpos,nucell,3,"atpos");
+    memory->create(attyp,nucell,"attyp");
     
     attyp[0] =  1;
     atpos[0][0] = 0.;
@@ -820,8 +820,8 @@ void FCC::Diamond111()
     latvec[1][1] =  sqrt(0.5);
     latvec[2][2] =  sqrt(3.);
     
-    atpos = memory->create(atpos,nucell,3,"atpos");
-    attyp = memory->create(attyp,nucell,"attyp");
+    memory->create(atpos,nucell,3,"atpos");
+    memory->create(attyp,nucell,"attyp");
     
     attyp[0] =  1;
     atpos[0][0] = 0.;
@@ -864,8 +864,8 @@ void FCC::Diamond111()
     latvec[1][1] = sqrt(0.375);
     latvec[2][2] = sqrt(3.);
     
-    atpos = memory->create(atpos,nucell,3,"atpos");
-    attyp = memory->create(attyp,nucell,"attyp");
+    memory->create(atpos,nucell,3,"atpos");
+    memory->create(attyp,nucell,"attyp");
     
     attyp[0] =  1;
     atpos[0][0] = 0.;
@@ -909,8 +909,8 @@ void FCC::Diamond111()
     latvec[1][1] = sqrt(0.5);
     latvec[2][2] = sqrt(3.);
     
-    atpos = memory->create(atpos,nucell,3,"atpos");
-    attyp = memory->create(attyp,nucell,"attyp");
+    memory->create(atpos,nucell,3,"atpos");
+    memory->create(attyp,nucell,"attyp");
     
     attyp[0] =  1;
     atpos[0][0] = 0.;
@@ -953,8 +953,8 @@ void FCC::Diamond111()
     latvec[1][1] = sqrt(1.5);
     latvec[2][2] = sqrt(3.);
     
-    atpos = memory->create(atpos,nucell,3,"atpos");
-    attyp = memory->create(attyp,nucell,"attyp");
+    memory->create(atpos,nucell,3,"atpos");
+    memory->create(attyp,nucell,"attyp");
     
     attyp[ 0] =  1;
     atpos[ 0][0] = 0.;
@@ -1027,8 +1027,8 @@ void FCC::Diamond111()
     latvec[1][1] = sqrt(0.5);
     latvec[2][2] = sqrt(3.);
     
-    atpos = memory->create(atpos,nucell,3,"atpos");
-    attyp = memory->create(attyp,nucell,"attyp");
+    memory->create(atpos,nucell,3,"atpos");
+    memory->create(attyp,nucell,"attyp");
     
     attyp[ 0] =  1;
     atpos[ 0][0] = 0.;

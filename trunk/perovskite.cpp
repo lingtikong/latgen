@@ -39,7 +39,7 @@ void AB::AB_Perov()
   initialized = 0;
   switch (orient){
   case 1:
-    name = memory->create(name,11,"Perov:name");
+    memory->create(name,11,"Perov:name");
     strcpy(name, "Perov(001)");
 
     nucell = 5;
@@ -47,8 +47,8 @@ void AB::AB_Perov()
     
     latvec[0][0] = latvec[1][1] = latvec[2][2] = 1.;
     
-    atpos = memory->create(atpos,nucell,3,"atpos");
-    attyp = memory->create(attyp,nucell,"attyp");
+    memory->create(atpos,nucell,3,"atpos");
+    memory->create(attyp,nucell,"attyp");
     
     attyp[0] =  3;
     atpos[0][0] = 0.5;
@@ -79,7 +79,7 @@ void AB::AB_Perov()
     break;
 
   case 2:
-    name = memory->create(name,11,"Perov:name");
+    memory->create(name,11,"Perov:name");
     strcpy(name, "Perov(001)");
 
     nucell = 10;
@@ -88,8 +88,8 @@ void AB::AB_Perov()
     latvec[0][0] = latvec[1][1] = sqrt(2.);
     latvec[2][2] = 1.;
     
-    atpos = memory->create(atpos,nucell,3,"atpos");
-    attyp = memory->create(attyp,nucell,"attyp");
+    memory->create(atpos,nucell,3,"atpos");
+    memory->create(attyp,nucell,"attyp");
     
     attyp[0] =  3;
     atpos[0][0] = 0.00;
@@ -145,7 +145,7 @@ void AB::AB_Perov()
     break;
 
   case 3:
-    name = memory->create(name,11,"Perov:name");
+    memory->create(name,11,"Perov:name");
     strcpy(name, "Perov(110)");
 
     nucell = 10;
@@ -154,8 +154,8 @@ void AB::AB_Perov()
     latvec[1][1] = 1.;
     latvec[0][0] = latvec[2][2] = sqrt(2.);
     
-    atpos = memory->create(atpos,nucell,3,"atpos");
-    attyp = memory->create(attyp,nucell,"attyp");
+    memory->create(atpos,nucell,3,"atpos");
+    memory->create(attyp,nucell,"attyp");
     
     attyp[0] =  3;
     atpos[0][0] = 0.50;
@@ -211,7 +211,7 @@ void AB::AB_Perov()
     break;
 
   case 4:
-    name = memory->create(name,11,"Perov:name");
+    memory->create(name,11,"Perov:name");
     strcpy(name, "Perov(110)");
 
     nucell = 10;
@@ -220,8 +220,8 @@ void AB::AB_Perov()
     latvec[0][0] = 1.;
     latvec[1][1] = latvec[2][2] = sqrt(2.);
     
-    atpos = memory->create(atpos,nucell,3,"atpos");
-    attyp = memory->create(attyp,nucell,"attyp");
+    memory->create(atpos,nucell,3,"atpos");
+    memory->create(attyp,nucell,"attyp");
     
     attyp[0] =  3;
     atpos[0][0] = 0.50;
@@ -277,7 +277,7 @@ void AB::AB_Perov()
     break;
 
   case 5:
-    name = memory->create(name,11,"Perov:name");
+    memory->create(name,11,"Perov:name");
     strcpy(name, "Perov(111)");
     nucell =   15;
     ntype  =  3;
@@ -287,8 +287,8 @@ void AB::AB_Perov()
     latvec[1][1] = sqrt(3.)*0.5;
     latvec[2][2] = sqrt(6.)*0.5;
     
-    atpos = memory->create(atpos,nucell,3,"atpos");
-    attyp = memory->create(attyp,nucell,"attyp");
+    memory->create(atpos,nucell,3,"atpos");
+    memory->create(attyp,nucell,"attyp");
     
     attyp[ 0] =  3;
     atpos[ 0][0] = one3;
@@ -369,7 +369,7 @@ void AB::AB_Perov()
     break;
 
   case 6:
-    name = memory->create(name,11,"Perov:name");
+    memory->create(name,11,"Perov:name");
     strcpy(name, "Perov(111)");
 
     nucell = 30;
@@ -379,8 +379,8 @@ void AB::AB_Perov()
     latvec[1][1] = sqrt(3.);
     latvec[2][2] = sqrt(6.)*0.5;
     
-    atpos = memory->create(atpos,nucell,3,"atpos");
-    attyp = memory->create(attyp,nucell,"attyp");
+    memory->create(atpos,nucell,3,"atpos");
+    memory->create(attyp,nucell,"attyp");
     
     attyp[ 0] =  3;
     atpos[ 0][0] = 0.0;
@@ -536,7 +536,7 @@ void AB::AB_Perov()
     break;
 
   case 7:
-    name = memory->create(name,11,"Perov:name");
+    memory->create(name,11,"Perov:name");
     strcpy(name, "Perov(111)");
 
     nucell = 30;
@@ -546,8 +546,8 @@ void AB::AB_Perov()
     latvec[0][0] = sqrt(3.);
     latvec[2][2] = sqrt(6.)*0.5;
     
-    atpos = memory->create(atpos,nucell,3,"atpos");
-    attyp = memory->create(attyp,nucell,"attyp");
+    memory->create(atpos,nucell,3,"atpos");
+    memory->create(attyp,nucell,"attyp");
     
     attyp[ 0] =  3;
     atpos[ 0][1] = 0.0;

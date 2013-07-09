@@ -98,7 +98,7 @@ void Driver::MainMenu()
   if ( ShowMenu(0) > 0 ){
     if (latt->initialized == 0) exit(2);
 
-    name = memory->create(name, strlen(latt->name)+1, "driver->MainMenu:name");
+    memory->create(name, strlen(latt->name)+1, "driver->MainMenu:name");
     strcpy(name, latt->name);
     alat = latt->alat;
   
@@ -156,12 +156,12 @@ void Driver::generate()
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) leading_dir = atoi(strtok(str, " \t\n\r\f"));
   for (int i=0; i<14; i++) printf("====="); printf("\n");
 
-  atpos = memory->create(atpos, natom, 3, "driver->generate:atpos");
-  attyp = memory->create(attyp, natom, "driver->generate:attyp");
-  xmap = memory->create(xmap, natom, "driver->generate:xmap");
-  ymap = memory->create(ymap, natom, "driver->generate:ymap");
-  zmap = memory->create(zmap, natom, "driver->generate:zmap");
-  umap = memory->create(umap, natom, "driver->generate:umap");
+  memory->create(atpos, natom, 3, "driver->generate:atpos");
+  memory->create(attyp, natom, "driver->generate:attyp");
+  memory->create(xmap, natom, "driver->generate:xmap");
+  memory->create(ymap, natom, "driver->generate:ymap");
+  memory->create(zmap, natom, "driver->generate:zmap");
+  memory->create(umap, natom, "driver->generate:umap");
 
   int iatom = 0;
   if ( leading_dir == 1){
@@ -232,8 +232,8 @@ void Driver::typescan()
   int typmax = 10;
   if (typeID != NULL) memory->destroy(typeID);
   if (numtype!= NULL) memory->destroy(numtype);
-  typeID  = memory->create(typeID,  typmax, "driver->typescan:typeID");
-  numtype = memory->create(numtype, typmax, "driver->typescan:numtype");
+  memory->create(typeID,  typmax, "driver->typescan:typeID");
+  memory->create(numtype, typmax, "driver->typescan:numtype");
   for (int i=0; i<typmax; i++) numtype[i] = 0;
 
   ntype = 0;
@@ -243,8 +243,8 @@ void Driver::typescan()
     if (id < 0){
       if (ntype == typmax){
         typmax += 5;
-        typeID  = memory->grow(typeID, typmax, "driver->typescan:typeID");
-        numtype = memory->grow(numtype,typmax, "driver->typescan:numtype");
+        memory->grow(typeID, typmax, "driver->typescan:typeID");
+        memory->grow(numtype,typmax, "driver->typescan:numtype");
       }
       typeID[ntype] = attyp[i];
       id            = ntype++;
@@ -771,8 +771,8 @@ void Driver::FormLayers()
   printf("\nYou have defined %d lattices: ", nlat);
   for (int i=0; i<nlat; i++) printf(" %c = %s;", 'A'+i, latts[i]->name); printf("\n");
   
-  mynx = memory->create(mynx, nlat, "mynx");
-  myny = memory->create(myny, nlat, "myny");
+  memory->create(mynx, nlat, "mynx");
+  memory->create(myny, nlat, "myny");
   for (int ilat=0; ilat<nlat; ilat++){
     printf("Please input the lateral extensions (nx & ny) for lattice %c: ", 'A'+ilat);
     while (1){
@@ -894,13 +894,13 @@ void Driver::FormLayers()
 
         ntm_new *= (mynx[ilat]*myny[ilat]);
         natom += ntm_new;
-        atpos = memory->grow(atpos, natom, 3, "atpos");
-        attyp = memory->grow(attyp, natom, "attyp");
+        memory->grow(atpos, natom, 3, "atpos");
+        memory->grow(attyp, natom, "attyp");
         if (fmap){
-          xmap = memory->grow(xmap, natom, "xmap");
-          ymap = memory->grow(ymap, natom, "ymap");
-          zmap = memory->grow(zmap, natom, "zmap");
-          umap = memory->grow(umap, natom, "umap");
+          memory->grow(xmap, natom, "xmap");
+          memory->grow(ymap, natom, "ymap");
+          memory->grow(zmap, natom, "zmap");
+          memory->grow(umap, natom, "umap");
 
           nx = mynx[ilat];
           ny = myny[ilat];
@@ -987,7 +987,7 @@ void Driver::FormLayers()
     sprintf(info, "%dx%d-%s ", mynx[i], myny[i], latts[i]->name);
     strcat(str,info);
   }
-  name = memory->create(name, strlen(str)+1, "driver->FormLayers"); strcpy(name, str);
+  memory->create(name, strlen(str)+1, "driver->FormLayers"); strcpy(name, str);
 
   double tmp[2];
   for (int i=0; i<natom; i++){
@@ -1012,7 +1012,8 @@ return;
 int Driver::count_words(const char *line)
 {
   int n = strlen(line) + 1;
-  char *copy = (char *) memory->smalloc(n*sizeof(char),"copy");
+  char *copy;
+  memory->create(copy, n,"copy");
   strcpy(copy,line);
 
   char *ptr;
