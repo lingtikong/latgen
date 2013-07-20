@@ -93,7 +93,7 @@ void Driver::PolyCrystal()
 
       int igrain = 0;
       // remaining ngrain effective lines: x y z alpha beta gamma
-      // alpha, beta, gamma are in unit of 2*PI; but can be 'ran' for random number within [0, 1]
+      // alpha, beta, gamma are in unit of degree; but can be 'ran' for random number within [0, 360]
       fgets(str, MAXLINE, fp);
       while ( !feof(fp) ) {
         if (count_words(str) >= 6){
@@ -103,7 +103,7 @@ void Driver::PolyCrystal()
           for (int ii=0; ii<3; ii++){
             ptr = strtok(NULL," \n\t\r\f");
             if (strcmp(ptr, "ran") == 0) orient[igrain][ii] = random->uniform();
-            else orient[igrain][ii] = atof(ptr);
+            else orient[igrain][ii] = atof(ptr)/360.;
           }
   
           if (++igrain >= ngrain) break;
