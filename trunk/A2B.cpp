@@ -19,11 +19,11 @@ A2B::A2B() : lattice()
   // print out the menu
   printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
   printf("Please select the composition of your lattice:\n");
-  printf("   1. A2B;\n");
-  printf("   2. AB2;\n");
+  printf("   1. AB2;          2. A2B;\n");
   printf("Your choice [%d]: ", ctype);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) ctype = atoi(strtok(str, " \t\n\r\f"));
   printf("You   selected : %d\n", ctype);
+
   if (ctype == 1){ip1 = 1; ip2=2;}
   else {ip1=2; ip2=1;}
 
@@ -36,7 +36,7 @@ A2B::A2B() : lattice()
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) lattype = atoi(strtok(str, " \t\n\r\f"));
   printf("You   selected : %d\n", lattype);
 
-  printf("Please input the lattice constant of the A3B crystal [%g]: ", alat);
+  printf("Please input the lattice constant of the A2B crystal [%g]: ", alat);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) alat = atof(strtok(str, " \t\n\r\f"));
   if (lattype == 3){
     printf("Please input the c/a or c (negative) of your crystal [%g]: ", ca);

@@ -305,9 +305,9 @@ void Driver::MapElement()
   char str[MAXLINE];
   printf("\n"); for (int i=0; i<14; i++) printf("=====");
   printf("\nThere are %d atomic types in system, and their IDs are:\nIndex : ", ntype);
-  for (int i=0; i<ntype; i++) printf("%4d", i+1); printf("\nTypeID: ");
-  for (int i=0; i<ntype; i++) printf("%4d", typeID[i]); printf("\nNatTyp: ");
-  for (int i=0; i<ntype; i++) printf("%4d", numtype[i]);
+  for (int i=0; i<ntype; i++) printf(" %6d", i+1); printf("\nTypeID: ");
+  for (int i=0; i<ntype; i++) printf(" %6d", typeID[i]); printf("\nNatTyp: ");
+  for (int i=0; i<ntype; i++) printf(" %6d", numtype[i]);
   printf("\nPlease input the element symbols in sequence, enter to skip: ");
   if (count_words(fgets(str,MAXLINE,stdin)) >= ntype){
 
@@ -325,7 +325,7 @@ void Driver::MapElement()
     for (int i=0; i<ntype; i++){
       char ename[3];
       int ip = typeID[i]; element->Num2Name(type2num[ip],ename);
-      printf("%4s", ename);
+      printf(" %6s", ename);
     } printf("\n");
   }
   for (int i=0; i<14; i++) printf("====="); printf("\n");
