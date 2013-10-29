@@ -21,7 +21,7 @@ FCC::FCC() : lattice()
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) alat = atof(strtok(str, " \t\n\r\f"));
 
   int orient = 3;
-  printf("Please selection the orientation of the FCC lattice:\n");
+  printf("Please select the orientation of the FCC lattice:\n");
   printf("   1. (001);                5. Diamond primitive;\n");
   printf("   2. (110);                6. Diamond (001);\n");
   printf("   3. (111);                7. Diamond (110);\n");

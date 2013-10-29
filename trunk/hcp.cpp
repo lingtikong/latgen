@@ -597,7 +597,7 @@ void HCP::Graphite()
   memory->create(name,9,"HCP:name");
   strcpy(name, "Graphite");
 
-  if (abs(ca-2.725) > 0.1){
+  if (fabs(ca-2.725) > 0.1){
     printf("\nThe experimental c/a for graphite is ~2.725, while yours is %g, if you\n", ca);
     printf("want to redefine it, input now, enter to keep c/a = %g: ", ca);
     if (count_words(fgets(str,MAXLINE,stdin)) > 0) ca = atof(strtok(str, " \t\n\r\f"));

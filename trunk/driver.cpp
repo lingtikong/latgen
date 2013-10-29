@@ -28,8 +28,8 @@ Driver::Driver()
 
   memory = new Memory();
 
-  for (int i=0; i<3; i++)
-  for (int j=0; j<3; j++) latvec[i][j] = 0.;
+  for (int i = 0; i < 3; ++i)
+  for (int j = 0; j < 3; ++j) latvec[i][j] = 0.;
 
   ShowVersion();
   MainMenu();
@@ -43,28 +43,29 @@ int Driver::ShowMenu(const int flag)
   char str[MAXLINE];
 
   // print out the menu
-  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
+  printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
   if (flag>0) printf("Please select the lattice type for lattice: %c\n", flag+'A'-1);
   else printf("Please select the lattice type of your system:\n");
   printf(" 1. FCC/Diamond;               |  4. A3B;\n");
   printf(" 2. BCC;                       |  5. A2B;\n");
   printf(" 3. HCP/Graphene;              |  6. AB & ABXn;\n");
-  for (int i=0; i<31; i++) printf("-"); printf("+"); for (int i=0; i<38; i++) printf("-"); printf("\n");
+  for (int i = 0; i < 31; ++i) printf("-"); printf("+");
+  for (int i = 0; i < 38; ++i) printf("-"); printf("\n");
   if (flag != 0){
     printf(" 7. User defined;              |  0. Exit.\n");
   } else {
     printf(" 7. User defined;              |  8. Multi-layer.\n");
-    for (int i=0; i<14; i++) printf("-----"); printf("\n");
+    for (int i = 0; i < 14; ++i) printf("-----"); printf("\n");
 #ifdef Poly
     printf(" 9. Polycrystal;               | ");
 #endif
     printf(" 0. Exit.\n");
   }
-  for (int i=0; i<14; i++) printf("-----");
+  for (int i = 0; i < 14; ++i) printf("-----");
   printf("\nYour choice [1]: ");
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) ltype = atoi(strtok(str," \t\n\r\f"));
   printf("You selected: %d\n", ltype);
-  for (int i=0; i<14; i++) printf("====="); printf("\n");
+  for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
 
   switch (ltype){
   case 1: latt = new FCC(); break;
@@ -141,7 +142,7 @@ void Driver::generate()
 {
   char str[MAXLINE];
   int leading_dir = 1;
-  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
+  printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
   printf("Please input the extensions in x, y, and z directions: ");
   if (count_words(fgets(str,MAXLINE,stdin)) < 3) exit(2);
   nx = atoi(strtok(str,  " \t\n\r\f"));
@@ -154,7 +155,7 @@ void Driver::generate()
   printf("Your system would be %d x %d x %d with %d atoms.\n",nx,ny,nz,natom);
   printf("Please indicate which direction should goes fast(1:x; other: z)[1]: ");
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) leading_dir = atoi(strtok(str, " \t\n\r\f"));
-  for (int i=0; i<14; i++) printf("====="); printf("\n");
+  for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
 
   memory->create(atpos, natom, 3, "driver->generate:atpos");
   memory->create(attyp, natom, "driver->generate:attyp");
@@ -165,54 +166,49 @@ void Driver::generate()
 
   int iatom = 0;
   if ( leading_dir == 1){
-    for (int k=0; k<nz; k++){
-      for (int j=0; j<ny; j++){
-        for (int i=0; i<nx; i++){
-          for (int u=0; u<latt->nucell; u++){
-            xmap[iatom] = i;
-            ymap[iatom] = j;
-            zmap[iatom] = k;
-            umap[iatom] = u;
-            attyp[iatom] = latt->attyp[u];
-            atpos[iatom][0] = latt->atpos[u][0] + double(i);
-            atpos[iatom][1] = latt->atpos[u][1] + double(j);
-            atpos[iatom][2] = latt->atpos[u][2] + double(k);
-            iatom++;
-          }
-        }
-      }
+    for (int k = 0; k < nz; ++k)
+    for (int j = 0; j < ny; ++j)
+    for (int i = 0; i < nx; ++i)
+    for (int u = 0; u < latt->nucell; ++u){
+      xmap[iatom] = i;
+      ymap[iatom] = j;
+      zmap[iatom] = k;
+      umap[iatom] = u;
+      attyp[iatom] = latt->attyp[u];
+      atpos[iatom][0] = latt->atpos[u][0] + double(i);
+      atpos[iatom][1] = latt->atpos[u][1] + double(j);
+      atpos[iatom][2] = latt->atpos[u][2] + double(k);
+      ++iatom;
     }
-  }else{
-    for (int i=0; i<nx; i++){
-      for (int j=0; j<ny; j++){
-        for (int k=0; k<nz; k++){
-          for (int u=0; u<latt->nucell; u++){
-            xmap[iatom] = i;
-            ymap[iatom] = j;
-            zmap[iatom] = k;
-            umap[iatom] = u;
-            attyp[iatom] = latt->attyp[u];
-            atpos[iatom][0] = latt->atpos[u][0] + double(i);
-            atpos[iatom][1] = latt->atpos[u][1] + double(j);
-            atpos[iatom][2] = latt->atpos[u][2] + double(k);
-            iatom++;
-          }
-        }
-      }
+
+  } else {
+    for (int i = 0; i < nx; ++i)
+    for (int j = 0; j < ny; ++j)
+    for (int k = 0; k < nz; ++k)
+    for (int u = 0; u < latt->nucell; ++u){
+      xmap[iatom] = i;
+      ymap[iatom] = j;
+      zmap[iatom] = k;
+      umap[iatom] = u;
+      attyp[iatom] = latt->attyp[u];
+      atpos[iatom][0] = latt->atpos[u][0] + double(i);
+      atpos[iatom][1] = latt->atpos[u][1] + double(j);
+      atpos[iatom][2] = latt->atpos[u][2] + double(k);
+      ++iatom;
     }
   }
   // convert fractional coordinate to cartesian
   double tmp[3];
-  for (int i=0; i<3; i++){
-    for (int j=0; j<3; j++) latvec[i][j] = latt->latvec[i][j]*latt->alat;
-  }
-  for (int i=0; i<natom; i++){
-    for (int idim=0; idim<3; idim++) tmp[idim] = atpos[i][idim];
+  for (int i = 0; i < 3; ++i)
+  for (int j = 0; j < 3; ++j) latvec[i][j] = latt->latvec[i][j]*latt->alat;
+
+  for (int i = 0; i < natom; ++i){
+    for (int idim = 0; idim < 3; ++idim) tmp[idim] = atpos[i][idim];
     atpos[i][0] = tmp[0]*latvec[0][0] + tmp[1]*latvec[1][0] + tmp[2]*latvec[2][0];
     atpos[i][1] = tmp[0]*latvec[0][1] + tmp[1]*latvec[1][1] + tmp[2]*latvec[2][1];
     atpos[i][2] = tmp[0]*latvec[0][2] + tmp[1]*latvec[1][2] + tmp[2]*latvec[2][2];
   }
-  for (int i=0; i<3; i++){
+  for (int i = 0; i < 3; ++i){
     latvec[0][i] *= double(nx);
     latvec[1][i] *= double(ny);
     latvec[2][i] *= double(nz);
@@ -238,7 +234,7 @@ void Driver::typescan()
 
   ntype = 0;
   // now to identify the total number of types
-  for (int i=0; i<natom; i++){
+  for (int i = 0; i < natom; ++i){
     int id = lookup(attyp[i]);
     if (id < 0){
       if (ntype == typmax){
@@ -260,11 +256,11 @@ return;
 void Driver::ResetTypeID()
 {
   char str[MAXLINE];
-  printf("\n"); for (int i=0; i<14; i++) printf("=====");
+  printf("\n"); for (int i = 0; i < 14; ++i) printf("=====");
   printf("\nThere are %d atomic types in system, and their IDs are:\nIndex : ", ntype);
-  for (int i=0; i<ntype; i++) printf("%4d", i+1); printf("\nTypeID: ");
-  for (int i=0; i<ntype; i++) printf("%4d", typeID[i]); printf("\nNatTyp: ");
-  for (int i=0; i<ntype; i++) printf("%4d", numtype[i]);
+  for (int i = 0; i < ntype; ++i) printf("%4d", i+1); printf("\nTypeID: ");
+  for (int i = 0; i < ntype; ++i) printf("%4d", typeID[i]); printf("\nNatTyp: ");
+  for (int i = 0; i < ntype; ++i) printf("%4d", numtype[i]);
   printf("\nPlease input the new type IDs in sequence, enter to skip: ");
   if (count_words(fgets(str,MAXLINE,stdin)) > 0){
     int newID[ntype], num=0;
@@ -277,13 +273,13 @@ void Driver::ResetTypeID()
     }
     if (num == ntype){
       printf("\nThe new type IDs are:\nIndex : ");
-      for (int i=0; i<ntype; i++) printf("%4d", i+1); printf("\nTypeID: ");
-      for (int i=0; i<ntype; i++) printf("%4d", newID[i]);
+      for (int i = 0; i < ntype; ++i) printf("%4d", i+1); printf("\nTypeID: ");
+      for (int i = 0; i < ntype; ++i) printf("%4d", newID[i]);
       printf("\nIs this what you want? (y/n)[y]: ");
       int nw = count_words(fgets(str,MAXLINE,stdin));
       char *flag = strtok(str, " \t\n\r\f");
       if ( nw < 1 || ((strcmp(flag,"n") != 0) && (strcmp(flag,"N") != 0))){
-        for (int i=0; i<natom; i++){
+        for (int i = 0; i < natom; ++i){
           int id = lookup(attyp[i]);
           attyp[i] = newID[id];
         }
@@ -292,7 +288,7 @@ void Driver::ResetTypeID()
       }
     }
   }
-  for (int i=0; i<14; i++) printf("====="); printf("\n");
+  for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
 
 return;
 }
@@ -303,11 +299,11 @@ return;
 void Driver::MapElement()
 {
   char str[MAXLINE];
-  printf("\n"); for (int i=0; i<14; i++) printf("=====");
+  printf("\n"); for (int i = 0; i < 14; ++i) printf("=====");
   printf("\nThere are %d atomic types in system, and their IDs are:\nIndex : ", ntype);
-  for (int i=0; i<ntype; i++) printf(" %6d", i+1); printf("\nTypeID: ");
-  for (int i=0; i<ntype; i++) printf(" %6d", typeID[i]); printf("\nNatTyp: ");
-  for (int i=0; i<ntype; i++) printf(" %6d", numtype[i]);
+  for (int i = 0; i < ntype; ++i) printf(" %6d", i+1); printf("\nTypeID: ");
+  for (int i = 0; i < ntype; ++i) printf(" %6d", typeID[i]); printf("\nNatTyp: ");
+  for (int i = 0; i < ntype; ++i) printf(" %6d", numtype[i]);
   printf("\nPlease input the element symbols in sequence, enter to skip: ");
   if (count_words(fgets(str,MAXLINE,stdin)) >= ntype){
 
@@ -315,20 +311,20 @@ void Driver::MapElement()
     type2num.clear();
 
     char *ptr = strtok(str, " \t\n\r\f");
-    for (int i=0; i<ntype; i++){
+    for (int i = 0; i < ntype; ++i){
       int ip = typeID[i];
       type2num[ip] = element->Name2Num(ptr);
 
       ptr = strtok(NULL, " \t\n\r\f");
     }
     printf("Element:");
-    for (int i=0; i<ntype; i++){
+    for (int i = 0; i < ntype; ++i){
       char ename[3];
       int ip = typeID[i]; element->Num2Name(type2num[ip],ename);
       printf(" %6s", ename);
     } printf("\n");
   }
-  for (int i=0; i<14; i++) printf("====="); printf("\n");
+  for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
 
 return;
 }
@@ -338,7 +334,7 @@ return;
 ------------------------------------------------------------------------- */
 int Driver::lookup(int ip)
 {
-  for (int i=0; i<ntype; i++){if (ip == typeID[i]) return i;}
+  for (int i = 0; i < ntype; ++i){if (ip == typeID[i]) return i;}
 
   return -1;
 }
@@ -354,7 +350,7 @@ void Driver::write()
   int flag_lmp_data = 1;
   if (latvec[0][1]*latvec[0][1]+latvec[0][2]*latvec[0][2]+latvec[1][2]*latvec[1][2] > 1.e-6) flag_lmp_data = 0;
 
-  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
+  printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
   printf("Please input the filename of the output xyz file [atomcfg.xyz]: ");
   if (count_words(fgets(str,MAXLINE,stdin)) > 0){
     int n = strlen(str) + 1;
@@ -393,9 +389,9 @@ void Driver::write()
   if (xmap) printf("The FFT map information  will be written to file: %s\n", mapfile);
   if (natom < 3){
     printf("\nThe basis vectors of your system is:\n");
-    for (int i=0; i<3; i++) printf("  %16.16e %16.16e %16.16e\n", latvec[i][0], latvec[i][1], latvec[i][2]);
+    for (int i = 0; i < 3; ++i) printf("  %16.16e %16.16e %16.16e\n", latvec[i][0], latvec[i][1], latvec[i][2]);
   }
-  for (int i=0; i<14; i++) printf("====="); printf("\n");
+  for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
 
   // write the xyz position file 
   fp = fopen(posfile, "w");
@@ -448,7 +444,7 @@ void Driver::write()
 
     fprintf(fp, "\nAtoms\n\n");
   
-    for (int i=0; i<natom; i++) fprintf(fp,"%d %d %20.14f %20.14f %20.14f\n", i+1, attyp[i], atpos[i][0], atpos[i][1], atpos[i][2]);
+    for (int i = 0; i < natom; ++i) fprintf(fp,"%d %d %20.14f %20.14f %20.14f\n", i+1, attyp[i], atpos[i][0], atpos[i][1], atpos[i][2]);
     fclose(fp);
     delete []lmpfile;
   }
@@ -458,7 +454,7 @@ void Driver::write()
      fp = fopen(mapfile, "w");
      fprintf(fp,"%d %d %d %d\n", nx, ny, nz, nucell);
      fprintf(fp,"Map file for %dx%dx%d %s cell.\n",nx,ny,nz, name);
-     for (int i=0; i<natom; i++)
+     for (int i = 0; i < natom; ++i)
        fprintf(fp,"%d %d %d %d %d\n", xmap[i], ymap[i], zmap[i], umap[i], i+1);
      fclose(fp);
 
@@ -479,7 +475,7 @@ void Driver::modify()
   while (ncycle){
     int job=0;
     // to display the menu for modification
-    printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
+    printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
     printf("Please select the modification you want to do:\n");
     printf("  1. Create substitutional solid solution;\n");
     printf("  2. Reset atomic types;\n");
@@ -492,7 +488,7 @@ void Driver::modify()
     if (count_words(fgets(str,MAXLINE,stdin)) >0) job = atoi(strtok(str, " \t\n\r\f"));
 
     printf("You selected: %d", job);
-    printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
+    printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
    
     switch (job){ 
     case 1: solidsol();    break;
@@ -513,7 +509,7 @@ void Driver::solidsol()
 {
   char str[MAXLINE];
   int job = 0;
-  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
+  printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
   printf("Please select the region to create the solid solution:\n");
   printf("  1. Limit solid solution inside/outside a block region;\n");
   printf("  2. Limit solid solution inside/outside a spherical region;\n");
@@ -524,7 +520,7 @@ void Driver::solidsol()
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) job = atoi(strtok(str," \t\n\r\f"));
   printf("You selected: %d\n", job);
   if (job < 1 || job > 5){
-    for (int i=0; i<14; i++) printf("====="); printf("\n");
+    for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
     return;
   }
 
@@ -537,7 +533,7 @@ void Driver::solidsol()
 
   if (flag & 1){ // block region needed
     printf("\nThe basis vectors that define the current simulation box is:\n");
-    for (int idim=0; idim<3; idim++) printf("  A%d: %lg %lg %lg\n", idim, latvec[idim][0], latvec[idim][1], latvec[idim][2]); 
+    for (int idim = 0; idim < 3; ++idim) printf("  A%d: %lg %lg %lg\n", idim, latvec[idim][0], latvec[idim][1], latvec[idim][2]); 
     printf("Please input the bounds of the block region, in the format of `xlo xhi ylo yhi zlo zhi pos`,\n");
     printf("where `pos` is either `i` or `o`, indicating inside or outside the block. If no limit in certain\n");
     printf("direction, use `NULL`. For non-orthogonal box, this might not work well.\nPlease input them now: ");
@@ -560,7 +556,7 @@ void Driver::solidsol()
       }
       printf("will be used to create the substitutional solid solution.\n");
 
-      for (int i=0; i<natom; i++){
+      for (int i = 0; i < natom; ++i){
         if (inside){
           if (atpos[i][0] - block[0] < ZERO || atpos[i][0] - block[1] >-ZERO||
               atpos[i][1] - block[2] < ZERO || atpos[i][1] - block[3] >-ZERO||
@@ -573,22 +569,22 @@ void Driver::solidsol()
       }
     } else {
       printf("\nNo input read, operation terminated!\n");
-      for (int i=0; i<14; i++) printf("====="); printf("\n");
+      for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
     }
   }
 
   nsel = 0;
-  for (int i=0; i<natom; i++) nsel += atsel[i];
+  for (int i = 0; i < natom; ++i) nsel += atsel[i];
 
   if (flag & 2){ // spherical region needed
     printf("\nThe basis vectors that define the current simulation box is:\n");
-    for (int idim=0; idim<3; idim++) printf("A%d: %lg %lg %lg\n", idim, latvec[idim][0], latvec[idim][1], latvec[idim][2]); 
+    for (int idim = 0; idim < 3; ++idim) printf("A%d: %lg %lg %lg\n", idim, latvec[idim][0], latvec[idim][1], latvec[idim][2]); 
     printf("There are %d atoms in current selection. Please input the necessary parameters that define the\n", nsel);
     printf("spherical region in the format of `x y z r pos`, where `pos` is either `i` or `o`, indicating\n");
     printf("inside or outside the block. Please input them now: ");
     if (count_words(fgets(str,MAXLINE,stdin)) >= 5){
       char *ptr = strtok(str," \t\n\r\f");
-      for (int i=0; i<3; i++){
+      for (int i = 0; i < 3; ++i){
         cpos[i] = atof(ptr);
         ptr = strtok(NULL, " \n\t\r\f");
       }
@@ -605,9 +601,9 @@ void Driver::solidsol()
       printf(" will be used to create the substitutional solid solution.\n");
       radius *= radius;
 
-      for (int i=0; i<natom; i++){
+      for (int i = 0; i < natom; ++i){
         double r2 = 0.;
-        for (int idim=0; idim<3; idim++){
+        for (int idim = 0; idim < 3; ++idim){
           double dx = atpos[i][idim]-cpos[idim];
           r2 += dx*dx;
         }
@@ -623,9 +619,9 @@ void Driver::solidsol()
   }
   nsel = 0;
   int nsel_type[ntype];
-  for (int i=0; i<ntype; i++) nsel_type[i] = 0;
+  for (int i = 0; i < ntype; ++i) nsel_type[i] = 0;
 
-  for (int i=0; i<natom; i++){
+  for (int i = 0; i < natom; ++i){
     nsel += atsel[i];
     int ip = lookup(attyp[i]);
     nsel_type[ip] += atsel[i];
@@ -635,11 +631,11 @@ void Driver::solidsol()
   printf("Total number of atoms in selection : %d\n", nsel);
   printf("Total number of atomimc types      : %d\n", ntype);
   printf("Atomic type number for each type   :");
-  for (int i=0; i<ntype; i++) printf(" %d", typeID[i]);
+  for (int i = 0; i < ntype; ++i) printf(" %d", typeID[i]);
   printf("\nNumber of atoms for each  type     :");
-  for (int i=0; i<ntype; i++) printf(" %d", numtype[i]); printf("\n");
+  for (int i = 0; i < ntype; ++i) printf(" %d", numtype[i]); printf("\n");
   printf("\nNumber of atoms in selection for each type:");
-  for (int i=0; i<ntype; i++) printf(" %d", nsel_type[i]); printf("\n");
+  for (int i = 0; i < ntype; ++i) printf(" %d", nsel_type[i]); printf("\n");
 
   int ipsrc, idsrc=-1, numsub;
   printf("\nPlease input the atomic type to be substituted: ");
@@ -648,14 +644,14 @@ void Driver::solidsol()
   idsrc = lookup(ipsrc);
   if (idsrc < 0){
     printf("\nInput atomic type not found, operation terminated!\n");
-    for (int i=0; i<14; i++) printf("====="); printf("\n");
+    for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
     return;
   }
 
   printf("Total # of atoms with type %d in selection is %d.\n", ipsrc, nsel_type[idsrc]);
   if (nsel_type[idsrc] < 1){
     printf("Not enough atoms to create substitutional solid solution.\n");
-    for (int i=0; i<14; i++) printf("====="); printf("\n");
+    for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
     return;
   }
 
@@ -665,7 +661,7 @@ void Driver::solidsol()
   frac = atof(strtok(str, " \t\n\r\f"));
   if (frac <= 0. || int(frac) > nsel_type[idsrc]){
     printf("Not enough atoms to create substitutional solid solution.\n");
-    for (int i=0; i<14; i++) printf("====="); printf("\n");
+    for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
     return;
   }
 
@@ -714,9 +710,10 @@ void Driver::solidsol()
 
   // atomic type info after replacement
   int newsel_type[ntype];
-  for (int i=0; i<ntype; i++) newsel_type[i] = 0;
+  for (int i = 0; i < ntype; ++i) newsel_type[i] = 0;
 
-  for (int i=0; i<natom; i++){
+  nsel = 0;
+  for (int i = 0; i < natom; ++i){
     nsel += atsel[i];
     int ip = lookup(attyp[i]);
     newsel_type[ip] += atsel[i];
@@ -726,13 +723,13 @@ void Driver::solidsol()
   printf("  Total number of atoms in selection : %d\n", nsel);
   printf("  Total number of atomimc types      : %d\n", ntype);
   printf("  Atomic type number for each type   :");
-  for (int i=0; i<ntype; i++) printf(" %d", typeID[i]);
+  for (int i = 0; i < ntype; ++i) printf(" %d", typeID[i]);
   printf("\n  Number of atoms for each  type     :");
-  for (int i=0; i<ntype; i++) printf(" %d", numtype[i]); printf("\n");
+  for (int i = 0; i < ntype; ++i) printf(" %d", numtype[i]); printf("\n");
   printf("\n  Number of atoms in selection for each type:");
-  for (int i=0; i<ntype; i++) printf(" %d", newsel_type[i]); printf("\n");
+  for (int i = 0; i < ntype; ++i) printf(" %d", newsel_type[i]); printf("\n");
 
-  for (int i=0; i<14; i++) printf("====="); printf("\n");
+  for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
 return;
 }
 
@@ -752,14 +749,14 @@ void Driver::FormLayers()
   if (nlat < 1) return;
 
   lattice *latts[nlat];
-  for (int i=0; i<nlat; i++){
+  for (int i = 0; i < nlat; ++i){
     if (! ShowMenu(i+1) ){nlat = i; break;}
 
     latts[i] = latt;
     latt = NULL;
   }
 
-  for (int i=0; i<nlat; i++){
+  for (int i = 0; i < nlat; ++i){
     printf("\n>>>>>>   Lattice info for lattice: %c - %s    <<<<<", 'A'+i, latts[i]->name);
     if (latts[i]->perp_z == 0)
       printf("\nWARNING: A3 is not perpendicular to A1 and A2, this lattice cannot be used to form layers!\n");
@@ -769,7 +766,7 @@ void Driver::FormLayers()
 
   idum = 0;
   printf("\nYou have defined %d lattices: ", nlat);
-  for (int i=0; i<nlat; i++) printf(" %c = %s;", 'A'+i, latts[i]->name); printf("\n");
+  for (int i = 0; i < nlat; ++i) printf(" %c = %s;", 'A'+i, latts[i]->name); printf("\n");
   
   memory->create(mynx, nlat, "mynx");
   memory->create(myny, nlat, "myny");
@@ -790,7 +787,7 @@ void Driver::FormLayers()
   }
 
   printf("\nThe surface vectors for each lattice will be:\n");
-  for (int i=0; i<nlat; i++){
+  for (int i = 0; i < nlat; ++i){
     printf("  %c: [", i+'A');
     for (int j=0; j<3; j++){
       double xi = mynx[i]*latts[i]->latvec[0][j]*latts[i]->alat;
@@ -824,7 +821,7 @@ void Driver::FormLayers()
   }
   lx0 = sqrt(lx0); ly0 = sqrt(ly0);
 
-  for (int i=0; i<nlat; i++){
+  for (int i = 0; i < nlat; ++i){
     lx = ly = 0.;
     for (int j=0; j<3; j++){
       double xi = mynx[i]*latts[i]->latvec[0][j]*latts[i]->alat;
@@ -838,7 +835,7 @@ void Driver::FormLayers()
 
   double H = 0.;
   int zprev[nlat], ntprev[nlat], zflag = 0, iatom = 0;
-  for (int i=0; i<nlat; i++) zprev[i] = 0;
+  for (int i = 0; i < nlat; ++i) zprev[i] = 0;
 
   ntprev[0] = 0;
   for (int i=1; i<nlat; i++) ntprev[i] = ntprev[i-1] + latts[i-1]->ntype;
@@ -982,7 +979,7 @@ void Driver::FormLayers()
   latvec[2][0] = latvec[2][1] = 0.; latvec[2][2] = H;
 
   strcpy(str,"Multilayer: ");
-  for (int i=0; i<nlat; i++){
+  for (int i = 0; i < nlat; ++i){
     char info[MAXLINE];
     sprintf(info, "%dx%d-%s ", mynx[i], myny[i], latts[i]->name);
     strcat(str,info);
@@ -990,13 +987,13 @@ void Driver::FormLayers()
   memory->create(name, strlen(str)+1, "driver->FormLayers"); strcpy(name, str);
 
   double tmp[2];
-  for (int i=0; i<natom; i++){
+  for (int i = 0; i < natom; ++i){
     for (int idim=0; idim<2; idim++) tmp[idim] = atpos[i][idim];
     atpos[i][0] = tmp[0]*latvec[0][0] + tmp[1]*latvec[1][0];
     atpos[i][1] = tmp[0]*latvec[0][1] + tmp[1]*latvec[1][1];
   }
 
-  for (int i=0; i<nlat; i++) delete latts[i];
+  for (int i = 0; i < nlat; ++i) delete latts[i];
 
   memory->destroy(mynx);
   memory->destroy(myny);
