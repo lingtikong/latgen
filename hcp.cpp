@@ -19,9 +19,12 @@ HCP::HCP() : lattice()
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
   printf("Please input the lattice constant of the HCP lattice [1]:");
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) alat = numeric(strtok(str, " \t\n\r\f"));
+  if (alat <= 0.) alat = 1.;
+
   printf("Please input the value of c/a ratio or c (negative) [1.633]: ");
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) ca = numeric(strtok(str, " \t\n\r\f"));
-  if (ca < 0.) ca = -ca/alat;
+  if (ca == 0.) ca = sqrt(8./3.);
+  if (ca <  0.) ca = -ca/alat;
   printf("The lattice constants of your HCP: a = %g, c/a = %g.\n\n", alat, ca);
 
   int orient = 1;
@@ -31,7 +34,7 @@ HCP::HCP() : lattice()
   printf("   3. (110);         6. Graphite;\n");
   printf("Your choice [%d]: ", orient);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) orient = inumeric(strtok(str, " \t\n\r\f"));
-  printf("You   selected : %d", orient);
+  printf("Your selection : %d", orient);
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
   
   // initialize according to orientation
@@ -87,7 +90,7 @@ void HCP::HCP001()
   printf("   6. Rectangle, long along y;\n");
   printf("Your choice [%d]: ", surftype);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = inumeric(strtok(str, " \t\n\r\f"));
-  printf("You   selected : %d", surftype);
+  printf("Your selection : %d", surftype);
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
 
   for (int i = 0; i < 3; ++i)
@@ -405,7 +408,7 @@ void HCP::Graphene()
   printf("   6. Rectangle, long along y;\n");
   printf("Your choice [%d]: ", surftype);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = inumeric(strtok(str, " \t\n\r\f"));
-  printf("You   selected : %d", surftype);
+  printf("Your selection : %d", surftype);
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
 
   for (int i = 0; i < 3; ++i)
@@ -591,7 +594,7 @@ void HCP::Graphite()
   printf("   6. Rectangle, long along y;\n");
   printf("Your choice [%d]: ", surftype);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = inumeric(strtok(str, " \t\n\r\f"));
-  printf("You   selected : %d", surftype);
+  printf("Your selection : %d", surftype);
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
 
   for (int i = 0; i < 3; ++i)

@@ -67,7 +67,7 @@ int Driver::ShowMenu(const int flag)
   for (int i = 0; i < 14; ++i) printf("-----");
   printf("\nYour choice [1]: ");
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) ltype = atoi(strtok(str," \t\n\r\f"));
-  printf("You selected: %d\n", ltype);
+  printf("Your selection : %d\n", ltype);
   for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
 
   switch (ltype){
@@ -85,7 +85,7 @@ int Driver::ShowMenu(const int flag)
   default: exit(1);}
 
   int rflag = 8 - ltype;
-  if (flag == 0 && rflag > 0){
+  if (flag == 0 && rflag > 0 && latt->initialized){
     // re-orient the lattice
     printf("Would you like to re-orient the unit cell to comply with LAMMPS? (y/n)[n]: ");
     if (count_words(fgets(str,MAXLINE,stdin)) > 0){
