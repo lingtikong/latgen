@@ -23,7 +23,7 @@ void AB::AB_Perov()
   for (int i = 0; i < 14; ++i) printf("-----");
   printf("\nYour choice [%d]: ", orient);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) orient = inumeric(strtok(str, " \t\n\r\f"));
-  printf("You   selected : %d", orient);
+  printf("Your selection : %d", orient);
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
   
   for (int i = 0; i < 3; ++i)

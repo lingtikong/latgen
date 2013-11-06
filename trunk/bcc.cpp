@@ -19,6 +19,7 @@ BCC::BCC() : lattice()
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
   printf("Please input the lattice constant of the BCC lattice [1.]: ");
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) alat = numeric(strtok(str, " \t\n\r\f"));
+  if (alat <= 0.) alat = 1.;
 
   int orient = 1;
   printf("Please selection the orientation of the BCC lattice:\n");
@@ -29,7 +30,7 @@ BCC::BCC() : lattice()
   printf("   5. primitive cell;\n");
   printf("Your choice [%d]: ", orient);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) orient = inumeric(strtok(str, " \t\n\r\f"));
-  printf("You   selected : %d", orient);
+  printf("Your selection : %d", orient);
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
   
   // initialize according to orientation
@@ -78,7 +79,7 @@ void BCC::BCC001()
   printf("   2. B2 structure;\n");
   printf("Your choice [%d]: ", surftype);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = inumeric(strtok(str, " \t\n\r\f"));
-  printf("You   selected : %d", surftype);
+  printf("Your selection : %d", surftype);
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
 
   for (int i = 0; i < 3; ++i)
@@ -155,7 +156,7 @@ void BCC::BCC110()
   printf("   2. orthogonal, long side along y\n");
   printf("Your choice [%d]: ", surftype);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = inumeric(strtok(str, " \t\n\r\f"));
-  printf("You   selected : %d", surftype);
+  printf("Your selection : %d", surftype);
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
   
   for (int i = 0; i < 3; ++i)
@@ -250,7 +251,7 @@ void BCC::BCC111()
   printf("   4. U = [1-21], V = [10-1]; U // x;\n");
   printf("Your choice [%d]: ", surftype);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = inumeric(strtok(str, " \t\n\r\f"));
-  printf("You   selected : %d", surftype);
+  printf("Your selection : %d", surftype);
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
   
   for (int i = 0; i < 3; ++i)
@@ -428,7 +429,7 @@ void BCC::BCC112()
   printf("   2. U = [.5,.5,-.5], V = [-110]; U // x\n");
   printf("Your choice [%d]: ", surftype);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = inumeric(strtok(str, " \t\n\r\f"));
-  printf("You   selected : %d", surftype);
+  printf("Your selection : %d", surftype);
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
   
   for (int i = 0; i < 3; ++i)

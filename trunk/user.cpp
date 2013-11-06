@@ -67,6 +67,8 @@ int USER::read_file(const char *fname)
   // scaling factor (lattice constant)
   fgets(str,MAXLINE,fp); if (feof(fp)){fclose(fp); return 2;}
   alat = numeric(strtok(str, " \t\n\r\f"));
+  if (alat <= 0.) return 2;
+
   // basis vectors
   for (int i = 0; i < 3; ++i){
     fgets(str,MAXLINE,fp); if (feof(fp)){fclose(fp); return i+3;}
@@ -113,8 +115,9 @@ int USER::read_stdin()
   char str[MAXLINE];
   // ask for lattice constant
   alat = 1.;
-  printf("\nPlease input the lattice constant of the USER lattice [1.0]: ");
+  printf("\nPlease input the lattice constant of the USER lattice [%g]: ", alat);
   if (count_words(fgets(str,MAXLINE,stdin))>0) alat = numeric(strtok(str, " \t\n\r\f"));
+  if (alat <= 0.) alat = 1.;
 
   // ask for lattice vectors
   for (int i = 0; i < 3; ++i){

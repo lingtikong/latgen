@@ -22,7 +22,7 @@ A2B::A2B() : lattice()
   printf("   1. AB2;          2. A2B;\n");
   printf("Your choice [%d]: ", ctype);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) ctype = inumeric(strtok(str, " \t\n\r\f"));
-  printf("You   selected : %d\n", ctype);
+  printf("Your selection : %d\n", ctype);
 
   if (ctype == 1){ip1 = 1; ip2=2;}
   else {ip1=2; ip2=1;}
@@ -34,14 +34,17 @@ A2B::A2B() : lattice()
   printf("   3. C32 (AlB2);\n");
   printf("Your choice [%d]: ", lattype);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) lattype = inumeric(strtok(str, " \t\n\r\f"));
-  printf("You   selected : %d\n", lattype);
+  printf("Your selection : %d\n", lattype);
 
   printf("Please input the lattice constant of the A2B crystal [%g]: ", alat);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) alat = numeric(strtok(str, " \t\n\r\f"));
+  if (alat <= 0.) alat = 1.;
+
   if (lattype == 3){
     printf("Please input the c/a or c (negative) of your crystal [%g]: ", ca);
     if (count_words(fgets(str,MAXLINE,stdin)) > 0) ca = numeric(strtok(str, " \t\n\r\f"));
-    if (ca < 0.) ca = -ca/alat;
+    if (ca == 0.) ca = 1.;
+    if (ca <  0.) ca = -ca/alat;
   }
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
   
@@ -88,7 +91,7 @@ void A2B::A2B_C1()
   printf("   5. primitive cell;\n");
   printf("Your choice [%d]: ", surftype);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = inumeric(strtok(str, " \t\n\r\f"));
-  printf("You   selected : %d\n", surftype);
+  printf("Your selection : %d\n", surftype);
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
 
   for (int i = 0; i < 3; ++i)
@@ -427,7 +430,7 @@ void A2B::A2B_C15()
   printf("   5. primitive cell;\n");
   printf("Your choice [%d]: ", surftype);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = inumeric(strtok(str, " \t\n\r\f"));
-  printf("You   selected : %d\n", surftype);
+  printf("Your selection : %d\n", surftype);
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
 
   for (int i = 0; i < 3; ++i)
@@ -991,7 +994,7 @@ void A2B::A2B_C32()
   printf("   5. (1-10), long along y;\n");
   printf("Your choice [%d]: ", surftype);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = inumeric(strtok(str, " \t\n\r\f"));
-  printf("You   selected : %d\n", surftype);
+  printf("Your selection : %d\n", surftype);
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
 
   for (int i = 0; i < 3; ++i)
