@@ -10,9 +10,9 @@
 #define MAXLINE 512
 #define MAX(a,b) ((a) > (b) ? (a) : (b))
 #define MIN(a,b) ((a) < (b) ? (a) : (b))
-/* ----------------------------------------------------------------------
-   constructor to initialize
-------------------------------------------------------------------------- */
+/* -----------------------------------------------------------------------------
+ * constructor to initialize
+ * -------------------------------------------------------------------------- */
 Driver::Driver()
 {
   nx = ny = nz = natom = ntype = 0;
@@ -37,6 +37,9 @@ Driver::Driver()
 return;
 }
 
+/* -----------------------------------------------------------------------------
+ * To show the main menu
+ * -------------------------------------------------------------------------- */
 int Driver::ShowMenu(const int flag)
 {
   int ltype = 1;
@@ -94,6 +97,9 @@ int Driver::ShowMenu(const int flag)
 return rflag;
 }
 
+/* -----------------------------------------------------------------------------
+ * Driver to show the main menu
+ * -------------------------------------------------------------------------- */
 void Driver::MainMenu()
 {
   if ( ShowMenu(0) > 0 ){
@@ -110,9 +116,9 @@ void Driver::MainMenu()
 return;
 }
 
-/* ----------------------------------------------------------------------
-   deconstructor to free memory
-------------------------------------------------------------------------- */
+/* -----------------------------------------------------------------------------
+ * deconstructor to free memory
+ * -------------------------------------------------------------------------- */
 Driver::~Driver()
 {
   memory->destroy(atpos);
@@ -135,9 +141,9 @@ Driver::~Driver()
   delete memory;
 }
 
-/* ----------------------------------------------------------------------
-   method to generate atomic configurations
-------------------------------------------------------------------------- */
+/* -----------------------------------------------------------------------------
+ * method to generate atomic configurations
+ * -------------------------------------------------------------------------- */
 void Driver::generate()
 {
   char str[MAXLINE];
@@ -219,9 +225,9 @@ void Driver::generate()
 return;
 }
 
-/* ----------------------------------------------------------------------
-   method to find the total # of types and # of atoms for each type
-------------------------------------------------------------------------- */
+/* -----------------------------------------------------------------------------
+ * method to find the total # of types and # of atoms for each type
+ * -------------------------------------------------------------------------- */
 void Driver::typescan()
 {
   // allocate memory
@@ -230,7 +236,7 @@ void Driver::typescan()
   if (numtype!= NULL) memory->destroy(numtype);
   memory->create(typeID,  typmax, "driver->typescan:typeID");
   memory->create(numtype, typmax, "driver->typescan:numtype");
-  for (int i=0; i<typmax; i++) numtype[i] = 0;
+  for (int ip = 0; ip < typmax; ++ip) numtype[ip] = 0;
 
   ntype = 0;
   // now to identify the total number of types
@@ -250,17 +256,18 @@ void Driver::typescan()
 return;
 }
 
-/* ----------------------------------------------------------------------
-   method to reset the atomic type ID
-------------------------------------------------------------------------- */
+/* -----------------------------------------------------------------------------
+ * method to reset the atomic type ID
+ * -------------------------------------------------------------------------- */
 void Driver::ResetTypeID()
 {
   char str[MAXLINE];
   printf("\n"); for (int i = 0; i < 14; ++i) printf("=====");
   printf("\nThere are %d atomic types in system, and their IDs are:\nIndex : ", ntype);
-  for (int i = 0; i < ntype; ++i) printf("%4d", i+1); printf("\nTypeID: ");
-  for (int i = 0; i < ntype; ++i) printf("%4d", typeID[i]); printf("\nNatTyp: ");
-  for (int i = 0; i < ntype; ++i) printf("%4d", numtype[i]);
+  for (int ip = 0; ip < ntype; ++ip) printf("%4d", ip+1); printf("\nTypeID: ");
+  for (int ip = 0; ip < ntype; ++ip) printf("%4d", typeID[ip]); printf("\nNatTyp: ");
+  for (int ip = 0; ip < ntype; ++ip) printf("%4d", numtype[ip]);
+
   printf("\nPlease input the new type IDs in sequence, enter to skip: ");
   if (count_words(fgets(str,MAXLINE,stdin)) > 0){
     int newID[ntype], num=0;
@@ -273,8 +280,8 @@ void Driver::ResetTypeID()
     }
     if (num == ntype){
       printf("\nThe new type IDs are:\nIndex : ");
-      for (int i = 0; i < ntype; ++i) printf("%4d", i+1); printf("\nTypeID: ");
-      for (int i = 0; i < ntype; ++i) printf("%4d", newID[i]);
+      for (int ip = 0; ip < ntype; ++ip) printf("%4d", ip+1); printf("\nTypeID: ");
+      for (int ip = 0; ip < ntype; ++ip) printf("%4d", newID[ip]);
       printf("\nIs this what you want? (y/n)[y]: ");
       int nw = count_words(fgets(str,MAXLINE,stdin));
       char *flag = strtok(str, " \t\n\r\f");
@@ -293,9 +300,9 @@ void Driver::ResetTypeID()
 return;
 }
 
-/* ----------------------------------------------------------------------
+/* -----------------------------------------------------------------------------
  * method to map atomic type to real element
- * ---------------------------------------------------------------------- */
+ * -------------------------------------------------------------------------- */
 void Driver::MapElement()
 {
   char str[MAXLINE];
@@ -329,9 +336,9 @@ void Driver::MapElement()
 return;
 }
 
-/* ----------------------------------------------------------------------
-   method to find the ID of the current atomic type
-------------------------------------------------------------------------- */
+/* -----------------------------------------------------------------------------
+ * method to find the ID of the current atomic type
+ * -------------------------------------------------------------------------- */
 int Driver::lookup(int ip)
 {
   for (int i = 0; i < ntype; ++i){if (ip == typeID[i]) return i;}
@@ -339,9 +346,9 @@ int Driver::lookup(int ip)
   return -1;
 }
 
-/* ----------------------------------------------------------------------
-   method to write out atomic configuraton and mapping info
-------------------------------------------------------------------------- */
+/* -----------------------------------------------------------------------------
+ * method to write out atomic configuraton and mapping info
+ * -------------------------------------------------------------------------- */
 void Driver::write()
 {
   if (natom < 1) return;
@@ -401,21 +408,21 @@ void Driver::write()
   if (natom < nr) nr = natom;
   if (type2num.size() == ntype){
     char ename[3];
-    for (int i=0; i<nr; i++){
+    for (int i = 0; i < nr; ++i){
       int ip = attyp[i]; element->Num2Name(type2num[ip], ename);
       fprintf(fp,"%2s %16.16e %16.16e %16.16e crystal_vector %d %16.16e %16.16e %16.16e\n", ename, atpos[i][0],
       atpos[i][1], atpos[i][2], i+1, latvec[i][0], latvec[i][1], latvec[i][2]);
     }
-    for (int i=nr; i<natom; i++){
+    for (int i = nr; i < natom; ++i){
       int ip = attyp[i]; element->Num2Name(type2num[ip], ename);
       fprintf(fp,"%2s %16.16e %16.16e %16.16e\n", ename, atpos[i][0], atpos[i][1], atpos[i][2]);
     }
   } else {
-    for (int i=0; i<nr; i++){
+    for (int i = 0; i < nr; ++i){
       fprintf(fp,"%d %16.16e %16.16e %16.16e crystal_vector %d %16.16e %16.16e %16.16e\n", attyp[i], atpos[i][0],
       atpos[i][1], atpos[i][2], i+1, latvec[i][0], latvec[i][1], latvec[i][2]);
     }
-    for (int i=nr; i<natom; i++) fprintf(fp,"%d %16.16e %16.16e %16.16e\n", attyp[i], atpos[i][0], atpos[i][1], atpos[i][2]);
+    for (int i = nr; i < natom; ++i) fprintf(fp,"%d %16.16e %16.16e %16.16e\n", attyp[i], atpos[i][0], atpos[i][1], atpos[i][2]);
   }
   fclose(fp);
   delete []posfile;
@@ -436,7 +443,7 @@ void Driver::write()
     if (type2num.size() == ntype){
       fprintf(fp, "\nMasses\n\n");
 
-      for (std::map<int,int>::iterator it = type2num.begin(); it != type2num.end(); it++){
+      for (std::map<int,int>::iterator it = type2num.begin(); it != type2num.end(); ++it){
         int ip = (*it).first; int num = (*it).second;
         fprintf(fp,"%d %g\n", ip, element->Num2Mass(num));
       }
@@ -464,9 +471,9 @@ void Driver::write()
 return;
 }
 
-/* ----------------------------------------------------------------------
-   method to modify the resultant model
-------------------------------------------------------------------------- */
+/* -----------------------------------------------------------------------------
+ * method to modify the resultant model
+ * -------------------------------------------------------------------------- */
 void Driver::modify()
 {
   if (natom < 1) return;
@@ -502,9 +509,9 @@ void Driver::modify()
 return;
 }
 
-/* ----------------------------------------------------------------------
-   private method to create substitutional solid solution
-------------------------------------------------------------------------- */
+/* -----------------------------------------------------------------------------
+ * private method to create substitutional solid solution
+ * -------------------------------------------------------------------------- */
 void Driver::solidsol()
 {
   char str[MAXLINE];
@@ -526,7 +533,7 @@ void Driver::solidsol()
 
   double block[6], cpos[3], radius;
   int flag, logand = 1, nsel, atsel[natom];
-  for (int id = 0; id<natom; id++) atsel[id] = 1;
+  for (int id = 0; id < natom; ++id) atsel[id] = 1;
   if (job==1 || job==3 || job==4) flag |= 1;
   if (job==2 || job==3 || job==4) flag |= 2;
   if (job==3) logand = 0;
@@ -539,7 +546,7 @@ void Driver::solidsol()
     printf("direction, use `NULL`. For non-orthogonal box, this might not work well.\nPlease input them now: ");
     if (count_words(fgets(str,MAXLINE,stdin)) >= 7){
       char *ptr = strtok(str," \t\n\r\f");
-      for (int i=0; i<6; i++){
+      for (int i = 0; i < 6; ++i){
         if (strcmp(ptr, "NULL") == 0) block[i] = double(i%2)*latvec[i/2][i/2];
         else block[i] = atof(ptr);
 
@@ -619,7 +626,7 @@ void Driver::solidsol()
   }
   nsel = 0;
   int nsel_type[ntype];
-  for (int i = 0; i < ntype; ++i) nsel_type[i] = 0;
+  for (int ip = 0; ip < ntype; ++ip) nsel_type[ip] = 0;
 
   for (int i = 0; i < natom; ++i){
     nsel += atsel[i];
@@ -631,11 +638,11 @@ void Driver::solidsol()
   printf("Total number of atoms in selection : %d\n", nsel);
   printf("Total number of atomimc types      : %d\n", ntype);
   printf("Atomic type number for each type   :");
-  for (int i = 0; i < ntype; ++i) printf(" %d", typeID[i]);
+  for (int ip = 0; ip < ntype; ++ip) printf(" %d", typeID[ip]);
   printf("\nNumber of atoms for each  type     :");
-  for (int i = 0; i < ntype; ++i) printf(" %d", numtype[i]); printf("\n");
+  for (int ip = 0; ip < ntype; ++ip) printf(" %d", numtype[ip]); printf("\n");
   printf("\nNumber of atoms in selection for each type:");
-  for (int i = 0; i < ntype; ++i) printf(" %d", nsel_type[i]); printf("\n");
+  for (int ip = 0; ip < ntype; ++ip) printf(" %d", nsel_type[ip]); printf("\n");
 
   int ipsrc, idsrc=-1, numsub;
   printf("\nPlease input the atomic type to be substituted: ");
@@ -733,9 +740,9 @@ void Driver::solidsol()
 return;
 }
 
-/*------------------------------------------------------------------------------
+/* -----------------------------------------------------------------------------
  * Method to form multilayers
- *----------------------------------------------------------------------------*/
+ * -------------------------------------------------------------------------- */
 void Driver::FormLayers()
 {
   int nlat = 1, idum;
@@ -770,7 +777,7 @@ void Driver::FormLayers()
   
   memory->create(mynx, nlat, "mynx");
   memory->create(myny, nlat, "myny");
-  for (int ilat=0; ilat<nlat; ilat++){
+  for (int ilat = 0; ilat < nlat; ++ilat){
     printf("Please input the lateral extensions (nx & ny) for lattice %c: ", 'A'+ilat);
     while (1){
       if ( count_words(fgets(str,MAXLINE,stdin)) == 2 ){
@@ -782,27 +789,25 @@ void Driver::FormLayers()
   }
 
   nx = ny = nz = 0;
-  for (int j=0; j<3; j++){
-    latvec[0][j] = latvec[1][j] = 0.;
-  }
+  for (int j = 0; j < 3; ++j) latvec[0][j] = latvec[1][j] = 0.;
 
   printf("\nThe surface vectors for each lattice will be:\n");
   for (int i = 0; i < nlat; ++i){
     printf("  %c: [", i+'A');
-    for (int j=0; j<3; j++){
+    for (int j = 0; j < 3; ++j){
       double xi = mynx[i]*latts[i]->latvec[0][j]*latts[i]->alat;
       printf("%g ", xi);
       latvec[0][j] += xi;
     }
     printf("] [");
-    for (int j=0; j<3; j++){
+    for (int j = 0; j < 3; ++j){
       double yi = myny[i]*latts[i]->latvec[1][j]*latts[i]->alat;
       printf("%g ", yi);
       latvec[1][j] += yi;
     }
     printf("]\n");
   }
-  for (int j=0; j<3; j++){
+  for (int j = 0; j < 3; ++j){
     latvec[0][j] /= double(nlat);
     latvec[1][j] /= double(nlat);
   }
@@ -810,12 +815,12 @@ void Driver::FormLayers()
     latvec[0][0], latvec[0][1], latvec[0][2], latvec[1][0], latvec[1][1], latvec[1][2]);
   if ( count_words(fgets(str,MAXLINE,stdin)) == 6 ){
     char *ptr = strtok(str," \n\r\t\f");
-    for (int i=0; i<2; i++)
-    for (int j=0; j<3; j++){ latvec[i][j] = atof(ptr); ptr = strtok(NULL, " \n\r\t\f");}
+    for (int i = 0; i < 2; ++i)
+    for (int j = 0; j < 3; ++j){ latvec[i][j] = atof(ptr); ptr = strtok(NULL, " \n\r\t\f");}
   }
 
   double lx, ly, lx0=0., ly0=0.;
-  for (int j=0; j<3; j++){
+  for (int j = 0; j < 3; ++j){
     lx0 += latvec[0][j]*latvec[0][j];
     ly0 += latvec[1][j]*latvec[1][j];
   }
@@ -823,7 +828,7 @@ void Driver::FormLayers()
 
   for (int i = 0; i < nlat; ++i){
     lx = ly = 0.;
-    for (int j=0; j<3; j++){
+    for (int j = 0; j < 3; ++j){
       double xi = mynx[i]*latts[i]->latvec[0][j]*latts[i]->alat;
       double yi = myny[i]*latts[i]->latvec[1][j]*latts[i]->alat;
       lx += xi*xi;
@@ -838,7 +843,7 @@ void Driver::FormLayers()
   for (int i = 0; i < nlat; ++i) zprev[i] = 0;
 
   ntprev[0] = 0;
-  for (int i=1; i<nlat; i++) ntprev[i] = ntprev[i-1] + latts[i-1]->ntype;
+  for (int i = 1; i < nlat; ++i) ntprev[i] = ntprev[i-1] + latts[i-1]->ntype;
 
   char realized[MAXLINE]; strcpy(realized, "");
 
@@ -875,7 +880,7 @@ void Driver::FormLayers()
         ptr[0] = ' ';
         int nl_new  = atoi(ptr);
         int ntm_new = 0;
-        for (int i=0; i<nl_new; i++) ntm_new += latt->numlayer[(i+zprev[ilat])%latt->nlayer];
+        for (int i = 0; i < nl_new; ++i) ntm_new += latt->numlayer[(i+zprev[ilat])%latt->nlayer];
 
         double Hbelow = latt->h[(latt->nlayer-1+zprev[ilat])%latt->nlayer];
         if (first){
@@ -904,12 +909,12 @@ void Driver::FormLayers()
           nucell = 0;
         }
 
-        for (int k=0; k<nl_new; k++){
+        for (int k = 0; k < nl_new; ++k){
           int il = (k+zprev[ilat])%latt->nlayer;
-          for (int ia=0; ia<latt->nucell; ia++){
+          for (int ia = 0; ia < latt->nucell; ++ia){
             if ( latt->layer[ia] == il ){
-              for (int i=0; i<mynx[ilat]; i++)
-              for (int j=0; j<myny[ilat]; j++){
+              for (int i = 0; i < mynx[ilat]; ++i)
+              for (int j = 0; j < myny[ilat]; ++j){
                 atpos[iatom][0] = (double(i)+latt->atpos[ia][0]+shift[0])/double(mynx[ilat]);
                 atpos[iatom][1] = (double(j)+latt->atpos[ia][1]+shift[1])/double(myny[ilat]);
                 atpos[iatom][2] = H;
@@ -988,7 +993,7 @@ void Driver::FormLayers()
 
   double tmp[2];
   for (int i = 0; i < natom; ++i){
-    for (int idim=0; idim<2; idim++) tmp[idim] = atpos[i][idim];
+    for (int idim = 0; idim < 2; ++idim) tmp[idim] = atpos[i][idim];
     atpos[i][0] = tmp[0]*latvec[0][0] + tmp[1]*latvec[1][0];
     atpos[i][1] = tmp[0]*latvec[0][1] + tmp[1]*latvec[1][1];
   }
@@ -1003,9 +1008,9 @@ void Driver::FormLayers()
 return;
 }
 
-/*------------------------------------------------------------------------------
+/* -----------------------------------------------------------------------------
  * Method to count # of words in a string, without destroying the string
- *----------------------------------------------------------------------------*/
+ * -------------------------------------------------------------------------- */
 int Driver::count_words(const char *line)
 {
   int n = strlen(line) + 1;
@@ -1027,9 +1032,9 @@ int Driver::count_words(const char *line)
   return n;
 }
 
-/*------------------------------------------------------------------------------
+/* -----------------------------------------------------------------------------
  * Private method to show the version info
- *----------------------------------------------------------------------------*/
+ * -------------------------------------------------------------------------- */
 void Driver::ShowVersion()
 {
   printf("\nLatGen  version 1.%d, compiled on %s.\n", VERSION, __DATE__);

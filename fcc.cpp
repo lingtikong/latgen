@@ -8,15 +8,15 @@
 
 using namespace std;
 
-/* ----------------------------------------------------------------------
-   To select the orientation of the lattice
-------------------------------------------------------------------------- */
+/* -----------------------------------------------------------------------------
+ * To select the orientation of the lattice
+ * -------------------------------------------------------------------------- */
 FCC::FCC() : lattice()
 {
   char str[MAXLINE];
   alat = 1.;
   // print out the menu
-  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
+  printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
   printf("Please input the lattice constant of the FCC/Diamond lattice [1.]: ");
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) alat = atof(strtok(str, " \t\n\r\f"));
 
@@ -26,11 +26,11 @@ FCC::FCC() : lattice()
   printf("   2. (110);                6. Diamond (001);\n");
   printf("   3. (111);                7. Diamond (110);\n");
   printf("   4. Primitive cell;       8. Diamond (111);\n");
-  for (int i=0; i<14; i++) printf("-----");
+  for (int i = 0; i < 14; ++i) printf("-----");
   printf("\nYour choice [%d]: ", orient);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) orient = atoi(strtok(str, " \t\n\r\f"));
   printf("You   selected : %d", orient);
-  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
+  printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
   
   // initialize according to orientation
   initialized = 0;
@@ -65,33 +65,34 @@ FCC::FCC() : lattice()
 
 }
 
-/* ----------------------------------------------------------------------
-   Deconstructor does nothing
-------------------------------------------------------------------------- */
+/* -----------------------------------------------------------------------------
+ * Deconstructor does nothing
+ * -------------------------------------------------------------------------- */
 FCC::~FCC()
 {
 
 }
 
-/* ----------------------------------------------------------------------
-   Initialize for (001) orientation
-------------------------------------------------------------------------- */
+/* -----------------------------------------------------------------------------
+ * Initialize for (001) orientation
+ * -------------------------------------------------------------------------- */
 void FCC::FCC001()
 {
   char str[MAXLINE];
   int surftype = 2;
   // print out the menu
-  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
+  printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
   printf("Please selection the type of FCC(001) surface:\n");
   printf("   1. primitive, horizental orientation;\n");
   printf("   2. conventional orientation;\n");
   printf("Your choice [%d]: ", surftype);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = atoi(strtok(str, " \t\n\r\f"));
   printf("You   selected : %d", surftype);
-  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
-  for (int i=0; i<3; i++){
-    for (int j=0; j<3; j++) latvec[i][j] = 0.;
-  }
+  printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
+
+  for (int i = 0; i < 3; ++i)
+  for (int j = 0; j < 3; ++j) latvec[i][j] = 0.;
+
   memory->create(name,9,"FCC:name");
   strcpy(name, "FCC(001)");
 
@@ -109,7 +110,7 @@ void FCC::FCC001()
     memory->create(attyp, nucell, "FCC:attyp");
   
     
-    for (int i=0; i<nucell; i++) attyp[i] = 1;
+    for (int i = 0; i < nucell; ++i) attyp[i] = 1;
     atpos[0][0] = 0.;
     atpos[0][1] = 0.;
     atpos[0][2] = 0.;
@@ -131,7 +132,7 @@ void FCC::FCC001()
     memory->create(atpos, nucell, 3, "FCC001_atpos");
     memory->create(attyp, nucell, "FCC:attyp");
     
-    for (int i=0; i<nucell; i++) attyp[i] = 1;
+    for (int i = 0; i < nucell; ++i) attyp[i] = 1;
     atpos[0][0] = 0.;
     atpos[0][1] = 0.;
     atpos[0][2] = 0.;
@@ -156,26 +157,26 @@ void FCC::FCC001()
 return;
 }
 
-/* ----------------------------------------------------------------------
-   Initialize for (110) orientation
-------------------------------------------------------------------------- */
+/* -----------------------------------------------------------------------------
+ * Initialize for (110) orientation
+ * -------------------------------------------------------------------------- */
 void FCC::FCC110()
 {
   char str[MAXLINE];
   int surftype = 1;
   // print out the menu
-  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
+  printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
   printf("Please selection the type of FCC(110) surface:\n");
   printf("   1. orthogonal, long side along x\n");
   printf("   2. orthogonal, long side along y\n");
   printf("Your choice [%d]: ", surftype);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = atoi(strtok(str, " \t\n\r\f"));
   printf("You   selected : %d", surftype);
-  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
+  printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
   
-  for (int i=0; i<3; i++){
-    for (int j=0; j<3; j++) latvec[i][j] = 0.;
-  }
+  for (int i = 0; i < 3; ++i)
+  for (int j = 0; j < 3; ++j) latvec[i][j] = 0.;
+
   memory->create(name,9,"FCC:name");
   strcpy(name, "FCC(110)");
 
@@ -192,7 +193,7 @@ void FCC::FCC110()
     memory->create(atpos, nucell, 3, "FCC110_atpos");
     memory->create(attyp, nucell, "FCC:attyp");
     
-    for (int i=0; i<nucell; i++) attyp[i] = 1;
+    for (int i = 0; i < nucell; ++i) attyp[i] = 1;
     atpos[0][0] = 0.;
     atpos[0][1] = 0.;
     atpos[0][2] = 0.;
@@ -214,7 +215,7 @@ void FCC::FCC110()
     memory->create(atpos, nucell, 3, "FCC110_atpos");
     memory->create(attyp, nucell, "FCC:attyp");
     
-    for (int i=0; i<nucell; i++) attyp[i] = 1;
+    for (int i = 0; i < nucell; ++i) attyp[i] = 1;
 
     atpos[0][0] = 0.;
     atpos[0][1] = 0.;
@@ -232,15 +233,15 @@ void FCC::FCC110()
 return;
 }
 
-/* ----------------------------------------------------------------------
-   Initialize for (111) orientation
-------------------------------------------------------------------------- */
+/* -----------------------------------------------------------------------------
+ * Initialize for (111) orientation
+ * -------------------------------------------------------------------------- */
 void FCC::FCC111()
 {
   char str[MAXLINE];
   int surftype = 5;
   // print out the menu
-  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
+  printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
   printf("Please selection the type of FCC(111) surface:\n");
   printf("   1. hexgonal U along x, 60 deg;\n");
   printf("   2. hexgonal V along y, 60 deg;\n");
@@ -251,11 +252,11 @@ void FCC::FCC111()
   printf("Your choice [%d]: ", surftype);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = atoi(strtok(str, " \t\n\r\f"));
   printf("You   selected : %d", surftype);
-  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
+  printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
   
-  for (int i=0; i<3; i++){
-    for (int j=0; j<3; j++) latvec[i][j] = 0.;
-  }
+  for (int i = 0; i < 3; ++i)
+  for (int j = 0; j < 3; ++j) latvec[i][j] = 0.;
+
   memory->create(name,9,"FCC:name");
   strcpy(name, "FCC(111)");
 
@@ -273,7 +274,7 @@ void FCC::FCC111()
     memory->create(atpos, nucell, 3, "FCC111_atpos");
     memory->create(attyp, nucell, "FCC:attyp");
     
-    for (int i=0; i<nucell; i++) attyp[i] = 1;
+    for (int i = 0; i < nucell; ++i) attyp[i] = 1;
 
     atpos[0][0] = 0.;
     atpos[0][1] = 0.;
@@ -301,7 +302,7 @@ void FCC::FCC111()
     memory->create(atpos, nucell, 3, "FCC111_atpos");
     memory->create(attyp, nucell, "FCC:attyp");
 
-    for (int i=0; i<nucell; i++) attyp[i] = 1;
+    for (int i = 0; i < nucell; ++i) attyp[i] = 1;
 
     atpos[0][0] = 0.;
     atpos[0][1] = 0.;
@@ -329,7 +330,7 @@ void FCC::FCC111()
     memory->create(atpos, nucell, 3, "FCC111_atpos");
     memory->create(attyp, nucell, "FCC:attyp");
 
-    for (int i=0; i<nucell; i++) attyp[i] = 1;
+    for (int i = 0; i < nucell; ++i) attyp[i] = 1;
 
     atpos[0][0] = 0.;
     atpos[0][1] = 0.;
@@ -357,7 +358,7 @@ void FCC::FCC111()
     memory->create(atpos, nucell, 3, "FCC111_atpos");
     memory->create(attyp, nucell, "FCC:attyp");
 
-    for (int i=0; i<nucell; i++) attyp[i] = 1;
+    for (int i = 0; i < nucell; ++i) attyp[i] = 1;
 
     atpos[0][0] = 0.;
     atpos[0][1] = 0.;
@@ -384,7 +385,7 @@ void FCC::FCC111()
     memory->create(atpos, nucell, 3, "FCC111_atpos");
     memory->create(attyp, nucell, "FCC:attyp");
 
-    for (int i=0; i<nucell; i++) attyp[i] = 1;
+    for (int i = 0; i < nucell; ++i) attyp[i] = 1;
 
     atpos[0][0] = 0.;
     atpos[0][1] = 0.;
@@ -423,7 +424,7 @@ void FCC::FCC111()
     memory->create(atpos, nucell, 3, "FCC111_atpos");
     memory->create(attyp, nucell, "FCC:attyp");
 
-    for (int i=0; i<nucell; i++) attyp[i] = 1;
+    for (int i = 0; i < nucell; ++i) attyp[i] = 1;
 
     atpos[0][0] = 0.;
     atpos[0][1] = 0.;
@@ -457,14 +458,14 @@ void FCC::FCC111()
 return;
 }
 
-/* ----------------------------------------------------------------------
-   Initialize for (001) orientation
-------------------------------------------------------------------------- */
+/* -----------------------------------------------------------------------------
+ * Initialize for (001) orientation
+ * -------------------------------------------------------------------------- */
 void FCC::Primitive()
 {
-  for (int i=0; i<3; i++){
-    for (int j=0; j<3; j++) latvec[i][j] = 0.;
-  }
+  for (int i = 0; i < 3; ++i)
+  for (int j = 0; j < 3; ++j) latvec[i][j] = 0.;
+
   memory->create(name,9,"FCC:name");
   strcpy(name, "FCC-prim");
 
@@ -481,7 +482,7 @@ void FCC::Primitive()
   memory->create(atpos,nucell,3,"Primitive:atpos");
   memory->create(attyp,nucell,"Primitive:attyp");
   
-  for (int i=0; i<nucell; i++) attyp[i] = 1;
+  for (int i = 0; i < nucell; ++i) attyp[i] = 1;
   atpos[0][0] = 0.;
   atpos[0][1] = 0.;
   atpos[0][2] = 0.;
@@ -490,14 +491,14 @@ void FCC::Primitive()
 return;
 }
 
-/* ----------------------------------------------------------------------
-   Initialize Diamond primitive cell
-------------------------------------------------------------------------- */
+/* -----------------------------------------------------------------------------
+ * Initialize Diamond primitive cell
+ * -------------------------------------------------------------------------- */
 void FCC::DiamondPrim()
 {
-  for (int i=0; i<3; i++){
-    for (int j=0; j<3; j++) latvec[i][j] = 0.;
-  }
+  for (int i = 0; i < 3; ++i)
+  for (int j = 0; j < 3; ++j) latvec[i][j] = 0.;
+
   memory->create(name,9,"FCC:name");
   strcpy(name, "Dia-prim");
 
@@ -514,7 +515,7 @@ void FCC::DiamondPrim()
   memory->create(atpos, nucell, 3, "Primitive:atpos");
   memory->create(attyp, nucell, "Primitive:attyp");
   
-  for (int i=0; i<nucell; i++) attyp[i] = 1;
+  for (int i = 0; i < nucell; ++i) attyp[i] = 1;
   atpos[0][0] = 0.;
   atpos[0][1] = 0.;
   atpos[0][2] = 0.;
@@ -527,26 +528,26 @@ void FCC::DiamondPrim()
 return;
 }
 
-/* ----------------------------------------------------------------------
-   Initialize Diamond (001)
-------------------------------------------------------------------------- */
+/* -----------------------------------------------------------------------------
+ * Initialize Diamond (001)
+ * -------------------------------------------------------------------------- */
 void FCC::Diamond001()
 {
   char str[MAXLINE];
   int surftype = 1;
   // print out the menu
-  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
+  printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
   printf("Please selection the type of Diamond (001):\n");
   printf("   1. Conventional cubic;\n");
   printf("   2. Orthogonal, x//[110], y//[-110];\n");
   printf("Your choice [%d]: ", surftype);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = atoi(strtok(str, " \t\n\r\f"));
   printf("You   selected : %d", surftype);
-  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
+  printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
 
-  for (int i=0; i<3; i++){
-    for (int j=0; j<3; j++) latvec[i][j] = 0.;
-  }
+  for (int i = 0; i < 3; ++i)
+  for (int j = 0; j < 3; ++j) latvec[i][j] = 0.;
+
   memory->create(name,13,"Dia001:name");
   strcpy(name, "Diamond(001)");
 
@@ -562,7 +563,7 @@ void FCC::Diamond001()
     memory->create(atpos,nucell,3,"Dia001:atpos");
     memory->create(attyp,nucell,"Dia001:atpos");
     
-    for (int i=0; i<nucell; i++) attyp[i] = 1;
+    for (int i = 0; i < nucell; ++i) attyp[i] = 1;
     atpos[0][0] = 0.;
     atpos[0][1] = 0.;
     atpos[0][2] = 0.;
@@ -636,26 +637,26 @@ void FCC::Diamond001()
 return;
 }
 
-/* ----------------------------------------------------------------------
-   Initialize Diamond (110)
-------------------------------------------------------------------------- */
+/* -----------------------------------------------------------------------------
+ * Initialize Diamond (110)
+ * -------------------------------------------------------------------------- */
 void FCC::Diamond110()
 {
   char str[MAXLINE];
   int surftype = 1;
   // print out the menu
-  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
+  printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
   printf("Please selection the type of Diamond (110):\n");
   printf("   1. x//[001], y//[110];\n");
   printf("   2. x//[110], y//[001];\n");
   printf("Your choice [%d]: ", surftype);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = atoi(strtok(str, " \t\n\r\f"));
   printf("You   selected : %d", surftype);
-  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
+  printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
 
-  for (int i=0; i<3; i++){
-    for (int j=0; j<3; j++) latvec[i][j] = 0.;
-  }
+  for (int i = 0; i < 3; ++i)
+  for (int j = 0; j < 3; ++j) latvec[i][j] = 0.;
+
   memory->create(name,13,"Dia:name");
   strcpy(name, "Diamond(110)");
 
@@ -732,15 +733,15 @@ void FCC::Diamond110()
 return;
 }
 
-/* ----------------------------------------------------------------------
+/* -----------------------------------------------------------------------------
  * Initialize Diamond (111)
- *----------------------------------------------------------------------- */
+ * -------------------------------------------------------------------------- */
 void FCC::Diamond111()
 {
   char str[MAXLINE];
   int surftype = 1;
   // print out the menu
-  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
+  printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
   printf("Please selection the type of Diamond (111):\n");
   printf("   1. x//[110], gamma = 120 deg;\n");
   printf("   2. y//[110], gamma = 120 deg;\n");
@@ -751,11 +752,11 @@ void FCC::Diamond111()
   printf("Your choice [%d]: ", surftype);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = atoi(strtok(str, " \t\n\r\f"));
   printf("You   selected : %d", surftype);
-  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
+  printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
 
-  for (int i=0; i<3; i++){
-    for (int j=0; j<3; j++) latvec[i][j] = 0.;
-  }
+  for (int i = 0; i < 3; ++i)
+  for (int j = 0; j < 3; ++j) latvec[i][j] = 0.;
+
   memory->create(name,13,"Dia:name");
   strcpy(name, "Diamond(111)");
 

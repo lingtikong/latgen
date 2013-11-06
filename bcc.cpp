@@ -8,15 +8,15 @@
 
 using namespace std;
 
-/* ----------------------------------------------------------------------
-   To select the orientation of the lattice
-------------------------------------------------------------------------- */
+/* -----------------------------------------------------------------------------
+ * To select the orientation of the lattice
+ * -------------------------------------------------------------------------- */
 BCC::BCC() : lattice()
 {
   char str[MAXLINE];
   // print out the menu
   alat = 1.;
-  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
+  printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
   printf("Please input the lattice constant of the BCC lattice [1.]: ");
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) alat = atof(strtok(str, " \t\n\r\f"));
 
@@ -29,7 +29,7 @@ BCC::BCC() : lattice()
   printf("Your choice [%d]: ", orient);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) orient = atoi(strtok(str, " \t\n\r\f"));
   printf("You   selected : %d", orient);
-  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
+  printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
   
   // initialize according to orientation
   initialized = 0;
@@ -52,33 +52,34 @@ BCC::BCC() : lattice()
 
 }
 
-/* ----------------------------------------------------------------------
-   Deconstructor does nothing
-------------------------------------------------------------------------- */
+/* -----------------------------------------------------------------------------
+ * Deconstructor does nothing
+ * -------------------------------------------------------------------------- */
 BCC::~BCC()
 {
 
 }
 
-/* ----------------------------------------------------------------------
-   Initialize for (001) orientation
-------------------------------------------------------------------------- */
+/* -----------------------------------------------------------------------------
+ * Initialize for (001) orientation
+ * -------------------------------------------------------------------------- */
 void BCC::BCC001()
 {
   char str[MAXLINE];
   int surftype = 1;
   // print out the menu
-  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
+  printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
   printf("Please selection the type of BCC(001) surface:\n");
   printf("   1. conventional orientation;\n");
   printf("   2. B2 structure;\n");
   printf("Your choice [%d]: ", surftype);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = atoi(strtok(str, " \t\n\r\f"));
   printf("You   selected : %d", surftype);
-  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
-  for (int i=0; i<3; i++){
-    for (int j=0; j<3; j++) latvec[i][j] = 0.;
-  }
+  printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
+
+  for (int i = 0; i < 3; ++i)
+  for (int j = 0; j < 3; ++j) latvec[i][j] = 0.;
+
   memory->create(name,9,"BCC:name");
   strcpy(name, "BCC(001)");
 
@@ -95,7 +96,7 @@ void BCC::BCC001()
     memory->create(atpos, nucell, 3, "BCC001_atpos");
     memory->create(attyp, nucell, "BCC:attyp");
     
-    for (int i=0; i<nucell; i++) attyp[i] = 1;
+    for (int i = 0; i < nucell; ++i) attyp[i] = 1;
     atpos[0][0] = 0.;
     atpos[0][1] = 0.;
     atpos[0][2] = 0.;
@@ -136,26 +137,26 @@ void BCC::BCC001()
 return;
 }
 
-/* ----------------------------------------------------------------------
-   Initialize for (110) orientation
-------------------------------------------------------------------------- */
+/* -----------------------------------------------------------------------------
+ * Initialize for (110) orientation
+ * -------------------------------------------------------------------------- */
 void BCC::BCC110()
 {
   char str[MAXLINE];
   int surftype=1;
   // print out the menu
-  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
+  printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
   printf("Please selection the type of BCC(110) surface:\n");
   printf("   1. orthogonal, long side along x\n");
   printf("   2. orthogonal, long side along y\n");
   printf("Your choice [%d]: ", surftype);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = atoi(strtok(str, " \t\n\r\f"));
   printf("You   selected : %d", surftype);
-  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
+  printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
   
-  for (int i=0; i<3; i++){
-    for (int j=0; j<3; j++) latvec[i][j] = 0.;
-  }
+  for (int i = 0; i < 3; ++i)
+  for (int j = 0; j < 3; ++j) latvec[i][j] = 0.;
+
   memory->create(name,9,"BCC:name");
   strcpy(name, "BCC(110)");
 
@@ -172,7 +173,7 @@ void BCC::BCC110()
     memory->create(atpos, nucell, 3, "BCC110_atpos");
     memory->create(attyp, nucell, "BCC:attyp");
     
-    for (int i=0; i<nucell; i++) attyp[i] = 1;
+    for (int i = 0; i < nucell; ++i) attyp[i] = 1;
 
     atpos[0][0] = 0.;
     atpos[0][1] = 0.;
@@ -203,7 +204,7 @@ void BCC::BCC110()
     memory->create(atpos, nucell, 3, "BCC110_atpos");
     memory->create(attyp, nucell, "BCC:attyp");
     
-    for (int i=0; i<nucell; i++) attyp[i] = 1;
+    for (int i = 0; i < nucell; ++i) attyp[i] = 1;
 
     atpos[0][0] = 0.;
     atpos[0][1] = 0.;
@@ -229,26 +230,26 @@ void BCC::BCC110()
 return;
 }
 
-/* ----------------------------------------------------------------------
-   Initialize for (111) orientation // this part is not corrected yet
-------------------------------------------------------------------------- */
+/* -----------------------------------------------------------------------------
+ * Initialize for (111) orientation // this part is not corrected yet
+ * -------------------------------------------------------------------------- */
 void BCC::BCC111()
 {
   char str[MAXLINE];
   int surftype =1;
   // print out the menu
-  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
+  printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
   printf("Please selection the type of BCC(111) surface:\n");
   printf("   1. orthogonal, long side along x\n");
   printf("   2. orthogonal, long side along y\n");
   printf("Your choice [%d]: ", surftype);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = atoi(strtok(str, " \t\n\r\f"));
   printf("You   selected : %d", surftype);
-  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
+  printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
   
-  for (int i=0; i<3; i++){
-    for (int j=0; j<3; j++) latvec[i][j] = 0.;
-  }
+  for (int i = 0; i < 3; ++i)
+  for (int j = 0; j < 3; ++j) latvec[i][j] = 0.;
+
   memory->create(name,9,"BCC:name");
   strcpy(name, "BCC(111)");
 
@@ -265,7 +266,7 @@ void BCC::BCC111()
     memory->create(atpos, nucell, 3, "BCC111_atpos");
     memory->create(attyp, nucell, "BCC:attyp");
     
-    for (int i=0; i<nucell; i++) attyp[i] = 1;
+    for (int i = 0; i < nucell; ++i) attyp[i] = 1;
     atpos[0][0] = 0.;
     atpos[0][1] = 0.;
     atpos[0][2] = 0.;
@@ -303,7 +304,7 @@ void BCC::BCC111()
     memory->create(atpos, nucell, 3, "BCC111_atpos");
     memory->create(attyp, nucell, "BCC:attyp");
     
-    for (int i=0; i<nucell; i++) attyp[i] = 1;
+    for (int i = 0; i < nucell; ++i) attyp[i] = 1;
 
     atpos[0][0] = 0.;
     atpos[0][1] = 0.;
@@ -337,9 +338,9 @@ void BCC::BCC111()
 return;
 }
 
-/* ----------------------------------------------------------------------
-   Initialize for Primitive cell
-------------------------------------------------------------------------- */
+/* -----------------------------------------------------------------------------
+ * Initialize for Primitive cell
+ * -------------------------------------------------------------------------- */
 void BCC::Primitive()
 {
   memory->create(name,9,"BCC:name");
@@ -361,7 +362,7 @@ void BCC::Primitive()
   memory->create(atpos, nucell, 3, "BCC001_atpos");
   memory->create(attyp, nucell, "BCC:attyp");
   
-  for (int i=0; i<nucell; i++) attyp[i] = 1;
+  for (int i = 0; i < nucell; ++i) attyp[i] = 1;
   atpos[0][0] = 0.;
   atpos[0][1] = 0.;
   atpos[0][2] = 0.;
@@ -369,3 +370,5 @@ void BCC::Primitive()
   initialized = 1;
 return;
 }
+
+/* --------------------------------------------------------------------------- */

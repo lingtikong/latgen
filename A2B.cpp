@@ -8,16 +8,16 @@
 
 using namespace std;
 
-/* ----------------------------------------------------------------------
-   To select the orientation of the lattice
-------------------------------------------------------------------------- */
+/* -----------------------------------------------------------------------------
+ * To select the orientation of the lattice
+ * -------------------------------------------------------------------------- */
 A2B::A2B() : lattice()
 {
   char str[MAXLINE];
   alat = 1.; ca = 1.;
   int ctype = 1;
   // print out the menu
-  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
+  printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
   printf("Please select the composition of your lattice:\n");
   printf("   1. AB2;          2. A2B;\n");
   printf("Your choice [%d]: ", ctype);
@@ -43,7 +43,7 @@ A2B::A2B() : lattice()
     if (count_words(fgets(str,MAXLINE,stdin)) > 0) ca = atof(strtok(str, " \t\n\r\f"));
     if (ca < 0.) ca = -ca/alat;
   }
-  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
+  printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
   
   // initialize according to orientation
   initialized = 0;
@@ -63,23 +63,23 @@ A2B::A2B() : lattice()
 
 }
 
-/* ----------------------------------------------------------------------
-   Deconstructor does nothing
-------------------------------------------------------------------------- */
+/* -----------------------------------------------------------------------------
+ * Deconstructor does nothing
+ * -------------------------------------------------------------------------- */
 A2B::~A2B()
 {
 
 }
 
-/* ----------------------------------------------------------------------
-   Initialize for C1 (Fluorite) lattice
-------------------------------------------------------------------------- */
+/* -----------------------------------------------------------------------------
+ * Initialize for C1 (Fluorite) lattice
+ * -------------------------------------------------------------------------- */
 void A2B::A2B_C1()
 {
   char str[MAXLINE];
   int surftype = 1;
   // print out the menu
-  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
+  printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
   printf("Please selection the type of A2B-C1 surface:\n");
   printf("   1. (001), small;\n");
   printf("   2. (001), conventional;\n");
@@ -89,10 +89,10 @@ void A2B::A2B_C1()
   printf("Your choice [%d]: ", surftype);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = atoi(strtok(str, " \t\n\r\f"));
   printf("You   selected : %d\n", surftype);
-  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
-  for (int i=0; i<3; i++){
-    for (int j=0; j<3; j++) latvec[i][j] = 0.;
-  }
+  printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
+
+  for (int i = 0; i < 3; ++i)
+  for (int j = 0; j < 3; ++j) latvec[i][j] = 0.;
 
   // initialize according to surface type
   switch (surftype){
@@ -410,15 +410,15 @@ void A2B::A2B_C1()
 return;
 }
 
-/* ----------------------------------------------------------------------
-   Initialize for C15 (Cu2Mg) lattice
-------------------------------------------------------------------------- */
+/* -----------------------------------------------------------------------------
+ * Initialize for C15 (Cu2Mg) lattice
+ * -------------------------------------------------------------------------- */
 void A2B::A2B_C15()
 {
   char str[MAXLINE];
   int surftype = 1;
   // print out the menu
-  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
+  printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
   printf("Please selection the type of A2B-C15 surface:\n");
   printf("   1. (001), small;\n");
   printf("   2. (001), conventional;\n");
@@ -428,10 +428,10 @@ void A2B::A2B_C15()
   printf("Your choice [%d]: ", surftype);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = atoi(strtok(str, " \t\n\r\f"));
   printf("You   selected : %d\n", surftype);
-  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
-  for (int i=0; i<3; i++){
-    for (int j=0; j<3; j++) latvec[i][j] = 0.;
-  }
+  printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
+
+  for (int i = 0; i < 3; ++i)
+  for (int j = 0; j < 3; ++j) latvec[i][j] = 0.;
 
   // initialize according to surface type
   switch (surftype){
@@ -974,15 +974,15 @@ void A2B::A2B_C15()
 return;
 }
 
-/* ----------------------------------------------------------------------
-   Initialize for C32 (AlB2) lattice
-------------------------------------------------------------------------- */
+/* -----------------------------------------------------------------------------
+ * Initialize for C32 (AlB2) lattice
+ * -------------------------------------------------------------------------- */
 void A2B::A2B_C32()
 {
   char str[MAXLINE];
   int surftype = 1;
   // print out the menu
-  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
+  printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
   printf("Please selection the type of A2B-C32 surface:\n");
   printf("   1. (001), conventional;\n");
   printf("   2. (001), orthogonal;\n");
@@ -992,10 +992,10 @@ void A2B::A2B_C32()
   printf("Your choice [%d]: ", surftype);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = atoi(strtok(str, " \t\n\r\f"));
   printf("You   selected : %d\n", surftype);
-  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
-  for (int i=0; i<3; i++){
-    for (int j=0; j<3; j++) latvec[i][j] = 0.;
-  }
+  printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
+
+  for (int i = 0; i < 3; ++i)
+  for (int j = 0; j < 3; ++j) latvec[i][j] = 0.;
 
   // initialize according to surface type
   switch (surftype){
