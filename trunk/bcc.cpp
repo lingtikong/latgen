@@ -25,7 +25,8 @@ BCC::BCC() : lattice()
   printf("   1. (001);\n");
   printf("   2. (110);\n");
   printf("   3. (111);\n");
-  printf("   4. primitive cell;\n");
+  printf("   4. (112);\n");
+  printf("   5. primitive cell;\n");
   printf("Your choice [%d]: ", orient);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) orient = inumeric(strtok(str, " \t\n\r\f"));
   printf("You   selected : %d", orient);
@@ -44,6 +45,9 @@ BCC::BCC() : lattice()
     BCC111();
     break;
   case 4:
+    BCC112();
+    break;
+  case 5:
     Primitive();
     break;
   default:
@@ -231,7 +235,7 @@ return;
 }
 
 /* -----------------------------------------------------------------------------
- * Initialize for (111) orientation // this part is not corrected yet
+ * Initialize for (111) orientation
  * -------------------------------------------------------------------------- */
 void BCC::BCC111()
 {
@@ -240,8 +244,10 @@ void BCC::BCC111()
   // print out the menu
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
   printf("Please selection the type of BCC(111) surface:\n");
-  printf("   1. orthogonal, long side along x\n");
-  printf("   2. orthogonal, long side along y\n");
+  printf("   1. U = [1-10], V = [10-1]; U // x;\n");
+  printf("   2. U = [1-10], V = [10-1]; V // y;\n");
+  printf("   3. U = [10-1], V = [1-21]; U // x;\n");
+  printf("   4. U = [1-21], V = [10-1]; U // x;\n");
   printf("Your choice [%d]: ", surftype);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = inumeric(strtok(str, " \t\n\r\f"));
   printf("You   selected : %d", surftype);
@@ -256,80 +262,268 @@ void BCC::BCC111()
   // initialize according to surface type
   switch (surftype){
   case 1:
+    nucell = 3;
+    ntype  = 1;
+    
+    latvec[0][0] =  sqrt(2.);
+    latvec[1][0] = -sqrt(0.5);
+    latvec[1][1] =  sqrt(1.5);
+    latvec[2][2] =  sqrt(0.75);
+    
+    atpos = memory->create(atpos,nucell,3,"atpos");
+    attyp = memory->create(attyp,nucell,"attyp");
+    
+    attyp[0] =  1;
+    atpos[0][0] = 0.;
+    atpos[0][1] = 0.;
+    atpos[0][2] = 0.;
+    
+    attyp[1] =  1;
+    atpos[1][0] = 1./3.;
+    atpos[1][1] = 2./3.;
+    atpos[1][2] = 1./3.;
+    
+    attyp[2] =  1;
+    atpos[2][0] = 2./3.;
+    atpos[2][1] = 1./3.;
+    atpos[2][2] = 2./3.;
+    
+    initialized = 1;
+    break;
+
+   case 2:
+    nucell = 3;
+    ntype  = 1;
+    
+    latvec[0][0] =  sqrt(1.5);
+    latvec[0][1] = -sqrt(0.5);
+    latvec[1][1] =  sqrt(2.0);
+    latvec[2][2] =  sqrt(0.75);
+    
+    atpos = memory->create(atpos,nucell,3,"atpos");
+    attyp = memory->create(attyp,nucell,"attyp");
+    
+    attyp[0] =  1;
+    atpos[0][0] = 0.;
+    atpos[0][1] = 0.;
+    atpos[0][2] = 0.;
+    
+    attyp[1] =  1;
+    atpos[1][0] = 1./3.;
+    atpos[1][1] = 2./3.;
+    atpos[1][2] = 1./3.;
+    
+    attyp[2] =  1;
+    atpos[2][0] = 2./3.;
+    atpos[2][1] = 1./3.;
+    atpos[2][2] = 2./3.;
+    
+    initialized = 1;
+    break;
+
+  case 3:
+    nucell =    6;
+    ntype  =  1;
+    
+    latvec[0][0] = sqrt(2.);
+    latvec[1][1] = sqrt(6.);
+    latvec[2][2] = sqrt(0.75);
+    
+    atpos = memory->create(atpos,nucell,3,"atpos");
+    attyp = memory->create(attyp,nucell,"attyp");
+    
+    attyp[0] =  1;
+    atpos[0][0] = 0.;
+    atpos[0][1] = 0.;
+    atpos[0][2] = 0.;
+    
+    attyp[1] =  1;
+    atpos[1][0] = 0.5;
+    atpos[1][1] = 0.5;
+    atpos[1][2] = 0.;
+    
+    attyp[2] =  1;
+    atpos[2][0] = 0.5;
+    atpos[2][1] = 1./6.;
+    atpos[2][2] = 1./3.;
+    
+    attyp[3] =  1;
+    atpos[3][0] = 0.;
+    atpos[3][1] = 2./3.;
+    atpos[3][2] = 1./3.;
+    
+    attyp[4] =  1;
+    atpos[4][0] = 0.;
+    atpos[4][1] = 1./3.;
+    atpos[4][2] = 2./3.;
+    
+    attyp[5] =  1;
+    atpos[5][0] = 0.5;
+    atpos[5][1] = 5./6.;
+    atpos[5][2] = 2./3.;
+    
+    initialized = 1;
+    break;
+
+  case 4:
+    nucell =    6;
+    ntype  =  1;
+    
+    latvec[0][0] = sqrt(6.);
+    latvec[1][1] = sqrt(2.);
+    latvec[2][2] = sqrt(0.75);
+    
+    atpos = memory->create(atpos,nucell,3,"atpos");
+    attyp = memory->create(attyp,nucell,"attyp");
+    
+    attyp[0] =  1;
+    atpos[0][0] = 0.;
+    atpos[0][1] = 0.;
+    atpos[0][2] = 0.;
+    
+    attyp[1] =  1;
+    atpos[1][0] = 0.5;
+    atpos[1][1] = 0.5;
+    atpos[1][2] = 0.;
+    
+    attyp[2] =  1;
+    atpos[2][0] = 1./6.;
+    atpos[2][1] = 0.5;
+    atpos[2][2] = 1./3.;
+    
+    attyp[3] =  1;
+    atpos[3][0] = 2./3.;
+    atpos[3][1] = 0.;
+    atpos[3][2] = 1./3.;
+    
+    attyp[4] =  1;
+    atpos[4][0] = 1./3.;
+    atpos[4][1] = 0.;
+    atpos[4][2] = 2./3.;
+    
+    attyp[5] =  1;
+    atpos[5][0] = 5./6.;
+    atpos[5][1] = 0.5;
+    atpos[5][2] = 2./3.;
+    
+    initialized = 1;
+    break;
+  default:
+    break;
+  }
+return;
+}
+
+/* -----------------------------------------------------------------------------
+ * Initialize for (112) orientation
+ * -------------------------------------------------------------------------- */
+void BCC::BCC112()
+{
+  char str[MAXLINE];
+  int surftype =1;
+  // print out the menu
+  printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
+  printf("Please selection the type of BCC(111) surface:\n");
+  printf("   1. U = [1-10], V = [.5,.5,-.5]; U // x\n");
+  printf("   2. U = [.5,.5,-.5], V = [-110]; U // x\n");
+  printf("Your choice [%d]: ", surftype);
+  if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = inumeric(strtok(str, " \t\n\r\f"));
+  printf("You   selected : %d", surftype);
+  printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
+  
+  for (int i = 0; i < 3; ++i)
+  for (int j = 0; j < 3; ++j) latvec[i][j] = 0.;
+
+  memory->create(name,9,"BCC:name");
+  strcpy(name, "BCC(112)");
+
+  // initialize according to surface type
+  switch (surftype){
+  case 1:
     nucell = 6;
     ntype  = 1;
     
     latvec[0][0] = sqrt(2.);
-    latvec[1][1] = sqrt(6.);
-    latvec[2][2] = sqrt(3.)*0.5;
-
-    memory->create(atpos, nucell, 3, "BCC111_atpos");
-    memory->create(attyp, nucell, "BCC:attyp");
+    latvec[1][1] = sqrt(0.75);
+    latvec[2][2] = sqrt(6.);
     
-    for (int i = 0; i < nucell; ++i) attyp[i] = 1;
+    atpos = memory->create(atpos,nucell,3,"atpos");
+    attyp = memory->create(attyp,nucell,"attyp");
+    
+    attyp[0] =  1;
     atpos[0][0] = 0.;
     atpos[0][1] = 0.;
     atpos[0][2] = 0.;
-
+    
+    attyp[1] =  1;
     atpos[1][0] = 0.5;
-    atpos[1][1] = 0.5;
-    atpos[1][2] = 0.;
-
+    atpos[1][1] = 2./3.;
+    atpos[1][2] = 1./6.;
+    
+    attyp[2] =  1;
     atpos[2][0] = 0.;
     atpos[2][1] = 1./3.;
     atpos[2][2] = 1./3.;
-
+    
+    attyp[3] =  1;
     atpos[3][0] = 0.5;
-    atpos[3][1] = 5./6.;
-    atpos[3][2] = 1./3.;
-
+    atpos[3][1] = 0.0;
+    atpos[3][2] = 0.5;
+    
+    attyp[4] =  1;
     atpos[4][0] = 0.;
     atpos[4][1] = 2./3.;
     atpos[4][2] = 2./3.;
-
+    
+    attyp[5] =  1;
     atpos[5][0] = 0.5;
-    atpos[5][1] = 1./6.;
-    atpos[5][2] = 2./3.;
-
+    atpos[5][1] = 1./3.;
+    atpos[5][2] = 5./6.;
+    
     initialized = 1;
     break;
+
   case 2:
     nucell = 6;
     ntype  = 1;
     
-    latvec[0][0] = sqrt(6.);
+    latvec[0][0] = sqrt(0.75);
     latvec[1][1] = sqrt(2.);
-    latvec[2][2] = sqrt(3.)*0.5;
-
-    memory->create(atpos, nucell, 3, "BCC111_atpos");
-    memory->create(attyp, nucell, "BCC:attyp");
+    latvec[2][2] = sqrt(6.);
     
-    for (int i = 0; i < nucell; ++i) attyp[i] = 1;
-
+    atpos = memory->create(atpos,nucell,3,"atpos");
+    attyp = memory->create(attyp,nucell,"attyp");
+    
+    attyp[0] =  1;
     atpos[0][0] = 0.;
     atpos[0][1] = 0.;
     atpos[0][2] = 0.;
-
-    atpos[1][0] = 0.5;
+    
+    attyp[1] =  1;
+    atpos[1][0] = 2./3.;
     atpos[1][1] = 0.5;
-    atpos[1][2] = 0.;
-
+    atpos[1][2] = 1./6.;
+    
+    attyp[2] =  1;
     atpos[2][0] = 1./3.;
     atpos[2][1] = 0.;
     atpos[2][2] = 1./3.;
-
-    atpos[3][0] = 5./6.;
+    
+    attyp[3] =  1;
+    atpos[3][0] = 0.0;
     atpos[3][1] = 0.5;
-    atpos[3][2] = 1./3.;
-
+    atpos[3][2] = 0.5;
+    
+    attyp[4] =  1;
     atpos[4][0] = 2./3.;
     atpos[4][1] = 0.;
     atpos[4][2] = 2./3.;
-
-    atpos[5][0] = 1./6.;
+    
+    attyp[5] =  1;
+    atpos[5][0] = 1./3.;
     atpos[5][1] = 0.5;
-    atpos[5][2] = 2./3.;
-
+    atpos[5][2] = 5./6.;
+    
     initialized = 1;
     break;
   default:

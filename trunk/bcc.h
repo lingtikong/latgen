@@ -13,6 +13,7 @@ private:
   void BCC001();
   void BCC110();
   void BCC111();
+  void BCC112();
   void Primitive();
 };
 #endif
