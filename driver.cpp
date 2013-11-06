@@ -151,16 +151,16 @@ void Driver::generate()
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
   printf("Please input the extensions in x, y, and z directions: ");
   if (count_words(fgets(str,MAXLINE,stdin)) < 3) exit(2);
-  nx = atoi(strtok(str,  " \t\n\r\f"));
-  ny = atoi(strtok(NULL, " \t\n\r\f"));
-  nz = atoi(strtok(NULL, " \t\n\r\f"));
+  nx = latt->inumeric(strtok(str,  " \t\n\r\f"));
+  ny = latt->inumeric(strtok(NULL, " \t\n\r\f"));
+  nz = latt->inumeric(strtok(NULL, " \t\n\r\f"));
   nucell = latt->nucell;
   natom = nx*ny*nz*nucell;
   if (natom < 1) exit(3);
 
   printf("Your system would be %d x %d x %d with %d atoms.\n",nx,ny,nz,natom);
   printf("Please indicate which direction should goes fast(1:x; other: z)[1]: ");
-  if (count_words(fgets(str,MAXLINE,stdin)) > 0) leading_dir = atoi(strtok(str, " \t\n\r\f"));
+  if (count_words(fgets(str,MAXLINE,stdin)) > 0) leading_dir = latt->inumeric(strtok(str, " \t\n\r\f"));
   for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
 
   memory->create(atpos, natom, 3, "driver->generate:atpos");
@@ -274,7 +274,7 @@ void Driver::ResetTypeID()
     char *ptr;
     ptr = strtok(str, " \t\n\r\f");
     while (ptr != NULL){
-      newID[num] = atoi(ptr);
+      newID[num] = latt->inumeric(ptr);
       if (++num >= ntype) break;
       ptr = strtok(NULL, " \t\n\r\f");
     }
@@ -492,7 +492,7 @@ void Driver::modify()
     else printf("  0. Done.\n");
     printf("Your choice [0]: ");
 
-    if (count_words(fgets(str,MAXLINE,stdin)) >0) job = atoi(strtok(str, " \t\n\r\f"));
+    if (count_words(fgets(str,MAXLINE,stdin)) >0) job = latt->inumeric(strtok(str, " \t\n\r\f"));
 
     printf("You selected: %d", job);
     printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
@@ -524,7 +524,7 @@ void Driver::solidsol()
   printf("  4. Intersection of 1 & 2;\n");
   printf("  5. All atoms in the box;\n");
   printf("  0. Return;\nYour choice [%d]: ", job);
-  if (count_words(fgets(str,MAXLINE,stdin)) > 0) job = atoi(strtok(str," \t\n\r\f"));
+  if (count_words(fgets(str,MAXLINE,stdin)) > 0) job = latt->inumeric(strtok(str," \t\n\r\f"));
   printf("You selected: %d\n", job);
   if (job < 1 || job > 5){
     for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
@@ -548,7 +548,7 @@ void Driver::solidsol()
       char *ptr = strtok(str," \t\n\r\f");
       for (int i = 0; i < 6; ++i){
         if (strcmp(ptr, "NULL") == 0) block[i] = double(i%2)*latvec[i/2][i/2];
-        else block[i] = atof(ptr);
+        else block[i] = latt->numeric(ptr);
 
         ptr = strtok(NULL, " \n\t\r\f");
       }
@@ -592,10 +592,10 @@ void Driver::solidsol()
     if (count_words(fgets(str,MAXLINE,stdin)) >= 5){
       char *ptr = strtok(str," \t\n\r\f");
       for (int i = 0; i < 3; ++i){
-        cpos[i] = atof(ptr);
+        cpos[i] = latt->numeric(ptr);
         ptr = strtok(NULL, " \n\t\r\f");
       }
-      radius = atof(ptr);
+      radius = latt->numeric(ptr);
 
       int inside = 1;
       ptr = strtok(NULL, " \n\t\r\f");
@@ -647,7 +647,7 @@ void Driver::solidsol()
   int ipsrc, idsrc=-1, numsub;
   printf("\nPlease input the atomic type to be substituted: ");
   while (count_words(fgets(str,MAXLINE,stdin)) < 1);
-  ipsrc = atoi(strtok(str, " \t\n\r\f"));
+  ipsrc = latt->inumeric(strtok(str, " \t\n\r\f"));
   idsrc = lookup(ipsrc);
   if (idsrc < 0){
     printf("\nInput atomic type not found, operation terminated!\n");
@@ -665,7 +665,7 @@ void Driver::solidsol()
   double frac = -1.;
   printf("Please input the fraction or total # of atoms to be replaced: ");
   while (count_words(fgets(str,MAXLINE,stdin)) < 1);
-  frac = atof(strtok(str, " \t\n\r\f"));
+  frac = latt->numeric(strtok(str, " \t\n\r\f"));
   if (frac <= 0. || int(frac) > nsel_type[idsrc]){
     printf("Not enough atoms to create substitutional solid solution.\n");
     for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
@@ -681,7 +681,7 @@ void Driver::solidsol()
   do {
     printf("Please input the atomic type to be assigned: ");
     while (count_words(fgets(str,MAXLINE,stdin)) < 1);
-    ipdes = atoi(strtok(str, " \t\n\r\f"));
+    ipdes = latt->inumeric(strtok(str, " \t\n\r\f"));
     iddes = lookup(ipdes);
     if (iddes >= 0){
       iddes = -1;
@@ -781,8 +781,8 @@ void Driver::FormLayers()
     printf("Please input the lateral extensions (nx & ny) for lattice %c: ", 'A'+ilat);
     while (1){
       if ( count_words(fgets(str,MAXLINE,stdin)) == 2 ){
-        mynx[ilat] = atoi(strtok(str, " \t\n\r\f"));
-        myny[ilat] = atoi(strtok(NULL," \t\n\r\f"));
+        mynx[ilat] = latts[0]->inumeric(strtok(str, " \t\n\r\f"));
+        myny[ilat] = latts[0]->inumeric(strtok(NULL," \t\n\r\f"));
        if (mynx[ilat] > 0 && myny[ilat] > 0) break;
       }
     }
@@ -816,7 +816,7 @@ void Driver::FormLayers()
   if ( count_words(fgets(str,MAXLINE,stdin)) == 6 ){
     char *ptr = strtok(str," \n\r\t\f");
     for (int i = 0; i < 2; ++i)
-    for (int j = 0; j < 3; ++j){ latvec[i][j] = atof(ptr); ptr = strtok(NULL, " \n\r\t\f");}
+    for (int j = 0; j < 3; ++j){ latvec[i][j] = latts[0]->numeric(ptr); ptr = strtok(NULL, " \n\r\t\f");}
   }
 
   double lx, ly, lx0=0., ly0=0.;
@@ -878,7 +878,7 @@ void Driver::FormLayers()
         zprev[ilat] += istr;
 
         ptr[0] = ' ';
-        int nl_new  = atoi(ptr);
+        int nl_new  = latt->inumeric(ptr);
         int ntm_new = 0;
         for (int i = 0; i < nl_new; ++i) ntm_new += latt->numlayer[(i+zprev[ilat])%latt->nlayer];
 
@@ -945,7 +945,7 @@ void Driver::FormLayers()
       } else if (strcmp(ptr, "-s") == 0){ // to define the start layer of each lattice, must be defined before this lattice
         ptr = strtok(NULL, " \n\r\t\f");
         if (ptr){
-          istr = atoi(ptr);
+          istr = latt->inumeric(ptr);
           strcat(realized," -s ");strcat(realized, ptr);
         }
 
@@ -953,8 +953,8 @@ void Driver::FormLayers()
         char *s0 = strtok(NULL, " \n\r\t\f");
         char *s1 = strtok(NULL, " \n\r\t\f");
         if (s0 && s1){
-          shift[0] = atof(s0);
-          shift[1] = atof(s1);
+          shift[0] = latt->numeric(s0);
+          shift[1] = latt->numeric(s1);
 
           strcat(realized," -S ");
           strcat(realized, s0);
@@ -966,7 +966,7 @@ void Driver::FormLayers()
         strcat(realized," ");strcat(realized, ptr);
 
       } else {
-        Hextra = atof(ptr);
+        Hextra = latt->numeric(ptr);
         strcat(realized," ");strcat(realized, ptr);
         H += Hextra;
       }

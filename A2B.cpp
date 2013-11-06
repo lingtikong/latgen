@@ -21,7 +21,7 @@ A2B::A2B() : lattice()
   printf("Please select the composition of your lattice:\n");
   printf("   1. AB2;          2. A2B;\n");
   printf("Your choice [%d]: ", ctype);
-  if (count_words(fgets(str,MAXLINE,stdin)) > 0) ctype = atoi(strtok(str, " \t\n\r\f"));
+  if (count_words(fgets(str,MAXLINE,stdin)) > 0) ctype = inumeric(strtok(str, " \t\n\r\f"));
   printf("You   selected : %d\n", ctype);
 
   if (ctype == 1){ip1 = 1; ip2=2;}
@@ -33,14 +33,14 @@ A2B::A2B() : lattice()
   printf("   2. C15 (Cu2Mg);\n");
   printf("   3. C32 (AlB2);\n");
   printf("Your choice [%d]: ", lattype);
-  if (count_words(fgets(str,MAXLINE,stdin)) > 0) lattype = atoi(strtok(str, " \t\n\r\f"));
+  if (count_words(fgets(str,MAXLINE,stdin)) > 0) lattype = inumeric(strtok(str, " \t\n\r\f"));
   printf("You   selected : %d\n", lattype);
 
   printf("Please input the lattice constant of the A2B crystal [%g]: ", alat);
-  if (count_words(fgets(str,MAXLINE,stdin)) > 0) alat = atof(strtok(str, " \t\n\r\f"));
+  if (count_words(fgets(str,MAXLINE,stdin)) > 0) alat = numeric(strtok(str, " \t\n\r\f"));
   if (lattype == 3){
     printf("Please input the c/a or c (negative) of your crystal [%g]: ", ca);
-    if (count_words(fgets(str,MAXLINE,stdin)) > 0) ca = atof(strtok(str, " \t\n\r\f"));
+    if (count_words(fgets(str,MAXLINE,stdin)) > 0) ca = numeric(strtok(str, " \t\n\r\f"));
     if (ca < 0.) ca = -ca/alat;
   }
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
@@ -87,7 +87,7 @@ void A2B::A2B_C1()
   printf("   4. (111), long along x, orthogonal;\n");
   printf("   5. primitive cell;\n");
   printf("Your choice [%d]: ", surftype);
-  if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = atoi(strtok(str, " \t\n\r\f"));
+  if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = inumeric(strtok(str, " \t\n\r\f"));
   printf("You   selected : %d\n", surftype);
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
 
@@ -426,7 +426,7 @@ void A2B::A2B_C15()
   printf("   4. (111), long along x, orthogonal;\n");
   printf("   5. primitive cell;\n");
   printf("Your choice [%d]: ", surftype);
-  if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = atoi(strtok(str, " \t\n\r\f"));
+  if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = inumeric(strtok(str, " \t\n\r\f"));
   printf("You   selected : %d\n", surftype);
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
 
@@ -990,7 +990,7 @@ void A2B::A2B_C32()
   printf("   4. (110), long along y;\n");
   printf("   5. (1-10), long along y;\n");
   printf("Your choice [%d]: ", surftype);
-  if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = atoi(strtok(str, " \t\n\r\f"));
+  if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = inumeric(strtok(str, " \t\n\r\f"));
   printf("You   selected : %d\n", surftype);
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
 

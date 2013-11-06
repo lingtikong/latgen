@@ -18,9 +18,9 @@ HCP::HCP() : lattice()
   // print out the menu
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
   printf("Please input the lattice constant of the HCP lattice [1]:");
-  if (count_words(fgets(str,MAXLINE,stdin)) > 0) alat = atof(strtok(str, " \t\n\r\f"));
+  if (count_words(fgets(str,MAXLINE,stdin)) > 0) alat = numeric(strtok(str, " \t\n\r\f"));
   printf("Please input the value of c/a ratio or c (negative) [1.633]: ");
-  if (count_words(fgets(str,MAXLINE,stdin)) > 0) ca = atof(strtok(str, " \t\n\r\f"));
+  if (count_words(fgets(str,MAXLINE,stdin)) > 0) ca = numeric(strtok(str, " \t\n\r\f"));
   if (ca < 0.) ca = -ca/alat;
   printf("The lattice constants of your HCP: a = %g, c/a = %g.\n\n", alat, ca);
 
@@ -30,7 +30,7 @@ HCP::HCP() : lattice()
   printf("   2. (100);         5. Graphene;\n");
   printf("   3. (110);         6. Graphite;\n");
   printf("Your choice [%d]: ", orient);
-  if (count_words(fgets(str,MAXLINE,stdin)) > 0) orient = atoi(strtok(str, " \t\n\r\f"));
+  if (count_words(fgets(str,MAXLINE,stdin)) > 0) orient = inumeric(strtok(str, " \t\n\r\f"));
   printf("You   selected : %d", orient);
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
   
@@ -86,7 +86,7 @@ void HCP::HCP001()
   printf("   5. Rectangle, long along x;\n");
   printf("   6. Rectangle, long along y;\n");
   printf("Your choice [%d]: ", surftype);
-  if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = atoi(strtok(str, " \t\n\r\f"));
+  if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = inumeric(strtok(str, " \t\n\r\f"));
   printf("You   selected : %d", surftype);
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
 
@@ -404,7 +404,7 @@ void HCP::Graphene()
   printf("   5. Rectangle, long along x;\n");
   printf("   6. Rectangle, long along y;\n");
   printf("Your choice [%d]: ", surftype);
-  if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = atoi(strtok(str, " \t\n\r\f"));
+  if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = inumeric(strtok(str, " \t\n\r\f"));
   printf("You   selected : %d", surftype);
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
 
@@ -590,7 +590,7 @@ void HCP::Graphite()
   printf("   5. Rectangle, long along x;\n");
   printf("   6. Rectangle, long along y;\n");
   printf("Your choice [%d]: ", surftype);
-  if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = atoi(strtok(str, " \t\n\r\f"));
+  if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = inumeric(strtok(str, " \t\n\r\f"));
   printf("You   selected : %d", surftype);
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
 
@@ -603,7 +603,7 @@ void HCP::Graphite()
   if (fabs(ca-2.725) > 0.1){
     printf("\nThe experimental c/a for graphite is ~2.725, while yours is %g, if you\n", ca);
     printf("want to redefine it, input now, enter to keep c/a = %g: ", ca);
-    if (count_words(fgets(str,MAXLINE,stdin)) > 0) ca = atof(strtok(str, " \t\n\r\f"));
+    if (count_words(fgets(str,MAXLINE,stdin)) > 0) ca = numeric(strtok(str, " \t\n\r\f"));
     printf("The adopted c/a will be: %g\n\n", ca);
   }
 
