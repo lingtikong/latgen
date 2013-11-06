@@ -1,6 +1,9 @@
 #include "elements.h"
 #include "string.h"
 
+/* -----------------------------------------------------------------------------
+ * Private method, to get atomic number from element name
+ * -------------------------------------------------------------------------- */
 int ChemElements::Name2Num(const char *ename)
 {
   int AtNum;
@@ -10,6 +13,9 @@ int ChemElements::Name2Num(const char *ename)
 return AtNum;
 }
 
+/* -----------------------------------------------------------------------------
+ * Private method, to get element name from atomic number
+ * -------------------------------------------------------------------------- */
 void ChemElements::Num2Name(const int AtNum, char * ename)
 {
   int num = AtNum;
@@ -17,6 +23,9 @@ void ChemElements::Num2Name(const int AtNum, char * ename)
   strcpy(ename, symbol[num]);
 }
 
+/* -----------------------------------------------------------------------------
+ * Private method, to get molar mass from element name
+ * -------------------------------------------------------------------------- */
 double ChemElements::Name2Mass(const char * ename)
 {
   int AtNum = Name2Num(ename);
@@ -24,6 +33,9 @@ double ChemElements::Name2Mass(const char * ename)
 return weight[AtNum];
 }
 
+/* -----------------------------------------------------------------------------
+ * Private method, to get molar mass from atomic number
+ * -------------------------------------------------------------------------- */
 double ChemElements::Num2Mass(const int AtNum)
 {
   int num = AtNum;

@@ -8,16 +8,16 @@
 
 using namespace std;
 
-/* ----------------------------------------------------------------------
-   To select the orientation of the lattice
-------------------------------------------------------------------------- */
+/* -----------------------------------------------------------------------------
+ * To select the orientation of the lattice
+ * -------------------------------------------------------------------------- */
 A3B::A3B() : lattice()
 {
   char str[MAXLINE];
   alat = 1.; ca = 1.;
   int ctype = 1;
   // print out the menu
-  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
+  printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
   printf("Please select the composition of your lattice:\n");
   printf("   1. A3B;\n");
   printf("   2. AB3;\n");
@@ -44,7 +44,7 @@ A3B::A3B() : lattice()
     if (count_words(fgets(str,MAXLINE,stdin)) > 0) ca = atof(strtok(str, " \t\n\r\f"));
     if (ca < 0.) ca = -ca/alat;
   }
-  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
+  printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
   
   // initialize according to orientation
   initialized = 0;
@@ -76,23 +76,23 @@ A3B::A3B() : lattice()
 
 }
 
-/* ----------------------------------------------------------------------
-   Deconstructor does nothing
-------------------------------------------------------------------------- */
+/* -----------------------------------------------------------------------------
+ * Deconstructor does nothing
+ * -------------------------------------------------------------------------- */
 A3B::~A3B()
 {
 
 }
 
-/* ----------------------------------------------------------------------
-   Initialize for A15 lattice
-------------------------------------------------------------------------- */
+/* -----------------------------------------------------------------------------
+ * Initialize for A15 lattice
+ * -------------------------------------------------------------------------- */
 void A3B::A3B_A15()
 {
   char str[MAXLINE];
   int surftype = 1;
   // print out the menu
-  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
+  printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
   printf("Please selection the type of A3B-A15 surface:\n");
   printf("   1. (001) conventional orientation;\n");
   printf("   2. (110), long along y;\n");
@@ -100,10 +100,10 @@ void A3B::A3B_A15()
   printf("Your choice [%d]: ", surftype);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = atoi(strtok(str, " \t\n\r\f"));
   printf("You   selected : %d\n", surftype);
-  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
-  for (int i=0; i<3; i++){
-    for (int j=0; j<3; j++) latvec[i][j] = 0.;
-  }
+  printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
+
+  for (int i = 0; i < 3; ++i)
+  for (int j = 0; j < 3; ++j) latvec[i][j] = 0.;
 
   // initialize according to surface type
   switch (surftype){
@@ -401,15 +401,15 @@ void A3B::A3B_A15()
 return;
 }
 
-/* ----------------------------------------------------------------------
-   Initialize for D019
-------------------------------------------------------------------------- */
+/* -----------------------------------------------------------------------------
+ * Initialize for D019
+ * -------------------------------------------------------------------------- */
 void A3B::A3B_D019()
 {
   char str[MAXLINE];
   int surftype = 1;
   // print out the menu
-  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
+  printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
   printf("Please selection the type of A3B-D019 surface:\n");
   printf("   1. (001), conventional;\n");
   printf("   2. (001), orthogonal, long along y;\n");
@@ -418,11 +418,10 @@ void A3B::A3B_D019()
   printf("Your choice [%d]: ", surftype);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = atoi(strtok(str, " \t\n\r\f"));
   printf("You   selected : %d\n", surftype);
-  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
+  printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
   
-  for (int i=0; i<3; i++){
-    for (int j=0; j<3; j++) latvec[i][j] = 0.;
-  }
+  for (int i = 0; i < 3; ++i)
+  for (int j = 0; j < 3; ++j) latvec[i][j] = 0.;
 
   // initialize according to surface type
   switch (surftype){
@@ -777,15 +776,15 @@ void A3B::A3B_D019()
 return;
 }
 
-/* ----------------------------------------------------------------------
-   Initialize for D022 lattice
-------------------------------------------------------------------------- */
+/* -----------------------------------------------------------------------------
+ * Initialize for D022 lattice
+ * -------------------------------------------------------------------------- */
 void A3B::A3B_D022()
 {
   char str[MAXLINE];
   int surftype = 1;
   // print out the menu
-  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
+  printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
   printf("Please selection the type of A3B-D022 surface:\n");
   printf("   1. (001);\n");
   printf("   2. (100);\n");
@@ -794,10 +793,10 @@ void A3B::A3B_D022()
   printf("Your choice [%d]: ", surftype);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = atoi(strtok(str, " \t\n\r\f"));
   printf("You   selected : %d\n", surftype);
-  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
-  for (int i=0; i<3; i++){
-    for (int j=0; j<3; j++) latvec[i][j] = 0.;
-  }
+  printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
+
+  for (int i = 0; i < 3; ++i)
+  for (int j = 0; j < 3; ++j) latvec[i][j] = 0.;
 
   // initialize according to surface type
   switch (surftype){
@@ -1057,15 +1056,15 @@ void A3B::A3B_D022()
 return;
 }
 
-/* ----------------------------------------------------------------------
-   Initialize for D03 lattice
-------------------------------------------------------------------------- */
+/* -----------------------------------------------------------------------------
+ * Initialize for D03 lattice
+ * -------------------------------------------------------------------------- */
 void A3B::A3B_D03()
 {
   char str[MAXLINE];
   int surftype = 1;
   // print out the menu
-  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
+  printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
   printf("Please selection the type of A3B-D03 surface:\n");
   printf("   1. (001), small;\n");
   printf("   2. (001), conventional;\n");
@@ -1075,10 +1074,10 @@ void A3B::A3B_D03()
   printf("Your choice [%d]: ", surftype);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = atoi(strtok(str, " \t\n\r\f"));
   printf("You   selected : %d\n", surftype);
-  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
-  for (int i=0; i<3; i++){
-    for (int j=0; j<3; j++) latvec[i][j] = 0.;
-  }
+  printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
+
+  for (int i = 0; i < 3; ++i)
+  for (int j = 0; j < 3; ++j) latvec[i][j] = 0.;
 
   // initialize according to surface type
   switch (surftype){
@@ -1471,15 +1470,15 @@ void A3B::A3B_D03()
 return;
 }
 
-/* ----------------------------------------------------------------------
-   Initialize for D09 lattice
-------------------------------------------------------------------------- */
+/* -----------------------------------------------------------------------------
+ * Initialize for D09 lattice
+ * -------------------------------------------------------------------------- */
 void A3B::A3B_D09()
 {
   char str[MAXLINE];
   int surftype = 1;
   // print out the menu
-  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
+  printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
   printf("Please selection the type of A3B-D09 surface:\n");
   printf("   1. (001), conventional;\n");
   printf("   2. (110), orthogonal, long along y;\n");
@@ -1487,10 +1486,10 @@ void A3B::A3B_D09()
   printf("Your choice [%d]: ", surftype);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = atoi(strtok(str, " \t\n\r\f"));
   printf("You   selected : %d\n", surftype);
-  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
-  for (int i=0; i<3; i++){
-    for (int j=0; j<3; j++) latvec[i][j] = 0.;
-  }
+  printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
+
+  for (int i = 0; i < 3; ++i)
+  for (int j = 0; j < 3; ++j) latvec[i][j] = 0.;
 
   // initialize according to surface type
   switch (surftype){
@@ -1728,15 +1727,15 @@ void A3B::A3B_D09()
 return;
 }
 
-/* ----------------------------------------------------------------------
-   Initialize for L12 lattice
-------------------------------------------------------------------------- */
+/* -----------------------------------------------------------------------------
+ * Initialize for L12 lattice
+ * -------------------------------------------------------------------------- */
 void A3B::A3B_L12()
 {
   char str[MAXLINE];
   int surftype = 1;
   // print out the menu
-  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
+  printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
   printf("Please selection the type of A3B-L12 surface:\n");
   printf("   1. (001), conventional;\n");
   printf("   2. (110), orthogonal, long along y;\n");
@@ -1744,10 +1743,10 @@ void A3B::A3B_L12()
   printf("Your choice [%d]: ", surftype);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = atoi(strtok(str, " \t\n\r\f"));
   printf("You   selected : %d\n", surftype);
-  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
-  for (int i=0; i<3; i++){
-    for (int j=0; j<3; j++) latvec[i][j] = 0.;
-  }
+  printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
+
+  for (int i = 0; i < 3; ++i)
+  for (int j = 0; j < 3; ++j) latvec[i][j] = 0.;
 
   // initialize according to surface type
   switch (surftype){
@@ -1985,15 +1984,15 @@ void A3B::A3B_L12()
 return;
 }
 
-/* ----------------------------------------------------------------------
-   Initialize for L60 lattice
-------------------------------------------------------------------------- */
+/* -----------------------------------------------------------------------------
+ * Initialize for L60 lattice
+ * -------------------------------------------------------------------------- */
 void A3B::A3B_L60()
 {
   char str[MAXLINE];
   int surftype = 1;
   // print out the menu
-  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
+  printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
   printf("Please selection the type of A3B-L60 surface:\n");
   printf("   1. (001), conventional;\n");
   printf("   2. (100), conventional;\n");
@@ -2001,10 +2000,10 @@ void A3B::A3B_L60()
   printf("Your choice [%d]: ", surftype);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = atoi(strtok(str, " \t\n\r\f"));
   printf("You   selected : %d\n", surftype);
-  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
-  for (int i=0; i<3; i++){
-    for (int j=0; j<3; j++) latvec[i][j] = 0.;
-  }
+  printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
+
+  for (int i = 0; i < 3; ++i)
+  for (int j = 0; j < 3; ++j) latvec[i][j] = 0.;
 
   // initialize according to surface type
   switch (surftype){

@@ -14,9 +14,9 @@ using namespace voro;
 #define MAX(a,b) ((a) > (b) ? (a) : (b))
 #define MIN(a,b) ((a) < (b) ? (a) : (b))
 
-/*------------------------------------------------------------------------------
+/* -----------------------------------------------------------------------------
  * Method to create polycrystals
- *----------------------------------------------------------------------------*/
+ * -------------------------------------------------------------------------- */
 void Driver::PolyCrystal()
 {
   char str[MAXLINE], *ptr;
@@ -100,7 +100,8 @@ void Driver::PolyCrystal()
           grains[igrain][0] = atof(strtok(str, " \n\t\r\f"));
           grains[igrain][1] = atof(strtok(NULL," \n\t\r\f"));
           grains[igrain][2] = atof(strtok(NULL," \n\t\r\f"));
-          for (int ii=0; ii<3; ii++){
+
+          for (int ii = 0; ii < 3; ++ii){
             ptr = strtok(NULL," \n\t\r\f");
             if (strcmp(ptr, "ran") == 0) orient[igrain][ii] = random->uniform();
             else orient[igrain][ii] = atof(ptr)/360.;
@@ -125,7 +126,7 @@ void Driver::PolyCrystal()
   if (grains == NULL){
     printf("\nThe necessary information will be read from stdin.\n");
     // ask for box info
-    for (int i=0; i<3; i++){
+    for (int i = 0; i < 3; ++i){
       printf("Please input the lower and upper bound of your box along %c: ", 'X'+i);
       while (1) if (count_words(fgets(str,MAXLINE,stdin)) == 2){
         lo[i] = atof(strtok(str, " \n\t\r\f"));
@@ -154,11 +155,10 @@ void Driver::PolyCrystal()
     memory->create(grains, ngrain, 3, "grains");
     memory->create(orient, ngrain, 3, "orient");
 
-    for (int ii=0; ii<ngrain; ii++){
-      for (int idim=0; idim< 3; idim++){
-        grains[ii][idim] = lo[idim] + random->uniform()*box[idim];
-        orient[ii][idim] = random->uniform();
-      }
+    for (int ii = 0; ii < ngrain; ++ii)
+    for (int idim = 0; idim < 3; ++idim){
+      grains[ii][idim] = lo[idim] + random->uniform()*box[idim];
+      orient[ii][idim] = random->uniform();
     }
 
     // atoms in different grain can be assigned as different type
@@ -176,14 +176,14 @@ void Driver::PolyCrystal()
   latvec[2][2] = box[2];
 
   bpbc[0] = bpbc[1] = bpbc[2] = false;
-  for (int idim=0; idim<3; idim++) if (pbc[idim] != 0) bpbc[idim] = true;
+  for (int idim = 0; idim < 3; ++idim) if (pbc[idim] != 0) bpbc[idim] = true;
 
   int ngd = MAX(2,ngrain/2);
   // now create the box (container)
   container con(lo[0],hi[0],lo[1],hi[1],lo[2],hi[2],ngd,ngd,ngd,bpbc[0],bpbc[1],bpbc[2],8);
   
   // insert grain centers into the container
-  for (int i=1; i<=ngrain; i++){
+  for (int i = 1; i <= ngrain; ++i){
     int ii= i-1;
     con.put(i, grains[ii][0], grains[ii][1], grains[ii][2]);
   }
@@ -228,16 +228,16 @@ void Driver::PolyCrystal()
     
     // rotated the lattice randomly
     double rotated[3][3], ang[3];
-    for (int i=0; i<3; i++) ang[i] = orient[id-1][i];
+    for (int i = 0; i < 3; ++i) ang[i] = orient[id-1][i];
     latt->RotateLattice(&ang[0], rotated);
 
     int n_in_grain = 0;
 
     // now to create local atoms
-    for (int ix=-nxmax; ix<=nxmax; ix++)
-    for (int iy=-nymax; iy<=nymax; iy++)
-    for (int iz=-nzmax; iz<=nzmax; iz++)
-    for (int iu=0; iu<latt->nucell; iu++){
+    for (int ix = -nxmax; ix <= nxmax; ++ix)
+    for (int iy = -nymax; iy <= nymax; ++iy)
+    for (int iz = -nzmax; iz <= nzmax; ++iz)
+    for (int iu = 0; iu < latt->nucell; ++iu){
       rx = double(ix) + latt->atpos[iu][0];
       ry = double(iy) + latt->atpos[iu][1];
       rz = double(iz) + latt->atpos[iu][2];
@@ -252,7 +252,7 @@ void Driver::PolyCrystal()
       xp[0] += xc; xp[1] += yc; xp[2] += zc;
 
       int inside = 1;
-      for (int idim=0; idim<3; idim++){
+      for (int idim = 0; idim < 3; ++idim){
         if (pbc[idim]){
           if (xp[idim] < lo[idim]) xp[idim] += box[idim];
           if (xp[idim] >=hi[idim]) xp[idim] -= box[idim];
@@ -271,7 +271,7 @@ void Driver::PolyCrystal()
           attyp = memory->grow(attyp,nmax,"polycrystal:attyp");
         }
 
-        for (int idim=0; idim<3; idim++) atpos[natom][idim] = xp[idim];
+        for (int idim = 0; idim < 3; ++idim) atpos[natom][idim] = xp[idim];
 
         if (type_by_grain) attyp[natom] = latt->attyp[iu] + (id-1)*latt->ntype;
         else attyp[natom] = latt->attyp[iu];

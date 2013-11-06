@@ -9,9 +9,9 @@
 #define MAX(a,b) ((a) > (b) ? (a) : (b))
 #define MIN(a,b) ((a) < (b) ? (a) : (b))
 
-/* ----------------------------------------------------------------------
-   constructor does nothing
-------------------------------------------------------------------------- */
+/* -----------------------------------------------------------------------------
+ * constructor does nothing
+ * -------------------------------------------------------------------------- */
 lattice::lattice()
 {
   initialized = 0;
@@ -29,9 +29,9 @@ lattice::lattice()
   memory = new Memory;
 }
 
-/* ----------------------------------------------------------------------
-   deconstructor destroy any allocated memory
-------------------------------------------------------------------------- */
+/* -----------------------------------------------------------------------------
+ * deconstructor destroy any allocated memory
+ * -------------------------------------------------------------------------- */
 lattice::~lattice()
 {
   if (atpos) memory->destroy(atpos);
@@ -44,47 +44,47 @@ lattice::~lattice()
   delete memory;
 }
 
-/* ----------------------------------------------------------------------
-   Display lattice basic info
-------------------------------------------------------------------------- */
+/* -----------------------------------------------------------------------------
+ * Display lattice basic info
+ * -------------------------------------------------------------------------- */
 void lattice::display()
 {
   if (!initialized) return;
   setup();
 
-  printf("\n"); for (int i=0; i<28; i++) printf("=");
-  printf(" Lattice Info "); for (int i=0; i<28; i++) printf("="); printf("\n");
+  printf("\n"); for (int i = 0; i < 7; ++i) printf("====");
+  printf(" Lattice Info "); for (int i = 0; i < 7; ++i) printf("===="); printf("\n");
   printf("Lattice name......................: %s\n", name);
   printf("Number of atom per unit cell......: %d\n", nucell);
   printf("Number of atom types per unit cell: %d\n", ntype);
   printf("Number of layers in each unit cell: %d\n", nlayer);
   printf("Number of atoms  in each layer    :");
-  for (int i=0; i<nlayer; i++) printf(" %d", numlayer[i]); printf("\n");
+  for (int i = 0; i < nlayer; ++i) printf(" %d", numlayer[i]); printf("\n");
   printf("Expected height above each layer  :");
-  for (int i=0; i<nlayer; i++) printf(" %g", h[i]); printf("\n");
-  for (int i=0; i<14; i++) printf("-----");
+  for (int i = 0; i < nlayer; ++i) printf(" %g", h[i]); printf("\n");
+  for (int i = 0; i < 14; ++i) printf("-----");
   printf("\nLattice vectors:\n");
-  for (int i=0; i<3; i++){
-    for(int j=0; j<3; j++) printf("%lf ", latvec[i][j]*alat);
+  for (int i = 0; i < 3; ++i){
+    for(int j = 0; j < 3; ++j) printf("%lf ", latvec[i][j]*alat);
     printf("\n");
   }
-  for (int i=0; i<14; i++) printf("-----");
+  for (int i = 0; i < 14; ++i) printf("-----");
   printf("\nBasis (Fractional coordinate & type):\n");
-  for (int i=0; i<nucell; i++){
+  for (int i = 0; i < nucell; ++i){
     printf("%lf %lf %lf %d\n", atpos[i][0], atpos[i][1], atpos[i][2], attyp[i]);
   }
-  for (int i=0; i<14; i++) printf("====="); printf("\n\n");
+  for (int i = 0; i < 14; ++i) printf("====="); printf("\n\n");
 }
 
-/*------------------------------------------------------------------------------
+/* -----------------------------------------------------------------------------
  * Method to re-orient the lattice, hope to follow the rules of LAMMPS
- *----------------------------------------------------------------------------*/
+ * -------------------------------------------------------------------------- */
 void lattice::OrientLattice()
 {
   double LV[3][3], box[3], oldy[3];
   box[0] = box[1] = box[2] = 0.;
-  for (int i=0; i<3; i++){
-    for (int j=0; j<3; j++){
+  for (int i = 0; i < 3; ++i){
+    for (int j = 0; j < 3; ++j){
       LV[i][j] = latvec[i][j];
       box[i] += latvec[i][j]*latvec[i][j];
       latvec[i][j] = 0.;
@@ -94,23 +94,23 @@ void lattice::OrientLattice()
   // new A
   latvec[0][0] = box[0];
   // new B
-  for (int i=0; i<3; i++) latvec[1][0] += LV[0][i]*LV[1][i]/box[0];
+  for (int i = 0; i < 3; ++i) latvec[1][0] += LV[0][i]*LV[1][i]/box[0];
   latvec[1][1] = sqrt(box[1]*box[1]-latvec[1][0]*latvec[1][0]);
   // new C
-  for (int i=0; i<3; i++) latvec[2][0] += LV[0][i]*LV[2][i]/box[0];
+  for (int i = 0; i < 3; ++i) latvec[2][0] += LV[0][i]*LV[2][i]/box[0];
 
-  for (int i=0; i<3; i++) oldy[i] = LV[1][i] - latvec[1][0]*LV[0][i]/box[0];
+  for (int i = 0; i < 3; ++i) oldy[i] = LV[1][i] - latvec[1][0]*LV[0][i]/box[0];
   double yl=0.;
-  for (int i=0; i<3; i++) yl += oldy[i]*oldy[i];
+  for (int i = 0; i < 3; ++i) yl += oldy[i]*oldy[i];
   latvec[2][1] = (oldy[0]*LV[2][0] + oldy[1]*LV[2][1] + oldy[2]*LV[2][2])/sqrt(yl);
   latvec[2][2] = sqrt(box[2]*box[2]-latvec[2][0]*latvec[2][0]-latvec[2][1]*latvec[2][1]);
 
 return;
 }
 
-/*------------------------------------------------------------------------------
+/* -----------------------------------------------------------------------------
  * Method to count # of words in a string, without destroying the string
- *----------------------------------------------------------------------------*/
+ * -------------------------------------------------------------------------- */
 int lattice::count_words(const char *line)
 {
   int n = strlen(line) + 1;
@@ -132,9 +132,9 @@ int lattice::count_words(const char *line)
   return n;
 }
 
-/*------------------------------------------------------------------------------
+/* -----------------------------------------------------------------------------
  * Method to setup the dependent parameters
- *----------------------------------------------------------------------------*/
+ * -------------------------------------------------------------------------- */
 void lattice::setup()
 {
   if (initialized == 0) return;
@@ -144,13 +144,13 @@ void lattice::setup()
   std::map<double,int> zmap;
 
   zlist.clear();
-  for (int i=0; i<nucell; i++) zlist.push_back(atpos[i][2]);
+  for (int i = 0; i < nucell; ++i) zlist.push_back(atpos[i][2]);
   zlist.sort(); zlist.unique();
 
   memory->create(layer, nucell, "lattice:setup:layers");
   int il = 0;
-  for (it = zlist.begin(); it != zlist.end(); it++) zmap[*it] = il++;
-  for (int i=0; i<nucell; i++) layer[i] = zmap[atpos[i][2]];
+  for (it = zlist.begin(); it != zlist.end(); ++it) zmap[*it] = il++;
+  for (int i = 0; i < nucell; ++i) layer[i] = zmap[atpos[i][2]];
   nlayer = (int) zmap.size();
   zlist.clear(); zmap.clear();
 
@@ -160,25 +160,25 @@ void lattice::setup()
   memory->create(h, nlayer, "lattice->setup:h");
   memory->create(numlayer, nlayer, "lattice->setup:numlayer");
 
-  for (int i=0; i<nlayer; i++) numlayer[i] = 0;
-  for (int i=0; i<nucell; i++) numlayer[layer[i]]++;
+  for (int i = 0; i < nlayer; ++i) numlayer[i] = 0;
+  for (int i = 0; i < nucell; ++i) numlayer[layer[i]]++;
 
   int i0 = 0, i1 =0;
   double pos0, pos1;
-  for (int i=0; i<nucell; i++) if (layer[i] == 0) {i0 = i; break;}
+  for (int i = 0; i < nucell; ++i) if (layer[i] == 0) {i0 = i; break;}
   pos0 = 0.;
-  for (int i=0; i<3; i++) pos0 += atpos[i0][i] * latvec[i][2];
+  for (int i = 0; i < 3; ++i) pos0 += atpos[i0][i] * latvec[i][2];
 
-  for (int il=1; il<nlayer; il++){
-    for (int i=0; i<nucell; i++) if (layer[i] == il) {i1 = i; break;}
+  for (int il = 1; il < nlayer; ++il){
+    for (int i = 0; i < nucell; ++i) if (layer[i] == il) {i1 = i; break;}
     pos1 = 0.;
-    for (int i=0; i<3; i++) pos1 += atpos[i1][i] * latvec[i][2];
+    for (int i = 0; i < 3; ++i) pos1 += atpos[i1][i] * latvec[i][2];
     h[il-1] = (pos1 - pos0)*alat;
     pos0 = pos1;
   }
 
   pos1 = 0.;
-  for (int i=0; i<3; i++) pos1 += (atpos[i0][i]+double(i/2)) * latvec[i][2];
+  for (int i = 0; i < 3; ++i) pos1 += (atpos[i0][i]+double(i/2)) * latvec[i][2];
   h[nlayer-1] = (pos1-pos0)*alat;
 
   // get the length of each vector
@@ -211,9 +211,9 @@ void lattice::setup()
 return;
 }
 
-/*------------------------------------------------------------------------------
+/* -----------------------------------------------------------------------------
  * Method to rotate the lattice. angles are in unit of 2*pi
- *----------------------------------------------------------------------------*/
+ * -------------------------------------------------------------------------- */
 void lattice::RotateLattice(double *angles, double rotated[][3])
 {
   const double tPI = 8.*atan(1.);
@@ -235,19 +235,19 @@ void lattice::RotateLattice(double *angles, double rotated[][3])
   rot[2][1] = cosa * sinb * sing - sina * cosg;
   rot[2][2] = cosa * cosb;
 
-  for (int i=0; i<3; i++)
-  for (int j=0; j<3; j++) rotated[i][j] = 0.;
+  for (int i = 0; i < 3; ++i)
+  for (int j = 0; j < 3; ++j) rotated[i][j] = 0.;
 
-  for (int i=0; i<3; i++)
-  for (int j=0; j<3; j++)
-  for (int k=0; k<3; k++) rotated[i][j] += rot[i][k] * latvec[k][j];
+  for (int i = 0; i < 3; ++i)
+  for (int j = 0; j < 3; ++j)
+  for (int k = 0; k < 3; ++k) rotated[i][j] += rot[i][k] * latvec[k][j];
 
 return;
 }
 
-/*------------------------------------------------------------------------------
+/* -----------------------------------------------------------------------------
  * Method to rotate the lattice. angles are in unit of 2*pi
- *----------------------------------------------------------------------------*/
+ * -------------------------------------------------------------------------- */
 void lattice::RotateLattice(double *angles)
 {
   const double tPI = 8.*atan(1.);
@@ -270,22 +270,22 @@ void lattice::RotateLattice(double *angles)
   rot[2][2] = cosa * cosb;
 
   double rotated[3][3];
-  for (int i=0; i<3; i++)
-  for (int j=0; j<3; j++) rotated[i][j] = 0.;
+  for (int i = 0; i < 3; ++i)
+  for (int j = 0; j < 3; ++j) rotated[i][j] = 0.;
 
-  for (int i=0; i<3; i++)
-  for (int j=0; j<3; j++)
-  for (int k=0; k<3; k++) rotated[i][j] += rot[i][k] * latvec[k][j];
+  for (int i = 0; i < 3; ++i)
+  for (int j = 0; j < 3; ++j)
+  for (int k = 0; k < 3; ++k) rotated[i][j] += rot[i][k] * latvec[k][j];
 
-  for (int i=0; i<3; i++)
-  for (int j=0; j<3; j++) latvec[i][j] = rotated[i][j];
+  for (int i = 0; i < 3; ++i)
+  for (int j = 0; j < 3; ++j) latvec[i][j] = rotated[i][j];
 
 return;
 }
 
-/*------------------------------------------------------------------------------
+/* -----------------------------------------------------------------------------
  * Private method to get the cross product of two vectors; C[3] = A[3] X B[3]
- *----------------------------------------------------------------------------*/
+ * -------------------------------------------------------------------------- */
 void lattice::Cross(double *A, double *B, double *C)
 {
    C[0] = A[1] * B[2] - A[2] * B[1];
@@ -295,9 +295,9 @@ void lattice::Cross(double *A, double *B, double *C)
 return;
 }
 
-/*------------------------------------------------------------------------------
+/* -----------------------------------------------------------------------------
  * Private method to get the dot product of two vectors of dim 3
- *----------------------------------------------------------------------------*/
+ * -------------------------------------------------------------------------- */
 double lattice::DotProd(double *A, double *B)
 {
 return A[0]*B[0] + A[1]*B[1] + A[2]*B[2];

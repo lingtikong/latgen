@@ -8,9 +8,9 @@
 
 using namespace std;
 
-/* ----------------------------------------------------------------------
-   To select the orientation of the lattice
-------------------------------------------------------------------------- */
+/* -----------------------------------------------------------------------------
+ * To select the orientation of the lattice
+ * -------------------------------------------------------------------------- */
 void AB::AB_Perov()
 {
   char str[MAXLINE];
@@ -20,15 +20,14 @@ void AB::AB_Perov()
   printf("   3. (110), x//[110];           4. (110), x//[001];\n");
   printf("   5. (111), gamma = 120deg;     6. (111), orthogonal, x//[100];\n");
   printf("   7. (111), orth., x//[110];\n");
-  for (int i=0; i<14; i++) printf("-----");
+  for (int i = 0; i < 14; ++i) printf("-----");
   printf("\nYour choice [%d]: ", orient);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) orient = atoi(strtok(str, " \t\n\r\f"));
   printf("You   selected : %d", orient);
-  printf("\n"); for (int i=0; i<14; i++) printf("====="); printf("\n");
+  printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
   
-  for (int i=0; i<3; i++){
-    for (int j=0; j<3; j++) latvec[i][j] = 0.;
-  }
+  for (int i = 0; i < 3; ++i)
+  for (int j = 0; j < 3; ++j) latvec[i][j] = 0.;
 
   // some constants
   const double one12 = 1./12., fiv12 = 5./12., sev12 = 7./12., ele12 = 11./12.;
