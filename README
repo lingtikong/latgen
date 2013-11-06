@@ -8,6 +8,9 @@ with different orientations have been coded, yet the user can provide
 their unit cell info and uses this code to generate the atomic position
 file for their system of interest as well.
 
+In general, the "orientation" means the crystalgraphic direction that
+will be aligned to the Z axes of the cartesian coordinate system.
+
 When one wants to create the atomic position based on their own lattice
 (option 7 in the main menu), one can choose to input the unit cell related
 info step by step or by providing an input file.

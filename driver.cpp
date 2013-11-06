@@ -264,9 +264,9 @@ void Driver::ResetTypeID()
   char str[MAXLINE];
   printf("\n"); for (int i = 0; i < 14; ++i) printf("=====");
   printf("\nThere are %d atomic types in system, and their IDs are:\nIndex : ", ntype);
-  for (int ip = 0; ip < ntype; ++ip) printf("%4d", ip+1); printf("\nTypeID: ");
-  for (int ip = 0; ip < ntype; ++ip) printf("%4d", typeID[ip]); printf("\nNatTyp: ");
-  for (int ip = 0; ip < ntype; ++ip) printf("%4d", numtype[ip]);
+  for (int ip = 0; ip < ntype; ++ip) printf(" %7d", ip+1); printf("\nTypeID: ");
+  for (int ip = 0; ip < ntype; ++ip) printf(" %7d", typeID[ip]); printf("\nNatTyp: ");
+  for (int ip = 0; ip < ntype; ++ip) printf(" %7d", numtype[ip]);
 
   printf("\nPlease input the new type IDs in sequence, enter to skip: ");
   if (count_words(fgets(str,MAXLINE,stdin)) > 0){
@@ -280,8 +280,8 @@ void Driver::ResetTypeID()
     }
     if (num == ntype){
       printf("\nThe new type IDs are:\nIndex : ");
-      for (int ip = 0; ip < ntype; ++ip) printf("%4d", ip+1); printf("\nTypeID: ");
-      for (int ip = 0; ip < ntype; ++ip) printf("%4d", newID[ip]);
+      for (int ip = 0; ip < ntype; ++ip) printf(" %7d", ip+1); printf("\nTypeID: ");
+      for (int ip = 0; ip < ntype; ++ip) printf(" %7d", newID[ip]);
       printf("\nIs this what you want? (y/n)[y]: ");
       int nw = count_words(fgets(str,MAXLINE,stdin));
       char *flag = strtok(str, " \t\n\r\f");
@@ -308,9 +308,9 @@ void Driver::MapElement()
   char str[MAXLINE];
   printf("\n"); for (int i = 0; i < 14; ++i) printf("=====");
   printf("\nThere are %d atomic types in system, and their IDs are:\nIndex : ", ntype);
-  for (int i = 0; i < ntype; ++i) printf(" %6d", i+1); printf("\nTypeID: ");
-  for (int i = 0; i < ntype; ++i) printf(" %6d", typeID[i]); printf("\nNatTyp: ");
-  for (int i = 0; i < ntype; ++i) printf(" %6d", numtype[i]);
+  for (int i = 0; i < ntype; ++i) printf(" %7d", i+1); printf("\nTypeID: ");
+  for (int i = 0; i < ntype; ++i) printf(" %7d", typeID[i]); printf("\nNatTyp: ");
+  for (int i = 0; i < ntype; ++i) printf(" %7d", numtype[i]);
   printf("\nPlease input the element symbols in sequence, enter to skip: ");
   if (count_words(fgets(str,MAXLINE,stdin)) >= ntype){
 
@@ -328,7 +328,7 @@ void Driver::MapElement()
     for (int i = 0; i < ntype; ++i){
       char ename[3];
       int ip = typeID[i]; element->Num2Name(type2num[ip],ename);
-      printf(" %6s", ename);
+      printf(" %7s", ename);
     } printf("\n");
   }
   for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
