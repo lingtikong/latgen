@@ -66,24 +66,24 @@ int USER::read_file(const char *fname)
   char str[MAXLINE];
   // scaling factor (lattice constant)
   fgets(str,MAXLINE,fp); if (feof(fp)){fclose(fp); return 2;}
-  alat = atof(strtok(str, " \t\n\r\f"));
+  alat = numeric(strtok(str, " \t\n\r\f"));
   // basis vectors
   for (int i = 0; i < 3; ++i){
     fgets(str,MAXLINE,fp); if (feof(fp)){fclose(fp); return i+3;}
-    latvec[i][0] = atof(strtok(str,  " \t\n\r\f"));
-    latvec[i][1] = atof(strtok(NULL, " \t\n\r\f"));
-    latvec[i][2] = atof(strtok(NULL, " \t\n\r\f"));
+    latvec[i][0] = numeric(strtok(str,  " \t\n\r\f"));
+    latvec[i][1] = numeric(strtok(NULL, " \t\n\r\f"));
+    latvec[i][2] = numeric(strtok(NULL, " \t\n\r\f"));
   }
   fgets(str,MAXLINE,fp); if (feof(fp)){fclose(fp); return 6;}
   ntype = count_words(str);
 
   int *ntm = new int[ntype];
   char *ptr = strtok(str," \t\n\r\f");
-  nucell = ntm[0] = atoi(ptr);
+  nucell = ntm[0] = inumeric(ptr);
 
   for (int i = 1; i < ntype; ++i){
     ptr = strtok(NULL," \t\n\r\f");
-    ntm[i] = atoi(ptr);
+    ntm[i] = inumeric(ptr);
     nucell += ntm[i];
   }
 
@@ -94,9 +94,9 @@ int USER::read_file(const char *fname)
   for (int ip = 0; ip < ntype;   ++ip)
   for (int i  = 0; i  < ntm[ip]; ++i){
     fgets(str,MAXLINE,fp); if (feof(fp)){fclose(fp); return 7;}
-    atpos[iatom][0] = atof(strtok(str,  " \t\n\r\f"));
-    atpos[iatom][1] = atof(strtok(NULL, " \t\n\r\f"));
-    atpos[iatom][2] = atof(strtok(NULL, " \t\n\r\f"));
+    atpos[iatom][0] = numeric(strtok(str,  " \t\n\r\f"));
+    atpos[iatom][1] = numeric(strtok(NULL, " \t\n\r\f"));
+    atpos[iatom][2] = numeric(strtok(NULL, " \t\n\r\f"));
     attyp[iatom++] = ip+1;
   }
   fclose(fp);
@@ -114,16 +114,16 @@ int USER::read_stdin()
   // ask for lattice constant
   alat = 1.;
   printf("\nPlease input the lattice constant of the USER lattice [1.0]: ");
-  if (count_words(fgets(str,MAXLINE,stdin))>0) alat = atof(strtok(str, " \t\n\r\f"));
+  if (count_words(fgets(str,MAXLINE,stdin))>0) alat = numeric(strtok(str, " \t\n\r\f"));
 
   // ask for lattice vectors
   for (int i = 0; i < 3; ++i){
     while ( 1 ){
       printf("Please input the lattice vector A%d: ", i+1);
       if (count_words(fgets(str,MAXLINE,stdin)) < 3) continue;
-      latvec[i][0] = atof(strtok(str,  " \t\n\r\f"));
-      latvec[i][1] = atof(strtok(NULL, " \t\n\r\f"));
-      latvec[i][2] = atof(strtok(NULL, " \t\n\r\f"));
+      latvec[i][0] = numeric(strtok(str,  " \t\n\r\f"));
+      latvec[i][1] = numeric(strtok(NULL, " \t\n\r\f"));
+      latvec[i][2] = numeric(strtok(NULL, " \t\n\r\f"));
 
       break;
     }
@@ -132,12 +132,12 @@ int USER::read_stdin()
   // ask for # of atoms and # of atom types
   nucell = ntype = 1;
   printf("Please input the number of atoms per unit cell [1]: ");
-  if (count_words(fgets(str,MAXLINE,stdin)) > 0) nucell = atoi(strtok(str, " \t\n\r\f"));
+  if (count_words(fgets(str,MAXLINE,stdin)) > 0) nucell = inumeric(strtok(str, " \t\n\r\f"));
   if (nucell < 1) return 1;
 
   if (nucell != 1){
     printf("Please input the number of atom  types in cell [1]: ");
-    if (count_words(fgets(str,MAXLINE,stdin))>0) ntype = atoi(strtok(str, " \t\n\r\f"));
+    if (count_words(fgets(str,MAXLINE,stdin))>0) ntype = inumeric(strtok(str, " \t\n\r\f"));
     if (ntype < 1) return 2;
     if (ntype > nucell) ntype = nucell;
   }
@@ -148,10 +148,10 @@ int USER::read_stdin()
   for (int i = 0; i < nucell; ++i){
     do printf("Please input [type xs ys zs] for atom %d: ", i+1);
     while (count_words(fgets(str,MAXLINE,stdin)) < 4);
-    attyp[i]    = atoi(strtok(str,  " \t\n\r\f"));
-    atpos[i][0] = atof(strtok(NULL, " \t\n\r\f"));
-    atpos[i][1] = atof(strtok(NULL, " \t\n\r\f"));
-    atpos[i][2] = atof(strtok(NULL, " \t\n\r\f"));
+    attyp[i]    = inumeric(strtok(str,  " \t\n\r\f"));
+    atpos[i][0] = numeric(strtok(NULL, " \t\n\r\f"));
+    atpos[i][1] = numeric(strtok(NULL, " \t\n\r\f"));
+    atpos[i][2] = numeric(strtok(NULL, " \t\n\r\f"));
   }
 
 return 0;

@@ -1,6 +1,7 @@
 #include "lattice.h"
 #include "stdlib.h"
 #include "stdio.h"
+#include "ctype.h"
 #include "string.h"
 #include "math.h"
 #include <list>
@@ -303,4 +304,39 @@ double lattice::DotProd(double *A, double *B)
 return A[0]*B[0] + A[1]*B[1] + A[2]*B[2];
 }
 
+/* -----------------------------------------------------------------------------
+ * read a floating point value from a string
+ * generate an error if not a legitimate floating point value
+ * called by various commands to check validity of their arguments
+ * -------------------------------------------------------------------------- */
+double lattice::numeric(char *str)
+{
+  int n = strlen(str);
+  for (int i = 0; i < n; ++i) {
+    if (isdigit(str[i])) continue;
+    if (str[i] == '-' || str[i] == '+' || str[i] == '.') continue;
+    if (str[i] == 'e' || str[i] == 'E') continue;
+    printf("ERROR: wrong input when a floating point parameter is expected!\n\n");
+    exit(1);
+  }
+
+  return atof(str);
+}
+
+/* -----------------------------------------------------------------------------
+ * read an integer value from a string
+ * generate an error if not a legitimate integer value
+ * called by various commands to check validity of their arguments
+ * -------------------------------------------------------------------------- */
+int lattice::inumeric(char *str)
+{
+  int n = strlen(str);
+  for (int i = 0; i < n; i++) {
+    if (isdigit(str[i]) || str[i] == '-' || str[i] == '+') continue;
+    printf("ERROR: wrong input when a integer number is expected!\n\n");
+    exit(1);
+  }
+
+  return atoi(str);
+}
 /*----------------------------------------------------------------------------*/

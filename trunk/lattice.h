@@ -37,6 +37,8 @@ public:
 
   int count_words(const char *);
 
+  double numeric(char *);
+  int inumeric(char *);
 private:
   void setup();        // to setup "numlayer", "h", "perp_?", "l?", "h?"
   void Cross(double *A, double *B, double *C); // C = A X B
