@@ -316,7 +316,7 @@ double lattice::numeric(char *str)
     if (isdigit(str[i])) continue;
     if (str[i] == '-' || str[i] == '+' || str[i] == '.') continue;
     if (str[i] == 'e' || str[i] == 'E') continue;
-    printf("ERROR: wrong input when a floating point parameter is expected!\n\n");
+    printf("ERROR: wrong input (%s) when a float is expected!\n\n", str);
     exit(1);
   }
 
@@ -333,7 +333,7 @@ int lattice::inumeric(char *str)
   int n = strlen(str);
   for (int i = 0; i < n; i++) {
     if (isdigit(str[i]) || str[i] == '-' || str[i] == '+') continue;
-    printf("ERROR: wrong input when a integer number is expected!\n\n");
+    printf("ERROR: wrong input (%s) when an integer is expected!\n\n", str);
     exit(1);
   }
 
