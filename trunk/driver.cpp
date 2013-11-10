@@ -877,8 +877,7 @@ void Driver::FormLayers()
         if (zflag) zprev[ilat] = 0;
         zprev[ilat] += istr;
 
-        ptr[0] = ' ';
-        int nl_new  = latt->inumeric(ptr);
+        int nl_new  = latt->inumeric(&ptr[1]);
         int ntm_new = 0;
         for (int i = 0; i < nl_new; ++i) ntm_new += latt->numlayer[(i+zprev[ilat])%latt->nlayer];
 
