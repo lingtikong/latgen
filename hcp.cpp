@@ -850,7 +850,6 @@ void HCP::HCP10m1()
   int surftype = 1;
   // print out the menu
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
-  printf("NOTE: This might work only for HCP with ideal c/a ration.\n");
   printf("   1. U along x;            2. V along y;\n");
   printf("Your choice [%d]: ", surftype);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = inumeric(strtok(str, " \t\n\r\f"));
@@ -864,6 +863,7 @@ void HCP::HCP10m1()
   strcpy(name, "HCP(10-1)");
  
   // initialize according to surface type
+  double lb = sqrt(1. + ca*ca);
   double c_ang = -0.5/sqrt(ca*ca + 1.);
   switch (surftype){
   case 1:
@@ -1313,7 +1313,6 @@ void HCP::HCP112()
   int surftype = 1;
   // print out the menu
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
-  printf("NOTE: This might work only for HCP with ideal c/a ration.\n");
   printf("   1. Long side along x;\n");
   printf("   2. Long side along y;\n");
   printf("Your choice [%d]: ", surftype);
