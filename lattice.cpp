@@ -205,9 +205,9 @@ void lattice::setup()
   double AdotC = DotProd(latvec[0], latvec[2]);
   double BdotC = DotProd(latvec[1], latvec[2]);
 
-  if ( (AdotB+AdotC) < 1.e-8 ) perp_x = 1;
-  if ( (AdotB+BdotC) < 1.e-8 ) perp_y = 1;
-  if ( (AdotC+BdotC) < 1.e-8 ) perp_z = 1;
+  if ( abs(AdotB) + abs(AdotC) < 1.e-5 ) perp_x = 1;
+  if ( abs(AdotB) + abs(BdotC) < 1.e-5 ) perp_y = 1;
+  if ( abs(AdotC) + abs(BdotC) < 1.e-5 ) perp_z = 1;
 
 return;
 }

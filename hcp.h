@@ -14,6 +14,8 @@ private:
   void HCP100();
   void HCP110();
   void HCPm10();
+  void HCP10m1();
+  void HCP112();
   void Graphene();
   void Graphite();
   double ca;
