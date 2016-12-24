@@ -1,7 +1,7 @@
 latgen : a lattice generation code
-
+#
 Author: Ling-Ti Kong,  konglt_AT_sjtu.edu.cn
-
+#-------------------------------------------------------------------------------
 This code helps to prepare the atomic position file needed by MD codes,
 as well as the map file needed by fix-phonon. Several typical lattices
 with different orientations have been coded, yet the user can provide
@@ -9,16 +9,16 @@ their unit cell info and uses this code to generate the atomic position
 file for their system of interest as well.
 
 In general, the "orientation" means the crystalgraphic direction that
-will be aligned to the Z axes of the cartesian coordinate system.
+will be aligned to the z axis of the cartesian coordinate system.
 
 When one wants to create the atomic position based on their own lattice
 (option 7 in the main menu), one can choose to input the unit cell related
 info step by step or by providing an input file.
 In the latter case, the format of the input file is similar to that of POSCAR
-of VASP, but differs slightly. Here is an example of FCC Cu, with the conventional
-orientation:
+of VASP, but differs slightly. Here is an example of FCC Cu, with the
+conventional orientation:
 
-########################################
+#-------------------------------------------------------------------------------
 3.615
 1  0  0
 0  1  0
@@ -28,7 +28,7 @@ orientation:
 0.5 0.5 0.
 0.5 0.  0.5
 0.  0.5 0.5 
-########################################
+#-------------------------------------------------------------------------------
 
 The first line is the lattice constant or scaling factor of the lattice,
 the 2nd-4th lines are the basis vectors that define the unit cell.
@@ -40,3 +40,20 @@ reduced unit, i.e., in unit of alat * A1, alat * A2, alat * A3.
 Please note that this code is written for personal use only, no support
 or warranty will be provided. But if any bug found, feel free to drop a line
 to konglt@sjtu.edu.cn.
+
+For updates, please check:
+  http://nes.sjtu.edu.cn/english/research/software.htm
+or
+  https://github.com/lingtikong/phana.git
+
+#-------------------------------------------------------------------------------
+INSTALL:
+It should be very easy to compile this code:
+1) Modify the Makefile, set the correct path info for your compiler;
+   The as-provided Makefile should work under most Linux systems.
+2) make
+3) cp latgen ~/bin
+#-------------------------------------------------------------------------------
+
+Author: Lingti Kong,  konglt(at)sjtu.edu.cn
+Oct 2015

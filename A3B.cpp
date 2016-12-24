@@ -1741,8 +1741,9 @@ void A3B::A3B_L12()
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
   printf("Please selection the type of A3B-L12 surface:\n");
   printf("   1. (001), conventional;\n");
-  printf("   2. (110), orthogonal, long along y;\n");
-  printf("   3. (111), orthogonal, long along y;\n");
+  printf("   2. (001), rotated by 45 deg;\n");
+  printf("   3. (110), orthogonal, long along y;\n");
+  printf("   4. (111), orthogonal, long along y;\n");
   printf("Your choice [%d]: ", surftype);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = inumeric(strtok(str, " \t\n\r\f"));
   printf("Your selection : %d\n", surftype);
@@ -1789,7 +1790,64 @@ void A3B::A3B_L12()
 
     initialized = 1;
     break;
+
   case 2:
+    memory->create(name,13,"A3B:name");
+    strcpy(name, "A3B-L12(001)-rotated");
+
+    ntype  = 2;
+    nucell = 8;
+    
+    latvec[0][0] = sqrt(2.);
+    latvec[1][1] = sqrt(2.);
+    latvec[2][2] = 1.;
+
+    memory->create(atpos, nucell, 3, "A3B:atpos");
+    memory->create(attyp, nucell, "A3B:attyp");
+
+    attyp[0] = ip2;
+    atpos[0][0] = 0.;
+    atpos[0][1] = 0.;
+    atpos[0][2] = 0.;
+    
+    attyp[1] = ip2;
+    atpos[1][0] = 0.5;
+    atpos[1][1] = 0.5;
+    atpos[1][2] = 0.;
+    
+    attyp[2] = ip1;
+    atpos[2][0] = 0.5;
+    atpos[2][1] = 0.;
+    atpos[2][2] = 0.;
+    
+    attyp[3] = ip1;
+    atpos[3][0] = 0.;
+    atpos[3][1] = 0.5;
+    atpos[3][2] = 0.;
+    
+    attyp[4] = ip1;
+    atpos[4][0] = 0.25;
+    atpos[4][1] = 0.25;
+    atpos[4][2] = 0.5;
+    
+    attyp[5] = ip1;
+    atpos[5][0] = 0.25;
+    atpos[5][1] = 0.75;
+    atpos[5][2] = 0.5;
+
+    attyp[6] = ip1;
+    atpos[6][0] = 0.75;
+    atpos[6][1] = 0.25;
+    atpos[6][2] = 0.5;
+    
+    attyp[7] = ip1;
+    atpos[7][0] = 0.75;
+    atpos[7][1] = 0.75;
+    atpos[7][2] = 0.5;
+
+    initialized = 1;
+    break;
+  case 3:
     memory->create(name,13,"A3B:name");
     strcpy(name, "A3B-L12(110)");
 
@@ -1845,7 +1903,7 @@ void A3B::A3B_L12()
 
     initialized = 1;
     break;
-  case 3:
+  case 4:
     memory->create(name,13,"A3B:name");
     strcpy(name, "A3B-L12(111)");
 

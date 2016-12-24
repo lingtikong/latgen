@@ -1,7 +1,7 @@
 .SUFFIXES : .o .cpp
 # compiler and flags
 CC     = g++ -Wno-unused-result
-LINK   = $(CC)
+LINK   = $(CC) -static
 CFLAGS = -O3 $(UFLAG) $(DEBUG)
 #
 OFLAGS = -O3 $(DEBUG)
@@ -17,8 +17,8 @@ LIB    = $(FFTLIB) $(LPKLIB) $(USRLIB) $(VoroLIB)
 #LPKLIB = -L/opt/clapack/3.2.1/lib -lclapack -lblas -lf2c -lm
 
 # Voro++
-VoroINC = -I/home/faculty/konglt/resource/voro_svn/src
-VoroLIB = -L/home/faculty/konglt/resource/voro_svn/src -lvoro++
+VoroINC = -I/opt/libs/voro/include/voro++
+VoroLIB = -L/opt/libs/voro/lib -lvoro++
 
 # User flag
 UFLAG = -DPoly
@@ -46,7 +46,7 @@ tar:
 	rm -f ${BASE}.tar; tar -czvf ${BASE}.tar.gz *.cpp  *.h Makefile README
 
 ver:
-	@echo "#define VERSION `svn info|grep Revision|cut -d: -f2`" > version.h
+	@echo "#define VERSION `git log|grep ^commit|wc -l`" > version.h; cat version.h
 
 .f.o:
 	$(FC) $(FFLAGS) $(FREE) $(MPI) ${INC} -c $<
