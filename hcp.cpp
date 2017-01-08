@@ -864,7 +864,7 @@ void HCP::HCP10m1()
  
   // initialize according to surface type
   double lb = sqrt(1. + ca*ca);
-  double c_ang = -0.5/sqrt(ca*ca + 1.);
+  double c_ang = sqrt((ca*ca + 0.75)/(ca*ca + 1.));
   switch (surftype){
   case 1:
     latvec[0][0] = 1.;
@@ -875,7 +875,7 @@ void HCP::HCP10m1()
     break;
 
   case 2:
-    latvec[0][0] = c_ang;
+    latvec[0][0] =  c_ang;
     latvec[0][1] = -sqrt(1. - c_ang*c_ang);
     latvec[1][1] = sqrt(ca*ca + 1.);
 
