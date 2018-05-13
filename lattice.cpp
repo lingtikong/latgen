@@ -9,6 +9,7 @@
 
 #define MAX(a,b) ((a) > (b) ? (a) : (b))
 #define MIN(a,b) ((a) < (b) ? (a) : (b))
+#define NearZERO 1.e-6
 
 /* -----------------------------------------------------------------------------
  * constructor does nothing
@@ -205,9 +206,9 @@ void lattice::setup()
   double AdotC = DotProd(latvec[0], latvec[2]);
   double BdotC = DotProd(latvec[1], latvec[2]);
 
-  if ( abs(AdotB) + abs(AdotC) < 1.e-5 ) perp_x = 1;
-  if ( abs(AdotB) + abs(BdotC) < 1.e-5 ) perp_y = 1;
-  if ( abs(AdotC) + abs(BdotC) < 1.e-5 ) perp_z = 1;
+  if ( fabs(AdotB) + fabs(AdotC) <= NearZERO ) perp_x = 1;
+  if ( fabs(AdotB) + fabs(BdotC) <= NearZERO ) perp_y = 1;
+  if ( fabs(AdotC) + fabs(BdotC) <= NearZERO ) perp_z = 1;
 
 return;
 }

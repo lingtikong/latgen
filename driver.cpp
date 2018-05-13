@@ -765,10 +765,10 @@ void Driver::FormLayers()
 
   for (int i = 0; i < nlat; ++i){
     printf("\n>>>>>>   Lattice info for lattice: %c - %s    <<<<<", 'A'+i, latts[i]->name);
+    latts[i]->display();
+
     if (latts[i]->perp_z == 0)
       printf("\nWARNING: A3 is not perpendicular to A1 and A2, this lattice cannot be used to form layers!\n");
-
-    latts[i]->display();
   }
 
   idum = 0;
