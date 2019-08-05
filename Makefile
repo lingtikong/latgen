@@ -21,7 +21,7 @@ VoroINC = -I/opt/libs/voro/include/voro++
 VoroLIB = -L/opt/libs/voro/lib -lvoro++
 
 # User flag
-# UFLAG = -DPoly
+UFLAG = -DPoly
 # Debug flags
 #DEBUG = -g
 #====================================================================
