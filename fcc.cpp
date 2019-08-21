@@ -22,10 +22,10 @@ FCC::FCC() : lattice()
 
   int orient = 3;
   printf("Please select the orientation/type of the FCC lattice:\n");
-  printf("   1. [001] along z;        5. Diamond primitive;\n");
-  printf("   2. [110] along z;        6. Diamond [001] along z;\n");
-  printf("   3. [111] along z;        7. Diamond [110] along z;\n");
-  printf("   4. Primitive cell;       8. Diamond [111] along z;\n");
+  printf("   1. [001] along z;        5. Diamond [001] along z;\n");
+  printf("   2. [110] along z;        6. Diamond [110] along z;\n");
+  printf("   3. [111] along z;        7. Diamond [111] along z;\n");
+  printf("   4. Primitive cell;       8. Diamond primitive;\n");
   for (int i = 0; i < 14; ++i) printf("-----");
   printf("\nYour choice [%d]: ", orient);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) orient = inumeric(strtok(str, " \t\n\r\f"));
@@ -48,16 +48,16 @@ FCC::FCC() : lattice()
     Primitive();
     break;
   case 5:
-    DiamondPrim();
-    break;
-  case 6:
     Diamond001();
     break;
-  case 7:
+  case 6:
     Diamond110();
     break;
-  case 8:
+  case 7:
     Diamond111();
+    break;
+  case 8:
+    DiamondPrim();
     break;
   default:
     break;
