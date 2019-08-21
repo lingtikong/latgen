@@ -27,11 +27,11 @@ HCP::HCP() : lattice()
   printf("The lattice constants of your HCP: a = %g, c/a = %g.\n\n", alat, ca);
 
   int orient = 1;
-  printf("Please select the orientation of the HCP lattice:\n");
-  printf("   1. (001)/(0001);         5. Graphene;\n");
-  printf("   2. (100)/(2-1-10);       6. Graphite;\n");
-  printf("   3. (110)/(11-20);        7. (101)/(2-1-13);\n");
-  printf("   4.(-110)/(-1100);        8. (112)/(11-26);\n");
+  printf("Please select the orientation/type of the HCP lattice:\n");
+  printf("   1. [001]/[0001]   along z;      5. Graphene;\n");
+  printf("   2. [100]/[2-1-10] along z;      6. Graphite;\n");
+  printf("   3. [110]/[11-20]  along z;      7. [101]/[2-1-13] along z;\n");
+  printf("   4.[-110]/[-1100]  along z;      8. [112]/[11-26]  along z;\n");
   printf("Your choice [%d]: ", orient);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) orient = inumeric(strtok(str, " \t\n\r\f"));
   printf("Your selection : %d", orient);
@@ -87,13 +87,13 @@ void HCP::HCP001()
   int surftype = 5;
   // print out the menu
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
-  printf("Please select the type of HCP(001) surface:\n");
+  printf("Please select the type of HCP(001) cell:\n");
   printf("   1. U along x,  60 degree;\n");
   printf("   2. V along y,  60 degree;\n");
   printf("   3. U along x, 120 degree;\n");
   printf("   4. V along y, 120 degree;\n");
-  printf("   5. Rectangle, long along x;\n");
-  printf("   6. Rectangle, long along y;\n");
+  printf("   5. Orthogonal, [1-10] along x;\n");
+  printf("   6. Orthogonal, [1-10] along y;\n");
   printf("Your choice [%d]: ", surftype);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = inumeric(strtok(str, " \t\n\r\f"));
   printf("Your selection : %d", surftype);
@@ -406,12 +406,13 @@ void HCP::Graphene()
   int surftype = 5;
   // print out the menu
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
+  printf("Please select the type of Graphene cell:\n");
   printf("   1. Primitive, U along x,  60 degree;\n");
   printf("   2. Primitive, V along y,  60 degree;\n");
   printf("   3. Primitive, U along x, 120 degree;\n");
   printf("   4. Primitive, V along y, 120 degree;\n");
-  printf("   5. Rectangle, long along x;\n");
-  printf("   6. Rectangle, long along y;\n");
+  printf("   5. Orthogonal, [1-10] along x;\n");
+  printf("   6. Orthogonal, [1-10] along y;\n");
   printf("Your choice [%d]: ", surftype);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = inumeric(strtok(str, " \t\n\r\f"));
   printf("Your selection : %d", surftype);
@@ -592,12 +593,13 @@ void HCP::Graphite()
   int surftype = 5;
   // print out the menu
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
+  printf("Please select the type of Graphite cell:\n");
   printf("   1. Primitive, U along x,  60 degree;\n");
   printf("   2. Primitive, V along y,  60 degree;\n");
   printf("   3. Primitive, U along x, 120 degree;\n");
   printf("   4. Primitive, V along y, 120 degree;\n");
-  printf("   5. Rectangle, long along x;\n");
-  printf("   6. Rectangle, long along y;\n");
+  printf("   5. Orthogonal, [110] along x;\n");
+  printf("   6. Orthogonal, [110] along y;\n");
   printf("Your choice [%d]: ", surftype);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = inumeric(strtok(str, " \t\n\r\f"));
   printf("Your selection : %d", surftype);
@@ -849,6 +851,7 @@ void HCP::HCP10m1()
   int surftype = 1;
   // print out the menu
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
+  printf("Please select the type of the HCP(10-1) cell:\n");
   printf("   1. U = [010]/[-12-10] along x, V = [101]/[2-1-1-3];\n");
   printf("   2. U = [010]/[-12-10], V = [101]/[2-1-13] along y;\n");
   printf("   3. U = [212]/[10-1-2] along x, V = [010/[-12-10] along y;\n");
@@ -2562,6 +2565,7 @@ void HCP::HCP112()
   int surftype = 1;
   // print out the menu
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
+  printf("Please select the type of the HCP(112) cell:\n");
   printf("   1. [1 -1 0] along x;\n");
   printf("   2. [1 -1 0] along y;\n");
   printf("Your choice [%d]: ", surftype);

@@ -95,10 +95,10 @@ void A3B::A3B_A15()
   int surftype = 1;
   // print out the menu
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
-  printf("Please selection the type of A3B-A15 surface:\n");
-  printf("   1. (001) conventional orientation;\n");
-  printf("   2. (110), long along y;\n");
-  printf("   3. (111), long along x, orthogonal;\n");
+  printf("Please select the type of A3B-A15 cell:\n");
+  printf("   1. [001] along z, conventional;\n");
+  printf("   2. [110] along z, [1-10] along y;\n");
+  printf("   3. [111] along z, [1-10] along x, orthogonal;\n");
   printf("Your choice [%d]: ", surftype);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = inumeric(strtok(str, " \t\n\r\f"));
   printf("Your selection : %d\n", surftype);
@@ -412,11 +412,11 @@ void A3B::A3B_D019()
   int surftype = 1;
   // print out the menu
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
-  printf("Please selection the type of A3B-D019 surface:\n");
-  printf("   1. (001), conventional;\n");
-  printf("   2. (001), orthogonal, long along y;\n");
-  printf("   3. (100), orthogonal;\n");
-  printf("   4. (1-10), conventional;\n");
+  printf("Please select the type of A3B-D019 cell:\n");
+  printf("   1. [001]  along z, conventional/primitive;\n");
+  printf("   2. [001]  along z, orthogonal, [110] along y;\n");
+  printf("   3. [100]  along z, orthogonal;\n");
+  printf("   4. [1-10] along z, conventional;\n");
   printf("Your choice [%d]: ", surftype);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = inumeric(strtok(str, " \t\n\r\f"));
   printf("Your selection : %d\n", surftype);
@@ -787,10 +787,10 @@ void A3B::A3B_D022()
   int surftype = 1;
   // print out the menu
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
-  printf("Please selection the type of A3B-D022 surface:\n");
-  printf("   1. (001);\n");
-  printf("   2. (100);\n");
-  printf("   3. (110), long along y, orthogonal;\n");
+  printf("Please select the type of A3B-D022 cell:\n");
+  printf("   1. [001] along z;\n");
+  printf("   2. [100] along z;\n");
+  printf("   3. [110] along z, [1-10] along y, orthogonal;\n");
   printf("   4. primitive cell;\n");
   printf("Your choice [%d]: ", surftype);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = inumeric(strtok(str, " \t\n\r\f"));
@@ -1067,11 +1067,11 @@ void A3B::A3B_D03()
   int surftype = 1;
   // print out the menu
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
-  printf("Please selection the type of A3B-D03 surface:\n");
-  printf("   1. (001), small;\n");
-  printf("   2. (001), conventional;\n");
-  printf("   3. (110), long along y, orthogonal;\n");
-  printf("   4. (111), long along y, orthogonal;\n");
+  printf("Please select the type of A3B-D03 cell:\n");
+  printf("   1. [001] along z, small;\n");
+  printf("   2. [001] along z, conventional;\n");
+  printf("   3. [110] along z, [1-10] along y, orthogonal;\n");
+  printf("   4. [111] along z, [1-10] along y, orthogonal;\n");
   printf("   5. primitive cell;\n");
   printf("Your choice [%d]: ", surftype);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = inumeric(strtok(str, " \t\n\r\f"));
@@ -1481,10 +1481,10 @@ void A3B::A3B_D09()
   int surftype = 1;
   // print out the menu
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
-  printf("Please selection the type of A3B-D09 surface:\n");
-  printf("   1. (001), conventional;\n");
-  printf("   2. (110), orthogonal, long along y;\n");
-  printf("   3. (111), orthogonal, long along y;\n");
+  printf("Please select the type of A3B-D09 cell:\n");
+  printf("   1. [001] along z, conventional;\n");
+  printf("   2. [110] along z, orthogonal, [1-10] along y;\n");
+  printf("   3. [111] along z, orthogonal, [1-10] along y;\n");
   printf("Your choice [%d]: ", surftype);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = inumeric(strtok(str, " \t\n\r\f"));
   printf("Your selection : %d\n", surftype);
@@ -1738,13 +1738,13 @@ void A3B::A3B_L12()
   int surftype = 1;
   // print out the menu
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
-  printf("Please selection the type of A3B-L12 surface:\n");
-  printf("   1. (001), conventional;\n");
-  printf("   2. (001), rotated by 45 deg;\n");
-  printf("   3. (110), orthogonal, long along x;\n");
-  printf("   4. (110), orthogonal, long along y;\n");
-  printf("   5. (111), orthogonal, long along x;\n");
-  printf("   6. (111), orthogonal, long along y;\n");
+  printf("Please select the type of A3B-L12 cell:\n");
+  printf("   1. [001] along z, conventional/primitive;\n");
+  printf("   2. [001] along z, rotated by 45 deg;\n");
+  printf("   3. [110] along z, orthogonal, [1-10] along x;\n");
+  printf("   4. [110] along z, orthogonal, [1-10] along y;\n");
+  printf("   5. [111] along z, orthogonal, [1-10] along x;\n");
+  printf("   6. [111] along z, orthogonal, [1-10] along y;\n");
   printf("Your choice [%d]: ", surftype);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = inumeric(strtok(str, " \t\n\r\f"));
   printf("Your selection : %d\n", surftype);
@@ -2251,10 +2251,10 @@ void A3B::A3B_L60()
   int surftype = 1;
   // print out the menu
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
-  printf("Please selection the type of A3B-L60 surface:\n");
-  printf("   1. (001), conventional;\n");
-  printf("   2. (100), conventional;\n");
-  printf("   3. (110), orthogonal, long along y;\n");
+  printf("Please select the type of A3B-L60 cell:\n");
+  printf("   1. [001] along z, conventional/primitive;\n");
+  printf("   2. [100] along z, conventional;\n");
+  printf("   3. [110] along z, orthogonal, [1-10] along y;\n");
   printf("Your choice [%d]: ", surftype);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = inumeric(strtok(str, " \t\n\r\f"));
   printf("Your selection : %d\n", surftype);

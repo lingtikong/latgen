@@ -21,11 +21,11 @@ BCC::BCC() : lattice()
   if (alat <= 0.) alat = 1.;
 
   int orient = 1;
-  printf("Please selection the orientation of the BCC lattice:\n");
-  printf("   1. (001);\n");
-  printf("   2. (110);\n");
-  printf("   3. (111);\n");
-  printf("   4. (112);\n");
+  printf("Please select the orientation/type of the BCC lattice:\n");
+  printf("   1. [001] along z;\n");
+  printf("   2. [110] along z;\n");
+  printf("   3. [111] along z;\n");
+  printf("   4. [112] along z;\n");
   printf("   5. primitive cell;\n");
   printf("Your choice [%d]: ", orient);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) orient = inumeric(strtok(str, " \t\n\r\f"));
@@ -73,9 +73,9 @@ void BCC::BCC001()
   int surftype = 1;
   // print out the menu
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
-  printf("Please selection the type of BCC(001) surface:\n");
-  printf("   1. conventional orientation;\n");
-  printf("   2. B2 structure;\n");
+  printf("Please select the type of BCC(001) cell:\n");
+  printf("   1. conventional, [100] along x;\n");
+  printf("   2. conventional, B2 structure;\n");
   printf("Your choice [%d]: ", surftype);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = inumeric(strtok(str, " \t\n\r\f"));
   printf("Your selection : %d", surftype);
@@ -150,9 +150,9 @@ void BCC::BCC110()
   int surftype=1;
   // print out the menu
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
-  printf("Please selection the type of BCC(110) surface:\n");
-  printf("   1. orthogonal, long side along x\n");
-  printf("   2. orthogonal, long side along y\n");
+  printf("Please select the type of BCC(110) cell:\n");
+  printf("   1. orthogonal, [110] along x\n");
+  printf("   2. orthogonal, [110] along y\n");
   printf("Your choice [%d]: ", surftype);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = inumeric(strtok(str, " \t\n\r\f"));
   printf("Your selection : %d", surftype);
@@ -243,7 +243,7 @@ void BCC::BCC111()
   int surftype =1;
   // print out the menu
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
-  printf("Please selection the type of BCC(111) surface:\n");
+  printf("Please select the type of BCC(111) cell:\n");
   printf("   1. U = [1-10], V = [10-1]; U // x;\n");
   printf("   2. U = [1-10], V = [10-1]; V // y;\n");
   printf("   3. U = [10-1], V = [1-21]; U // x;\n");
@@ -423,7 +423,7 @@ void BCC::BCC112()
   int surftype =1;
   // print out the menu
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
-  printf("Please selection the type of BCC(111) surface:\n");
+  printf("Please select the type of BCC(111) cell:\n");
   printf("   1. U = [1-10], V = [.5,.5,-.5]; U // x\n");
   printf("   2. U = [.5,.5,-.5], V = [-110]; U // x\n");
   printf("Your choice [%d]: ", surftype);

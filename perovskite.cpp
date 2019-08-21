@@ -14,11 +14,11 @@ void AB::AB_Perov()
 {
   char str[MAXLINE];
   int orient = 1;
-  printf("Please selection the orientation of the Perovskite lattice:\n");
-  printf("   1. Conventional (001);        2. (001), x//[110], y//[-110];\n");
-  printf("   3. (110), x//[110];           4. (110), x//[001];\n");
-  printf("   5. (111), gamma = 120deg;     6. (111), orthogonal, x//[100];\n");
-  printf("   7. (111), orth., x//[110];\n");
+  printf("Please select the orientation/type of the Perovskite lattice:\n");
+  printf("   1. Conventional, [001]//z;     2. [001]//z, [110]//x, [-110]//y;\n");
+  printf("   3. [110]//z, [110]//x;         4. [110]//z, [001]//x;\n");
+  printf("   5. [111]//z, gamma = 120deg;   6. [111]//z, [100]//x, orthogonal;\n");
+  printf("   7. [111]//z, orthogonal, [110]//x;\n");
   for (int i = 0; i < 14; ++i) printf("-----");
   printf("\nYour choice [%d]: ", orient);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) orient = inumeric(strtok(str, " \t\n\r\f"));

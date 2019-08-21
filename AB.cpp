@@ -88,11 +88,11 @@ void AB::AB_B1()
   int surftype = 1;
   // print out the menu
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
-  printf("Please selection the type of AB-B1 (NaCl) surface:\n");
-  printf("   1. (001), small;\n");
-  printf("   2. (001), conventional;\n");
-  printf("   3. (110), long along y;\n");
-  printf("   4. (111), long along x, orthogonal;\n");
+  printf("Please select the type of AB-B1 (NaCl) cell:\n");
+  printf("   1. [001] along z, small;\n");
+  printf("   2. [001] along z, conventional;\n");
+  printf("   3. [110] along z, [1-10] along y;\n");
+  printf("   4. [111] along z, [1-10] along x, orthogonal;\n");
   printf("   5. primitive cell;\n");
   printf("Your choice [%d]: ", surftype);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = inumeric(strtok(str, " \t\n\r\f"));
@@ -352,10 +352,10 @@ void AB::AB_B2()
   int surftype = 1;
   // print out the menu
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
-  printf("Please selection the type of AB-B2 (CsCl) surface:\n");
-  printf("   1. (100);\n");
-  printf("   2. (110);\n");
-  printf("   3. (111);\n");
+  printf("Please select the type of AB-B2 (CsCl) cell:\n");
+  printf("   1. [100] along z;\n");
+  printf("   2. [110] along z;\n");
+  printf("   3. [111] along z;\n");
   printf("Your choice [%d]: ", surftype);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = inumeric(strtok(str, " \t\n\r\f"));
   printf("Your selection : %d", surftype);
@@ -519,11 +519,11 @@ void AB::AB_B3()
   int surftype = 1;
   // print out the menu
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
-  printf("Please selection the type of AB-B3 surface:\n");
-  printf("   1. (100), small;\n");
-  printf("   2. (100), conventional;\n");
-  printf("   3. (110), long along y, orthogonal;\n");
-  printf("   4. (111), long along y, orthogonal;\n");
+  printf("Please select the type of AB-B3 cell:\n");
+  printf("   1. [100] along z, small;\n");
+  printf("   2. [100] along z, conventional;\n");
+  printf("   3. [110] along z, [1-10] along y, orthogonal;\n");
+  printf("   4. [111] along z, [1-10] along y, orthogonal;\n");
   printf("   5. primitive;\n");
   printf("Your choice [%d]: ", surftype);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = inumeric(strtok(str, " \t\n\r\f"));
@@ -783,10 +783,10 @@ void AB::AB_L10()
   int surftype = 1;
   // print out the menu
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
-  printf("Please selection the type of AB-L10 surface:\n");
-  printf("   1. (001);\n");
-  printf("   2. (100);\n");
-  printf("   3. (110), long along y, orthogonal;\n");
+  printf("Please select the type of AB-L10 cell:\n");
+  printf("   1. [001] along z;\n");
+  printf("   2. [100] along z;\n");
+  printf("   3. [110] along z, [1-10] along y, orthogonal;\n");
   printf("   4. primitive cell;\n");
   printf("Your choice [%d]: ", surftype);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = inumeric(strtok(str, " \t\n\r\f"));
@@ -947,12 +947,12 @@ void AB::AB_NiAs()
   int surftype = 1;
   // print out the menu
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
-  printf("Please selection the type of AB-a-NiAs surface:\n");
-  printf("   1. (001), conventional;\n");
-  printf("   2. (001), orthogonal;\n");
-  printf("   3. (100);\n");
-  printf("   4. (110), orthogonal, long along y;\n");
-  printf("   5. (1-10), orthogonal, long along y;\n");
+  printf("Please select the type of AB-a-NiAs cell:\n");
+  printf("   1. [001]  along z, conventional;\n");
+  printf("   2. [001]  along z, orthogonal;\n");
+  printf("   3. [100]  along z;\n");
+  printf("   4. [110]  along z, orthogonal, [1-10] along y;\n");
+  printf("   5. [1-10] along z, orthogonal, [110]  along y;\n");
   printf("Your choice [%d]: ", surftype);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = inumeric(strtok(str, " \t\n\r\f"));
   printf("Your selection : %d", surftype);
@@ -1242,11 +1242,11 @@ void AB::AB_B4()
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
   printf("Please indicate the relative position of the two lattices along c [%g]: ", u);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) u = numeric(strtok(str, " \t\n\r\f"));
-  printf("\nPlease selection the type of AB-B4 surface:\n");
-  printf("   1. (001), gamma =  60 degree;\n");
-  printf("   2. (001), gamma = 120 degree;\n");
-  printf("   3. (001), orthogonal, long x;\n");
-  printf("   4. (001), orthogonal, long y;\n");
+  printf("\nPlease select the type of AB-B4 cell:\n");
+  printf("   1. [001] along z, gamma =  60 degree;\n");
+  printf("   2. [001] along z, gamma = 120 degree;\n");
+  printf("   3. [001] along z, orthogonal, long x;\n");
+  printf("   4. [001] along z, orthogonal, long y;\n");
   printf("Your choice [%d]: ", surftype);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = inumeric(strtok(str, " \t\n\r\f"));
   printf("Your selection : %d", surftype);

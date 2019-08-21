@@ -82,11 +82,11 @@ void A2B::A2B_C1()
   int surftype = 1;
   // print out the menu
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
-  printf("Please selection the type of A2B-C1 surface:\n");
-  printf("   1. (001), small;\n");
-  printf("   2. (001), conventional;\n");
-  printf("   3. (110), long along y;\n");
-  printf("   4. (111), long along x, orthogonal;\n");
+  printf("Please select the type of A2B-C1 cell:\n");
+  printf("   1. [001] along z, primitive;\n");
+  printf("   2. [001] along z, conventional;\n");
+  printf("   3. [110] along z, [1-10] along y;\n");
+  printf("   4. [111] along z, orthogonal, [1-10] along x;\n");
   printf("   5. primitive cell;\n");
   printf("Your choice [%d]: ", surftype);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = inumeric(strtok(str, " \t\n\r\f"));
@@ -421,11 +421,11 @@ void A2B::A2B_C15()
   int surftype = 1;
   // print out the menu
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
-  printf("Please selection the type of A2B-C15 surface:\n");
-  printf("   1. (001), small;\n");
-  printf("   2. (001), conventional;\n");
-  printf("   3. (110), long along y;\n");
-  printf("   4. (111), long along x, orthogonal;\n");
+  printf("Please select the type of A2B-C15 cell:\n");
+  printf("   1. [001] along z, small;\n");
+  printf("   2. [001] along z, conventional;\n");
+  printf("   3. [110] along z, [1-10] along y;\n");
+  printf("   4. [111] along z, [1-10] along x, orthogonal;\n");
   printf("   5. primitive cell;\n");
   printf("Your choice [%d]: ", surftype);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = inumeric(strtok(str, " \t\n\r\f"));
@@ -985,12 +985,12 @@ void A2B::A2B_C32()
   int surftype = 1;
   // print out the menu
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
-  printf("Please selection the type of A2B-C32 surface:\n");
-  printf("   1. (001), conventional;\n");
-  printf("   2. (001), orthogonal;\n");
-  printf("   3. (100);\n");
-  printf("   4. (110), long along y;\n");
-  printf("   5. (1-10), long along y;\n");
+  printf("Please select the type of A2B-C32 cell:\n");
+  printf("   1. [001]  along z, conventional;\n");
+  printf("   2. [001]  along z, orthogonal;\n");
+  printf("   3. [100]  along z, conventional;\n");
+  printf("   4. [110]  along z, [1-10] along y;\n");
+  printf("   5. [1-10] along z, [110]  along y;\n");
   printf("Your choice [%d]: ", surftype);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = inumeric(strtok(str, " \t\n\r\f"));
   printf("Your selection : %d\n", surftype);
