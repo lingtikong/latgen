@@ -3,8 +3,7 @@
 #include "stdlib.h"
 #include "string.h"
 #include "math.h"
-
-#define MAXLINE 256
+#include "common.h"
 
 using namespace std;
 

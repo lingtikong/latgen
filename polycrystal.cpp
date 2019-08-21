@@ -6,13 +6,10 @@
 #include <time.h>
 #include <math.h>
 #include "random.h"
+#include "common.h"
 
 #include "voro++.hh"
 using namespace voro;
-
-#define MAXLINE 512
-#define MAX(a,b) ((a) > (b) ? (a) : (b))
-#define MIN(a,b) ((a) < (b) ? (a) : (b))
 
 /* -----------------------------------------------------------------------------
  * Method to create polycrystals

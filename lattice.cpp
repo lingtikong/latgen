@@ -6,10 +6,7 @@
 #include "math.h"
 #include <list>
 #include <map>
-
-#define MAX(a,b) ((a) > (b) ? (a) : (b))
-#define MIN(a,b) ((a) < (b) ? (a) : (b))
-#define NearZERO 1.e-6
+#include "common.h"
 
 /* -----------------------------------------------------------------------------
  * constructor does nothing

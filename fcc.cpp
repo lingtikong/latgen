@@ -3,8 +3,7 @@
 #include "stdlib.h"
 #include "string.h"
 #include "math.h"
-
-#define MAXLINE 256
+#include "common.h"
 
 using namespace std;
 
@@ -170,6 +169,8 @@ void FCC::FCC110()
   printf("Please selection the type of FCC(110) surface:\n");
   printf("   1. orthogonal, long side along x\n");
   printf("   2. orthogonal, long side along y\n");
+  printf("   3. conv, orth, long side along x\n");
+  printf("   4. conv, orth, long side along y\n");
   printf("Your choice [%d]: ", surftype);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = inumeric(strtok(str, " \t\n\r\f"));
   printf("Your selection : %d", surftype);
@@ -225,6 +226,102 @@ void FCC::FCC110()
     atpos[1][0] = 0.5;
     atpos[1][1] = 0.5;
     atpos[1][2] = 0.5;
+
+    initialized = 1;
+    break;
+
+  case 4:
+    ntype  = 1;
+    nucell = 8;
+    
+    latvec[0][0] = 1.;
+    latvec[1][1] = sqrt(2.);
+    latvec[2][2] = sqrt(2.);
+
+    memory->create(atpos, nucell, 3, "fcc:atpos");
+    memory->create(attyp, nucell, "fcc:attyp");
+    
+    for (int i = 0; i < nucell; ++i) attyp[i] = 1;
+
+    atpos[0][0] = 0.;
+    atpos[0][1] = 0.50;
+    atpos[0][2] = 0.;
+    
+    atpos[1][0] = 0.;
+    atpos[1][1] = 0.;
+    atpos[1][2] = 0.;
+    
+    atpos[2][0] = 0.5;
+    atpos[2][1] = 0.25;
+    atpos[2][2] = 0.25;
+    
+    atpos[3][0] = 0.5;
+    atpos[3][1] = 0.75;
+    atpos[3][2] = 0.25;
+    
+    atpos[4][0] = 0.;
+    atpos[4][1] = 0.;
+    atpos[4][2] = 0.50;
+    
+    atpos[5][0] = 0.;
+    atpos[5][1] = 0.50;
+    atpos[5][2] = 0.50;
+    
+    atpos[6][0] = 0.5;
+    atpos[6][1] = 0.75;
+    atpos[6][2] = 0.75;
+    
+    atpos[7][0] = 0.5;
+    atpos[7][1] = 0.25;
+    atpos[7][2] = 0.75;
+
+    initialized = 1;
+    break;
+
+  case 3:
+    ntype  = 1;
+    nucell = 8;
+    
+    latvec[0][0] = sqrt(2.);
+    latvec[1][1] = 1.;
+    latvec[2][2] = sqrt(2.);
+
+    memory->create(atpos, nucell, 3, "fcc:atpos");
+    memory->create(attyp, nucell, "fcc:attyp");
+    
+    for (int i = 0; i < nucell; ++i) attyp[i] = 1;
+
+    atpos[0][0] = 0.50;
+    atpos[0][1] = 0.;
+    atpos[0][2] = 0.;
+    
+    atpos[1][0] = 0.;
+    atpos[1][1] = 0.;
+    atpos[1][2] = 0.;
+    
+    atpos[2][0] = 0.25;
+    atpos[2][1] = 0.5;
+    atpos[2][2] = 0.25;
+    
+    atpos[3][0] = 0.75;
+    atpos[3][1] = 0.5;
+    atpos[3][2] = 0.25;
+    
+    atpos[4][0] = 0.;
+    atpos[4][1] = 0.;
+    atpos[4][2] = 0.50;
+    
+    atpos[5][0] = 0.5;
+    atpos[5][1] = 0.;
+    atpos[5][2] = 0.50;
+    
+    atpos[6][0] = 0.75;
+    atpos[6][1] = 0.5;
+    atpos[6][2] = 0.75;
+    
+    atpos[7][0] = 0.25;
+    atpos[7][1] = 0.5;
+    atpos[7][2] = 0.75;
 
     initialized = 1;
     break;
