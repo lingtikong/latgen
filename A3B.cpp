@@ -3,8 +3,7 @@
 #include "stdlib.h"
 #include "string.h"
 #include "math.h"
-
-#define MAXLINE 256
+#include "common.h"
 
 using namespace std;
 
@@ -96,10 +95,10 @@ void A3B::A3B_A15()
   int surftype = 1;
   // print out the menu
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
-  printf("Please selection the type of A3B-A15 surface:\n");
-  printf("   1. (001) conventional orientation;\n");
-  printf("   2. (110), long along y;\n");
-  printf("   3. (111), long along x, orthogonal;\n");
+  printf("Please select the type of A3B-A15 cell:\n");
+  printf("   1. [001] along z, conventional;\n");
+  printf("   2. [110] along z, [1-10] along y;\n");
+  printf("   3. [111] along z, [1-10] along x, orthogonal;\n");
   printf("Your choice [%d]: ", surftype);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = inumeric(strtok(str, " \t\n\r\f"));
   printf("Your selection : %d\n", surftype);
@@ -413,11 +412,11 @@ void A3B::A3B_D019()
   int surftype = 1;
   // print out the menu
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
-  printf("Please selection the type of A3B-D019 surface:\n");
-  printf("   1. (001), conventional;\n");
-  printf("   2. (001), orthogonal, long along y;\n");
-  printf("   3. (100), orthogonal;\n");
-  printf("   4. (1-10), conventional;\n");
+  printf("Please select the type of A3B-D019 cell:\n");
+  printf("   1. [001]  along z, conventional/primitive;\n");
+  printf("   2. [001]  along z, orthogonal, [110] along y;\n");
+  printf("   3. [100]  along z, orthogonal;\n");
+  printf("   4. [1-10] along z, conventional;\n");
   printf("Your choice [%d]: ", surftype);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = inumeric(strtok(str, " \t\n\r\f"));
   printf("Your selection : %d\n", surftype);
@@ -788,10 +787,10 @@ void A3B::A3B_D022()
   int surftype = 1;
   // print out the menu
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
-  printf("Please selection the type of A3B-D022 surface:\n");
-  printf("   1. (001);\n");
-  printf("   2. (100);\n");
-  printf("   3. (110), long along y, orthogonal;\n");
+  printf("Please select the type of A3B-D022 cell:\n");
+  printf("   1. [001] along z;\n");
+  printf("   2. [100] along z;\n");
+  printf("   3. [110] along z, [1-10] along y, orthogonal;\n");
   printf("   4. primitive cell;\n");
   printf("Your choice [%d]: ", surftype);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = inumeric(strtok(str, " \t\n\r\f"));
@@ -1068,11 +1067,11 @@ void A3B::A3B_D03()
   int surftype = 1;
   // print out the menu
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
-  printf("Please selection the type of A3B-D03 surface:\n");
-  printf("   1. (001), small;\n");
-  printf("   2. (001), conventional;\n");
-  printf("   3. (110), long along y, orthogonal;\n");
-  printf("   4. (111), long along y, orthogonal;\n");
+  printf("Please select the type of A3B-D03 cell:\n");
+  printf("   1. [001] along z, small;\n");
+  printf("   2. [001] along z, conventional;\n");
+  printf("   3. [110] along z, [1-10] along y, orthogonal;\n");
+  printf("   4. [111] along z, [1-10] along y, orthogonal;\n");
   printf("   5. primitive cell;\n");
   printf("Your choice [%d]: ", surftype);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = inumeric(strtok(str, " \t\n\r\f"));
@@ -1482,10 +1481,10 @@ void A3B::A3B_D09()
   int surftype = 1;
   // print out the menu
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
-  printf("Please selection the type of A3B-D09 surface:\n");
-  printf("   1. (001), conventional;\n");
-  printf("   2. (110), orthogonal, long along y;\n");
-  printf("   3. (111), orthogonal, long along y;\n");
+  printf("Please select the type of A3B-D09 cell:\n");
+  printf("   1. [001] along z, conventional;\n");
+  printf("   2. [110] along z, orthogonal, [1-10] along y;\n");
+  printf("   3. [111] along z, orthogonal, [1-10] along y;\n");
   printf("Your choice [%d]: ", surftype);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = inumeric(strtok(str, " \t\n\r\f"));
   printf("Your selection : %d\n", surftype);
@@ -1739,11 +1738,13 @@ void A3B::A3B_L12()
   int surftype = 1;
   // print out the menu
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
-  printf("Please selection the type of A3B-L12 surface:\n");
-  printf("   1. (001), conventional;\n");
-  printf("   2. (001), rotated by 45 deg;\n");
-  printf("   3. (110), orthogonal, long along y;\n");
-  printf("   4. (111), orthogonal, long along y;\n");
+  printf("Please select the type of A3B-L12 cell:\n");
+  printf("   1. [001] along z, conventional/primitive;\n");
+  printf("   2. [001] along z, rotated by 45 deg;\n");
+  printf("   3. [110] along z, orthogonal, [1-10] along x;\n");
+  printf("   4. [110] along z, orthogonal, [1-10] along y;\n");
+  printf("   5. [111] along z, orthogonal, [1-10] along x;\n");
+  printf("   6. [111] along z, orthogonal, [1-10] along y;\n");
   printf("Your choice [%d]: ", surftype);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = inumeric(strtok(str, " \t\n\r\f"));
   printf("Your selection : %d\n", surftype);
@@ -1847,7 +1848,8 @@ void A3B::A3B_L12()
 
     initialized = 1;
     break;
-  case 3:
+
+  case 4:
     memory->create(name,13,"A3B:name");
     strcpy(name, "A3B-L12(110)");
 
@@ -1903,7 +1905,202 @@ void A3B::A3B_L12()
 
     initialized = 1;
     break;
-  case 4:
+
+  case 3:
+    memory->create(name,13,"A3B:name");
+    strcpy(name, "A3B-L12(110)");
+
+    ntype  = 2;
+    nucell = 8;
+    
+    latvec[0][0] = sqrt(2.);
+    latvec[1][1] = 1.;
+    latvec[2][2] = sqrt(2.);
+
+    memory->create(atpos, nucell, 3, "A3B:atpos");
+    memory->create(attyp, nucell, "A3B:attyp");
+    
+    attyp[0] = ip1;
+    atpos[0][0] = 0.5;
+    atpos[0][1] = 0.;
+    atpos[0][2] = 0.;
+    
+    attyp[1] = ip2;
+    atpos[1][0] = 0.;
+    atpos[1][1] = 0.;
+    atpos[1][2] = 0.;
+    
+    attyp[2] = ip1;
+    atpos[2][0] = 0.25;
+    atpos[2][1] = 0.5;
+    atpos[2][2] = 0.25;
+    
+    attyp[3] = ip1;
+    atpos[3][0] = 0.75;
+    atpos[3][1] = 0.5;
+    atpos[3][2] = 0.25;
+    
+    attyp[4] = ip1;
+    atpos[4][0] = 0.;
+    atpos[4][1] = 0.;
+    atpos[4][2] = 0.50;
+    
+    attyp[5] = ip2;
+    atpos[5][0] = 0.5;
+    atpos[5][1] = 0.;
+    atpos[5][2] = 0.50;
+    
+    attyp[6] = ip1;
+    atpos[6][0] = 0.75;
+    atpos[6][1] = 0.5;
+    atpos[6][2] = 0.75;
+    
+    attyp[7] = ip1;
+    atpos[7][0] = 0.25;
+    atpos[7][1] = 0.5;
+    atpos[7][2] = 0.75;
+
+    initialized = 1;
+    break;
+
+  case 5:
+    memory->create(name,13,"A3B:name");
+    strcpy(name, "A3B-L12(111)");
+
+    ntype  = 2;
+    nucell = 24;
+    
+    latvec[0][0] = sqrt(6.);
+    latvec[1][1] = sqrt(2.);
+    latvec[2][2] = sqrt(3.);
+
+    memory->create(atpos, nucell, 3, "A3B:atpos");
+    memory->create(attyp, nucell, "A3B:attyp");
+
+    attyp[ 0]  = ip2;
+    atpos[ 0][0] =     0.00;
+    atpos[ 0][1] =     0.00;
+    atpos[ 0][2] =     0.00;
+     
+    attyp[ 1]  = ip1;
+    atpos[ 1][0] =     0.50;
+    atpos[ 1][1] =     0.00;
+    atpos[ 1][2] =     0.00;
+     
+    attyp[ 2]  = ip1;
+    atpos[ 2][0] =     0.25;
+    atpos[ 2][1] =     0.25;
+    atpos[ 2][2] =     0.00;
+     
+    attyp[ 3]  = ip1;
+    atpos[ 3][0] =     0.75;
+    atpos[ 3][1] =     0.25;
+    atpos[ 3][2] =     0.00;
+     
+    attyp[ 4]  = ip1;
+    atpos[ 4][0] =     0.00;
+    atpos[ 4][1] =     0.50;
+    atpos[ 4][2] =     0.00;
+     
+    attyp[ 5]  = ip2;
+    atpos[ 5][0] =     0.50;
+    atpos[ 5][1] =     0.50;
+    atpos[ 5][2] =     0.00;
+     
+    attyp[ 6]  = ip1;
+    atpos[ 6][0] =     0.25;
+    atpos[ 6][1] =     0.75;
+    atpos[ 6][2] =     0.00;
+     
+    attyp[ 7]  = ip1;
+    atpos[ 7][0] =     0.75;
+    atpos[ 7][1] =     0.75;
+    atpos[ 7][2] =     0.00;
+     
+    attyp[ 8]  = ip1;
+    atpos[ 8][0] =     2./3.;
+    atpos[ 8][1] =     0.50;
+    atpos[ 8][2] =     1./3.;
+     
+    attyp[ 9]  = ip2;
+    atpos[ 9][0] =     1./6.;
+    atpos[ 9][1] =     0.50;
+    atpos[ 9][2] =     1./3.;
+     
+    attyp[10]  = ip1;
+    atpos[10][0] =     1./6.;
+    atpos[10][1] =     0.00;
+    atpos[10][2] =     1./3.;
+     
+    attyp[11]  = ip2;
+    atpos[11][0] =     2./3.;
+    atpos[11][1] =     0.00;
+    atpos[11][2] =     1./3.;
+     
+    attyp[12]  = ip1;
+    atpos[12][0] =     5./12.;
+    atpos[12][1] =     0.25;
+    atpos[12][2] =     1./3.;
+     
+    attyp[13]  = ip1;
+    atpos[13][0] =     11./12.;
+    atpos[13][1] =     0.25;
+    atpos[13][2] =     1./3.;
+     
+    attyp[14]  = ip1;
+    atpos[14][0] =     11./12.;
+    atpos[14][1] =     0.75;
+    atpos[14][2] =     1./3.;
+     
+    attyp[15]  = ip1;
+    atpos[15][0] =     5./12.;
+    atpos[15][1] =     0.75;
+    atpos[15][2] =     1./3.;
+     
+    attyp[16]  = ip2;
+    atpos[16][0] =     5./6.;
+    atpos[16][1] =     0.50;
+    atpos[16][2] =     2./3.;
+     
+    attyp[17]  = ip1;
+    atpos[17][0] =     1./3.;
+    atpos[17][1] =     0.50;
+    atpos[17][2] =     2./3.;
+     
+    attyp[18]  = ip1;
+    atpos[18][0] =     1./12.;
+    atpos[18][1] =     0.25;
+    atpos[18][2] =     2./3.;
+     
+    attyp[19]  = ip1;
+    atpos[19][0] =     5./6.;
+    atpos[19][1] =     0.00;
+    atpos[19][2] =     2./3.;
+     
+    attyp[20]  = ip1;
+    atpos[20][0] =     7./12.;
+    atpos[20][1] =     0.75;
+    atpos[20][2] =     2./3.;
+     
+    attyp[21]  = ip1;
+    atpos[21][0] =     1./12.;
+    atpos[21][1] =     0.75;
+    atpos[21][2] =     2./3.;
+     
+    attyp[22]  = ip2;
+    atpos[22][0] =     1./3.;
+    atpos[22][1] =     0.00;
+    atpos[22][2] =     2./3.;
+     
+    attyp[23]  = ip1;
+    atpos[23][0] =     7./12.;
+    atpos[23][1] =     0.25;
+    atpos[23][2] =     2./3.;
+    
+    initialized = 1;
+    break;
+ 
+  case 6:
     memory->create(name,13,"A3B:name");
     strcpy(name, "A3B-L12(111)");
 
@@ -2054,10 +2251,10 @@ void A3B::A3B_L60()
   int surftype = 1;
   // print out the menu
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
-  printf("Please selection the type of A3B-L60 surface:\n");
-  printf("   1. (001), conventional;\n");
-  printf("   2. (100), conventional;\n");
-  printf("   3. (110), orthogonal, long along y;\n");
+  printf("Please select the type of A3B-L60 cell:\n");
+  printf("   1. [001] along z, conventional/primitive;\n");
+  printf("   2. [100] along z, conventional;\n");
+  printf("   3. [110] along z, orthogonal, [1-10] along y;\n");
   printf("Your choice [%d]: ", surftype);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = inumeric(strtok(str, " \t\n\r\f"));
   printf("Your selection : %d\n", surftype);

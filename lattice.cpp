@@ -6,10 +6,7 @@
 #include "math.h"
 #include <list>
 #include <map>
-
-#define MAX(a,b) ((a) > (b) ? (a) : (b))
-#define MIN(a,b) ((a) < (b) ? (a) : (b))
-#define NearZERO 1.e-6
+#include "common.h"
 
 /* -----------------------------------------------------------------------------
  * constructor does nothing
@@ -56,13 +53,13 @@ void lattice::display()
 
   printf("\n"); for (int i = 0; i < 7; ++i) printf("====");
   printf(" Lattice Info "); for (int i = 0; i < 7; ++i) printf("===="); printf("\n");
-  printf("Lattice name......................: %s\n", name);
-  printf("Number of atom per unit cell......: %d\n", nucell);
-  printf("Number of atom types per unit cell: %d\n", ntype);
-  printf("Number of layers in each unit cell: %d\n", nlayer);
-  printf("Number of atoms  in each layer    :");
+  printf("Lattice name........................: %s\n", name);
+  printf("Number of atom per unit cell........: %d\n", nucell);
+  printf("Number of atomic types per unit cell: %d\n", ntype);
+  printf("Number of z-layers in each unit cell: %d\n", nlayer);
+  printf("Number of atoms  in each layer......:");
   for (int i = 0; i < nlayer; ++i) printf(" %d", numlayer[i]); printf("\n");
-  printf("Expected height above each layer  :");
+  printf("Expected height above each layer....:");
   for (int i = 0; i < nlayer; ++i) printf(" %g", h[i]); printf("\n");
   for (int i = 0; i < 14; ++i) printf("-----");
   printf("\nLattice vectors:\n");
