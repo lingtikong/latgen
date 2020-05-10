@@ -231,7 +231,7 @@ void Driver::PolyCrystal()
     int n_in_grain = 0;
 
     // now to create local atoms
-    for (int iu = 0; iu < latt->nucell; ++iu){
+    for (int iu = 0; iu < latt->nucell; ++iu)
     for (int ix = -nxmax; ix <= nxmax; ++ix)
     for (int iy = -nymax; iy <= nymax; ++iy)
     for (int iz = -nzmax; iz <= nzmax; ++iz){
