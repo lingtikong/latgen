@@ -172,10 +172,10 @@ void Driver::generate()
 
   int iatom = 0;
   if ( leading_dir == 1){
+    for (int u = 0; u < latt->nucell; ++u)
     for (int k = 0; k < nz; ++k)
     for (int j = 0; j < ny; ++j)
-    for (int i = 0; i < nx; ++i)
-    for (int u = 0; u < latt->nucell; ++u){
+    for (int i = 0; i < nx; ++i){
       xmap[iatom] = i;
       ymap[iatom] = j;
       zmap[iatom] = k;
@@ -188,10 +188,10 @@ void Driver::generate()
     }
 
   } else {
+    for (int u = 0; u < latt->nucell; ++u)
     for (int i = 0; i < nx; ++i)
     for (int j = 0; j < ny; ++j)
-    for (int k = 0; k < nz; ++k)
-    for (int u = 0; u < latt->nucell; ++u){
+    for (int k = 0; k < nz; ++k){
       xmap[iatom] = i;
       ymap[iatom] = j;
       zmap[iatom] = k;
