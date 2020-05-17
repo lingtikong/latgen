@@ -228,7 +228,7 @@ return;
 void Driver::typescan()
 {
   // allocate memory
-  int typmax = 10;
+  int typmax = latt->nucell;
   if (typeID != NULL) memory->destroy(typeID);
   if (numtype!= NULL) memory->destroy(numtype);
   memory->create(typeID,  typmax, "driver->typescan:typeID");
@@ -425,47 +425,48 @@ void Driver::write()
   delete []posfile;
 
   // write the lammps atomic style file
-  if (flag_lmp_data){
-    fp = fopen(lmpfile,"w");
-    fprintf(fp, "# %s cell with dimension %d x %d x %d and a = %g\n", name, nx, ny, nz, alat);
-    fprintf(fp, "%10d  atoms\n", natom);
-    fprintf(fp, "%10d  atom types\n\n", ntype);
-    fprintf(fp, " 0. %20.14f  xlo xhi\n", latvec[0][0]);
-    fprintf(fp, " 0. %20.14f  ylo yhi\n", latvec[1][1]);
-    fprintf(fp, " 0. %20.14f  zlo zhi\n", latvec[2][2]);
-    if ( latvec[1][0]*latvec[1][0] + latvec[2][0]*latvec[2][0] + latvec[2][1]*latvec[2][1] > 1.e-8 )
-      fprintf(fp, "%20.14f %20.14f %20.14f xy xz yz\n", latvec[1][0], latvec[2][0], latvec[2][1]);
-
-    // write atomic mass info (g/mol) if element mapping is done
-    if (type2num.size() == ntype){
-      fprintf(fp, "\nMasses\n\n");
-
-      for (std::map<int,int>::iterator it = type2num.begin(); it != type2num.end(); ++it){
-        int ip = (*it).first; int num = (*it).second;
-        fprintf(fp,"%d %g\n", ip, element->Num2Mass(num));
-      }
-    }
-
-    fprintf(fp, "\nAtoms\n\n");
+   if (flag_lmp_data){
+      fp = fopen(lmpfile,"w");
+      fprintf(fp, "# %s cell with dimension %d x %d x %d and a = %g\n", name, nx, ny, nz, alat);
+      fprintf(fp, "%10d  atoms\n", natom);
+      fprintf(fp, "%10d  atom types\n\n", ntype);
+      fprintf(fp, " 0. %20.14f  xlo xhi\n", latvec[0][0]);
+      fprintf(fp, " 0. %20.14f  ylo yhi\n", latvec[1][1]);
+      fprintf(fp, " 0. %20.14f  zlo zhi\n", latvec[2][2]);
+      if ( latvec[1][0]*latvec[1][0] + latvec[2][0]*latvec[2][0] + latvec[2][1]*latvec[2][1] > 1.e-8 )
+         fprintf(fp, "%20.14f %20.14f %20.14f xy xz yz\n", latvec[1][0], latvec[2][0], latvec[2][1]);
   
-    for (int i = 0; i < natom; ++i) fprintf(fp,"%d %d %20.14f %20.14f %20.14f\n", i+1, attyp[i], atpos[i][0], atpos[i][1], atpos[i][2]);
-    fclose(fp);
-    delete []lmpfile;
-  }
+      // write atomic mass info (g/mol) if element mapping is done
+      if (type2num.size() == ntype){
+         fprintf(fp, "\nMasses\n\n");
+  
+         for (std::map<int,int>::iterator it = type2num.begin(); it != type2num.end(); ++it){
+            int ip = (*it).first; int num = (*it).second;
+            fprintf(fp,"%d %g\n", ip, element->Num2Mass(num));
+         }
+      }
+  
+      fprintf(fp, "\nAtoms\n\n");
+    
+      for (int i = 0; i < natom; ++i)
+         fprintf(fp,"%d %d %20.14f %20.14f %20.14f\n", i+1, attyp[i], atpos[i][0], atpos[i][1], atpos[i][2]);
+      fclose(fp);
+      delete []lmpfile;
+   }
+ 
+   // write the map file, useful to fix_phonon only.
+   if (xmap){
+      fp = fopen(mapfile, "w");
+      fprintf(fp,"%d %d %d %d\n", nx, ny, nz, nucell);
+      fprintf(fp,"Map file for %dx%dx%d %s cell.\n",nx,ny,nz, name);
+      for (int i = 0; i < natom; ++i)
+         fprintf(fp,"%d %d %d %d %d\n", xmap[i], ymap[i], zmap[i], umap[i], i+1);
+      fclose(fp);
+ 
+      delete []mapfile;
+   }
 
-  // write the map file, useful to fix_phonon only.
-  if (xmap){
-     fp = fopen(mapfile, "w");
-     fprintf(fp,"%d %d %d %d\n", nx, ny, nz, nucell);
-     fprintf(fp,"Map file for %dx%dx%d %s cell.\n",nx,ny,nz, name);
-     for (int i = 0; i < natom; ++i)
-       fprintf(fp,"%d %d %d %d %d\n", xmap[i], ymap[i], zmap[i], umap[i], i+1);
-     fclose(fp);
-
-     delete []mapfile;
-  }
-
-return;
+   return;
 }
 
 /* -----------------------------------------------------------------------------

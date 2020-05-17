@@ -19,7 +19,7 @@ USER::USER() : lattice()
 
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
   printf("Input the file name if you want to read the unit cell information from\n");
-  printf("a POSCAR-like file, or simply ENTER to read from stdin: ");
+  printf("a POSCAR file, or simply ENTER to read from stdin: ");
   fgets(str, MAXLINE, stdin);
 
   int flag = 1;
@@ -53,18 +53,22 @@ int USER::read_file(const char *fname)
   }
 
   // to read file
-  // if read from file, the file would be similar to vasp POSCAR (direct)
-  //  alat
+  // if read from file, the file would be in the format of vasp5 POSCAR (direct)
+  //  Comment
+  //  alat  (must be positive)
   //  xx xy xz
   //  yx yy yz
   //  zx zy zz
+  //  Element-1 Element-2 ... (read but not used)
   //  ntype1 ntype2 ntype3 ...
+  //  Direct (must be direct)
   //  sx1 sy1 sz1
   //  ...
 
   char str[MAXLINE];
   // scaling factor (lattice constant)
-  fgets(str,MAXLINE,fp); if (feof(fp)){fclose(fp); return 2;}
+  fgets(str,MAXLINE,fp); if (feof(fp)){fclose(fp); return 2;} // Comment Line
+  fgets(str,MAXLINE,fp); if (feof(fp)){fclose(fp); return 2;} // Scaling factor
   alat = numeric(strtok(str, " \t\n\r\f"));
   if (alat <= 0.) return 2;
 
@@ -75,6 +79,9 @@ int USER::read_file(const char *fname)
     latvec[i][1] = numeric(strtok(NULL, " \t\n\r\f"));
     latvec[i][2] = numeric(strtok(NULL, " \t\n\r\f"));
   }
+  // Elements names will be read but not used/stored.
+  fgets(str,MAXLINE,fp); if (feof(fp)){fclose(fp); return 6;}
+  // # of atoms for each type
   fgets(str,MAXLINE,fp); if (feof(fp)){fclose(fp); return 6;}
   ntype = count_words(str);
 
@@ -87,6 +94,10 @@ int USER::read_file(const char *fname)
     ntm[i] = inumeric(ptr);
     nucell += ntm[i];
   }
+
+  // Must be Direct
+  fgets(str,MAXLINE,fp); if (feof(fp)){fclose(fp); return 6;}
+  if (str[0] != 'd' && str[0] != 'D') return 6;
 
   memory->create(atpos, nucell, 3, "USER_atpos");
   memory->create(attyp, nucell, "USER:attyp");
