@@ -16,6 +16,7 @@ lattice::lattice()
   initialized = 0;
   perp_x = perp_y = perp_z = 0;
   nlayer = nucell = ntype = 0;
+  noct = ntetra = 0;
 
   name = NULL;
   attyp = NULL;

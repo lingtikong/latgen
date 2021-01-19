@@ -23,6 +23,7 @@ public:
   double lx, ly, lz;   // length of each vector
   double hx, hy, hz;   // height for each direction
   double **atpos;      // fractional coordinate for atoms in unit cell
+  int noct, ntetra;    // number of octahedral and tetrahedral interstitial sites
 
   int nlayer;          // # of layers per unit cell; will count automatically in setup
   int *layer;          // layer ID for each atom
@@ -39,6 +40,7 @@ public:
 
   double numeric(char *);
   int inumeric(char *);
+
 private:
   void setup();        // to setup "numlayer", "h", "perp_?", "l?", "h?"
   void Cross(double *A, double *B, double *C); // C = A X B
