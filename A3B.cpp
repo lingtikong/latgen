@@ -97,8 +97,8 @@ void A3B::A3B_A15()
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
   printf("Please select the type of A3B-A15 cell:\n");
   printf("   1. [001] along z, conventional;\n");
-  printf("   2. [110] along z, [1-10] along y;\n");
-  printf("   3. [111] along z, [1-10] along x, orthogonal;\n");
+  printf("   2. [110] along z, orthogonal, [1-10] along y;\n");
+  printf("   3. [111] along z, orthogonal, [1-10] along x;\n");
   printf("Your choice [%d]: ", surftype);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = inumeric(strtok(str, " \t\n\r\f"));
   printf("Your selection : %d\n", surftype);

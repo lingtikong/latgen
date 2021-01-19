@@ -85,7 +85,7 @@ void A2B::A2B_C1()
   printf("Please select the type of A2B-C1 cell:\n");
   printf("   1. [001] along z, primitive;\n");
   printf("   2. [001] along z, conventional;\n");
-  printf("   3. [110] along z, [1-10] along y;\n");
+  printf("   3. [110] along z, orthogonal, [1-10] along y;\n");
   printf("   4. [111] along z, orthogonal, [1-10] along x;\n");
   printf("   5. primitive cell;\n");
   printf("Your choice [%d]: ", surftype);
