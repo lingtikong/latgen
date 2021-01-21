@@ -16,7 +16,7 @@ HCP::HCP() : lattice()
   alat = 1.; ca = sqrt(8./3.);
   // print out the menu
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
-  printf("Please input the lattice constant of the HCP lattice [1]:");
+  printf("Please input the lattice constant of the HCP lattice [1]: ");
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) alat = numeric(strtok(str, " \t\n\r\f"));
   if (alat <= 0.) alat = 1.;
 

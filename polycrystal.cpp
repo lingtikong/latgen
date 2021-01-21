@@ -5,7 +5,6 @@
 #include "string.h"
 #include <time.h>
 #include <math.h>
-#include "random.h"
 #include "common.h"
 
 #include "voro++.hh"
@@ -14,7 +13,7 @@ using namespace voro;
 /* -----------------------------------------------------------------------------
  * Method to create polycrystals
  * -------------------------------------------------------------------------- */
-void Driver::PolyCrystal()
+int Driver::PolyCrystal()
 {
   char str[MAXLINE], *ptr;
   int ngrain = 0, type_by_grain = 0;
@@ -296,7 +295,7 @@ void Driver::PolyCrystal()
   memory->destroy(orient);
 
   printf(">>>>>>============= End of Polycrystal generation ==============<<<<<<\n");
-return;
+return 0;
 }
 
 /* ------------------------------------------------------------------- */

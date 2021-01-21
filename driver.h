@@ -17,10 +17,11 @@ public:
 
   void write();     // method to write the atomic configuration (xyz) and mapping info
 
-  void FormLayers();
+  int FormLayers();
+  int Interstitial();
 
 #ifdef Poly
-  void PolyCrystal();
+  int PolyCrystal();
 #endif
 
 private:
