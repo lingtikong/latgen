@@ -492,7 +492,7 @@ return;
 }
 
 /* -----------------------------------------------------------------------------
- * Initialize for (110) orientation
+ * Initialize for (100) orientation
  * -------------------------------------------------------------------------- */
 void HCP::HCP100()
 {
@@ -601,30 +601,82 @@ void HCP::HCP110()
   // initialize
   nucell = 4;
   ntype  = 1;
+  noct   = nucell;
+  ntetra = nucell + nucell;
+  
+  memory->create(atpos, nucell + noct + ntetra, 3, "HCP001_atpos");
+  memory->create(attyp, nucell + noct + ntetra, "HCP:attyp");
     
   latvec[0][0] = ca;
   latvec[1][1] = sqrt(3.);
   latvec[2][2] = 1.;
 
-  memory->create(atpos, nucell, 3, "HCP110_atpos");
-  memory->create(attyp, nucell, "HCP:attyp");
-    
   for (int i = 0; i < nucell; ++i) attyp[i] = 1;
-  atpos[0][0] = 0.25;
-  atpos[0][1] = 1./3.;
-  atpos[0][2] = 0.00;
+  atpos[0][0] = 0.;
+  atpos[0][1] = 0.;
+  atpos[0][2] = 0.;
 
-  atpos[1][0] = 0.75;
+  atpos[1][0] = 0.500;
   atpos[1][1] = 2./3.;
   atpos[1][2] = 0.;
 
-  atpos[2][0] = 0.75;
+  atpos[2][0] = 0.500;
   atpos[2][1] = 1./6.;
-  atpos[2][2] = 0.50;
+  atpos[2][2] = 0.500;
 
-  atpos[3][0] = 0.25;
-  atpos[3][1] = 5./6.;
-  atpos[3][2] = 0.50;
+  atpos[3][0] = 0.000;
+  atpos[3][1] = 0.500;
+  atpos[3][2] = 0.500;
+
+  for (int i = nucell; i < nucell + noct + ntetra; ++i) attyp[i] = 2;
+  // octohedra sites
+  atpos[4][0] = 0.250;
+  atpos[4][1] = 1./3.;
+  atpos[4][2] = 0.000;
+
+  atpos[5][0] = 0.750;
+  atpos[5][1] = 1./3.;
+  atpos[5][2] = 0.000;
+
+  atpos[6][0] = 0.250;
+  atpos[6][1] = 5./6.;
+  atpos[6][2] = 0.500;
+
+  atpos[7][0] = 0.750;
+  atpos[7][1] = 5./6.;
+  atpos[7][2] = 0.500;
+
+  atpos[8][0] = 0.375;
+  atpos[8][1] = 0.000;
+  atpos[8][2] = 0.000;
+
+  atpos[9][0] = 0.875;
+  atpos[9][1] = 2./3.;
+  atpos[9][2] = 0.000;
+
+  atpos[10][0] = 0.125;
+  atpos[10][1] = 2./3.;
+  atpos[10][2] = 0.000;
+
+  atpos[11][0] = 0.625;
+  atpos[11][1] = 0.000;
+  atpos[11][2] = 0.000;
+
+  atpos[12][0] = 0.375;
+  atpos[12][1] = 0.500;
+  atpos[12][2] = 0.500;
+
+  atpos[13][0] = 0.875;
+  atpos[13][1] = 1./6.;
+  atpos[13][2] = 0.500;
+
+  atpos[14][0] = 0.125;
+  atpos[14][1] = 1./6.;
+  atpos[14][2] = 0.500;
+
+  atpos[15][0] = 0.625;
+  atpos[15][1] = 0.500;
+  atpos[15][2] = 0.500;
 
   initialized = 1;
 
@@ -645,6 +697,11 @@ void HCP::HCPm10()
   // initialize
   nucell = 4;
   ntype  = 1;
+  noct   = nucell;
+  ntetra = nucell + nucell;
+  
+  memory->create(atpos, nucell + noct + ntetra, 3, "HCP001_atpos");
+  memory->create(attyp, nucell + noct + ntetra, "HCP:attyp");
     
   latvec[0][0] = 1.;
   latvec[1][1] = ca;
@@ -654,25 +711,75 @@ void HCP::HCPm10()
   memory->create(attyp, nucell, "HCP:attyp");
     
   for (int i = 0; i < nucell; ++i) attyp[i] = 1;
-  atpos[0][0] = 0.50;
-  atpos[0][1] = 0.25;
-  atpos[0][2] = 0.00;
+  atpos[0][0] = 0.000;
+  atpos[0][1] = 0.000;
+  atpos[0][2] = 0.000;
 
-  atpos[1][0] = 0.00;
-  atpos[1][1] = 0.75;
+  atpos[1][0] = 0.500;
+  atpos[1][1] = 0.500;
   atpos[1][2] = 1./6.;
 
-  atpos[2][0] = 0.00;
-  atpos[2][1] = 0.25;
-  atpos[2][2] = 0.50;
+  atpos[2][0] = 0.500;
+  atpos[2][1] = 0.000;
+  atpos[2][2] = 0.500;
 
-  atpos[3][0] = 0.50;
-  atpos[3][1] = 0.75;
+  atpos[3][0] = 0.000;
+  atpos[3][1] = 0.500;
   atpos[3][2] = 2./3.;
+
+  for (int i = nucell; i < nucell + noct + ntetra; ++i) attyp[i] = 2;
+  // octohedra sites
+  atpos[4][0] = 0.000;
+  atpos[4][1] = 0.250;
+  atpos[4][2] = 1./3.;
+
+  atpos[5][0] = 0.000;
+  atpos[5][1] = 0.750;
+  atpos[5][2] = 1./3.;
+
+  atpos[6][0] = 0.500;
+  atpos[6][1] = 0.250;
+  atpos[6][2] = 5./6.;
+
+  atpos[7][0] = 0.500;
+  atpos[7][1] = 0.750;
+  atpos[7][2] = 5./6.;
+
+  atpos[8][0] = 0.000;
+  atpos[8][1] = 0.375;
+  atpos[8][2] = 0.000;
+
+  atpos[9][0] = 0.000;
+  atpos[9][1] = 0.625;
+  atpos[9][2] = 0.000;
+
+  atpos[10][0] = 0.500;
+  atpos[10][1] = 0.875;
+  atpos[10][2] = 1./6.;
+
+  atpos[11][0] = 0.500;
+  atpos[11][1] = 0.125;
+  atpos[11][2] = 1./6.;
+
+  atpos[12][0] = 0.500;
+  atpos[12][1] = 0.375;
+  atpos[12][2] = 0.500;
+
+  atpos[13][0] = 0.500;
+  atpos[13][1] = 0.625;
+  atpos[13][2] = 0.500;
+
+  atpos[14][0] = 0.000;
+  atpos[14][1] = 0.875;
+  atpos[14][2] = 2./3.;
+
+  atpos[15][0] = 0.000;
+  atpos[15][1] = 0.125;
+  atpos[15][2] = 2./3.;
 
   initialized = 1;
 
-return;
+  return;
 }
 
 /* -----------------------------------------------------------------------------
