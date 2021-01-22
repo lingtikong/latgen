@@ -1,7 +1,8 @@
 .SUFFIXES : .o .cpp
 # compiler and flags
-CC     = g++ -Wno-unused-result
-LINK   = $(CC) -static
+#CC     = g++ #-Wno-unused-result
+CC     = /opt/intel/bin/icc
+LINK   = $(CC) #-static
 CFLAGS = -O3 $(UFLAG) $(DEBUG)
 #
 OFLAGS = -O3 $(DEBUG)
@@ -17,11 +18,11 @@ LIB    = $(FFTLIB) $(LPKLIB) $(USRLIB) $(VoroLIB)
 #LPKLIB = -L/opt/clapack/3.2.1/lib -lclapack -lblas -lf2c -lm
 
 # Voro++
-VoroINC = -I/opt/libs/voro/include/voro++
-VoroLIB = -L/opt/libs/voro/lib -lvoro++
+VoroINC = -I/opt/voro/include/voro++
+VoroLIB = -L/opt/voro/lib -lvoro++
 
 # User flag
-# UFLAG = -DPoly
+#UFLAG = -DPoly
 # Debug flags
 #DEBUG = -g
 #====================================================================

@@ -36,6 +36,8 @@ return;
 
 /* -----------------------------------------------------------------------------
  * To show the main menu
+ *    flag: 0:   general case (main menu)
+ *          n>0: multilayer, sequence of lattices.
  * -------------------------------------------------------------------------- */
 int Driver::ShowMenu(const int flag)
 {
@@ -51,8 +53,10 @@ int Driver::ShowMenu(const int flag)
   printf(" 3. HCP/Graphene;              |  6. AB & ABXn;\n");
   for (int i = 0; i < 31; ++i) printf("-"); printf("+");
   for (int i = 0; i < 38; ++i) printf("-"); printf("\n");
+
   if (flag != 0){
     printf(" 7. User defined;              |  0. Exit.\n");
+
   } else {
     printf(" 7. User defined;              |  8. Multi-layer.\n");
     for (int i = 0; i < 14; ++i) printf("-----"); printf("\n");
@@ -63,11 +67,13 @@ int Driver::ShowMenu(const int flag)
     printf(" 0. Exit.\n");
   }
   for (int i = 0; i < 14; ++i) printf("-----");
+
   printf("\nYour choice [1]: ");
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) ltype = atoi(strtok(str," \t\n\r\f"));
   printf("Your selection : %d\n", ltype);
   for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
-  int rflag = 1;
+
+  int rflag = 1; // > 0, generate & re-orient; 0, neither; <0, re-orient only.
   switch (ltype){
   case 1: latt = new FCC(); break;
   case 2: latt = new BCC(); break;

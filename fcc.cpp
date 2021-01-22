@@ -101,17 +101,16 @@ void FCC::FCC001()
   case 1:
     nucell = 2;
     ntype  = 1;
-    noct   = 2;
-    ntetra = 4;
+    noct   = nucell;
+    ntetra = nucell + nucell;
+
+    memory->create(atpos, nucell + noct + ntetra, 3, "FCC001_atpos");
+    memory->create(attyp, nucell + noct + ntetra, "FCC:attyp");
     
     latvec[0][0] = 1./sqrt(2.);
     latvec[1][1] = 1./sqrt(2.);
     latvec[2][2] = 1.;
 
-    memory->create(atpos, nucell + noct + ntetra, 3, "FCC001_atpos");
-    memory->create(attyp, nucell + noct + ntetra, "FCC:attyp");
-  
-    
     for (int i = 0; i < nucell; ++i) attyp[i] = 1;
     atpos[0][0] = 0.;
     atpos[0][1] = 0.;
@@ -121,8 +120,8 @@ void FCC::FCC001()
     atpos[1][1] = 0.5;
     atpos[1][2] = 0.5;
 
+    for (int i = nucell; i < nucell + noct + ntetra; ++i) attyp[i] = 2;
     // octohedra site
-    attyp[2]    = 2;
     atpos[2][0] = 0.5;
     atpos[2][1] = 0.5;
     atpos[2][2] = 0.;
@@ -133,22 +132,18 @@ void FCC::FCC001()
     atpos[3][2] = 0.5;
 
     // tetrahedra site
-    attyp[4]    = 2;
     atpos[4][0] = 0.5;
     atpos[4][1] = 0.;
     atpos[4][2] = 0.25;
 
-    attyp[5]    = 2;
     atpos[5][0] = 0.;
     atpos[5][1] = 0.5;
     atpos[5][2] = 0.25;
 
-    attyp[6]    = 2;
     atpos[6][0] = 0.5;
     atpos[6][1] = 0.;
     atpos[6][2] = 0.75;
 
-    attyp[7]    = 2;
     atpos[7][0] = 0.;
     atpos[7][1] = 0.5;
     atpos[7][2] = 0.75;
@@ -159,16 +154,16 @@ void FCC::FCC001()
   case 2:
     nucell = 4;
     ntype  = 1;
-    noct   = 4;
-    ntetra = 8;
+    noct   = nucell;
+    ntetra = nucell + nucell;
+
+    memory->create(atpos, nucell + noct + ntetra, 3, "FCC001_atpos");
+    memory->create(attyp, nucell + noct + ntetra, "FCC:attyp");
     
     latvec[0][0] = 1.;
     latvec[1][1] = 1.;
     latvec[2][2] = 1.;
 
-    memory->create(atpos, nucell + noct + ntetra, 3, "FCC001_atpos");
-    memory->create(attyp, nucell + noct + ntetra, "FCC:attyp");
-    
     for (int i = 0; i < nucell; ++i) attyp[i] = 1;
     atpos[0][0] = 0.;
     atpos[0][1] = 0.;
@@ -257,8 +252,6 @@ void FCC::FCC110()
   printf("Please select the type of FCC(110) cell:\n");
   printf("   1. orthogonal primitive, [220] along x\n");
   printf("   2. orthogonal primitive, [220] along y\n");
-  printf("   3. orthogonal conventional, [110] along x\n");
-  printf("   4. orthogonal conventional, [110] along y\n");
   printf("Your choice [%d]: ", surftype);
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = inumeric(strtok(str, " \t\n\r\f"));
   printf("Your selection : %d", surftype);
@@ -275,14 +268,16 @@ void FCC::FCC110()
   case 2:
     nucell = 2;
     ntype  = 1;
+    noct   = nucell;
+    ntetra = nucell + nucell;
+
+    memory->create(atpos, nucell + noct + ntetra, 3, "FCC001_atpos");
+    memory->create(attyp, nucell + noct + ntetra, "FCC:attyp");
     
     latvec[0][0] = 0.5*sqrt(2.);
     latvec[1][1] = 1.;
     latvec[2][2] = 0.5*sqrt(2.);
 
-    memory->create(atpos, nucell, 3, "FCC110_atpos");
-    memory->create(attyp, nucell, "FCC:attyp");
-    
     for (int i = 0; i < nucell; ++i) attyp[i] = 1;
     atpos[0][0] = 0.;
     atpos[0][1] = 0.;
@@ -292,127 +287,88 @@ void FCC::FCC110()
     atpos[1][1] = 0.5;
     atpos[1][2] = 0.5;
 
+    for (int i = nucell; i < nucell + noct + ntetra; ++i) attyp[i] = 2;
+    // octohedra sites
+    atpos[2][0] = 0.00;
+    atpos[2][1] = 0.50;
+    atpos[2][2] = 0.00;
+
+    atpos[3][0] = 0.50;
+    atpos[3][1] = 0.00;
+    atpos[3][2] = 0.50;
+
+    // tetrahedra sites
+    atpos[4][0] = 0.50;
+    atpos[4][1] = 0.75;
+    atpos[4][2] = 0.00;
+
+    atpos[5][0] = 0.50;
+    atpos[5][1] = 0.25;
+    atpos[5][2] = 0.00;
+
+    atpos[6][0] = 0.00;
+    atpos[6][1] = 0.25;
+    atpos[6][2] = 0.50;
+
+    atpos[7][0] = 0.0;
+    atpos[7][1] = 0.75;
+    atpos[7][2] = 0.50;
+
     initialized = 1;
     break;
+
   case 1:
     nucell = 2;
     ntype  = 1;
+    noct   = nucell;
+    ntetra = nucell + nucell;
+
+    memory->create(atpos, nucell + noct + ntetra, 3, "FCC001_atpos");
+    memory->create(attyp, nucell + noct + ntetra, "FCC:attyp");
     
     latvec[0][0] = 1.;
     latvec[1][1] = sqrt(2.)*0.5;
     latvec[2][2] = sqrt(2.)*0.5;
 
-    memory->create(atpos, nucell, 3, "FCC110_atpos");
-    memory->create(attyp, nucell, "FCC:attyp");
-    
     for (int i = 0; i < nucell; ++i) attyp[i] = 1;
+    atpos[0][0] = 0.000;
+    atpos[0][1] = 0.000;
+    atpos[0][2] = 0.000;
 
-    atpos[0][0] = 0.;
-    atpos[0][1] = 0.;
-    atpos[0][2] = 0.;
+    atpos[1][0] = 0.500;
+    atpos[1][1] = 0.500;
+    atpos[1][2] = 0.500;
 
-    atpos[1][0] = 0.5;
-    atpos[1][1] = 0.5;
-    atpos[1][2] = 0.5;
+    for (int i = nucell; i < nucell + noct + ntetra; ++i) attyp[i] = 2;
+    // octohedra sites
+    atpos[2][0] = 0.500;
+    atpos[2][1] = 0.000;
+    atpos[2][2] = 0.000;
+
+    atpos[3][0] = 0.000;
+    atpos[3][1] = 0.500;
+    atpos[3][2] = 0.500;
+
+    // tetrahedra sites
+    atpos[4][0] = 0.750;
+    atpos[4][1] = 0.500;
+    atpos[4][2] = 0.000;
+
+    atpos[5][0] = 0.250;
+    atpos[5][1] = 0.500;
+    atpos[5][2] = 0.000;
+
+    atpos[6][0] = 0.250;
+    atpos[6][1] = 0.000;
+    atpos[6][2] = 0.500;
+
+    atpos[7][0] = 0.750;
+    atpos[7][1] = 0.000;
+    atpos[7][2] = 0.500;
 
     initialized = 1;
     break;
 
-  case 4:
-    ntype  = 1;
-    nucell = 8;
-    
-    latvec[0][0] = 1.;
-    latvec[1][1] = sqrt(2.);
-    latvec[2][2] = sqrt(2.);
-
-    memory->create(atpos, nucell, 3, "fcc:atpos");
-    memory->create(attyp, nucell, "fcc:attyp");
-    
-    for (int i = 0; i < nucell; ++i) attyp[i] = 1;
-
-    atpos[0][0] = 0.;
-    atpos[0][1] = 0.50;
-    atpos[0][2] = 0.;
-    
-    atpos[1][0] = 0.;
-    atpos[1][1] = 0.;
-    atpos[1][2] = 0.;
-    
-    atpos[2][0] = 0.5;
-    atpos[2][1] = 0.25;
-    atpos[2][2] = 0.25;
-    
-    atpos[3][0] = 0.5;
-    atpos[3][1] = 0.75;
-    atpos[3][2] = 0.25;
-    
-    atpos[4][0] = 0.;
-    atpos[4][1] = 0.;
-    atpos[4][2] = 0.50;
-    
-    atpos[5][0] = 0.;
-    atpos[5][1] = 0.50;
-    atpos[5][2] = 0.50;
-    
-    atpos[6][0] = 0.5;
-    atpos[6][1] = 0.75;
-    atpos[6][2] = 0.75;
-    
-    atpos[7][0] = 0.5;
-    atpos[7][1] = 0.25;
-    atpos[7][2] = 0.75;
-
-    initialized = 1;
-    break;
-
-  case 3:
-    ntype  = 1;
-    nucell = 8;
-    
-    latvec[0][0] = sqrt(2.);
-    latvec[1][1] = 1.;
-    latvec[2][2] = sqrt(2.);
-
-    memory->create(atpos, nucell, 3, "fcc:atpos");
-    memory->create(attyp, nucell, "fcc:attyp");
-    
-    for (int i = 0; i < nucell; ++i) attyp[i] = 1;
-
-    atpos[0][0] = 0.50;
-    atpos[0][1] = 0.;
-    atpos[0][2] = 0.;
-    
-    atpos[1][0] = 0.;
-    atpos[1][1] = 0.;
-    atpos[1][2] = 0.;
-    
-    atpos[2][0] = 0.25;
-    atpos[2][1] = 0.5;
-    atpos[2][2] = 0.25;
-    
-    atpos[3][0] = 0.75;
-    atpos[3][1] = 0.5;
-    atpos[3][2] = 0.25;
-    
-    atpos[4][0] = 0.;
-    atpos[4][1] = 0.;
-    atpos[4][2] = 0.50;
-    
-    atpos[5][0] = 0.5;
-    atpos[5][1] = 0.;
-    atpos[5][2] = 0.50;
-    
-    atpos[6][0] = 0.75;
-    atpos[6][1] = 0.5;
-    atpos[6][2] = 0.75;
-    
-    atpos[7][0] = 0.25;
-    atpos[7][1] = 0.5;
-    atpos[7][2] = 0.75;
-
-    initialized = 1;
-    break;
   default:
     break;
   }
@@ -451,70 +407,16 @@ void FCC::FCC111()
   case 1:
     nucell = 3;
     ntype  = 1;
-    
-    latvec[0][0] = sqrt(0.5);
-    latvec[1][0] = sqrt(0.125);
-    latvec[1][1] = sqrt(0.375);
-    latvec[2][2] = sqrt(3.);
+    noct   = nucell;
+    ntetra = nucell + nucell;
 
-    memory->create(atpos, nucell, 3, "FCC111_atpos");
-    memory->create(attyp, nucell, "FCC:attyp");
-    
-    for (int i = 0; i < nucell; ++i) attyp[i] = 1;
-
-    atpos[0][0] = 0.;
-    atpos[0][1] = 0.;
-    atpos[0][2] = 0.;
-
-    atpos[1][0] = 1./3.;
-    atpos[1][1] = 1./3.;
-    atpos[1][2] = 1./3.;
-
-    atpos[2][0] = 2./3.;
-    atpos[2][1] = 2./3.;
-    atpos[2][2] = 2./3.;
-
-    initialized = 1;
-    break;
-  case 2:
-    nucell = 3;
-    ntype  = 1;
-
-    latvec[0][0] = sqrt(0.375);
-    latvec[0][1] = sqrt(0.125);
-    latvec[1][1] = sqrt(0.5);
-    latvec[2][2] = sqrt(3.);
-
-    memory->create(atpos, nucell, 3, "FCC111_atpos");
-    memory->create(attyp, nucell, "FCC:attyp");
-
-    for (int i = 0; i < nucell; ++i) attyp[i] = 1;
-
-    atpos[0][0] = 0.;
-    atpos[0][1] = 0.;
-    atpos[0][2] = 0.;
-
-    atpos[1][0] = 1./3.;
-    atpos[1][1] = 1./3.;
-    atpos[1][2] = 1./3.;
-
-    atpos[2][0] = 2./3.;
-    atpos[2][1] = 2./3.;
-    atpos[2][2] = 2./3.;
-
-    initialized = 1;
-    break;
-  case 3:
-    nucell = 3;
-    ntype  = 1;
+    memory->create(atpos, nucell + noct + ntetra, 3, "FCC001_atpos");
+    memory->create(attyp, nucell + noct + ntetra, "FCC:attyp");
 
     latvec[0][0] =  sqrt(0.5);
-    latvec[1][0] = -sqrt(0.125);
+    latvec[1][0] =  sqrt(0.125);
     latvec[1][1] =  sqrt(0.375);
     latvec[2][2] =  sqrt(3.);
-
-    memory->create(atpos, nucell, 3, "FCC111_atpos");
-    memory->create(attyp, nucell, "FCC:attyp");
 
     for (int i = 0; i < nucell; ++i) attyp[i] = 1;
 
@@ -523,26 +425,138 @@ void FCC::FCC111()
     atpos[0][2] = 0.;
 
     atpos[1][0] = 2./3.;
-    atpos[1][1] = 1./3.;
+    atpos[1][1] = 2./3.;
     atpos[1][2] = 1./3.;
 
     atpos[2][0] = 1./3.;
-    atpos[2][1] = 2./3.;
+    atpos[2][1] = 1./3.;
     atpos[2][2] = 2./3.;
+
+    for (int i = nucell; i < nucell + noct + ntetra; ++i) attyp[i] = 2;
+    // octohedra sites
+    atpos[3][0] = 0.;
+    atpos[3][1] = 0.;
+    atpos[3][2] = 0.5;
+
+    atpos[4][0] = 2./3.;
+    atpos[4][1] = 2./3.;
+    atpos[4][2] = 5./6.;
+
+    atpos[5][0] = 1./3.;
+    atpos[5][1] = 1./3.;
+    atpos[5][2] = 1./6.;
+
+    // tetrahedra sites
+    atpos[6][0] = 0.;
+    atpos[6][1] = 0.;
+    atpos[6][2] = 0.25;
+
+    atpos[7][0] = 2./3.;
+    atpos[7][1] = 2./3.;
+    atpos[7][2] = 7./12.;
+
+    atpos[8][0] = 1./3.;
+    atpos[8][1] = 1./3.;
+    atpos[8][2] = 11./12.;
+
+    atpos[9][0] = 0.;
+    atpos[9][1] = 0.;
+    atpos[9][2] = 0.75;
+
+    atpos[10][0] = 2./3.;
+    atpos[10][1] = 2./3.;
+    atpos[10][2] = 1./12.;
+
+    atpos[11][0] = 1./3.;
+    atpos[11][1] = 1./3.;
+    atpos[11][2] = 5./12.;
 
     initialized = 1;
     break;
-  case 4:
+
+  case 2:
     nucell = 3;
     ntype  = 1;
+    noct   = nucell;
+    ntetra = nucell + nucell;
+
+    memory->create(atpos, nucell + noct + ntetra, 3, "FCC001_atpos");
+    memory->create(attyp, nucell + noct + ntetra, "FCC:attyp");
 
     latvec[0][0] =  sqrt(0.375);
     latvec[0][1] = -sqrt(0.125);
     latvec[1][1] =  sqrt(0.5);
     latvec[2][2] =  sqrt(3.);
 
-    memory->create(atpos, nucell, 3, "FCC111_atpos");
-    memory->create(attyp, nucell, "FCC:attyp");
+    for (int i = 0; i < nucell; ++i) attyp[i] = 1;
+
+    atpos[0][0] = 0.;
+    atpos[0][1] = 0.;
+    atpos[0][2] = 0.;
+
+    atpos[1][0] = 2./3.;
+    atpos[1][1] = 2./3.;
+    atpos[1][2] = 1./3.;
+
+    atpos[2][0] = 1./3.;
+    atpos[2][1] = 1./3.;
+    atpos[2][2] = 2./3.;
+
+    for (int i = nucell; i < nucell + noct + ntetra; ++i) attyp[i] = 2;
+    // octohedra sites
+    atpos[3][0] = 0.;
+    atpos[3][1] = 0.;
+    atpos[3][2] = 0.5;
+
+    atpos[4][0] = 2./3.;
+    atpos[4][1] = 2./3.;
+    atpos[4][2] = 5./6.;
+
+    atpos[5][0] = 1./3.;
+    atpos[5][1] = 1./3.;
+    atpos[5][2] = 1./6.;
+
+    // tetrahedra sites
+    atpos[6][0] = 0.;
+    atpos[6][1] = 0.;
+    atpos[6][2] = 0.25;
+
+    atpos[7][0] = 2./3.;
+    atpos[7][1] = 2./3.;
+    atpos[7][2] = 7./12.;
+
+    atpos[8][0] = 1./3.;
+    atpos[8][1] = 1./3.;
+    atpos[8][2] = 11./12.;
+
+    atpos[9][0] = 0.;
+    atpos[9][1] = 0.;
+    atpos[9][2] = 0.75;
+
+    atpos[10][0] = 2./3.;
+    atpos[10][1] = 2./3.;
+    atpos[10][2] = 1./12.;
+
+    atpos[11][0] = 1./3.;
+    atpos[11][1] = 1./3.;
+    atpos[11][2] = 5./12.;
+
+    initialized = 1;
+    break;
+
+  case 3:
+    nucell = 3;
+    ntype  = 1;
+    noct   = nucell;
+    ntetra = nucell + nucell;
+
+    memory->create(atpos, nucell + noct + ntetra, 3, "FCC001_atpos");
+    memory->create(attyp, nucell + noct + ntetra, "FCC:attyp");
+
+    latvec[0][0] = sqrt(0.5);
+    latvec[1][0] = sqrt(0.125);
+    latvec[1][1] = sqrt(0.375);
+    latvec[2][2] = sqrt(3.);
 
     for (int i = 0; i < nucell; ++i) attyp[i] = 1;
 
@@ -558,18 +572,130 @@ void FCC::FCC111()
     atpos[2][1] = 1./3.;
     atpos[2][2] = 2./3.;
 
+    for (int i = nucell; i < nucell + noct + ntetra; ++i) attyp[i] = 2;
+    // octohedra sites
+    atpos[3][0] = 2./3.;
+    atpos[3][1] = 1./3.;
+    atpos[3][2] = 1./6.;
+
+    atpos[4][0] = 0.;
+    atpos[4][1] = 0.;
+    atpos[4][2] = 0.5;
+
+    atpos[5][0] = 1./3.;
+    atpos[5][1] = 2./3.;
+    atpos[5][2] = 5./6.;
+
+    // tetrahedra sites
+    atpos[6][0] = 1./3.;
+    atpos[6][1] = 2./3.;
+    atpos[6][2] = 1./12.;
+
+    atpos[7][0] = 0.;
+    atpos[7][1] = 0.;
+    atpos[7][2] = 0.25;
+
+    atpos[8][0] = 2./3.;
+    atpos[8][1] = 1./3.;
+    atpos[8][2] = 5./12.;
+
+    atpos[9][0] = 1./3.;
+    atpos[9][1] = 2./3.;
+    atpos[9][2] = 7./12.;
+
+    atpos[10][0] = 0.;
+    atpos[10][1] = 0.;
+    atpos[10][2] = 0.75;
+
+    atpos[11][0] = 2./3.;
+    atpos[11][1] = 1./3.;
+    atpos[11][2] = 11./12.;
+
     initialized = 1;
     break;
+
+  case 4:
+    nucell = 3;
+    ntype  = 1;
+    noct   = nucell;
+    ntetra = nucell + nucell;
+
+    memory->create(atpos, nucell + noct + ntetra, 3, "FCC001_atpos");
+    memory->create(attyp, nucell + noct + ntetra, "FCC:attyp");
+
+    latvec[0][0] = sqrt(0.375);
+    latvec[0][1] = sqrt(0.125);
+    latvec[1][1] = sqrt(0.5);
+    latvec[2][2] = sqrt(3.);
+
+    for (int i = 0; i < nucell; ++i) attyp[i] = 1;
+
+    atpos[0][0] = 0.;
+    atpos[0][1] = 0.;
+    atpos[0][2] = 0.;
+
+    atpos[1][0] = 1./3.;
+    atpos[1][1] = 2./3.;
+    atpos[1][2] = 1./3.;
+
+    atpos[2][0] = 2./3.;
+    atpos[2][1] = 1./3.;
+    atpos[2][2] = 2./3.;
+
+    for (int i = nucell; i < nucell + noct + ntetra; ++i) attyp[i] = 2;
+    // octohedra sites
+    atpos[3][0] = 2./3.;
+    atpos[3][1] = 1./3.;
+    atpos[3][2] = 1./6.;
+
+    atpos[4][0] = 0.;
+    atpos[4][1] = 0.;
+    atpos[4][2] = 0.5;
+
+    atpos[5][0] = 1./3.;
+    atpos[5][1] = 2./3.;
+    atpos[5][2] = 5./6.;
+
+    // tetrahedra sites
+    atpos[6][0] = 1./3.;
+    atpos[6][1] = 2./3.;
+    atpos[6][2] = 1./12.;
+
+    atpos[7][0] = 0.;
+    atpos[7][1] = 0.;
+    atpos[7][2] = 0.25;
+
+    atpos[8][0] = 2./3.;
+    atpos[8][1] = 1./3.;
+    atpos[8][2] = 5./12.;
+
+    atpos[9][0] = 1./3.;
+    atpos[9][1] = 2./3.;
+    atpos[9][2] = 7./12.;
+
+    atpos[10][0] = 0.;
+    atpos[10][1] = 0.;
+    atpos[10][2] = 0.75;
+
+    atpos[11][0] = 2./3.;
+    atpos[11][1] = 1./3.;
+    atpos[11][2] = 11./12.;
+
+    initialized = 1;
+    break;
+
   case 5:
     nucell = 6;
     ntype  = 1;
+    noct   = nucell;
+    ntetra = nucell + nucell;
+
+    memory->create(atpos, nucell + noct + ntetra, 3, "FCC001_atpos");
+    memory->create(attyp, nucell + noct + ntetra, "FCC:attyp");
 
     latvec[0][0] =  sqrt(1.5);
     latvec[1][1] =  sqrt(0.5);
     latvec[2][2] =  sqrt(3.);
-
-    memory->create(atpos, nucell, 3, "FCC111_atpos");
-    memory->create(attyp, nucell, "FCC:attyp");
 
     for (int i = 0; i < nucell; ++i) attyp[i] = 1;
 
@@ -581,12 +707,12 @@ void FCC::FCC111()
     atpos[1][1] = 0.5;
     atpos[1][2] = 0.;
 
-    atpos[2][0] = 1./6.;
-    atpos[2][1] = 0.5;
+    atpos[2][0] = 2./3.;
+    atpos[2][1] = 0.;
     atpos[2][2] = 1./3.;
 
-    atpos[3][0] = 2./3.;
-    atpos[3][1] = 1.;
+    atpos[3][0] = 1./6.;
+    atpos[3][1] = 0.5;
     atpos[3][2] = 1./3.;
 
     atpos[4][0] = 1./3.;
@@ -597,18 +723,96 @@ void FCC::FCC111()
     atpos[5][1] = 0.5;
     atpos[5][2] = 2./3.;
 
+    for (int i = nucell; i < nucell + noct + ntetra; ++i) attyp[i] = 2;
+    // octohedra sites
+    atpos[6][0] = 1./3.;
+    atpos[6][1] = 0.;
+    atpos[6][2] = 1./6.;
+
+    atpos[7][0] = 5./6.;
+    atpos[7][1] = 0.5;
+    atpos[7][2] = 1./6.;
+
+    atpos[8][0] = 0.5;
+    atpos[8][1] = 0.5;
+    atpos[8][2] = 0.5;
+
+    atpos[9][0] = 0.;
+    atpos[9][1] = 0.;
+    atpos[9][2] = 0.5;
+
+    atpos[10][0] = 2./3.;
+    atpos[10][1] = 0.;
+    atpos[10][2] = 5./6.;
+
+    atpos[11][0] = 1./6.;
+    atpos[11][1] = 0.5;
+    atpos[11][2] = 5./6.;
+
+    // tetrahedra sites
+    atpos[12][0] = 1./6.;
+    atpos[12][1] = 0.5;
+    atpos[12][2] = 1./12.;
+
+    atpos[13][0] = 2./3.;
+    atpos[13][1] = 0.;
+    atpos[13][2] = 1./12.;
+
+    atpos[14][0] = 0.;
+    atpos[14][1] = 0.;
+    atpos[14][2] = 0.25;
+
+    atpos[15][0] = 0.5;
+    atpos[15][1] = 0.5;
+    atpos[15][2] = 0.25;
+
+    atpos[16][0] = 5./6.;
+    atpos[16][1] = 0.5;
+    atpos[16][2] = 5./12.;
+
+    atpos[17][0] = 1./3.;
+    atpos[17][1] = 0.;
+    atpos[17][2] = 5./12.;
+
+    atpos[18][0] = 1./6.;
+    atpos[18][1] = 0.5;
+    atpos[18][2] = 7./12.;
+
+    atpos[19][0] = 2./3.;
+    atpos[19][1] = 0.;
+    atpos[19][2] = 7./12.;
+
+    atpos[20][0] = 0.;
+    atpos[20][1] = 0.;
+    atpos[20][2] = 0.75;
+
+    atpos[21][0] = 0.5;
+    atpos[21][1] = 0.5;
+    atpos[21][2] = 0.75;
+
+    atpos[22][0] = 5./6.;
+    atpos[22][1] = 0.5;
+    atpos[22][2] = 11./12.;
+
+    atpos[23][0] = 1./3.;
+    atpos[23][1] = 0.;
+    atpos[23][2] = 11./12.;
+
     initialized = 1;
     break;
+
   case 6:
     nucell = 6;
     ntype  = 1;
+    noct   = nucell;
+    ntetra = nucell + nucell;
+
+    memory->create(atpos, nucell + noct + ntetra, 3, "FCC001_atpos");
+    memory->create(attyp, nucell + noct + ntetra, "FCC:attyp");
 
     latvec[0][0] = sqrt(0.5);
     latvec[1][1] = sqrt(1.5);
     latvec[2][2] = sqrt(3.);
-
-    memory->create(atpos, nucell, 3, "FCC111_atpos");
-    memory->create(attyp, nucell, "FCC:attyp");
 
     for (int i = 0; i < nucell; ++i) attyp[i] = 1;
 
@@ -624,7 +828,7 @@ void FCC::FCC111()
     atpos[2][1] = 1./6.;
     atpos[2][2] = 1./3.;
 
-    atpos[3][0] = 1.;
+    atpos[3][0] = 0.;
     atpos[3][1] = 2./3.;
     atpos[3][2] = 1./3.;
 
@@ -635,6 +839,81 @@ void FCC::FCC111()
     atpos[5][0] = 0.5;
     atpos[5][1] = 5./6.;
     atpos[5][2] = 2./3.;
+
+    for (int i = nucell; i < nucell + noct + ntetra; ++i) attyp[i] = 2;
+    // octohedra sites
+    atpos[6][0] = 0.000;
+    atpos[6][1] = 1./3.;
+    atpos[6][2] = 1./6.;
+
+    atpos[7][0] = 0.500;
+    atpos[7][1] = 5./6.;
+    atpos[7][2] = 1./6.;
+
+    atpos[8][0] = 0.000;
+    atpos[8][1] = 0.000;
+    atpos[8][2] = 0.500;
+
+    atpos[9][0] = 0.500;
+    atpos[9][1] = 0.500;
+    atpos[9][2] = 0.500;
+
+    atpos[10][0] = 0.500;
+    atpos[10][1] = 1./6.;
+    atpos[10][2] = 5./6.;
+
+    atpos[11][0] = 0.000;
+    atpos[11][1] = 2./3.;
+    atpos[11][2] = 5./6.;
+
+    // tetrahedra sites
+    atpos[12][0] = 0.000;
+    atpos[12][1] = 2./3.;
+    atpos[12][2] = 1./12.;
+
+    atpos[13][0] = 0.500;
+    atpos[13][1] = 1./6.;
+    atpos[13][2] = 1./12.;
+
+    atpos[14][0] = 0.000;
+    atpos[14][1] = 0.000;
+    atpos[14][2] = 0.250;
+
+    atpos[15][0] = 0.500;
+    atpos[15][1] = 0.500;
+    atpos[15][2] = 0.250;
+
+    atpos[16][0] = 1.000;
+    atpos[16][1] = 1./3.;
+    atpos[16][2] = 5./12.;
+
+    atpos[17][0] = 0.500;
+    atpos[17][1] = 5./6.;
+    atpos[17][2] = 5./12.;
+
+    atpos[18][0] = 0.000;
+    atpos[18][1] = 2./3.;
+    atpos[18][2] = 7./12.;
+
+    atpos[19][0] = 0.500;
+    atpos[19][1] = 1./6.;
+    atpos[19][2] = 7./12.;
+
+    atpos[20][0] = 0.500;
+    atpos[20][1] = 0.500;
+    atpos[20][2] = 0.750;
+
+    atpos[21][0] = 0.000;
+    atpos[21][1] = 0.000;
+    atpos[21][2] = 0.750;
+
+    atpos[22][0] = 0.000;
+    atpos[22][1] = 1./3.;
+    atpos[22][2] = 11./12.;
+
+    atpos[23][0] = 0.500;
+    atpos[23][1] = 5./6.;
+    atpos[23][2] = 11./12.;
 
     initialized = 1;
     break;
@@ -804,6 +1083,7 @@ void FCC::Diamond001()
   
     initialized = 1;
     break;
+
   case 2:
     nucell = 4;
     ntype  = 1;
@@ -1062,6 +1342,7 @@ void FCC::Diamond111()
     
     initialized = 1;
     break;
+
   case 3:
     nucell =    6;
     ntype  =  1;
