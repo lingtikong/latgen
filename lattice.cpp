@@ -60,8 +60,11 @@ void lattice::display()
   printf("Number of z-layers in each unit cell: %d\n", nlayer);
   printf("Number of atoms  in each layer......:");
   for (int i = 0; i < nlayer; ++i) printf(" %d", numlayer[i]); printf("\n");
-  printf("Expected height above each layer....:");
-  for (int i = 0; i < nlayer; ++i) printf(" %g", h[i]); printf("\n");
+  printf("Expected height above each layer....:\n");
+  for (int i = 0; i < nlayer; ++i){
+    printf(" %g", h[i]);
+    if (i%5 == 4 || i == nlayer-1) printf("\n");
+  }
   for (int i = 0; i < 14; ++i) printf("-----");
   printf("\nLattice vectors:\n");
   for (int i = 0; i < 3; ++i){
