@@ -163,7 +163,7 @@ void Driver::generate()
   if (natom < 1) exit(3);
 
   printf("Your system would be %d x %d x %d with %d atoms.\n",nx,ny,nz,natom);
-  printf("Please indicate which direction should goes fast(1:x; other: z)[1]: ");
+  printf("Please indicate which direction should go faster (1: x; other: z)[1]: ");
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) leading_dir = latt->inumeric(strtok(str, " \t\n\r\f"));
   for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
 
