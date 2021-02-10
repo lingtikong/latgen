@@ -968,9 +968,9 @@ void FCC::Primitive()
 
   // tetrahedral interstitital site 2
   attyp[3]    = 2;
-  atpos[3][0] = 0.25;
-  atpos[3][1] = 0.25;
-  atpos[3][2] = 0.25;
+  atpos[3][0] = 0.75;
+  atpos[3][1] = 0.75;
+  atpos[3][2] = 0.75;
 
   initialized = 1;
 return;

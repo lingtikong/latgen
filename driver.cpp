@@ -266,6 +266,7 @@ void Driver::typescan()
         typmax += 5;
         memory->grow(typeID, typmax, "driver->typescan:typeID");
         memory->grow(numtype,typmax, "driver->typescan:numtype");
+        for (int ip = typmax-5; ip < typmax; ++ip) numtype[ip] = 0;
       }
       typeID[ntype] = attyp[i];
       id            = ntype++;
