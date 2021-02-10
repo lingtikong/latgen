@@ -22,6 +22,7 @@ Driver::Driver()
   element = NULL;
   typeID = numtype = NULL;
   xmap = ymap = zmap = umap = NULL;
+  flag_orient = 1;
 
   memory = new Memory();
 
@@ -36,8 +37,8 @@ return;
 
 /* -----------------------------------------------------------------------------
  * To show the main menu
- *    flag: 0:   general case (main menu)
- *          n>0: multilayer, sequence of lattices.
+ *    flag:  0, general case (main menu)
+ *          >0, multilayer, polycrystal, or interstitials
  * -------------------------------------------------------------------------- */
 int Driver::ShowMenu(const int flag)
 {
@@ -73,7 +74,6 @@ int Driver::ShowMenu(const int flag)
   printf("Your selection : %d\n", ltype);
   for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
 
-  int rflag = 1; // > 0, generate & re-orient; 0, neither; <0, re-orient only.
   switch (ltype){
   case 1: latt = new FCC(); break;
   case 2: latt = new BCC(); break;
@@ -82,14 +82,29 @@ int Driver::ShowMenu(const int flag)
   case 5: latt = new A2B(); break;
   case 6: latt = new AB(); break;
   case 7: latt = new USER(); break;
-  case 8: if (flag == 0) rflag = FormLayers(); break;
+  case 8:
+    if (flag == 0){
+      flag_orient = 0;
+      FormLayers();
+      break;
+    }
 #ifdef Poly
-  case 9: if (flag == 0) rflag = Interstitial(); break;
-  case 10: if (flag == 0) rflag = PolyCrystal(); break;
+  case 9:
+    if (flag == 0){
+      Interstitial();
+      flag_orient = 0;
+      break;
+    }
+
+  case 10: if (flag == 0){
+     flag_orient = 0;
+     PolyCrystal();
+     break;
+  }
 #endif
   default: exit(1);}
 
-  if (flag == 0 && rflag != 0 && latt->initialized){
+  if (flag_orient > 0 && latt->initialized){
     // re-orient the lattice
     printf("Would you like to re-orient the unit cell to comply with LAMMPS? (y/n)[n]: ");
     if (count_words(fgets(str,MAXLINE,stdin)) > 0){
@@ -98,7 +113,7 @@ int Driver::ShowMenu(const int flag)
     }
   }
 
-return rflag;
+return 8-ltype;
 }
 
 /* -----------------------------------------------------------------------------
@@ -749,7 +764,7 @@ return;
 /* -----------------------------------------------------------------------------
  * Method to form multilayers
  * -------------------------------------------------------------------------- */
-int Driver::FormLayers()
+void Driver::FormLayers()
 {
   int nlat = 1, idum;
   int *mynx, *myny;
@@ -759,7 +774,7 @@ int Driver::FormLayers()
   printf("NOTE: The 3rd axis of these lattices must be perpendicular to the other 2!\n");
   printf("\nPlease input the number of lattices in your multi-layer system: ");
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) nlat = atoi(strtok(str," \t\n\r\f"));
-  if (nlat < 1) return 0;
+  if (nlat < 1) return;
 
   lattice *latts[nlat];
   for (int i = 0; i < nlat; ++i){
@@ -1010,7 +1025,7 @@ int Driver::FormLayers()
   // find the total # of types and # of atoms for each type
   typescan();
 
-return 0;
+return;
 }
 
 /* -----------------------------------------------------------------------------

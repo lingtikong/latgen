@@ -11,7 +11,7 @@
 /* -----------------------------------------------------------------------------
  * Method to create crystals with interstitial solutes
  * -------------------------------------------------------------------------- */
-int Driver::Interstitial()
+void Driver::Interstitial()
 {
   char str[MAXLINE], *ptr;
   printf("\n\n>>>>>>=========== Crystal with Interstitial Solutes ============<<<<<<\n");
@@ -19,7 +19,7 @@ int Driver::Interstitial()
   while ( ShowMenu(-1) < 1 );
   if (latt->noct + latt->ntetra < 1){
      printf("The lattice chosen does not define potential interstitial sites.\n");
-     return 0;
+     return;
   }
   latt->display();
   memory->create(name,strlen(latt->name),"interstitial:name");
@@ -64,11 +64,11 @@ int Driver::Interstitial()
   if (sites.size() < 1){
     printf("No interstitial sites defined! Bye~\n\n");
     natom = 0;
-    return 0;
+    return;
   }
 
   vector<double> fraction; fraction.clear();
-  printf("Please input the fraction (positive)  or number(negative) of solutes\nat each site in sequence: ");
+  printf("Please input the fraction (positive) or number(negative) of solutes\nat each site in sequence: ");
   while (count_words(fgets(str,MAXLINE,stdin)) < 1) continue;
   ptr = strtok(str, " \t\n\r\f");
   while (ptr){
@@ -77,13 +77,13 @@ int Driver::Interstitial()
   }
   if (fraction.size() != sites.size()){
     printf("\nIncomplete info provided for the fraction/number of solutes at each site. Bye~\n\n");
-    natom = 0; return 0;
+    natom = 0; return;
   }
   double tf = 0.;
   for (int i = 0; i < fraction.size(); ++i) tf += fabs(fraction[i]);
   if (tf <= ZERO){
     printf("\nIt seems that no interstitial solutes (%lg) are required. Bye~\n\n", tf);
-    natom = 0; return 0;
+    natom = 0; return;
   }
   
   int noct = latt->noct;
@@ -103,7 +103,7 @@ int Driver::Interstitial()
   for (int i = 0; i < noct+ntet; ++i) n_interstitial += ninter[i];
   if (n_interstitial < 1){
     printf("\nIt seems that no interstitial solutes are required. Bye~\n\n");
-    natom = 0; return 0;
+    natom = 0; return;
   }
   
   natom += n_interstitial;
@@ -246,7 +246,7 @@ int Driver::Interstitial()
   typescan();
 
   printf(">>>>>>============= End of Xtal with interstitial ==============<<<<<<\n\n");
-  return -1;
+  return;
 }
 
 /* ------------------------------------------------------------------- */

@@ -13,7 +13,7 @@ using namespace voro;
 /* -----------------------------------------------------------------------------
  * Method to create polycrystals
  * -------------------------------------------------------------------------- */
-int Driver::PolyCrystal()
+void Driver::PolyCrystal()
 {
   char str[MAXLINE], *ptr;
   int ngrain = 0, type_by_grain = 0;
@@ -295,7 +295,7 @@ int Driver::PolyCrystal()
   memory->destroy(orient);
 
   printf(">>>>>>============= End of Polycrystal generation ==============<<<<<<\n");
-return 0;
+  return;
 }
 
 /* ------------------------------------------------------------------- */
