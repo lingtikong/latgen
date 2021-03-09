@@ -884,7 +884,11 @@ void Driver::FormLayers()
   printf("If extra distance between different lattices is needed, just insert a number between\n");
   printf("them, for example: A4 0.5 B5 0.4 A4 B5...; multiple numbers will add multiple distances.\n");
   printf("If you want to form the 2nd A layers from its first layer in the unit cell, use\n");
-  printf("lower case 'a' instead of 'A'. Now, input your sequences: ");
+  printf("lower case 'a' instead of 'A'.\nOther options available:\n");
+  printf("  -s starting_layer  : to define the starting layer of the next lattice; 0 is the 1st.\n");
+  printf("  -S xs ys           : to define the relative shift of the next lattice.\n");
+  printf("  -z                 : to indicate not to add the next interlayer distance to the total height.\n");
+  printf("Now, input your sequences: ");
   if (count_words(fgets(str,MAXLINE,stdin)) > 0) {
     char *ptr; if (ptr = strchr(str,'#')) *ptr = '\0';
     ptr = strtok(str," \n\r\t\f");
