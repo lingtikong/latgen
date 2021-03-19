@@ -15,7 +15,7 @@ public:
   void generate();  // method to generate the atomic configuration
   void modify();    // to modify the resultant model
 
-  void write();     // method to write the atomic configuration (xyz) and mapping info
+  void write(int);  // method to write the atomic configuration (xyz) and mapping info
 
   void FormLayers();
   void Interstitial();

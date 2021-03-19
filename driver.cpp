@@ -369,7 +369,7 @@ int Driver::lookup(int ip)
 /* -----------------------------------------------------------------------------
  * method to write out atomic configuraton and mapping info
  * -------------------------------------------------------------------------- */
-void Driver::write()
+void Driver::write(int format)
 {
   if (natom < 1) return;
   FILE *fp;
@@ -387,7 +387,7 @@ void Driver::write()
     posfile = new char[12];
     strcpy(posfile, "atomcfg.xyz");
   }
-  if (flag_lmp_data){
+  if (flag_lmp_data && format == 1){
     printf("Please input the filename of the lammps atomic file [data.pos]: ");
     if (count_words(fgets(str,MAXLINE,stdin)) > 0){
       int n = strlen(str) + 1;
@@ -396,6 +396,17 @@ void Driver::write()
     } else {
       lmpfile = new char[9];
       strcpy(lmpfile, "data.pos");
+    }
+  }
+  if (format == 2){
+    printf("Please input the filename of the lammps atomic file [POSCAR]: ");
+    if (count_words(fgets(str,MAXLINE,stdin)) > 0){
+      int n = strlen(str) + 1;
+      lmpfile = new char[n];
+      strcpy(lmpfile, strtok(str," \t\n\r\f"));
+    } else {
+      lmpfile = new char[7];
+      strcpy(lmpfile, "POSCAR");
     }
   }
 
@@ -412,7 +423,7 @@ void Driver::write()
   }
 
   printf("\nThe atomic configuration will be written to: %s", posfile);
-  if (flag_lmp_data) printf(" and %s\n", lmpfile); else printf("\n");
+  if (flag_lmp_data || format == 2) printf(" and %s\n", lmpfile); else printf("\n");
   if (xmap) printf("The FFT map information  will be written to file: %s\n", mapfile);
   if (natom < 3){
     printf("\nThe basis vectors of your system is:\n");
@@ -448,34 +459,64 @@ void Driver::write()
   delete []posfile;
 
   // write the lammps atomic style file
-   if (flag_lmp_data){
-      fp = fopen(lmpfile,"w");
-      fprintf(fp, "# %s cell with dimension %d x %d x %d and a = %g\n", name, nx, ny, nz, alat);
-      fprintf(fp, "%10d  atoms\n", natom);
-      fprintf(fp, "%10d  atom types\n\n", ntype);
-      fprintf(fp, " 0. %20.14f  xlo xhi\n", latvec[0][0]);
-      fprintf(fp, " 0. %20.14f  ylo yhi\n", latvec[1][1]);
-      fprintf(fp, " 0. %20.14f  zlo zhi\n", latvec[2][2]);
-      if ( latvec[1][0]*latvec[1][0] + latvec[2][0]*latvec[2][0] + latvec[2][1]*latvec[2][1] > 1.e-8 )
-         fprintf(fp, "%20.14f %20.14f %20.14f xy xz yz\n", latvec[1][0], latvec[2][0], latvec[2][1]);
+  if (flag_lmp_data && format == 1){
+     fp = fopen(lmpfile,"w");
+     fprintf(fp, "# %s cell with dimension %d x %d x %d and a = %g\n", name, nx, ny, nz, alat);
+     fprintf(fp, "%10d  atoms\n", natom);
+     fprintf(fp, "%10d  atom types\n\n", ntype);
+     fprintf(fp, " 0. %20.14f  xlo xhi\n", latvec[0][0]);
+     fprintf(fp, " 0. %20.14f  ylo yhi\n", latvec[1][1]);
+     fprintf(fp, " 0. %20.14f  zlo zhi\n", latvec[2][2]);
+     if ( latvec[1][0]*latvec[1][0] + latvec[2][0]*latvec[2][0] + latvec[2][1]*latvec[2][1] > 1.e-8 )
+        fprintf(fp, "%20.14f %20.14f %20.14f xy xz yz\n", latvec[1][0], latvec[2][0], latvec[2][1]);
   
-      // write atomic mass info (g/mol) if element mapping is done
-      if (type2num.size() == ntype){
-         fprintf(fp, "\nMasses\n\n");
+     // write atomic mass info (g/mol) if element mapping is done
+     if (type2num.size() == ntype){
+        fprintf(fp, "\nMasses\n\n");
+ 
+        for (std::map<int,int>::iterator it = type2num.begin(); it != type2num.end(); ++it){
+           int ip = (*it).first; int num = (*it).second;
+           fprintf(fp,"%d %g\n", ip, element->Num2Mass(num));
+        }
+     }
   
-         for (std::map<int,int>::iterator it = type2num.begin(); it != type2num.end(); ++it){
-            int ip = (*it).first; int num = (*it).second;
-            fprintf(fp,"%d %g\n", ip, element->Num2Mass(num));
-         }
-      }
-  
-      fprintf(fp, "\nAtoms\n\n");
+     fprintf(fp, "\nAtoms\n\n");
     
-      for (int i = 0; i < natom; ++i)
-         fprintf(fp,"%d %d %20.14f %20.14f %20.14f\n", i+1, attyp[i], atpos[i][0], atpos[i][1], atpos[i][2]);
-      fclose(fp);
-      delete []lmpfile;
-   }
+     for (int i = 0; i < natom; ++i)
+        fprintf(fp,"%d %d %20.14f %20.14f %20.14f\n", i+1, attyp[i], atpos[i][0], atpos[i][1], atpos[i][2]);
+     fclose(fp);
+     delete []lmpfile;
+  }
+  // write the poscar file
+  if (format == 2){
+     fp = fopen(lmpfile,"w");
+     fprintf(fp, "# %s cell with dimension %d x %d x %d and a = %g\n", name, nx, ny, nz, alat);
+     fprintf(fp, "%10d\n", natom);
+     fprintf(fp, "%20.14f %20.14f %20.14f\n", latvec[0][0], latvec[0][1], latvec[0][2]);
+     fprintf(fp, "%20.14f %20.14f %20.14f\n", latvec[1][0], latvec[1][1], latvec[1][2]);
+     fprintf(fp, "%20.14f %20.14f %20.14f\n", latvec[2][0], latvec[2][1], latvec[2][2]);
+ 
+     // write atomic mass info (g/mol) if element mapping is done
+     if (type2num.size() == ntype){
+        char ename[3];
+        for (int ip = 0; ip < ntype; ++ip){
+           int id = typeID[ip];
+           element->Num2Name(type2num[id], ename);
+           fprintf(fp, " %s", ename);
+        }
+        fprintf(fp, "\n");
+     }
+     for (int ip = 0; ip < ntype; ++ip) fprintf(fp, " %d", numtype[ip]);
+     fprintf(fp, "\nCartesian\n");
+   
+     for (int ip = 0; ip < ntype; ++ip){
+        for (int i = 0; i < natom; ++i){
+           if (attyp[i] == typeID[ip]) fprintf(fp,"%20.14f %20.14f %20.14f\n", atpos[i][0], atpos[i][1], atpos[i][2]);
+        }
+     }
+     fclose(fp);
+     delete []lmpfile;
+  }
  
    // write the map file, useful to fix_phonon only.
    if (xmap){
