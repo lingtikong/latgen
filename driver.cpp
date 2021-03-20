@@ -250,7 +250,7 @@ return;
 void Driver::typescan()
 {
   // allocate memory
-  int typmax = latt->nucell;
+  int typmax = natom;
   if (typeID != NULL) memory->destroy(typeID);
   if (numtype!= NULL) memory->destroy(numtype);
   memory->create(typeID,  typmax, "driver->typescan:typeID");
@@ -262,12 +262,6 @@ void Driver::typescan()
   for (int i = 0; i < natom; ++i){
     int id = lookup(attyp[i]);
     if (id < 0){
-      if (ntype == typmax){
-        typmax += 5;
-        memory->grow(typeID, typmax, "driver->typescan:typeID");
-        memory->grow(numtype,typmax, "driver->typescan:numtype");
-        for (int ip = typmax-5; ip < typmax; ++ip) numtype[ip] = 0;
-      }
       typeID[ntype] = attyp[i];
       id            = ntype++;
     }
@@ -511,7 +505,7 @@ void Driver::write(int format)
    
      for (int ip = 0; ip < ntype; ++ip){
         for (int i = 0; i < natom; ++i){
-           if (attyp[i] == typeID[ip]) fprintf(fp,"%20.14f %20.14f %20.14f\n", atpos[i][0], atpos[i][1], atpos[i][2]);
+           if (attyp[i] == typeID[ip]) fprintf(fp,"%20.14f %20.14f %20.14f # %d\n", atpos[i][0], atpos[i][1], atpos[i][2], i+1);
         }
      }
      fclose(fp);

@@ -141,6 +141,21 @@ int lattice::count_words(const char *line)
 void lattice::setup()
 {
   if (initialized == 0) return;
+  // sort atom according to their types
+  for (int i = 0; i < nucell; ++i){
+     for (int j = i+1; j < nucell; ++j){
+        if (attyp[i] > attyp[j]){
+           int idum = attyp[i];
+           attyp[i] = attyp[j];
+           attyp[j] = idum;
+           for (int idim = 0; idim < 3; ++idim){
+              double fdum = atpos[i][idim];
+              atpos[i][idim] = atpos[j][idim];
+              atpos[j][idim] = fdum;
+           }
+        }
+     }
+  }
   // get the layer ID
   std::list<double> zlist;
   std::list<double>::iterator it;
