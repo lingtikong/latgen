@@ -493,8 +493,8 @@ void Driver::write(int format)
      fprintf(fp, "%20.14f %20.14f %20.14f\n", latvec[2][0], latvec[2][1], latvec[2][2]);
  
      // write atomic mass info (g/mol) if element mapping is done
+     char ename[3];
      if (type2num.size() == ntype){
-        char ename[3];
         for (int ip = 0; ip < ntype; ++ip){
            int id = typeID[ip];
            element->Num2Name(type2num[id], ename);
@@ -507,7 +507,11 @@ void Driver::write(int format)
    
      for (int ip = 0; ip < ntype; ++ip){
         for (int i = 0; i < natom; ++i){
-           if (attyp[i] == typeID[ip]) fprintf(fp,"%20.14f %20.14f %20.14f # %d\n", atpos[i][0], atpos[i][1], atpos[i][2], i+1);
+           int id = typeID[ip];
+           if (attyp[i] == id){
+             element->Num2Name(type2num[id], ename);
+             fprintf(fp,"%20.14f %20.14f %20.14f # %d %s\n", atpos[i][0], atpos[i][1], atpos[i][2], i+1, ename);
+           }
         }
      }
      fclose(fp);
