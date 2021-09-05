@@ -410,7 +410,7 @@ void FCC::FCC111()
     noct   = nucell;
     ntetra = nucell + nucell;
 
-    memory->create(atpos, nucell + noct + ntetra, 3, "FCC001_atpos");
+    memory->create(atpos, nucell + noct + ntetra, 3, "FCC111_atpos");
     memory->create(attyp, nucell + noct + ntetra, "FCC:attyp");
 
     latvec[0][0] =  sqrt(0.5);
@@ -480,7 +480,7 @@ void FCC::FCC111()
     noct   = nucell;
     ntetra = nucell + nucell;
 
-    memory->create(atpos, nucell + noct + ntetra, 3, "FCC001_atpos");
+    memory->create(atpos, nucell + noct + ntetra, 3, "FCC111_atpos");
     memory->create(attyp, nucell + noct + ntetra, "FCC:attyp");
 
     latvec[0][0] =  sqrt(0.375);
@@ -550,7 +550,7 @@ void FCC::FCC111()
     noct   = nucell;
     ntetra = nucell + nucell;
 
-    memory->create(atpos, nucell + noct + ntetra, 3, "FCC001_atpos");
+    memory->create(atpos, nucell + noct + ntetra, 3, "FCC111_atpos");
     memory->create(attyp, nucell + noct + ntetra, "FCC:attyp");
 
     latvec[0][0] = sqrt(0.5);
@@ -620,7 +620,7 @@ void FCC::FCC111()
     noct   = nucell;
     ntetra = nucell + nucell;
 
-    memory->create(atpos, nucell + noct + ntetra, 3, "FCC001_atpos");
+    memory->create(atpos, nucell + noct + ntetra, 3, "FCC111_atpos");
     memory->create(attyp, nucell + noct + ntetra, "FCC:attyp");
 
     latvec[0][0] = sqrt(0.375);
@@ -690,7 +690,7 @@ void FCC::FCC111()
     noct   = nucell;
     ntetra = nucell + nucell;
 
-    memory->create(atpos, nucell + noct + ntetra, 3, "FCC001_atpos");
+    memory->create(atpos, nucell + noct + ntetra, 3, "FCC111_atpos");
     memory->create(attyp, nucell + noct + ntetra, "FCC:attyp");
 
     latvec[0][0] =  sqrt(1.5);

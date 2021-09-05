@@ -60,10 +60,12 @@ int Driver::ShowMenu(const int flag)
 
   } else {
     printf(" 7. User defined;              |  8. Multi-layer.\n");
-    for (int i = 0; i < 14; ++i) printf("-----"); printf("\n");
+    for (int i = 0; i < 31; ++i) printf("-"); printf("+");
+    for (int i = 0; i < 38; ++i) printf("-"); printf("\n");
 #ifdef Poly
     printf(" 9. Xtal with interstitials;   | 10. Polycrystals;\n");
-    for (int i = 0; i < 14; ++i) printf("-----"); printf("\n");
+    for (int i = 0; i < 31; ++i) printf("-"); printf("+");
+    for (int i = 0; i < 38; ++i) printf("-"); printf("\n");
 #endif
     printf(" 0. Exit.\n");
   }
@@ -589,7 +591,7 @@ void Driver::solidsol()
   }
 
   double block[6], cpos[3], radius;
-  int flag, logand = 1, nsel, atsel[natom];
+  int flag = 0, logand = 1, nsel, atsel[natom];
   for (int id = 0; id < natom; ++id) atsel[id] = 1;
   if (job==1 || job==3 || job==4) flag |= 1;
   if (job==2 || job==3 || job==4) flag |= 2;
