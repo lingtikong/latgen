@@ -487,7 +487,7 @@ void Driver::write(int format)
   if (format == 2){
      fp = fopen(lmpfile,"w");
      fprintf(fp, "# %s cell with dimension %d x %d x %d and a = %g\n", name, nx, ny, nz, alat);
-     fprintf(fp, " 1.0 \n")
+     fprintf(fp, " 1.0 \n");
      fprintf(fp, "%20.14f %20.14f %20.14f\n", latvec[0][0], latvec[0][1], latvec[0][2]);
      fprintf(fp, "%20.14f %20.14f %20.14f\n", latvec[1][0], latvec[1][1], latvec[1][2]);
      fprintf(fp, "%20.14f %20.14f %20.14f\n", latvec[2][0], latvec[2][1], latvec[2][2]);
