@@ -95,9 +95,10 @@ int USER::read_file(const char *fname)
     nucell += ntm[i];
   }
 
-  // Must be Direct
+  // Direct or Cartesian
   fgets(str,MAXLINE,fp); if (feof(fp)){fclose(fp); return 6;}
-  if (str[0] != 'd' && str[0] != 'D') return 6;
+  int cartesian = 0;
+  if (str[0] != 'd' && str[0] != 'D') cartesian = 1;
 
   memory->create(atpos, nucell, 3, "USER_atpos");
   memory->create(attyp, nucell, "USER:attyp");
@@ -113,6 +114,8 @@ int USER::read_file(const char *fname)
   }
   fclose(fp);
   delete []ntm;
+
+  if (cartesian) car2dir();
 
   return 0;
 }
@@ -168,5 +171,105 @@ int USER::read_stdin()
   }
 
 return 0;
+}
+
+/*------------------------------------------------------------------------------
+ * Private method to do matrix inversion
+ *----------------------------------------------------------------------------*/
+void USER::GaussJordan(const int n, const double *MatA, double *Mat)
+{
+  int i,icol,irow,j,k,l,ll,idr,idc;
+  int indxc[n],indxr[n],ipiv[n];
+  double big, dum, pivinv;
+
+  for (int i=0; i<n*n; i++) Mat[i] = MatA[i];
+
+  for (i=0; i<n; i++) ipiv[i] = 0;
+  for (i=0; i<n; i++){
+    big = 0.;
+    for (j=0; j<n; j++){
+      if (ipiv[j] != 1){
+        for (k=0; k<n; k++){
+          if (ipiv[k] == 0){
+            idr = j*n+k;
+            if (fabs(Mat[idr]) >= big){
+              big  = fabs(Mat[idr]);
+              irow = j;
+              icol = k;
+            }
+          }else if (ipiv[k] >1){
+            printf("\nError: Singular matrix in double GaussJordan!\n");
+          }
+        }
+      }
+    }
+    ipiv[icol] += 1;
+    if (irow != icol){
+      for (l=0; l<n; l++){
+        idr  = irow*n+l;
+        idc  = icol*n+l;
+        dum  = Mat[idr];
+        Mat[idr] = Mat[idc];
+        Mat[idc] = dum;
+      }
+    }
+    indxr[i] = irow;
+    indxc[i] = icol;
+    idr = icol*n+icol;
+    if (Mat[idr] == 0.) printf("\nError: Singular matrix in double GaussJordan!\n");
+    
+    pivinv = 1./ Mat[idr];
+    Mat[idr] = 1.;
+    idr = icol*n;
+    for (l=0; l<n; l++) Mat[idr+l] *= pivinv;
+    for (ll=0; ll<n; ll++){
+      if (ll != icol){
+        idc = ll*n+icol;
+        dum = Mat[idc];
+        Mat[idc] = 0.;
+        idc -= icol;
+        for (l=0; l<n; l++) Mat[idc+l] -= Mat[idr+l]*dum;
+      }
+    }
+  }
+  for (l=n-1; l>=0; l--){
+    int rl = indxr[l];
+    int cl = indxc[l];
+    if (rl != cl){
+      for (k=0; k<n; k++){
+        idr = k*n+rl;
+        idc = k*n+cl;
+        dum = Mat[idr];
+        Mat[idr] = Mat[idc];
+        Mat[idc] = dum;
+      }
+    }
+  }
+
+return;
+}
+
+/*------------------------------------------------------------------------------
+ * Method to convert cartesian coordinate into fractional
+ *----------------------------------------------------------------------------*/
+void USER::car2dir()
+{
+  double invaxis[3][3];
+  GaussJordan(3,&latvec[0][0],&invaxis[0][0]);
+  double x[nucell][3], **s = atpos;
+  for (int i=0; i<nucell; i++)
+  for (int idim=0; idim<3; idim++) x[i][idim] = atpos[i][idim];
+
+  for (int i=0; i<nucell; i++){
+    for (int idim=0; idim<3; idim++){
+      s[i][idim] = 0.;
+      for (int jdim=0; jdim<3; jdim++) s[i][idim] += x[i][jdim]*invaxis[jdim][idim];
+
+      while (s[i][idim] >= 1.) s[i][idim] -= 1.;
+      while (s[i][idim] <  0.) s[i][idim] += 1.;
+    }
+  }
+
+return;
 }
 /* ------------------------------------------------------------------- */

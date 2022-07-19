@@ -15,8 +15,7 @@ When one wants to create the atomic position based on their own lattice
 (option 7 in the main menu), one can choose to input the unit cell related
 info step by step or by providing an input file.
 In the latter case, the format of the input file is the same as the POSCAR
-of VASP 5 (Direct, ie, fractional coordinates). Here is an example of FCC Cu,
-with the conventional orientation:
+of VASP 5. Here is an example of FCC Cu, with the conventional orientation:
 #-------------------------------------------------------------------------------
 Comment
 3.615
