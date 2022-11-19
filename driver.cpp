@@ -383,7 +383,7 @@ void Driver::write(int format)
     posfile = new char[12];
     strcpy(posfile, "atomcfg.xyz");
   }
-  if (flag_lmp_data && format == 1){
+  if (flag_lmp_data && format != 2){
     printf("Please input the filename of the lammps atomic file [data.pos]: ");
     if (count_words(fgets(str,MAXLINE,stdin)) > 0){
       int n = strlen(str) + 1;
@@ -455,7 +455,7 @@ void Driver::write(int format)
   delete []posfile;
 
   // write the lammps atomic style file
-  if (flag_lmp_data && format == 1){
+  if (flag_lmp_data && format != 2){
      fp = fopen(lmpfile,"w");
      fprintf(fp, "# %s cell with dimension %d x %d x %d and a = %g\n", name, nx, ny, nz, alat);
      fprintf(fp, "%10d  atoms\n", natom);
@@ -478,8 +478,15 @@ void Driver::write(int format)
   
      fprintf(fp, "\nAtoms\n\n");
     
-     for (int i = 0; i < natom; ++i)
-        fprintf(fp,"%d %d %20.14f %20.14f %20.14f\n", i+1, attyp[i], atpos[i][0], atpos[i][1], atpos[i][2]);
+     if (format == 1){
+        for (int i = 0; i < natom; ++i)
+            fprintf(fp,"%d %d %20.14f %20.14f %20.14f\n", i+1, attyp[i], atpos[i][0], atpos[i][1], atpos[i][2]);
+
+     } else if (format == 3){
+        for (int i = 0; i < natom; ++i)
+            fprintf(fp,"%d %d 0. %20.14f %20.14f %20.14f\n", i+1, attyp[i], atpos[i][0], atpos[i][1], atpos[i][2]);
+     }
+
      fclose(fp);
      delete []lmpfile;
   }
