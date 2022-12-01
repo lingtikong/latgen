@@ -484,7 +484,7 @@ void FCC::FCC111()
     memory->create(attyp, nucell + noct + ntetra, "FCC:attyp");
 
     latvec[0][0] =  sqrt(0.375);
-    latvec[0][1] = -sqrt(0.125);
+    latvec[0][1] =  sqrt(0.125);
     latvec[1][1] =  sqrt(0.5);
     latvec[2][2] =  sqrt(3.);
 
@@ -554,7 +554,7 @@ void FCC::FCC111()
     memory->create(attyp, nucell + noct + ntetra, "FCC:attyp");
 
     latvec[0][0] = sqrt(0.5);
-    latvec[1][0] = sqrt(0.125);
+    latvec[1][0] =-sqrt(0.125);
     latvec[1][1] = sqrt(0.375);
     latvec[2][2] = sqrt(3.);
 
@@ -624,7 +624,7 @@ void FCC::FCC111()
     memory->create(attyp, nucell + noct + ntetra, "FCC:attyp");
 
     latvec[0][0] = sqrt(0.375);
-    latvec[0][1] = sqrt(0.125);
+    latvec[0][1] =-sqrt(0.125);
     latvec[1][1] = sqrt(0.5);
     latvec[2][2] = sqrt(3.);
 
