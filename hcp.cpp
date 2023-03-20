@@ -707,9 +707,6 @@ void HCP::HCPm10()
   latvec[1][1] = ca;
   latvec[2][2] = sqrt(3.);
 
-  memory->create(atpos, nucell, 3, "HCPm10_atpos");
-  memory->create(attyp, nucell, "HCP:attyp");
-    
   for (int i = 0; i < nucell; ++i) attyp[i] = 1;
   atpos[0][0] = 0.000;
   atpos[0][1] = 0.000;
