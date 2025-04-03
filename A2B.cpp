@@ -105,12 +105,15 @@ void A2B::A2B_C1()
     ntype  = 2;
     nucell = 6;
     
+    noct   = 2;
+    ntetra = 0;
+
     latvec[0][0] = 1./sqrt(2.);
     latvec[1][1] = 1./sqrt(2.);
     latvec[2][2] = 1.;
 
-    memory->create(atpos, nucell, 3, "A2B:atpos");
-    memory->create(attyp, nucell, "A2B:attyp");
+    memory->create(atpos, nucell + noct + ntetra, 3, "A2B:atpos");
+    memory->create(attyp, nucell + noct + ntetra, "A2B:attyp");
 
     attyp[0] = ip1;
     atpos[0][0] = 0.;
@@ -142,8 +145,19 @@ void A2B::A2B_C1()
     atpos[5][1] = 0.5;
     atpos[5][2] = 0.75;
 
+    for (int i = nucell; i < nucell + noct + ntetra; ++i) attyp[i] = 3;
+    // octohedra site
+    atpos[6][0] = 0.0;
+    atpos[6][1] = 0.0;
+    atpos[6][2] = 0.5;
+
+    atpos[7][0] = 0.5;
+    atpos[7][1] = 0.5;
+    atpos[7][2] = 0.0;
+
     initialized = 1;
     break;
+
   case 2:
     memory->create(name,12,"A2B:name");
     strcpy(name, "A2B-C1(001)");
@@ -151,12 +165,15 @@ void A2B::A2B_C1()
     ntype  = 2;
     nucell = 12;
     
+    noct   = 4;
+    ntetra = 0;
+
     latvec[0][0] = 1.;
     latvec[1][1] = 1.;
     latvec[2][2] = 1.;
 
-    memory->create(atpos, nucell, 3, "A2B:atpos");
-    memory->create(attyp, nucell, "A2B:attyp");
+    memory->create(atpos, nucell + noct + ntetra, 3, "A2B:atpos");
+    memory->create(attyp, nucell + noct + ntetra, "A2B:attyp");
 
     attyp[0] = ip1;
     atpos[0][0] = 0.;
@@ -218,8 +235,27 @@ void A2B::A2B_C1()
     atpos[11][1] = 0.75;
     atpos[11][2] = 0.75;
 
+    for (int i = nucell; i < nucell + noct + ntetra; ++i) attyp[i] = 3;
+    // octohedra site
+    atpos[12][0] = 0.500;
+    atpos[12][1] = 0.500;
+    atpos[12][2] = 0.500;
+
+    atpos[13][0] = 0.500;
+    atpos[13][1] = 0.000;
+    atpos[13][2] = 0.000;
+
+    atpos[14][0] = 0.000;
+    atpos[14][1] = 0.500;
+    atpos[14][2] = 0.000;
+
+    atpos[15][0] = 0.000;
+    atpos[15][1] = 0.000;
+    atpos[15][2] = 0.500;
+
     initialized = 1;
     break;
+
   case 3:
     memory->create(name,12,"A2B:name");
     strcpy(name, "A2B-C1(110)");
@@ -227,12 +263,15 @@ void A2B::A2B_C1()
     ntype  = 2;
     nucell = 6;
     
+    noct   = 2;
+    ntetra = 0;
+
     latvec[0][0] = 1.;
     latvec[1][1] = 1./sqrt(2.);
     latvec[2][2] = 1./sqrt(2.);
 
-    memory->create(atpos, nucell, 3, "A2B:atpos");
-    memory->create(attyp, nucell, "A2B:attyp");
+    memory->create(atpos, nucell + noct + ntetra, 3, "A2B:atpos");
+    memory->create(attyp, nucell + noct + ntetra, "A2B:attyp");
 
     attyp[0] = ip2;
     atpos[0][0] = 0.75;
@@ -264,8 +303,19 @@ void A2B::A2B_C1()
     atpos[5][1] = 0.5;
     atpos[5][2] = 0.5;
 
+    for (int i = nucell; i < nucell + noct + ntetra; ++i) attyp[i] = 3;
+    // octohedra site
+    atpos[6][0] = 0.0;
+    atpos[6][1] = 0.5;
+    atpos[6][2] = 0.5;
+
+    atpos[7][0] = 0.5;
+    atpos[7][1] = 0.0;
+    atpos[7][2] = 0.0;
+
     initialized = 1;
     break;
+
   case 4:
     memory->create(name,12,"A2B:name");
     strcpy(name, "A2B-C1(111)");
@@ -273,12 +323,15 @@ void A2B::A2B_C1()
     ntype  = 2;
     nucell = 18;
     
+    noct   = 6;
+    ntetra = 0;
+
     latvec[0][0] = sqrt(6.)/2.;
     latvec[1][1] = sqrt(2.)/2.;
     latvec[2][2] = sqrt(3.);
 
-    memory->create(atpos, nucell, 3, "A2B:atpos");
-    memory->create(attyp, nucell, "A2B:attyp");
+    memory->create(atpos, nucell + noct + ntetra, 3, "A2B:atpos");
+    memory->create(attyp, nucell + noct + ntetra, "A2B:attyp");
 
     attyp[0] = ip1;
     atpos[0][0] = 0.;
@@ -370,8 +423,35 @@ void A2B::A2B_C1()
     atpos[17][1] = 0.5;
     atpos[17][2] = 11./12.;
 
+    for (int i = nucell; i < nucell + noct + ntetra; ++i) attyp[i] = 3;
+    // octohedra site
+    atpos[18][0] = 1./6.;
+    atpos[18][1] = 0.5;
+    atpos[18][2] = 1./6.;
+
+    atpos[19][0] = 2./3.;
+    atpos[19][1] = 0.0;
+    atpos[19][2] = 1./6.;
+
+    atpos[20][0] = 5./6.;
+    atpos[20][1] = 0.5;
+    atpos[20][2] = 5./6.;
+
+    atpos[21][0] = 1./3.;
+    atpos[21][1] = 0.0;
+    atpos[21][2] = 5./6.;
+
+    atpos[22][0] = 0.;
+    atpos[22][1] = 0.;
+    atpos[22][2] = 0.5;
+
+    atpos[23][0] = 0.5;
+    atpos[23][1] = 0.5;
+    atpos[23][2] = 0.5;
+
     initialized = 1;
     break;
+
   case 5:
     memory->create(name,17,"A2B:name");
     strcpy(name, "A2B-C1-primitive");
@@ -379,6 +459,9 @@ void A2B::A2B_C1()
     ntype  = 2;
     nucell = 3;
     
+    noct   = 1;
+    ntetra = 0;
+
     latvec[0][1] = 0.5;
     latvec[0][2] = 0.5;
     latvec[1][0] = 0.5;
@@ -386,8 +469,8 @@ void A2B::A2B_C1()
     latvec[2][0] = 0.5;
     latvec[2][1] = 0.5;
 
-    memory->create(atpos, nucell, 3, "A2B:atpos");
-    memory->create(attyp, nucell, "A2B:attyp");
+    memory->create(atpos, nucell + noct + ntetra, 3, "A2B:atpos");
+    memory->create(attyp, nucell + noct + ntetra, "A2B:attyp");
 
     attyp[0] = ip1;
     atpos[0][0] = 0.;
@@ -404,6 +487,12 @@ void A2B::A2B_C1()
     atpos[2][1] = 0.75;
     atpos[2][2] = 0.75;
     
+    for (int i = nucell; i < nucell + noct + ntetra; ++i) attyp[i] = 3;
+    // octohedra site
+    atpos[3][0] = 0.5;
+    atpos[3][1] = 0.5;
+    atpos[3][2] = 0.5;
+
     initialized = 1;
     break;
   default:
