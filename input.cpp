@@ -6,6 +6,7 @@
  * -------------------------------------------------------------------------- */ 
 UserInput::UserInput(int flag, Memory *m)
 {
+   fp = NULL;
    if (flag) fp = fopen("script.inp", "w");
    memory = m;
 

@@ -12,9 +12,8 @@ public:
    UserInput(int, Memory *);
    ~UserInput();
 
-   int read_stdin(char *);
-
    Memory *memory;
+   int read_stdin(char *);
    int count_words(const char *);
 
 private:
