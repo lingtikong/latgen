@@ -21,7 +21,7 @@ void AB::AB_Perov()
   printf("   7. [111]//z, orthogonal, [110]//x;\n");
   for (int i = 0; i < 14; ++i) printf("-----");
   printf("\nYour choice [%d]: ", orient);
-  if (count_words(fgets(str,MAXLINE,stdin)) > 0) orient = inumeric(strtok(str, " \t\n\r\f"));
+  if (uin->read_stdin(str) > 0) orient = inumeric(strtok(str, " \t\n\r\f"));
   printf("Your selection : %d", orient);
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
   

@@ -6,7 +6,7 @@
 class FCC : public lattice {
 public:
   
-  FCC();
+  FCC(UserInput *);
   ~FCC();
 
 private:

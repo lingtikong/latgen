@@ -10,18 +10,18 @@ using namespace std;
 /* -----------------------------------------------------------------------------
  * To select the orientation of the lattice
  * -------------------------------------------------------------------------- */
-HCP::HCP() : lattice()
+HCP::HCP(UserInput *u) : lattice(u)
 {
   char str[MAXLINE];
   alat = 1.; ca = sqrt(8./3.);
   // print out the menu
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
   printf("Please input the lattice constant of the HCP lattice [1]: ");
-  if (count_words(fgets(str,MAXLINE,stdin)) > 0) alat = numeric(strtok(str, " \t\n\r\f"));
+  if (uin->read_stdin(str) > 0) alat = numeric(strtok(str, " \t\n\r\f"));
   if (alat <= 0.) alat = 1.;
 
   printf("Please input the value of c/a ratio or c (negative) [1.633]: ");
-  if (count_words(fgets(str,MAXLINE,stdin)) > 0) ca = numeric(strtok(str, " \t\n\r\f"));
+  if (uin->read_stdin(str) > 0) ca = numeric(strtok(str, " \t\n\r\f"));
   if (ca == 0.) ca = sqrt(8./3.);
   if (ca <  0.) ca = -ca/alat;
   printf("The lattice constants of your HCP: a = %g, c/a = %g.\n\n", alat, ca);
@@ -33,7 +33,7 @@ HCP::HCP() : lattice()
   printf("   3. [110]/[11-20]  along z;      7. [101]/[2-1-13] along z;\n");
   printf("   4.[-110]/[-1100]  along z;      8. [112]/[11-26]  along z;\n");
   printf("Your choice [%d]: ", orient);
-  if (count_words(fgets(str,MAXLINE,stdin)) > 0) orient = inumeric(strtok(str, " \t\n\r\f"));
+  if (uin->read_stdin(str) > 0) orient = inumeric(strtok(str, " \t\n\r\f"));
   printf("Your selection : %d", orient);
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
   
@@ -95,7 +95,7 @@ void HCP::HCP001()
   printf("   5. Orthogonal, [1-10] along x;\n");
   printf("   6. Orthogonal, [1-10] along y;\n");
   printf("Your choice [%d]: ", surftype);
-  if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = inumeric(strtok(str, " \t\n\r\f"));
+  if (uin->read_stdin(str) > 0) surftype = inumeric(strtok(str, " \t\n\r\f"));
   printf("Your selection : %d", surftype);
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
 
@@ -796,7 +796,7 @@ void HCP::Graphene()
   printf("   5. Orthogonal, [1-10] along x;\n");
   printf("   6. Orthogonal, [1-10] along y;\n");
   printf("Your choice [%d]: ", surftype);
-  if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = inumeric(strtok(str, " \t\n\r\f"));
+  if (uin->read_stdin(str) > 0) surftype = inumeric(strtok(str, " \t\n\r\f"));
   printf("Your selection : %d", surftype);
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
 
@@ -983,7 +983,7 @@ void HCP::Graphite()
   printf("   5. Orthogonal, [110] along x;\n");
   printf("   6. Orthogonal, [110] along y;\n");
   printf("Your choice [%d]: ", surftype);
-  if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = inumeric(strtok(str, " \t\n\r\f"));
+  if (uin->read_stdin(str) > 0) surftype = inumeric(strtok(str, " \t\n\r\f"));
   printf("Your selection : %d", surftype);
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
 
@@ -996,7 +996,7 @@ void HCP::Graphite()
   if (fabs(ca-2.725) > 0.1){
     printf("\nThe experimental c/a for graphite is ~2.725, while yours is %g, if you\n", ca);
     printf("want to redefine it, input now, enter to keep c/a = %g: ", ca);
-    if (count_words(fgets(str,MAXLINE,stdin)) > 0) ca = numeric(strtok(str, " \t\n\r\f"));
+    if (uin->read_stdin(str) > 0) ca = numeric(strtok(str, " \t\n\r\f"));
     printf("The adopted c/a will be: %g\n\n", ca);
   }
 
@@ -1238,7 +1238,7 @@ void HCP::HCP10m1()
   printf("   2. U = [010]/[-12-10], V = [101]/[2-1-13] along y;\n");
   printf("   3. U = [212]/[10-1-2] along x, V = [010/[-12-10] along y;\n");
   printf("Your choice [%d]: ", surftype);
-  if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = inumeric(strtok(str, " \t\n\r\f"));
+  if (uin->read_stdin(str) > 0) surftype = inumeric(strtok(str, " \t\n\r\f"));
   printf("Your selection : %d", surftype);
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
 
@@ -2951,7 +2951,7 @@ void HCP::HCP112()
   printf("   1. [1 -1 0] along x;\n");
   printf("   2. [1 -1 0] along y;\n");
   printf("Your choice [%d]: ", surftype);
-  if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = inumeric(strtok(str, " \t\n\r\f"));
+  if (uin->read_stdin(str) > 0) surftype = inumeric(strtok(str, " \t\n\r\f"));
   printf("Your selection : %d", surftype);
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
 

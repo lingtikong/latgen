@@ -2,14 +2,16 @@
 #define LATTICE_H
 
 #include "memory.h"
+#include "input.h"
 
 class lattice {
 public:
   
-  lattice();
+  lattice(UserInput *);
   ~lattice();
 
   Memory *memory;
+  UserInput *uin;
 
   char *name;          // name of the lattice
  
@@ -35,8 +37,6 @@ public:
   void OrientLattice();// to orient the lattice, following the rule of LAMMPS.
   void RotateLattice(double *);            // rotate the lattice
   void RotateLattice(double *, double [3][3]); // rotate the lattice, but keep latvec
-
-  int count_words(const char *);
 
   double numeric(char *);
   int inumeric(char *);

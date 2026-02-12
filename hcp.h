@@ -6,7 +6,7 @@
 class HCP : public lattice {
 public:
   
-  HCP();
+  HCP(UserInput *);
   ~HCP();
 
 private:

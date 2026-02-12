@@ -11,7 +11,7 @@
 /* -----------------------------------------------------------------------------
  * constructor does nothing
  * -------------------------------------------------------------------------- */
-lattice::lattice()
+lattice::lattice(UserInput *ui)
 {
   initialized = 0;
   perp_x = perp_y = perp_z = 0;
@@ -26,7 +26,8 @@ lattice::lattice()
   numlayer = NULL;
   h        = NULL;
 
-  memory = new Memory;
+  uin = ui;
+  memory = uin->memory;
 }
 
 /* -----------------------------------------------------------------------------
@@ -40,8 +41,6 @@ lattice::~lattice()
   if (layer) memory->destroy(layer);
   if (numlayer) memory->destroy(numlayer);
   if (h       ) memory->destroy(h);
-  
-  delete memory;
 }
 
 /* -----------------------------------------------------------------------------
@@ -109,30 +108,6 @@ void lattice::OrientLattice()
   latvec[2][2] = sqrt(box[2]*box[2]-latvec[2][0]*latvec[2][0]-latvec[2][1]*latvec[2][1]);
 
 return;
-}
-
-/* -----------------------------------------------------------------------------
- * Method to count # of words in a string, without destroying the string
- * -------------------------------------------------------------------------- */
-int lattice::count_words(const char *line)
-{
-  int n = strlen(line) + 1;
-  char *copy;
-  memory->create(copy, n, "copy");
-  strcpy(copy,line);
-
-  char *ptr;
-  if (ptr = strchr(copy,'#')) *ptr = '\0';
-
-  if (strtok(copy," \t\n\r\f") == NULL) {
-    memory->sfree(copy);
-    return 0;
-  }
-  n = 1;
-  while (strtok(NULL," \t\n\r\f")) n++;
-
-  memory->sfree(copy);
-  return n;
 }
 
 /* -----------------------------------------------------------------------------

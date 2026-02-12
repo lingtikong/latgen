@@ -10,14 +10,14 @@ using namespace std;
 /* -----------------------------------------------------------------------------
  * To select the orientation of the lattice
  * -------------------------------------------------------------------------- */
-FCC::FCC() : lattice()
+FCC::FCC(UserInput *u) : lattice(u)
 {
   char str[MAXLINE];
   alat = 1.;
   // print out the menu
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
   printf("Please input the lattice constant of the FCC/Diamond lattice [1.]: ");
-  if (count_words(fgets(str,MAXLINE,stdin)) > 0) alat = numeric(strtok(str, " \t\n\r\f"));
+  if (uin->read_stdin(str) > 0) alat = numeric(strtok(str, " \t\n\r\f"));
   if (alat <= 0.) alat = 1.;
 
   int orient = 3;
@@ -28,7 +28,7 @@ FCC::FCC() : lattice()
   printf("   4. Primitive cell;       8. Diamond primitive;\n");
   for (int i = 0; i < 14; ++i) printf("-----");
   printf("\nYour choice [%d]: ", orient);
-  if (count_words(fgets(str,MAXLINE,stdin)) > 0) orient = inumeric(strtok(str, " \t\n\r\f"));
+  if (uin->read_stdin(str) > 0) orient = inumeric(strtok(str, " \t\n\r\f"));
   printf("Your selection : %d", orient);
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
   
@@ -86,7 +86,7 @@ void FCC::FCC001()
   printf("   1. primitive,    [110] along x;\n");
   printf("   2. conventional, [100] along x.\n");
   printf("Your choice [%d]: ", surftype);
-  if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = inumeric(strtok(str, " \t\n\r\f"));
+  if (uin->read_stdin(str) > 0) surftype = inumeric(strtok(str, " \t\n\r\f"));
   printf("Your selection : %d", surftype);
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
 
@@ -253,7 +253,7 @@ void FCC::FCC110()
   printf("   1. orthogonal primitive, [220] along x\n");
   printf("   2. orthogonal primitive, [220] along y\n");
   printf("Your choice [%d]: ", surftype);
-  if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = inumeric(strtok(str, " \t\n\r\f"));
+  if (uin->read_stdin(str) > 0) surftype = inumeric(strtok(str, " \t\n\r\f"));
   printf("Your selection : %d", surftype);
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
   
@@ -392,7 +392,7 @@ void FCC::FCC111()
   printf("   5. orthogonal, long side along x;\n");
   printf("   6. orthogonal, long side along y;\n");
   printf("Your choice [%d]: ", surftype);
-  if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = inumeric(strtok(str, " \t\n\r\f"));
+  if (uin->read_stdin(str) > 0) surftype = inumeric(strtok(str, " \t\n\r\f"));
   printf("Your selection : %d", surftype);
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
   
@@ -1026,7 +1026,7 @@ void FCC::Diamond001()
   printf("   1. Conventional cubic;\n");
   printf("   2. Orthogonal, x//[110], y//[-110];\n");
   printf("Your choice [%d]: ", surftype);
-  if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = inumeric(strtok(str, " \t\n\r\f"));
+  if (uin->read_stdin(str) > 0) surftype = inumeric(strtok(str, " \t\n\r\f"));
   printf("Your selection : %d", surftype);
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
 
@@ -1136,7 +1136,7 @@ void FCC::Diamond110()
   printf("   1. x//[001], y//[110];\n");
   printf("   2. x//[110], y//[001];\n");
   printf("Your choice [%d]: ", surftype);
-  if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = inumeric(strtok(str, " \t\n\r\f"));
+  if (uin->read_stdin(str) > 0) surftype = inumeric(strtok(str, " \t\n\r\f"));
   printf("Your selection : %d", surftype);
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
 
@@ -1236,7 +1236,7 @@ void FCC::Diamond111()
   printf("   5. Orthogonal, x//[1-10];\n");
   printf("   6. Orthogonal, y//[1-10];\n");
   printf("Your choice [%d]: ", surftype);
-  if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = inumeric(strtok(str, " \t\n\r\f"));
+  if (uin->read_stdin(str) > 0) surftype = inumeric(strtok(str, " \t\n\r\f"));
   printf("Your selection : %d", surftype);
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
 

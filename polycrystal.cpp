@@ -49,7 +49,7 @@ void Driver::PolyCrystal()
   printf("read from a file. In the previous case, the position and the orientation of\n");
   printf("each grain are assigned randomly. While in the latter case, such information\n");
   printf("can be defined explicitly. If this is preferred, input the file name now: ");
-  if (count_words(fgets(str,MAXLINE,stdin)) > 0){
+  if (uin->read_stdin(str) > 0){
     ptr = strtok(str, " \n\t\r\f");
     fp = fopen(ptr, "r");
   }
@@ -59,7 +59,7 @@ void Driver::PolyCrystal()
     int idir = 0;
     fgets(str, MAXLINE, fp);
     while ( !feof(fp) ) {  // first three effective lines: xlo, xhi, xpbc
-      if (count_words(str) >= 3){
+      if (uin->count_words(str) >= 3){
         lo[idir]  = atof(strtok(str, " \n\t\r\f"));
         hi[idir]  = atof(strtok(NULL," \n\t\r\f"));
         pbc[idir] = atoi(strtok(NULL," \n\t\r\f"));
@@ -74,7 +74,7 @@ void Driver::PolyCrystal()
 
     fgets(str, MAXLINE, fp);
     while ( !feof(fp) ) {   // fourth effective line: ngrain, type-by-grain
-      if (count_words(str) >= 2){
+      if (uin->count_words(str) >= 2){
         ngrain = atoi(strtok(str, " \n\t\r\f"));
         type_by_grain = atoi(strtok(NULL," \n\t\r\f"));
 
@@ -92,7 +92,7 @@ void Driver::PolyCrystal()
       // alpha, beta, gamma are in unit of degree; but can be 'ran' for random number within [0, 360]
       fgets(str, MAXLINE, fp);
       while ( !feof(fp) ) {
-        if (count_words(str) >= 6){
+        if (uin->count_words(str) >= 6){
           grains[igrain][0] = atof(strtok(str, " \n\t\r\f"));
           grains[igrain][1] = atof(strtok(NULL," \n\t\r\f"));
           grains[igrain][2] = atof(strtok(NULL," \n\t\r\f"));
@@ -124,7 +124,7 @@ void Driver::PolyCrystal()
     // ask for box info
     for (int i = 0; i < 3; ++i){
       printf("Please input the lower and upper bound of your box along %c: ", 'X'+i);
-      while (1) if (count_words(fgets(str,MAXLINE,stdin)) == 2){
+      while (1) if (uin->read_stdin(str) == 2){
         lo[i] = atof(strtok(str, " \n\t\r\f"));
         hi[i] = atof(strtok(NULL," \n\t\r\f"));
   
@@ -134,7 +134,7 @@ void Driver::PolyCrystal()
     }
     pbc[0] = pbc[1] = pbc[2] = 1;
     printf("Please indicate where you want pbc in x, y, and z (0/1)[1 1 1]: ");
-    if (count_words(fgets(str,MAXLINE,stdin)) == 3){
+    if (uin->read_stdin(str) == 3){
       pbc[0] = atoi(strtok(str, " \t\n\r\f"));
       pbc[1] = atoi(strtok(NULL," \n\t\r\f"));
       pbc[2] = atoi(strtok(NULL," \n\t\r\f"));
@@ -142,7 +142,7 @@ void Driver::PolyCrystal()
 
     // ask for number of grains in box
     printf("Please input the desired number of grains in your box: ");
-    while (1) if (count_words(fgets(str,MAXLINE,stdin)) > 0){
+    while (1) if (uin->read_stdin(str) > 0){
       ngrain = atoi(strtok(str, " \t\n\r\f"));
       if (ngrain > 1) break;
     }
@@ -159,7 +159,7 @@ void Driver::PolyCrystal()
 
     // atoms in different grain can be assigned as different type
     printf("Would you like to assign different atomic types for different grains? (y/n)[n]: ");
-    if (count_words(fgets(str,MAXLINE,stdin)) > 0){
+    if (uin->read_stdin(str) > 0){
       ptr = strtok(str, " \n\t\r\f");
       if (strcmp(ptr,"y")==0 || strcmp(ptr,"Y")==0) type_by_grain = 1;
     }

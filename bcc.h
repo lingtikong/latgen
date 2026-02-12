@@ -6,7 +6,7 @@
 class BCC : public lattice {
 public:
   
-  BCC();
+  BCC(UserInput *);
   ~BCC();
 
 private:

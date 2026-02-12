@@ -10,7 +10,7 @@ using namespace std;
 /* -----------------------------------------------------------------------------
  * To select the orientation of the lattice
  * -------------------------------------------------------------------------- */
-AB::AB() : lattice()
+AB::AB(UserInput *u) : lattice(u)
 {
   char str[MAXLINE];
   alat = 1.; ca = 1.;
@@ -25,17 +25,17 @@ AB::AB() : lattice()
   printf("   7. Perovskite;\n");
   for (int i = 0; i < 14; ++i) printf("-----"); printf("\n");
   printf("Your choice [%d]: ", lattype);
-  if (count_words(fgets(str,MAXLINE,stdin)) > 0) lattype = inumeric(strtok(str, " \t\n\r\f"));
+  if (uin->read_stdin(str) > 0) lattype = inumeric(strtok(str, " \t\n\r\f"));
   printf("Your selection : %d\n", lattype);
 
   printf("Please input the lattice constant of your AB crystal [%g]: ", alat);
-  if (count_words(fgets(str,MAXLINE,stdin)) > 0) alat = numeric(strtok(str, " \t\n\r\f"));
+  if (uin->read_stdin(str) > 0) alat = numeric(strtok(str, " \t\n\r\f"));
   if (alat <= 0.) alat = 1.;
 
   if (lattype == 4 || lattype == 5 || lattype == 6){
     if (lattype == 6) ca = sqrt(8./3.);
     printf("Please input the c/a or c (negative) of your crystal [%g]: ", ca);
-    if (count_words(fgets(str,MAXLINE,stdin)) > 0) ca = numeric(strtok(str, " \t\n\r\f"));
+    if (uin->read_stdin(str) > 0) ca = numeric(strtok(str, " \t\n\r\f"));
     if (ca == 0.) ca = 1.;
     if (ca <  0.) ca = -ca/alat;
   }
@@ -95,7 +95,7 @@ void AB::AB_B1()
   printf("   4. [111] along z, [1-10] along x, orthogonal;\n");
   printf("   5. primitive cell;\n");
   printf("Your choice [%d]: ", surftype);
-  if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = inumeric(strtok(str, " \t\n\r\f"));
+  if (uin->read_stdin(str) > 0) surftype = inumeric(strtok(str, " \t\n\r\f"));
   printf("Your selection : %d", surftype);
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
 
@@ -357,7 +357,7 @@ void AB::AB_B2()
   printf("   2. [110] along z;\n");
   printf("   3. [111] along z;\n");
   printf("Your choice [%d]: ", surftype);
-  if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = inumeric(strtok(str, " \t\n\r\f"));
+  if (uin->read_stdin(str) > 0) surftype = inumeric(strtok(str, " \t\n\r\f"));
   printf("Your selection : %d", surftype);
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
   
@@ -526,7 +526,7 @@ void AB::AB_B3()
   printf("   4. [111] along z, [1-10] along y, orthogonal;\n");
   printf("   5. primitive;\n");
   printf("Your choice [%d]: ", surftype);
-  if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = inumeric(strtok(str, " \t\n\r\f"));
+  if (uin->read_stdin(str) > 0) surftype = inumeric(strtok(str, " \t\n\r\f"));
   printf("Your selection : %d", surftype);
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
 
@@ -789,7 +789,7 @@ void AB::AB_L10()
   printf("   3. [110] along z, [1-10] along y, orthogonal;\n");
   printf("   4. primitive cell;\n");
   printf("Your choice [%d]: ", surftype);
-  if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = inumeric(strtok(str, " \t\n\r\f"));
+  if (uin->read_stdin(str) > 0) surftype = inumeric(strtok(str, " \t\n\r\f"));
   printf("Your selection : %d", surftype);
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
 
@@ -954,7 +954,7 @@ void AB::AB_NiAs()
   printf("   4. [110]  along z, orthogonal, [1-10] along y;\n");
   printf("   5. [1-10] along z, orthogonal, [110]  along y;\n");
   printf("Your choice [%d]: ", surftype);
-  if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = inumeric(strtok(str, " \t\n\r\f"));
+  if (uin->read_stdin(str) > 0) surftype = inumeric(strtok(str, " \t\n\r\f"));
   printf("Your selection : %d", surftype);
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
 
@@ -1241,14 +1241,14 @@ void AB::AB_B4()
   // print out the menu
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
   printf("Please indicate the relative position of the two lattices along c [%g]: ", u);
-  if (count_words(fgets(str,MAXLINE,stdin)) > 0) u = numeric(strtok(str, " \t\n\r\f"));
+  if (uin->read_stdin(str) > 0) u = numeric(strtok(str, " \t\n\r\f"));
   printf("\nPlease select the type of AB-B4 cell:\n");
   printf("   1. [001] along z, gamma =  60 degree;\n");
   printf("   2. [001] along z, gamma = 120 degree;\n");
   printf("   3. [001] along z, orthogonal, long x;\n");
   printf("   4. [001] along z, orthogonal, long y;\n");
   printf("Your choice [%d]: ", surftype);
-  if (count_words(fgets(str,MAXLINE,stdin)) > 0) surftype = inumeric(strtok(str, " \t\n\r\f"));
+  if (uin->read_stdin(str) > 0) surftype = inumeric(strtok(str, " \t\n\r\f"));
   printf("Your selection : %d", surftype);
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
 

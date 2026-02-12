@@ -28,7 +28,7 @@ void Driver::Interstitial()
   // ask for crystal size
   int leading_dir = 1;
   printf("Please input the extensions of your unit cell in x, y, and z directions: ");
-  if (count_words(fgets(str,MAXLINE,stdin)) < 3) exit(2);
+  if (uin->read_stdin(str) < 3) exit(2);
   nx = latt->inumeric(strtok(str,  " \t\n\r\f"));
   ny = latt->inumeric(strtok(NULL, " \t\n\r\f"));
   nz = latt->inumeric(strtok(NULL, " \t\n\r\f"));
@@ -55,7 +55,7 @@ void Driver::Interstitial()
 
   vector<int> sites; sites.clear();
   printf("\nPlease input the indices of the interstitial sites to add solute atoms: ");
-  while (count_words(fgets(str,MAXLINE,stdin)) < 1) continue;
+  while (uin->read_stdin(str) < 1) continue;
   ptr = strtok(str, " \t\n\r\f");
   while (ptr){
     sites.push_back(atoi(ptr));
@@ -69,7 +69,7 @@ void Driver::Interstitial()
 
   vector<double> fraction; fraction.clear();
   printf("Please input the fraction (positive) or number(negative) of solutes\nat each site in sequence: ");
-  while (count_words(fgets(str,MAXLINE,stdin)) < 1) continue;
+  while (uin->read_stdin(str) < 1) continue;
   ptr = strtok(str, " \t\n\r\f");
   while (ptr){
     fraction.push_back(atof(ptr));
@@ -109,7 +109,7 @@ void Driver::Interstitial()
   natom += n_interstitial;
   printf("Your system would be of size %d x %d x %d with %d atoms, including %d interstitial solutes.\n",nx,ny,nz,natom, n_interstitial);
   printf("Please indicate which direction should goes fast (1:x; other: z)[1]: ");
-  if (count_words(fgets(str,MAXLINE,stdin)) > 0) leading_dir = latt->inumeric(strtok(str, " \t\n\r\f"));
+  if (uin->read_stdin(str) > 0) leading_dir = latt->inumeric(strtok(str, " \t\n\r\f"));
 
   memory->create(atpos, natom, 3, "interstitial:atpos");
   memory->create(attyp, natom, "interstitial:attyp");

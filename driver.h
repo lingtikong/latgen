@@ -3,13 +3,14 @@
 
 #include "lists.h"
 #include "random.h"
+#include "input.h"
 #include "memory.h"
 #include "elements.h"
 #include <map>
 
 class Driver{
 public:
-  Driver();
+  Driver(int);
   ~Driver();
   
   void generate();  // method to generate the atomic configuration
@@ -23,6 +24,9 @@ public:
 #ifdef Poly
   void PolyCrystal();
 #endif
+
+  Memory *memory;
+  UserInput *uin;
 
 private:
   int ShowMenu(int);
@@ -43,7 +47,6 @@ private:
   int lookup(int);                // to find the ID of an atomic type
 
   RanPark *random;                // class object to create random numbers
-  Memory *memory;
 
   // private modification methods
   void solidsol(void);            // method to create subsutitutional solid solution
@@ -53,7 +56,6 @@ private:
   ChemElements * element;
   std::map<int,int> type2num;
 
-  int count_words(const char *);
 };
 
 #endif

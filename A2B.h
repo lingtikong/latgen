@@ -6,7 +6,7 @@
 class A2B : public lattice {
 public:
   
-  A2B();
+  A2B(UserInput *);
   ~A2B();
 
 private:

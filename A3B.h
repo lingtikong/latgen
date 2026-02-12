@@ -6,7 +6,7 @@
 class A3B : public lattice {
 public:
   
-  A3B();
+  A3B(UserInput *);
   ~A3B();
 
 private:

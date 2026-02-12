@@ -6,7 +6,7 @@
 class USER : public lattice {
 public:
   
-  USER();
+  USER(UserInput *);
   ~USER();
 
 private:
