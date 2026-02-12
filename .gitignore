@@ -1,0 +1,4 @@
+*.o
+*.gz
+test/
+latgen
