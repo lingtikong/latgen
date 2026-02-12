@@ -22,8 +22,8 @@ USER::USER(UserInput *u) : lattice(u)
   printf("a POSCAR file, or simply ENTER to read from stdin: ");
 
   int flag = 1;
-  if (uin->read_stdin(str) > 0) flag = read_file(strtok(str," \t\n\r\f"));
-  if (flag) flag = read_stdin();
+  if (uin->read_stdin(str) > 0) flag = from_file(strtok(str," \t\n\r\f"));
+  if (flag) flag = from_stdin();
   if (flag == 0) initialized = 1;
 
   for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
@@ -42,7 +42,7 @@ USER::~USER()
 /* -----------------------------------------------------------------------------
  * To read the unit cell info from file
  * -------------------------------------------------------------------------- */
-int USER::read_file(const char *fname)
+int USER::from_file(const char *fname)
 {
   FILE *fp = fopen(fname,"r");
   // check file existence
@@ -122,7 +122,7 @@ int USER::read_file(const char *fname)
 /* -----------------------------------------------------------------------------
  * To read the unit cell info from input
  * -------------------------------------------------------------------------- */
-int USER::read_stdin()
+int USER::from_stdin()
 {
   char str[MAXLINE];
   // ask for lattice constant

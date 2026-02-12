@@ -10,8 +10,8 @@ public:
   ~USER();
 
 private:
-  int read_file(const char *);
-  int read_stdin();
+  int from_file(const char *);
+  int from_stdin();
   void GaussJordan(const int n, const double *MatA, double *Mat);
   void car2dir();
 };
