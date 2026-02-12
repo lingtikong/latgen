@@ -426,29 +426,21 @@ void Driver::write(int format)
   }
   for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
 
-  // write the xyz position file 
+  // write the exyz position file 
   fp = fopen(posfile, "w");
   fprintf(fp, "%d\n", natom);
-  fprintf(fp, "%s cell with dimension %dx%dx%d and a= %g\n", name, nx, ny, nz, alat);
-  int nr = 3;
-  if (natom < nr) nr = natom;
+  fprintf(fp, "pbc='T T T' lattice='");
+  for (int i=0; i<3; ++i)
+  for (int j=0; j<3; ++j) fprintf(fp, " %lg", latvec[i][j]);
+  fprintf(fp, "' info=\"%s cell with dimension %dx%dx%d and a= %g\"\n", name, nx, ny, nz, alat);
   if (type2num.size() == ntype){
     char ename[3];
-    for (int i = 0; i < nr; ++i){
-      int ip = attyp[i]; element->Num2Name(type2num[ip], ename);
-      fprintf(fp,"%2s %16.16e %16.16e %16.16e crystal_vector %d %16.16e %16.16e %16.16e\n", ename, atpos[i][0],
-      atpos[i][1], atpos[i][2], i+1, latvec[i][0], latvec[i][1], latvec[i][2]);
-    }
-    for (int i = nr; i < natom; ++i){
+    for (int i = 0; i < natom; ++i){
       int ip = attyp[i]; element->Num2Name(type2num[ip], ename);
       fprintf(fp,"%2s %16.16e %16.16e %16.16e\n", ename, atpos[i][0], atpos[i][1], atpos[i][2]);
     }
   } else {
-    for (int i = 0; i < nr; ++i){
-      fprintf(fp,"%d %16.16e %16.16e %16.16e crystal_vector %d %16.16e %16.16e %16.16e\n", attyp[i], atpos[i][0],
-      atpos[i][1], atpos[i][2], i+1, latvec[i][0], latvec[i][1], latvec[i][2]);
-    }
-    for (int i = nr; i < natom; ++i) fprintf(fp,"%d %16.16e %16.16e %16.16e\n", attyp[i], atpos[i][0], atpos[i][1], atpos[i][2]);
+    for (int i = 0; i < natom; ++i) fprintf(fp,"%d %16.16e %16.16e %16.16e\n", attyp[i], atpos[i][0], atpos[i][1], atpos[i][2]);
   }
   fclose(fp);
   delete []posfile;
