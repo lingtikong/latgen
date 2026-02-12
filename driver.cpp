@@ -429,7 +429,7 @@ void Driver::write(int format)
   // write the exyz position file 
   fp = fopen(posfile, "w");
   fprintf(fp, "%d\n", natom);
-  fprintf(fp, "pbc='T T T' lattice='");
+  fprintf(fp, "pbc='T T T' properties=species:S:1:pos:R:3 lattice='");
   for (int i=0; i<3; ++i)
   for (int j=0; j<3; ++j) fprintf(fp, " %lg", latvec[i][j]);
   fprintf(fp, "' info=\"%s cell with dimension %dx%dx%d and a= %g\"\n", name, nx, ny, nz, alat);
