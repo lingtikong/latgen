@@ -10,7 +10,6 @@ void help()
   printf("an xyz format file will be written.\n");
   printf("\nUsage:\n    latgen [options]\n");
   printf("\nAvailable options:\n      -poscar : to output VASP POSCAR instead of LAMMPS data file.\n");
-  printf("      -q      : to output atomic_style of charge with all q = 0.\n");
   printf("      -s      : to write all user input to script.inp, facilitating scripting.\n");
   printf("      -h      : to print this hlep info.\n");
   printf("\nAuthor: Lingti Kong, konglt@sjtu.edu.cn\n(C) 2026\n\n");
@@ -28,9 +27,6 @@ int main (int narg, char **arg)
   while (narg > iarg){
     if (strcmp(arg[iarg],"-poscar") == 0 || strcmp(arg[iarg],"-p") == 0){
       fmt = 2;
-
-    } else if (strcmp(arg[iarg],"-q") == 0){
-      fmt = 3;
 
     } else if (strcmp(arg[iarg],"-save") == 0 || strcmp(arg[iarg],"-s") == 0){
       save = 1;

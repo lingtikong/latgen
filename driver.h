@@ -42,6 +42,7 @@ private:
   int *attyp, *numtype, *typeID;  // array to store the atomic types for all
   int *xmap, *ymap, *zmap, *umap; // arrays to store the mapping info
   double **atpos, latvec[3][3];   // arrays to store the atomic positions and lattice info
+  double *atchg;                  // charge info for each type
   int flag_orient;                // > 0, ask for orient; <= 0, not ask.
   void typescan();                // to scan the total number of atomic types in system
   int lookup(int);                // to find the ID of an atomic type
@@ -52,6 +53,7 @@ private:
   void solidsol(void);            // method to create subsutitutional solid solution
   void ResetTypeID(void);         // method to reset the atomic type ID
   void MapElement(void);          // method to map atomic type to real elements
+  void AssignCharge(void);        // method to assign charge info to each type
 
   ChemElements * element;
   std::map<int,int> type2num;

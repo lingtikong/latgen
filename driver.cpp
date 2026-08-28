@@ -15,6 +15,7 @@ Driver::Driver(int flag)
   latt = NULL;
   atpos = NULL;
   attyp = NULL;
+  atchg = NULL;
   random = NULL;
   element = NULL;
   typeID = numtype = NULL;
@@ -151,6 +152,7 @@ Driver::~Driver()
   type2num.clear();
 
   if (latt != NULL) delete latt;
+  if (atchg != NULL) delete atchg;
   if (element != NULL) delete element;
 
   memory->destroy(typeID);
@@ -352,6 +354,41 @@ return;
 }
 
 /* -----------------------------------------------------------------------------
+ * method to assign charge to each atomic type
+ * -------------------------------------------------------------------------- */
+void Driver::AssignCharge()
+{
+  char str[MAXLINE];
+  printf("\n"); for (int i = 0; i < 14; ++i) printf("=====");
+  printf("\nThere are %d atomic types in system, and their IDs are:\nIndex : ", ntype);
+  for (int i = 0; i < ntype; ++i) printf(" %7d", i+1); printf("\nTypeID: ");
+  for (int i = 0; i < ntype; ++i) printf(" %7d", typeID[i]); printf("\nNatTyp: ");
+  for (int i = 0; i < ntype; ++i) printf(" %7d", numtype[i]);
+  printf("\nPlease input the charge for each type in sequence, enter to skip: ");
+  if (uin->read_stdin(str) >= ntype){
+
+    if (atchg != NULL) delete atchg;
+    atchg = new double [ntype];
+
+    char *ptr = strtok(str, " \t\n\r\f");
+    for (int i = 0; i < ntype; ++i){
+      int ip = typeID[i];
+      atchg[ip] = latt->inumeric(ptr);
+
+      ptr = strtok(NULL, " \t\n\r\f");
+    }
+    printf("Charge:");
+    for (int i = 0; i < ntype; ++i){
+      int ip = typeID[i];
+      printf(" %g", atchg[ip]);
+    } printf("\n");
+  }
+  for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
+
+return;
+}
+
+/* -----------------------------------------------------------------------------
  * method to find the ID of the current atomic type
  * -------------------------------------------------------------------------- */
 int Driver::lookup(int ip)
@@ -363,6 +400,9 @@ int Driver::lookup(int ip)
 
 /* -----------------------------------------------------------------------------
  * method to write out atomic configuraton and mapping info
+ * format:
+ *    1  : lammps atomic or charge style
+ *    2  : POSCAR
  * -------------------------------------------------------------------------- */
 void Driver::write(int format)
 {
@@ -445,8 +485,8 @@ void Driver::write(int format)
   fclose(fp);
   delete []posfile;
 
-  // write the lammps atomic style file
-  if (flag_lmp_data && format != 2){
+  // write the lammps atomic style file, or charge if atomic charges are assigned
+  if (flag_lmp_data && format == 2){
      fp = fopen(lmpfile,"w");
      fprintf(fp, "# %s cell with dimension %d x %d x %d and a = %g\n", name, nx, ny, nz, alat);
      fprintf(fp, "%10d  atoms\n", natom);
@@ -469,13 +509,15 @@ void Driver::write(int format)
   
      fprintf(fp, "\nAtoms\n\n");
     
-     if (format == 1){
+     if (atchg == NULL){
         for (int i = 0; i < natom; ++i)
             fprintf(fp,"%d %d %20.14f %20.14f %20.14f\n", i+1, attyp[i], atpos[i][0], atpos[i][1], atpos[i][2]);
 
-     } else if (format == 3){
-        for (int i = 0; i < natom; ++i)
-            fprintf(fp,"%d %d 0. %20.14f %20.14f %20.14f\n", i+1, attyp[i], atpos[i][0], atpos[i][1], atpos[i][2]);
+     } else {
+        for (int i = 0; i < natom; ++i){
+            int ip = attyp[i];
+            fprintf(fp,"%d %d %g %20.14f %20.14f %20.14f\n", i+1, ip, atchg[ip], atpos[i][0], atpos[i][1], atpos[i][2]);
+        }
      }
 
      fclose(fp);
@@ -548,6 +590,7 @@ void Driver::modify()
     printf("  1. Create substitutional solid solution;\n");
     printf("  2. Reset atomic types;\n");
     printf("  3. Map atomic type to elements;\n");
+    printf("  4. Assign charges to elements;\n");
 
     if (ncycle == 1) printf("  0. Nothing.\n");
     else printf("  0. Done.\n");
@@ -562,6 +605,7 @@ void Driver::modify()
     case 1: solidsol();    break;
     case 2: ResetTypeID(); break;
     case 3: MapElement();  break;
+    case 4: AssignCharge();  break;
     default: return;
     }
 
