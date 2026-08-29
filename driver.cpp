@@ -409,8 +409,10 @@ void Driver::write(int format)
   if (natom < 1) return;
   FILE *fp;
   char str[MAXLINE], *posfile, *mapfile, *lmpfile;
+
+  // Make sure the lattice comply with the lammps style, otherwise do not output the configuration
   int flag_lmp_data = 1;
-  if (latvec[0][1]*latvec[0][1]+latvec[0][2]*latvec[0][2]+latvec[1][2]*latvec[1][2] > 1.e-6) flag_lmp_data = 0;
+  if (latvec[0][1]*latvec[0][1]+latvec[0][2]*latvec[0][2]+latvec[1][2]*latvec[1][2] > NearZERO) flag_lmp_data = 0;
 
   printf("\n"); for (int i = 0; i < 14; ++i) printf("====="); printf("\n");
   printf("Please input the filename of the output xyz file [atomcfg.xyz]: ");
@@ -422,6 +424,7 @@ void Driver::write(int format)
     posfile = new char[12];
     strcpy(posfile, "atomcfg.xyz");
   }
+
   if (flag_lmp_data && format != 2){
     printf("Please input the filename of the lammps atomic file [data.pos]: ");
     if (uin->read_stdin(str) > 0){
@@ -433,8 +436,9 @@ void Driver::write(int format)
       strcpy(lmpfile, "data.pos");
     }
   }
+
   if (format == 2){
-    printf("Please input the filename of the lammps atomic file [POSCAR]: ");
+    printf("Please input the filename of the vasp poscar file [POSCAR]: ");
     if (uin->read_stdin(str) > 0){
       int n = strlen(str) + 1;
       lmpfile = new char[n];
@@ -486,7 +490,7 @@ void Driver::write(int format)
   delete []posfile;
 
   // write the lammps atomic style file, or charge if atomic charges are assigned
-  if (flag_lmp_data && format == 2){
+  if (flag_lmp_data && format != 2){
      fp = fopen(lmpfile,"w");
      fprintf(fp, "# %s cell with dimension %d x %d x %d and a = %g\n", name, nx, ny, nz, alat);
      fprintf(fp, "%10d  atoms\n", natom);
@@ -494,7 +498,7 @@ void Driver::write(int format)
      fprintf(fp, " 0. %20.14f  xlo xhi\n", latvec[0][0]);
      fprintf(fp, " 0. %20.14f  ylo yhi\n", latvec[1][1]);
      fprintf(fp, " 0. %20.14f  zlo zhi\n", latvec[2][2]);
-     if ( latvec[1][0]*latvec[1][0] + latvec[2][0]*latvec[2][0] + latvec[2][1]*latvec[2][1] > 1.e-8 )
+     if ( latvec[1][0]*latvec[1][0] + latvec[2][0]*latvec[2][0] + latvec[2][1]*latvec[2][1] > ZERO )
         fprintf(fp, "%20.14f %20.14f %20.14f xy xz yz\n", latvec[1][0], latvec[2][0], latvec[2][1]);
   
      // write atomic mass info (g/mol) if element mapping is done
