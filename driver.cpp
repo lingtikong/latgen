@@ -373,7 +373,7 @@ void Driver::AssignCharge()
     char *ptr = strtok(str, " \t\n\r\f");
     for (int i = 0; i < ntype; ++i){
       int ip = typeID[i];
-      atchg[ip] = latt->inumeric(ptr);
+      atchg[ip] = latt->numeric(ptr);
 
       ptr = strtok(NULL, " \t\n\r\f");
     }
